@@ -57,6 +57,30 @@ const HomePage = () => {
       >
         Collect Items
       </StyledButton>
+      <StyledButton
+        type="submit"
+        size="large"
+        fullWidth
+        color="secondary"
+        variant="contained"
+        onClick={() => {
+          router.push("/leaderboard");
+        }}
+      >
+        Leaderboard
+      </StyledButton>
+      <StyledButton
+        type="submit"
+        size="large"
+        fullWidth
+        color="secondary"
+        variant="contained"
+        onClick={() => {
+          router.push(`/collections/${session.user.id}`);
+        }}
+      >
+        My Collection
+      </StyledButton>
     </Container>
   );
 };
