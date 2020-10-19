@@ -1,9 +1,26 @@
-import { Button, Container, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  Container,
+  styled,
+  Typography,
+} from "@material-ui/core";
 import { signIn, useSession } from "next-auth/client";
+import { useRouter } from "next/router";
 import React from "react";
+
+const LargeAvatar = styled(Avatar)({
+  width: "5rem",
+  height: "5rem",
+});
+
+const StyledButton = styled(Button)({
+  margin: ".5rem .25rem",
+});
 
 const HomePage = () => {
   const [session] = useSession();
+  const router = useRouter();
 
   if (!session)
     return (
@@ -25,8 +42,21 @@ const HomePage = () => {
     );
 
   return (
-    <Container>
-      <Typography variant="body1">Hello, {session.user.name}.</Typography>
+    <Container align="center">
+      <LargeAvatar alt={session.user.name} src={session.user.image} />
+      <Typography variant="body1">{session.user.name}</Typography>
+      <StyledButton
+        type="submit"
+        size="large"
+        fullWidth
+        color="secondary"
+        variant="contained"
+        onClick={() => {
+          router.push("/collect");
+        }}
+      >
+        Collect Items
+      </StyledButton>
     </Container>
   );
 };

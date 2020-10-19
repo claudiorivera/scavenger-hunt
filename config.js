@@ -12,6 +12,22 @@ const userLinks = [
     title: "Home",
     url: "/",
   },
+  {
+    title: "Collect",
+    url: "/collect",
+  },
+  {
+    title: "Leaderboard",
+    url: "/leaderboard",
+  },
+  {
+    title: "Collections",
+    url: "/collections",
+  },
+  {
+    title: "Items",
+    url: "/items",
+  },
 ];
 
 export { appTitle, primaryColor, secondaryColor, adminLinks, userLinks };
