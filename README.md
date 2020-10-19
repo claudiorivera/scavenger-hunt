@@ -25,7 +25,7 @@ A game that challenges you to find the most random items around your house. Made
 
 # Config
 
-- Add a `.env.local` file with environmental variables as shown in the example `.sample-env.local` file. You can also add these on Vercel and do `vercel pull .env.local` on your machine, which saves you a step.
+- Add a `.env.local` file with environmental variables as shown in the example `.example-env.local` file. You can also add these on Vercel and do `vercel pull .env.local` on your machine, which saves you a step.
 
 # Dev
 
