@@ -2,10 +2,10 @@ const appTitle = "Scavenger Hunt";
 const primaryColor = "#bb4430";
 const secondaryColor = "#dda15e";
 const adminLinks = [
-  // {
-  //   title: "Admin",
-  //   url: "/admin"
-  // }
+  {
+    title: "Admin",
+    url: "/admin",
+  },
 ];
 const userLinks = [
   {
