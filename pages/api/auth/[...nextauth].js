@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import nextConnect from "next-connect";
 import middleware from "../../../middleware";
+import verificationRequest from "../../../util/verificationRequest";
 
 const handler = nextConnect();
 
@@ -17,6 +18,7 @@ handler.use((req, res) =>
       Providers.Email({
         server: process.env.EMAIL_SERVER,
         from: process.env.EMAIL_FROM,
+        sendVerificationRequest: verificationRequest,
       }),
     ],
     database: process.env.MONGODB_URI,
