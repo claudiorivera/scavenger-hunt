@@ -1,6 +1,6 @@
 const appTitle = "Scavenger Hunt";
-const primaryColor = "#bb4430ff";
-const secondaryColor = "#dda15eff";
+const primaryColor = "#bb4430";
+const secondaryColor = "#dda15e";
 const adminLinks = [
   // {
   //   title: "Admin",
