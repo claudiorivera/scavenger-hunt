@@ -10,6 +10,7 @@ handler.use(middleware);
 
 handler.use((req, res) =>
   NextAuth(req, res, {
+    debug: true,
     providers: [
       Providers.GitHub({
         clientId: process.env.GITHUB_CLIENT_ID,
