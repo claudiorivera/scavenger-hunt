@@ -93,10 +93,10 @@ export const getServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
   if (session) {
     await middleware.apply(req, res);
-    const userToFind = await User.findById(session.user.id).lean();
+    const user = await User.findById(session.user.id).lean();
     return {
       props: {
-        user: JSON.parse(JSON.stringify(userToFind)),
+        user: JSON.parse(JSON.stringify(user)),
       },
     };
   } else
