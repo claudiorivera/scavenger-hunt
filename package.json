@@ -19,5 +19,8 @@
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "unique-names-generator": "^4.3.1"
+  },
+  "peerOptionalDependencies": {
+    "mongodb": "^3.6.2"
   }
 }
