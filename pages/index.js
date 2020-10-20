@@ -24,7 +24,7 @@ const HomePage = ({ user }) => {
   const [session] = useSession();
   const router = useRouter();
 
-  if (!session)
+  if (!session || !user)
     return (
       <Container>
         <Typography variant="h5" align="center">
@@ -102,7 +102,7 @@ export const getServerSideProps = async ({ req, res }) => {
   } else
     return {
       props: {
-        user: { name: "No User", id: 1, image: "https://picsum.photos/460" },
+        user: null,
       },
     };
 };
