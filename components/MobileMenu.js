@@ -73,7 +73,6 @@ const MobileMenu = ({ userLinks, adminLinks }) => {
             </MenuItem>
           </Fragment>
         )}
-        {/* TODO: Create and protect admin routes */}
         {session.user.isAdmin &&
           adminLinks.map(({ title, url }) => (
             <MenuItem
