@@ -31,7 +31,6 @@ const HomePage = ({ user }) => {
           Welcome. Please login.
         </Typography>
         <Button
-          type="submit"
           size="large"
           fullWidth
           color="secondary"
@@ -48,7 +47,6 @@ const HomePage = ({ user }) => {
       <LargeAvatar alt={user.name} src={user.image} />
       <Typography variant="body1">{user.name}</Typography>
       <StyledButton
-        type="submit"
         size="large"
         fullWidth
         color="secondary"
@@ -60,7 +58,6 @@ const HomePage = ({ user }) => {
         Collect Items
       </StyledButton>
       <StyledButton
-        type="submit"
         size="large"
         fullWidth
         color="secondary"
@@ -72,7 +69,6 @@ const HomePage = ({ user }) => {
         Leaderboard
       </StyledButton>
       <StyledButton
-        type="submit"
         size="large"
         fullWidth
         color="secondary"

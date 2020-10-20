@@ -12,7 +12,6 @@ const CollectionsPage = () => {
           You must be logged in to view this page.
         </Typography>
         <Button
-          type="submit"
           size="large"
           fullWidth
           color="secondary"

@@ -27,7 +27,6 @@ const AdminPage = ({ user }) => {
           You must be logged in as an admin to view this content.
         </Typography>
         <Button
-          type="submit"
           size="large"
           fullWidth
           color="secondary"
