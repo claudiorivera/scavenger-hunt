@@ -5,9 +5,11 @@ import {
   styled,
   Typography,
 } from "@material-ui/core";
-import { signIn, useSession } from "next-auth/client";
+import { getSession, signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React from "react";
+import middleware from "../middleware";
+import User from "../models/User";
 
 const LargeAvatar = styled(Avatar)({
   width: "5rem",
@@ -18,7 +20,7 @@ const StyledButton = styled(Button)({
   margin: ".5rem .25rem",
 });
 
-const HomePage = () => {
+const HomePage = ({ user }) => {
   const [session] = useSession();
   const router = useRouter();
 
@@ -43,8 +45,8 @@ const HomePage = () => {
 
   return (
     <Container align="center">
-      <LargeAvatar alt={session.user.name} src={session.user.image} />
-      <Typography variant="body1">{session.user.name}</Typography>
+      <LargeAvatar alt={user.name} src={user.image} />
+      <Typography variant="body1">{user.name}</Typography>
       <StyledButton
         type="submit"
         size="large"
@@ -76,7 +78,7 @@ const HomePage = () => {
         color="secondary"
         variant="contained"
         onClick={() => {
-          router.push(`/collections/${session.user.id}`);
+          router.push(`/collections/${user._id}`);
         }}
       >
         My Collection
@@ -86,3 +88,21 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+export const getServerSideProps = async ({ req, res }) => {
+  const session = await getSession({ req });
+  if (session) {
+    await middleware.apply(req, res);
+    const userToFind = await User.findById(session.user.id).lean();
+    return {
+      props: {
+        user: JSON.parse(JSON.stringify(userToFind)),
+      },
+    };
+  } else
+    return {
+      props: {
+        user: { name: "No User", id: 1, image: "https://picsum.photos/460" },
+      },
+    };
+};
