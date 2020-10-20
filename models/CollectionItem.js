@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const CollectionItemSchema = new mongoose.Schema({
-  collectionItemId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
   collectionItemPhoto: {
     type: String,
     required: true,
