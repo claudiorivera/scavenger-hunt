@@ -18,7 +18,7 @@ A game that challenges you to find the most random items around your house. Made
 
 # TODO
 
-- Too many to list right now 😂
+- Too many to list right now 😂😬
 
 # Install
 
