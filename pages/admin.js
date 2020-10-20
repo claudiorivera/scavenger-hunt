@@ -18,11 +18,11 @@ const LargeAvatar = styled(Avatar)({
 const AdminPage = ({ user }) => {
   const [session] = useSession();
 
-  if (!session || !user)
+  if (!session || !user || !user.isAdmin)
     return (
       <Container>
         <Typography variant="h5" align="center">
-          Welcome. Please login.
+          You must be logged in as an admin to view this content.
         </Typography>
         <Button
           type="submit"
