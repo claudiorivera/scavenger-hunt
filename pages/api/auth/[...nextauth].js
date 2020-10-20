@@ -45,11 +45,18 @@ handler.use((req, res) =>
         }
         if (user) {
           token.uid = user.id;
+          try {
+            const userFound = await User.findById(user.id);
+            token.isAdmin = userFound?.isAdmin;
+          } catch (error) {
+            console.log(error);
+          }
         }
         return Promise.resolve(token);
       },
       session: async (session, token) => {
         session.user.id = token.uid;
+        session.user.isAdmin = token.isAdmin;
         return Promise.resolve(session);
       },
     },
