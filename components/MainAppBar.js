@@ -55,11 +55,12 @@ const MainAppBar = () => {
               </Link>
             ))}
             {/* TODO: Protect these routes, perhaps an "isAdmin" prop somewhere? */}
-            {adminLinks.map(({ title, url }) => (
-              <Link key={title} href={url}>
-                <Button color="inherit">{title}</Button>
-              </Link>
-            ))}
+            {session.user.isAdmin &&
+              adminLinks.map(({ title, url }) => (
+                <Link key={title} href={url}>
+                  <Button color="inherit">{title}</Button>
+                </Link>
+              ))}
             <Button
               color="inherit"
               onClick={() => {
