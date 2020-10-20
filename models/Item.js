@@ -12,7 +12,7 @@ const ItemSchema = new mongoose.Schema({
   usersWithItemCollected: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "AppUser",
+      ref: "User",
       required: true,
     },
   ],

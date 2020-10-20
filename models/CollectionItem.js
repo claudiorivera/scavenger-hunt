@@ -9,9 +9,9 @@ const CollectionItemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  appUserId: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "AppUser",
+    ref: "User",
     required: true,
   },
   itemId: {
