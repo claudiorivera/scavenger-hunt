@@ -5,12 +5,12 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+import middleware from "@middleware";
+import User from "@models/User";
+import { capitalizeLetters } from "@util/capitalizeLetters";
+import axios from "axios";
 import { getSession, signIn, useSession } from "next-auth/client";
 import React, { useState } from "react";
-import middleware from "../middleware";
-import User from "../models/User";
-import { capitalizeLetters } from "../util/capitalizeLetters";
-import axios from "axios";
 
 const StyledButton = styled(Button)({
   margin: ".5rem .25rem",

@@ -1,6 +1,6 @@
 // https://next-auth.js.org/providers/email#customising-emails
+import { appTitle, primaryColor } from "@config";
 import nodemailer from "nodemailer";
-import { appTitle, primaryColor } from "../config";
 
 const verificationRequest = ({
   identifier: email,

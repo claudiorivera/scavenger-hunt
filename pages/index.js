@@ -5,11 +5,11 @@ import {
   styled,
   Typography,
 } from "@material-ui/core";
+import middleware from "@middleware";
+import User from "@models/User";
 import { getSession, signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React from "react";
-import middleware from "../middleware";
-import User from "../models/User";
 
 const LargeAvatar = styled(Avatar)({
   width: "5rem",

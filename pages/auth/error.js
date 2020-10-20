@@ -1,7 +1,7 @@
 import { Container, Link, Typography } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
-import React from "react";
 import { useRouter } from "next/router";
+import React from "react";
 
 const StyledLink = styled(Link)({
   cursor: "pointer",

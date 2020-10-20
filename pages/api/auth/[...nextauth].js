@@ -1,9 +1,9 @@
+import middleware from "@middleware";
+import User from "@models/User";
+import verificationRequest from "@util/verificationRequest";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import nextConnect from "next-connect";
-import middleware from "../../../middleware";
-import verificationRequest from "../../../util/verificationRequest";
-import User from "../../../models/User";
 
 const handler = nextConnect();
 

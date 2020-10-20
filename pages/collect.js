@@ -1,8 +1,8 @@
 import { Button, Container, Typography } from "@material-ui/core";
+import middleware from "@middleware";
+import Item from "@models/Item";
 import { getSession, signIn, useSession } from "next-auth/client";
 import React from "react";
-import middleware from "../middleware";
-import Item from "../models/Item";
 
 const CollectPage = ({ items }) => {
   const [session] = useSession();
