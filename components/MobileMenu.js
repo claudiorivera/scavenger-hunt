@@ -51,7 +51,7 @@ const MobileMenu = ({ userLinks, adminLinks }) => {
         ) : !session ? (
           <MenuItem onClick={signIn}>Login</MenuItem>
         ) : (
-          <Fragment>
+          <div>
             {userLinks.map(({ url, title }) => (
               <MenuItem
                 key={title}
@@ -71,7 +71,7 @@ const MobileMenu = ({ userLinks, adminLinks }) => {
             >
               Log Out
             </MenuItem>
-          </Fragment>
+          </div>
         )}
         {session.user.isAdmin &&
           adminLinks.map(({ title, url }) => (
