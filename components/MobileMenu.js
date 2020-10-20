@@ -71,20 +71,20 @@ const MobileMenu = ({ userLinks, adminLinks }) => {
             >
               Log Out
             </MenuItem>
+            {session.user.isAdmin &&
+              adminLinks.map(({ title, url }) => (
+                <MenuItem
+                  key={title}
+                  onClick={() => {
+                    handleMenuClose();
+                    router.push(url);
+                  }}
+                >
+                  {title}
+                </MenuItem>
+              ))}
           </div>
         )}
-        {session.user.isAdmin &&
-          adminLinks.map(({ title, url }) => (
-            <MenuItem
-              key={title}
-              onClick={() => {
-                handleMenuClose();
-                router.push(url);
-              }}
-            >
-              {title}
-            </MenuItem>
-          ))}
       </Menu>
     </Fragment>
   );
