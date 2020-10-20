@@ -1,8 +1,10 @@
 import { Button, Container, Typography } from "@material-ui/core";
-import { signIn, useSession } from "next-auth/client";
+import { getSession, signIn, useSession } from "next-auth/client";
 import React from "react";
+import middleware from "../middleware";
+import Item from "../models/Item";
 
-const CollectPage = () => {
+const CollectPage = ({ items }) => {
   const [session] = useSession();
 
   if (!session)
@@ -26,9 +28,33 @@ const CollectPage = () => {
 
   return (
     <Container align="center">
-      <Typography variant="body1">COLLECT PAGE GOES HERE</Typography>
+      <Typography variant="h3">Find...</Typography>
+      {items &&
+        items.map((item) => (
+          <Typography key={item._id} variant="body1">
+            {item.itemDescription}
+          </Typography>
+        ))}
     </Container>
   );
 };
 
 export default CollectPage;
+
+export const getServerSideProps = async ({ req, res }) => {
+  const session = await getSession({ req });
+  if (session) {
+    await middleware.apply(req, res);
+    const items = await Item.find().lean();
+    return {
+      props: {
+        items: JSON.parse(JSON.stringify(items)),
+      },
+    };
+  } else
+    return {
+      props: {
+        items: null,
+      },
+    };
+};
