@@ -1,4 +1,5 @@
-import { Button, Container, Typography } from "@material-ui/core";
+import StyledButton from "@components/StyledButton";
+import { Container, Typography } from "@material-ui/core";
 import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React from "react";
@@ -13,7 +14,7 @@ const CollectPage = () => {
         <Typography variant="h5" align="center">
           You must be logged in to view this page.
         </Typography>
-        <Button
+        <StyledButton
           size="large"
           fullWidth
           color="secondary"
@@ -21,7 +22,7 @@ const CollectPage = () => {
           onClick={signIn}
         >
           Login
-        </Button>
+        </StyledButton>
       </Container>
     );
 

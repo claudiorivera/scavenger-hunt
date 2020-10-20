@@ -1,20 +1,11 @@
-import {
-  Button,
-  Container,
-  styled,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import StyledButton from "@components/StyledButton";
+import { Container, TextField, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import User from "@models/User";
 import { capitalizeLetters } from "@util/capitalizeLetters";
 import axios from "axios";
 import { getSession, signIn, useSession } from "next-auth/client";
 import React, { useState } from "react";
-
-const StyledButton = styled(Button)({
-  margin: ".5rem .25rem",
-});
 
 const AdminPage = ({ user }) => {
   const [session] = useSession();
@@ -26,7 +17,7 @@ const AdminPage = ({ user }) => {
         <Typography variant="h5" align="center">
           You must be logged in as an admin to view this content.
         </Typography>
-        <Button
+        <StyledButton
           size="large"
           fullWidth
           color="secondary"
@@ -34,7 +25,7 @@ const AdminPage = ({ user }) => {
           onClick={signIn}
         >
           Login
-        </Button>
+        </StyledButton>
       </Container>
     );
 

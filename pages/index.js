@@ -1,10 +1,5 @@
-import {
-  Avatar,
-  Button,
-  Container,
-  styled,
-  Typography,
-} from "@material-ui/core";
+import StyledButton from "@components/StyledButton";
+import { Avatar, Container, styled, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import User from "@models/User";
 import { getSession, signIn, useSession } from "next-auth/client";
@@ -14,10 +9,6 @@ import React from "react";
 const LargeAvatar = styled(Avatar)({
   width: "5rem",
   height: "5rem",
-});
-
-const StyledButton = styled(Button)({
-  margin: ".5rem .25rem",
 });
 
 const HomePage = ({ user }) => {
@@ -30,7 +21,7 @@ const HomePage = ({ user }) => {
         <Typography variant="h5" align="center">
           Welcome. Please login.
         </Typography>
-        <Button
+        <StyledButton
           size="large"
           fullWidth
           color="secondary"
@@ -38,7 +29,7 @@ const HomePage = ({ user }) => {
           onClick={signIn}
         >
           Login
-        </Button>
+        </StyledButton>
       </Container>
     );
 

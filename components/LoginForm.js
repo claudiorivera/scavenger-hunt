@@ -1,5 +1,5 @@
+import StyledButton from "@components/StyledButton";
 import {
-  Button,
   Container,
   Divider,
   styled,
@@ -7,12 +7,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import { signIn, useSession } from "next-auth/client";
-import React, { useState } from "react";
 import { useRouter } from "next/router";
-
-const StyledButton = styled(Button)({
-  margin: ".5rem .25rem",
-});
+import React, { useState } from "react";
 
 const StyledDivider = styled(Divider)({
   margin: "1.5rem",
