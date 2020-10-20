@@ -13,11 +13,12 @@ A game that challenges you to find the most random items around your house. Made
 
 # New in This Version
 
-- Initial release
+- Implemented admin user role, page, routes, auth, etc.
+- Added admin page to add items.
 
-# Future Improvements
+# TODO
 
-- Initial release
+- Too many to list right now 😂
 
 # Install
 
