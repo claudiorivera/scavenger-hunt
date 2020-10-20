@@ -1,22 +1,24 @@
 import {
-  Avatar,
   Button,
   Container,
   styled,
+  TextField,
   Typography,
 } from "@material-ui/core";
 import { getSession, signIn, useSession } from "next-auth/client";
-import React from "react";
+import React, { useState } from "react";
 import middleware from "../middleware";
 import User from "../models/User";
+import { capitalizeLetters } from "../util/capitalizeLetters";
+import axios from "axios";
 
-const LargeAvatar = styled(Avatar)({
-  width: "5rem",
-  height: "5rem",
+const StyledButton = styled(Button)({
+  margin: ".5rem .25rem",
 });
 
 const AdminPage = ({ user }) => {
   const [session] = useSession();
+  const [itemDescription, setItemDescription] = useState("");
 
   if (!session || !user || !user.isAdmin)
     return (
@@ -37,14 +39,52 @@ const AdminPage = ({ user }) => {
       </Container>
     );
 
+  const handleSubmit = async (itemDescription) => {
+    try {
+      const response = await axios.post("/api/items", { itemDescription });
+      console.log(`response: ${JSON.stringify(response, null, 2)}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container align="center">
       <Typography variant="h3">ADMIN PAGE</Typography>
-      <LargeAvatar alt={user.name} src={user.image} />
-      <Typography variant="body1">{user.name}</Typography>
-      <Typography variant="body1">
-        Is admin? {user.isAdmin ? "Yes" : "No"}
-      </Typography>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(itemDescription);
+          setItemDescription("");
+        }}
+      >
+        <TextField
+          name="newItem"
+          required
+          id="newItem"
+          label="Add New Item"
+          placeholder="Enter the item description"
+          fullWidth
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+          value={itemDescription}
+          onChange={(e) =>
+            setItemDescription(capitalizeLetters(e.target.value))
+          }
+        />
+        <StyledButton
+          type="submit"
+          size="large"
+          fullWidth
+          color="secondary"
+          variant="contained"
+        >
+          Add Item
+        </StyledButton>
+      </form>
     </Container>
   );
 };
