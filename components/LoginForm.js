@@ -1,18 +1,9 @@
 import StyledButton from "@components/StyledButton";
-import {
-  Container,
-  Divider,
-  styled,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import StyledDivider from "@components/StyledDivider";
+import { Container, TextField, Typography } from "@material-ui/core";
 import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-
-const StyledDivider = styled(Divider)({
-  margin: "1.5rem",
-});
 
 const LoginForm = ({ providers }) => {
   const router = useRouter();
