@@ -1,6 +1,8 @@
 import middleware from "@middleware";
 import User from "@models/User";
+import randomlyGeneratedName from "@util/randomlyGeneratedName";
 import verificationRequest from "@util/verificationRequest";
+import cloudinary from "cloudinary";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import nextConnect from "next-connect";
@@ -36,8 +38,15 @@ handler.use((req, res) =>
       jwt: async (token, user, _account, _profile, isNewUser) => {
         if (isNewUser) {
           try {
-            // Find the user and save, so that missing values populate with defaults
             const userFound = await User.findById(user.id);
+            const randomAvatar = await cloudinary.v2.uploader.upload(
+              "https://picsum.photos/460",
+              {
+                upload_preset: "scavenger-hunt-avatars",
+              }
+            );
+            userFound.name = user.name || randomlyGeneratedName();
+            userFound.image = user.image || randomAvatar.url;
             await userFound.save();
           } catch (error) {
             console.log(error);

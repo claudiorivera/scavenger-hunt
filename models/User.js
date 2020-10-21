@@ -1,23 +1,10 @@
 import mongoose from "mongoose";
-import {
-  uniqueNamesGenerator,
-  adjectives,
-  animals,
-} from "unique-names-generator";
-
-const randomlyGeneratedName = `${uniqueNamesGenerator({
-  dictionaries: [adjectives],
-  style: "capital",
-})} ${uniqueNamesGenerator({
-  dictionaries: [animals],
-  style: "capital",
-})}`;
 
 const UserSchema = new mongoose.Schema({
   _id: mongoose.Types.ObjectId,
   name: {
     type: String,
-    default: randomlyGeneratedName,
+    default: "No Name",
   },
   image: {
     type: String,
