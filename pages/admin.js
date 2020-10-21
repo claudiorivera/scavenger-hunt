@@ -34,7 +34,7 @@ const AdminPage = ({ user }) => {
       const response = await axios.post("/api/items", { itemDescription });
       console.log(`response: ${JSON.stringify(response, null, 2)}`);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
