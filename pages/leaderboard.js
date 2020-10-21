@@ -1,19 +1,82 @@
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
-import StyledButton from "@components/StyledButton";
-import { Container, Typography } from "@material-ui/core";
-import { signIn, useSession } from "next-auth/client";
+import SmallAvatar from "@components/SmallAvatar";
+import StyledDivider from "@components/StyledDivider";
+import StyledLink from "@components/StyledLink";
+import { Box, Container, styled, Typography } from "@material-ui/core";
+import middleware from "@middleware";
+import User from "@models/User";
+import { getSession, useSession } from "next-auth/client";
 import React from "react";
 
-const LeaderboardPage = () => {
+const StyledContainer = styled(Container)({
+  padding: ".5rem",
+});
+
+const LeaderboardPage = ({ users }) => {
   const [session] = useSession();
 
   if (!session) return <NotLoggedInMessage />;
 
   return (
-    <Container align="center">
-      <Typography variant="body1">LEADERBOARD PAGE GOES HERE</Typography>
+    <Container align="center" maxWidth="xs">
+      {/* <pre>{JSON.stringify(users, null, 2)}</pre> */}
+      <Typography variant="h3">Leaderboard</Typography>
+      <StyledDivider />
+      {users.length > 0 ? (
+        users.map((user) => (
+          <StyledLink key={user._id} href={`/collections/${user._id}`}>
+            <StyledContainer>
+              <Box display="flex" alignItems="center">
+                <Box flexGrow="2">
+                  <Box flexGrow="1" display="flex" alignItems="center">
+                    <SmallAvatar
+                      style={{ marginRight: "1rem" }}
+                      alt={user.name}
+                      src={user.image}
+                    />
+                    {user.name}
+                  </Box>
+                </Box>
+                <Box>
+                  <Typography variant="body1">
+                    {user.itemsCollected.length} items
+                  </Typography>
+                </Box>
+              </Box>
+            </StyledContainer>
+          </StyledLink>
+        ))
+      ) : (
+        <Typography variant="h5">
+          Nobody's found anything, yet{" "}
+          <span role="img" aria-label="sad face emoji">
+            😢
+          </span>
+        </Typography>
+      )}
     </Container>
   );
 };
 
 export default LeaderboardPage;
+
+export const getServerSideProps = async ({ req, res }) => {
+  const session = await getSession({ req });
+  if (session) {
+    await middleware.apply(req, res);
+    const users = await User.find().lean();
+    const sortedUsers = users.sort(
+      (a, b) => b.itemsCollected.length - a.itemsCollected.length
+    );
+    return {
+      props: {
+        users: JSON.parse(JSON.stringify(sortedUsers)),
+      },
+    };
+  } else
+    return {
+      props: {
+        users: null,
+      },
+    };
+};

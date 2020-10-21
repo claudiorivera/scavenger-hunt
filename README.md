@@ -22,14 +22,14 @@ A game that challenges you to find the most random items around your house. Made
 
 # TODO
 
-- Linking to /collect/itemId should show collect page starting with that item
-- Refactor collect page to use a "collecting" and "successful collect" state with Context
-- Successful collect page should have a "continue" option to keep collecting
-- Successful collect page should link to the collection item
-- Collect page should have a container for the item description that is a fixed size, so that the action buttons below it will stay in place
+- Send email link needs spinner
 - Leaderboard should show list of users ranked by most items found
 - Collection pages should show a user's found items
 - CollectionItem pages should show the user's item photo
+- Linking to /collect/itemId should show collect page starting with that item
+- Refactor collect page to use a "collecting" and "successful collect" state with Context
+- Successful collect page should link to the collection item
+- Collect page should have a container for the item description that is a fixed size, so that the action buttons below it will stay in place, or use flexbox and justify flex-end on the buttons
 
 # Install
 
