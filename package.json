@@ -12,6 +12,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "axios": "^0.20.0",
+    "cloudinary": "^1.23.0",
     "mongoose": "^5.10.9",
     "next": "9.5.5",
     "next-auth": "^3.1.0",
