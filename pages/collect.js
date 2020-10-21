@@ -1,12 +1,23 @@
-import { Button, Container, styled, Typography } from "@material-ui/core";
+import NotLoggedInMessage from "@components/NotLoggedInMessage";
+import StyledButton from "@components/StyledButton";
+import {
+  Button,
+  Container,
+  Input,
+  styled,
+  Typography,
+} from "@material-ui/core";
+import { AddAPhoto as AddAPhotoIcon } from "@material-ui/icons";
 import middleware from "@middleware";
 import Item from "@models/Item";
-import { getSession, signIn, useSession } from "next-auth/client";
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { getSession, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
-const StyledButton = styled(Button)({
-  margin: ".5rem .25rem",
+const StyledImage = styled("img")({
+  width: "100%",
+  margin: "2rem 0 1rem",
 });
 
 const CollectPage = ({ items }) => {
@@ -14,6 +25,10 @@ const CollectPage = ({ items }) => {
   const [item, setItem] = useState(items[0]);
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
   const router = useRouter();
+  const [fileInput, setFileInput] = useState("");
+  const [previewSource, setPreviewSource] = useState("");
+  const [wasSuccessful, setWasSuccessful] = useState(false);
+  const [successfulImageSource, setSuccessfulImageSource] = useState("");
 
   // Adapted from https://medium.com/swlh/simple-react-app-with-context-and-functional-components-a374b7fb66b5
   useEffect(() => {
@@ -26,29 +41,110 @@ const CollectPage = ({ items }) => {
     setCurrentItemIndex(index);
   };
 
-  if (!session)
-    return (
-      <Container>
-        <Typography variant="h5" align="center">
-          You must be logged in to view this page.
-        </Typography>
-        <Button
-          size="large"
-          fullWidth
-          color="secondary"
-          variant="contained"
-          onClick={signIn}
-        >
-          Login
-        </Button>
-      </Container>
-    );
+  // https://www.youtube.com/watch?v=Rw_QeJLnCK4
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+  };
 
-  return items.length ? (
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+
+  const handleSubmitFile = (e) => {
+    e.preventDefault();
+    if (!previewSource) return;
+    uploadImage(previewSource);
+  };
+
+  const uploadImage = async (base64EncodedImage) => {
+    try {
+      const response = await axios.post("/api/collections", {
+        imageDataString: base64EncodedImage,
+        userId: session.user.id,
+        itemId: item._id,
+      });
+      if (response.data.success) {
+        setSuccessfulImageSource(response.data.cloudinaryImageUrl);
+        setWasSuccessful(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (!session) return <NotLoggedInMessage />;
+
+  return wasSuccessful ? (
+    <Container align="center">
+      <Typography variant="h1">Success!</Typography>
+      <img
+        width="140px"
+        src={successfulImageSource}
+        alt="Successfully uploaded photo"
+      />
+      <StyledButton
+        size="large"
+        fullWidth
+        color="secondary"
+        variant="contained"
+        onClick={() => {
+          setWasSuccessful(false);
+          setSuccessfulImageSource("");
+          setPreviewSource("");
+          getNextItem();
+        }}
+      >
+        Find More
+      </StyledButton>
+    </Container>
+  ) : items.length ? (
     <Container align="center">
       <Typography variant="h1">Find</Typography>
       <Typography variant="h2">{item.itemDescription}</Typography>
-      <Button
+      <form id="imageUploadForm" onSubmit={handleSubmitFile}>
+        {/* https://kiranvj.com/blog/blog/file-upload-in-material-ui/ */}
+        <label htmlFor="imagePicker">
+          <Input
+            id="imagePicker"
+            style={{ display: "none" }}
+            name="imagePicker"
+            type="file"
+            onChange={handleFileInputChange}
+            value={fileInput}
+          />
+          <Button
+            size="large"
+            startIcon={<AddAPhotoIcon />}
+            fullWidth
+            color="secondary"
+            variant="contained"
+            component="span"
+          >
+            Found One!
+          </Button>
+        </label>
+      </form>
+      {previewSource && (
+        <Container>
+          <StyledImage src={previewSource} alt="Item image" />
+        </Container>
+      )}
+      <StyledButton
+        form="imageUploadForm"
+        type="submit"
+        size="large"
+        fullWidth
+        color="secondary"
+        variant="contained"
+      >
+        Submit Photo
+      </StyledButton>
+      <StyledButton
         size="large"
         fullWidth
         color="secondary"
@@ -57,8 +153,8 @@ const CollectPage = ({ items }) => {
           getNextItem();
         }}
       >
-        Skip
-      </Button>
+        Skip It!
+      </StyledButton>
     </Container>
   ) : (
     <Container align="center">
