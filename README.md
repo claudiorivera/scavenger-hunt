@@ -18,8 +18,9 @@ A game that challenges you to find the most random items around your house. Made
 
 # TODO
 
+- When an item is collected, it should be pushed to the correct item's user array, so that it doesn't appear on the collect page
+- Collected item success page should link to the collection item
 - Collect page should have a container for the item description that is a fixed size, so that the action buttons below it will stay in place
-- Collect page should allow user to upload a photo of the item they found
 - Leaderboard should show list of users ranked by most items found
 - Collection pages should show a user's found items
 - CollectionItem pages should show the user's item photo
