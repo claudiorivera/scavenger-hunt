@@ -3,7 +3,7 @@ import React from "react";
 
 const AuthVerifyRequestPage = () => {
   return (
-    <Container>
+    <Container align="center" maxWidth="xs">
       <Typography variant="body1">
         Check your email for a login link from notifications@claudiorivera.com.
         Be sure to check your spam folder.

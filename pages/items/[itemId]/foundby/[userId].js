@@ -11,7 +11,7 @@ const ItemFoundByDetails = () => {
   if (!session) return <NotLoggedInMessage />;
 
   return (
-    <Container align="center">
+    <Container align="center" maxWidth="xs">
       <Typography variant="body1">
         ITEM DETAIL PAGE FOR ITEM WITH ID {router.query.itemId} FOUND BY USER
         WITH ID {router.query.userId}

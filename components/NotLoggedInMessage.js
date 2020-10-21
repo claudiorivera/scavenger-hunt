@@ -4,8 +4,8 @@ import { signIn } from "next-auth/client";
 import React from "react";
 
 const NotLoggedInMessage = () => (
-  <Container>
-    <Typography variant="h5" align="center">
+  <Container maxWidth="xs" align="center">
+    <Typography variant="h5">
       You must be logged in to view this page.
     </Typography>
     <StyledButton

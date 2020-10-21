@@ -1,9 +1,9 @@
 import StyledButton from "@components/StyledButton";
 import StyledDivider from "@components/StyledDivider";
-import { Container, TextField, Typography } from "@material-ui/core";
+import { TextField, Typography } from "@material-ui/core";
 import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 
 const LoginForm = ({ providers }) => {
   const router = useRouter();
@@ -11,7 +11,7 @@ const LoginForm = ({ providers }) => {
   const [email, setEmail] = useState("");
   if (session) router.push("/");
   return (
-    <Container>
+    <Fragment>
       <Typography variant="h5">
         Please login with one of the following:
       </Typography>
@@ -65,7 +65,7 @@ const LoginForm = ({ providers }) => {
           Send Me A Login Link
         </StyledButton>
       </form>
-    </Container>
+    </Fragment>
   );
 };
 

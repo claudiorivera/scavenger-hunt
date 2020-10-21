@@ -19,7 +19,7 @@ const HomePage = ({ user }) => {
   if (!session || !user) return <NotLoggedInMessage />;
 
   return (
-    <Container align="center">
+    <Container align="center" maxWidth="xs">
       <LargeAvatar alt={user.name} src={user.image} />
       <Typography variant="body1">{user.name}</Typography>
       <StyledButton

@@ -10,7 +10,7 @@ const CollectionsPage = () => {
   if (!session) return <NotLoggedInMessage />;
 
   return (
-    <Container align="center">
+    <Container align="center" maxWidth="xs">
       <Typography variant="body1">COLLECTIONS PAGE GOES HERE</Typography>
     </Container>
   );

@@ -12,7 +12,7 @@ const CollectPage = () => {
   if (!session) return <NotLoggedInMessage />;
 
   return (
-    <Container align="center">
+    <Container align="center" maxWidth="xs">
       <Typography variant="body1">
         COLLECTION PAGE FOR USER WITH ID: {router.query.userId}
       </Typography>

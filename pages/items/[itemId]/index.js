@@ -19,7 +19,7 @@ const ItemDetailsPage = ({ item }) => {
   if (!session) return <NotLoggedInMessage />;
 
   return (
-    <Container align="center">
+    <Container align="center" maxWidth="xs">
       <Typography variant="h3">{item.itemDescription}</Typography>
       <Box
         display="flex"

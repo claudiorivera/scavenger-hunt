@@ -13,7 +13,7 @@ const AdminPage = ({ user }) => {
 
   if (!session || !user || !user.isAdmin)
     return (
-      <Container>
+      <Container maxWidth="xs">
         <Typography variant="h5" align="center">
           You must be logged in as an admin to view this content.
         </Typography>
@@ -39,8 +39,8 @@ const AdminPage = ({ user }) => {
   };
 
   return (
-    <Container align="center">
-      <Typography variant="h3">ADMIN PAGE</Typography>
+    <Container align="center" maxWidth="xs">
+      <Typography variant="h3">Admin</Typography>
       <form
         onSubmit={(e) => {
           e.preventDefault();
