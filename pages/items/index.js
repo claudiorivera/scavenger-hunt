@@ -1,15 +1,12 @@
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledButton from "@components/StyledButton";
-import { Container, Typography } from "@material-ui/core";
+import { Box, Container, Typography } from "@material-ui/core";
+import { CheckCircle, RadioButtonUnchecked } from "@material-ui/icons";
 import middleware from "@middleware";
 import Item from "@models/Item";
 import { getSession, useSession } from "next-auth/client";
 import Link from "next/link";
 import React from "react";
-import {
-  CheckBox as CheckBoxIcon,
-  CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
-} from "@material-ui/icons";
 
 const ItemsPage = ({ items, foundItemIds }) => {
   const [session] = useSession();
@@ -21,22 +18,18 @@ const ItemsPage = ({ items, foundItemIds }) => {
       <Typography variant="h3">All Items</Typography>
       {items &&
         items.map(({ _id, itemDescription }) => (
-          <Link key={_id} href={`/items/${_id}`}>
-            <StyledButton
-              fullWidth
-              variant="contained"
-              color="secondary"
-              startIcon={
-                foundItemIds.includes(_id) ? (
-                  <CheckBoxIcon />
-                ) : (
-                  <CheckBoxOutlineBlankIcon />
-                )
-              }
-            >
-              {itemDescription}
-            </StyledButton>
-          </Link>
+          <Box key={_id} display="flex" alignItems="center">
+            <Link href={`/items/${_id}`}>
+              <StyledButton fullWidth variant="contained" color="secondary">
+                {itemDescription}
+              </StyledButton>
+            </Link>
+            {foundItemIds.includes(_id) ? (
+              <CheckCircle color="secondary" />
+            ) : (
+              <RadioButtonUnchecked color="secondary" />
+            )}
+          </Box>
         ))}
     </Container>
   );
