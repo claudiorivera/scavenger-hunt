@@ -1,3 +1,4 @@
+import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledButton from "@components/StyledButton";
 import { Avatar, Container, styled, Typography } from "@material-ui/core";
 import middleware from "@middleware";
@@ -15,23 +16,7 @@ const HomePage = ({ user }) => {
   const [session] = useSession();
   const router = useRouter();
 
-  if (!session || !user)
-    return (
-      <Container>
-        <Typography variant="h5" align="center">
-          Welcome. Please login.
-        </Typography>
-        <StyledButton
-          size="large"
-          fullWidth
-          color="secondary"
-          variant="contained"
-          onClick={signIn}
-        >
-          Login
-        </StyledButton>
-      </Container>
-    );
+  if (!session || !user) return <NotLoggedInMessage />;
 
   return (
     <Container align="center">

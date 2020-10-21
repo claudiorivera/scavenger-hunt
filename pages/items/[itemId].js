@@ -1,3 +1,4 @@
+import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledButton from "@components/StyledButton";
 import { Container, Typography } from "@material-ui/core";
 import { signIn, useSession } from "next-auth/client";
@@ -8,23 +9,7 @@ const ItemDetailsPage = () => {
   const router = useRouter();
   const [session] = useSession();
 
-  if (!session)
-    return (
-      <Container>
-        <Typography variant="h5" align="center">
-          You must be logged in to view this page.
-        </Typography>
-        <StyledButton
-          size="large"
-          fullWidth
-          color="secondary"
-          variant="contained"
-          onClick={signIn}
-        >
-          Login
-        </StyledButton>
-      </Container>
-    );
+  if (!session) return <NotLoggedInMessage />;
 
   if (router.query.foundBy)
     return (
