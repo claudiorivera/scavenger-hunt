@@ -18,6 +18,7 @@ A game that challenges you to find the most random items around your house. Made
 
 # TODO
 
+- Specific item page should show all users who have found that item
 - Refactor collect page to use a "collecting" and "successful collect" state with Context
 - Collected item success page should link to the collection item
 - Collect page should have a container for the item description that is a fixed size, so that the action buttons below it will stay in place
@@ -25,7 +26,6 @@ A game that challenges you to find the most random items around your house. Made
 - Collection pages should show a user's found items
 - CollectionItem pages should show the user's item photo
 - Items page should show all items
-- Specific item page should show all users who have found that item
 
 # Install
 
