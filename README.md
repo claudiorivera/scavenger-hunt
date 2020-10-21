@@ -18,7 +18,6 @@ A game that challenges you to find the most random items around your house. Made
 
 # TODO
 
-- When an item is collected, it should be pushed to the correct item's user array, so that it doesn't appear on the collect page
 - Refactor collect page to use a "collecting" and "successful collect" state with Context
 - Collected item success page should link to the collection item
 - Collect page should have a container for the item description that is a fixed size, so that the action buttons below it will stay in place
