@@ -15,22 +15,24 @@ handler.post(async (req, res) => {
   const session = await getSession({ req });
   if (session) {
     try {
-      const { imageDataString } = req.body;
-      const image = await cloudinary.v2.uploader.upload(imageDataString, {
-        upload_preset: "scavenger-hunt",
-      });
+      const image = await cloudinary.v2.uploader.upload(
+        req.body.imageDataString,
+        {
+          upload_preset: "scavenger-hunt",
+        }
+      );
       const collectionItem = new CollectionItem({
-        itemId: req.body.itemId,
-        userId: session.user.id,
         imageUrl: image.secure_url,
+        userId: session.user.id,
+        itemId: req.body.itemId,
       });
-      const user = await User.findById(session.user.id);
-      const item = await Item.findById(req.body.itemId);
-      user.itemsCollected.addToSet(collectionItem);
-      item.usersWithItemCollected.addToSet(session.user.id);
       const savedCollectionItem = await collectionItem.save();
-      await item.save();
+      const user = await User.findById(session.user.id);
+      user.itemsCollected.addToSet(collectionItem);
       await user.save();
+      const item = await Item.findById(req.body.itemId);
+      item.usersWithItemCollected.addToSet(session.user.id);
+      await item.save();
       res.status(201).json({
         success: true,
         message: "Successfully collected item",
