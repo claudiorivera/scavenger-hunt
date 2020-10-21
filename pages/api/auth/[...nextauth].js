@@ -46,7 +46,7 @@ handler.use((req, res) =>
               }
             );
             userFound.name = user.name || randomlyGeneratedName();
-            userFound.image = user.image || randomAvatar.url;
+            userFound.image = user.image || randomAvatar.secure_url;
             await userFound.save();
           } catch (error) {
             console.log(error);
