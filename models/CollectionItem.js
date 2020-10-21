@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const CollectionItemSchema = new mongoose.Schema({
-  cloudinaryPublicId: {
+  cloudinaryImageUrl: {
     type: String,
     required: true,
   },
