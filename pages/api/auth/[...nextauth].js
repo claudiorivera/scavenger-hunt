@@ -39,17 +39,20 @@ handler.use((req, res) =>
         if (isNewUser) {
           try {
             const userFound = await User.findById(user.id);
-            const randomAvatar = await cloudinary.v2.uploader.upload(
-              "https://picsum.photos/460",
-              {
-                upload_preset: "scavenger-hunt-avatars",
-              }
-            );
-            userFound.name = user.name || randomlyGeneratedName();
-            userFound.image = user.image || randomAvatar.secure_url;
+            user.name
+              ? (userFound.name = user.name)
+              : (userFound.name = randomlyGeneratedName());
+            user.image
+              ? (userFound.image = user.image)
+              : (userFound.image = await cloudinary.v2.uploader.upload(
+                  "https://picsum.photos/460",
+                  {
+                    upload_preset: "scavenger-hunt-avatars",
+                  }
+                ).secure_url);
             await userFound.save();
           } catch (error) {
-            console.log(error);
+            console.error(error);
           }
         }
         if (user) {
@@ -58,7 +61,7 @@ handler.use((req, res) =>
             const userFound = await User.findById(user.id);
             token.isAdmin = userFound?.isAdmin;
           } catch (error) {
-            console.log(error);
+            console.error(error);
           }
         }
         return Promise.resolve(token);
