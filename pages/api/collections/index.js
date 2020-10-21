@@ -22,7 +22,7 @@ handler.post(async (req, res) => {
       const collectionItem = new CollectionItem({
         itemId: req.body.itemId,
         userId: session.user.id,
-        imageUrl: image.url,
+        imageUrl: image.secure_url,
       });
       const user = await User.findById(session.user.id);
       user.itemsCollected.addToSet(collectionItem);
@@ -35,7 +35,7 @@ handler.post(async (req, res) => {
         success: true,
         message: "Successfully collected item",
         collectionItemId: savedCollectionItem._id,
-        imageUrl: image.url,
+        imageUrl: image.secure_url,
       });
     } catch (error) {
       res.status(500).json({
