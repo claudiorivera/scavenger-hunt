@@ -25,12 +25,12 @@ handler.post(async (req, res) => {
         imageUrl: image.secure_url,
       });
       const user = await User.findById(session.user.id);
-      user.itemsCollected.addToSet(collectionItem);
       const item = await Item.findById(req.body.itemId);
+      user.itemsCollected.addToSet(collectionItem);
       item.usersWithItemCollected.addToSet(session.user.id);
       const savedCollectionItem = await collectionItem.save();
-      await user.save();
       await item.save();
+      await user.save();
       res.status(201).json({
         success: true,
         message: "Successfully collected item",
@@ -53,7 +53,7 @@ export default handler;
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: "8mb",
+      sizeLimit: "20mb",
     },
   },
 };
