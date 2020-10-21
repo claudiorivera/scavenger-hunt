@@ -1,6 +1,6 @@
 import StyledButton from "@components/StyledButton";
 import StyledDivider from "@components/StyledDivider";
-import { TextField, Typography } from "@material-ui/core";
+import { CircularProgress, TextField, Typography } from "@material-ui/core";
 import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
@@ -9,7 +9,10 @@ const LoginForm = ({ providers }) => {
   const router = useRouter();
   const [session] = useSession();
   const [email, setEmail] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
+
   if (session) router.push("/");
+
   return (
     <Fragment>
       <Typography variant="h5">
@@ -37,6 +40,7 @@ const LoginForm = ({ providers }) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          setIsFetching(true);
           signIn("email", { email });
         }}
       >
@@ -61,8 +65,9 @@ const LoginForm = ({ providers }) => {
           fullWidth
           color="secondary"
           variant="contained"
+          disabled={isFetching}
         >
-          Send Me A Login Link
+          {isFetching ? <CircularProgress /> : "Send Me A Login Link"}
         </StyledButton>
       </form>
     </Fragment>
