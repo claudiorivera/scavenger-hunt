@@ -12,6 +12,7 @@ import middleware from "@middleware";
 import Item from "@models/Item";
 import axios from "axios";
 import { getSession, useSession } from "next-auth/client";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment, useEffect, useState } from "react";
 
@@ -25,10 +26,17 @@ const CollectPage = ({ items }) => {
   const [item, setItem] = useState(items[0]);
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
   const router = useRouter();
-  const [fileInput, setFileInput] = useState("");
+  const [fileInput] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [wasSuccessful, setWasSuccessful] = useState(false);
   const [successfulImageSource, setSuccessfulImageSource] = useState("");
+
+  // TODO: Start with whatever item was passed in as a query, if any
+  useEffect(() => {
+    if (router.query.itemId) {
+      console.log(`query ${router.query.itemId} passed in`);
+    }
+  }, []);
 
   // Adapted from https://medium.com/swlh/simple-react-app-with-context-and-functional-components-a374b7fb66b5
   useEffect(() => {
@@ -87,7 +95,7 @@ const CollectPage = ({ items }) => {
 
   return wasSuccessful ? (
     <Container align="center">
-      <Typography variant="h1">Success!</Typography>
+      <Typography variant="h2">Nice Find!</Typography>
       <img
         width="140px"
         src={successfulImageSource}
@@ -105,11 +113,24 @@ const CollectPage = ({ items }) => {
       >
         Find More
       </StyledButton>
+      <StyledButton
+        size="large"
+        fullWidth
+        color="secondary"
+        variant="contained"
+        onClick={() => {
+          router.push(`/collections/${session.user.id}`);
+        }}
+      >
+        My Collection
+      </StyledButton>
     </Container>
   ) : items.length ? (
     <Container align="center">
-      <Typography variant="h1">Find</Typography>
-      <Typography variant="h2">{item.itemDescription}</Typography>
+      <Typography variant="h4">Find</Typography>
+      <Typography variant="h2" gutterBottom>
+        {item.itemDescription}
+      </Typography>
       <form id="imageUploadForm" onSubmit={handleSubmitFile}>
         {/* https://kiranvj.com/blog/blog/file-upload-in-material-ui/ */}
         <label htmlFor="imagePicker">
@@ -130,7 +151,7 @@ const CollectPage = ({ items }) => {
             variant="contained"
             component="span"
           >
-            Found One!
+            Found It!
           </Button>
         </label>
       </form>
@@ -163,23 +184,31 @@ const CollectPage = ({ items }) => {
       >
         Skip It!
       </StyledButton>
-    </Container>
-  ) : (
-    <Container align="center">
-      <Typography variant="h1">You Found All The Items!</Typography>
-      <Container>
+      <Link href={`/items/${item._id}`}>
         <StyledButton
           size="large"
           fullWidth
           color="secondary"
           variant="contained"
-          onClick={() => {
-            router.push(`/collections/${session.user.id}`);
-          }}
         >
-          My Collection
+          Who Found This?
         </StyledButton>
-      </Container>
+      </Link>
+    </Container>
+  ) : (
+    <Container align="center">
+      <Typography variant="h1">You Found All The Items!</Typography>
+      <StyledButton
+        size="large"
+        fullWidth
+        color="secondary"
+        variant="contained"
+        onClick={() => {
+          router.push(`/collections/${session.user.id}`);
+        }}
+      >
+        My Collection
+      </StyledButton>
     </Container>
   );
 };
@@ -192,6 +221,7 @@ export const getServerSideProps = async ({ req, res }) => {
     await middleware.apply(req, res);
     const items = await Item.where("usersWithItemCollected")
       .ne(session.user.id)
+      .select("-addedBy")
       .lean();
     return {
       props: {
