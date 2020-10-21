@@ -42,14 +42,17 @@ handler.use((req, res) =>
             user.name
               ? (userFound.name = user.name)
               : (userFound.name = randomlyGeneratedName());
-            user.image
-              ? (userFound.image = user.image)
-              : (userFound.image = await cloudinary.v2.uploader.upload(
-                  "https://picsum.photos/460",
-                  {
-                    upload_preset: "scavenger-hunt-avatars",
-                  }
-                ).secure_url);
+            if (user.image) {
+              userFound.image = user.image;
+            } else {
+              const randomAvatar = await cloudinary.v2.uploader.upload(
+                "https://picsum.photos/460",
+                {
+                  upload_preset: "scavenger-hunt-avatars",
+                }
+              );
+              userFound.image = randomAvatar.secure_url;
+            }
             await userFound.save();
           } catch (error) {
             console.error(error);
