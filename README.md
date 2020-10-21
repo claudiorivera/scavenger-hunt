@@ -18,6 +18,7 @@ A game that challenges you to find the most random items around your house. Made
 - Items page shows all items and indicates whether current user has found it
 - User can collect items
 - Specific item page should show all users who have found that item
+- Load spinners for photo submit
 
 # TODO
 

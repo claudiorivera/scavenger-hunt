@@ -2,6 +2,7 @@ import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledButton from "@components/StyledButton";
 import {
   Button,
+  CircularProgress,
   Container,
   Input,
   styled,
@@ -30,6 +31,7 @@ const CollectPage = ({ items }) => {
   const [previewSource, setPreviewSource] = useState("");
   const [wasSuccessful, setWasSuccessful] = useState(false);
   const [successfulImageSource, setSuccessfulImageSource] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
 
   // TODO: Start with whatever item was passed in as a query, if any
   useEffect(() => {
@@ -71,12 +73,14 @@ const CollectPage = ({ items }) => {
 
   const uploadImage = async (base64EncodedImage) => {
     try {
+      setIsFetching(true);
       const response = await axios.post("/api/collections", {
         imageDataString: base64EncodedImage,
         userId: session.user.id,
         itemId: item._id,
       });
       if (response.data.success) {
+        setIsFetching(false);
         setSuccessfulImageSource(response.data.imageUrl);
         setWasSuccessful(true);
       }
@@ -86,6 +90,7 @@ const CollectPage = ({ items }) => {
   };
 
   const clearFoundItem = () => {
+    setIsFetching(false);
     setWasSuccessful(false);
     setSuccessfulImageSource("");
     setPreviewSource("");
@@ -94,7 +99,7 @@ const CollectPage = ({ items }) => {
   if (!session) return <NotLoggedInMessage />;
 
   return wasSuccessful ? (
-    <Container align="center">
+    <Container align="center" maxWidth="xs">
       <Typography variant="h2">Nice Find!</Typography>
       <img
         width="140px"
@@ -111,7 +116,7 @@ const CollectPage = ({ items }) => {
           getNextItem();
         }}
       >
-        Find More
+        Continue Finding
       </StyledButton>
       <StyledButton
         size="large"
@@ -126,7 +131,7 @@ const CollectPage = ({ items }) => {
       </StyledButton>
     </Container>
   ) : items.length ? (
-    <Container align="center">
+    <Container align="center" maxWidth="xs">
       <Typography variant="h4">Find</Typography>
       <Typography variant="h2" gutterBottom>
         {item.itemDescription}
@@ -167,8 +172,9 @@ const CollectPage = ({ items }) => {
             fullWidth
             color="secondary"
             variant="contained"
+            disabled={isFetching}
           >
-            Submit Photo
+            {isFetching ? <CircularProgress /> : "Submit Photo"}
           </StyledButton>
         </Fragment>
       )}
@@ -196,7 +202,7 @@ const CollectPage = ({ items }) => {
       </Link>
     </Container>
   ) : (
-    <Container align="center">
+    <Container align="center" maxWidth="xs">
       <Typography variant="h1">You Found All The Items!</Typography>
       <StyledButton
         size="large"
