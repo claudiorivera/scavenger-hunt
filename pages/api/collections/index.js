@@ -1,10 +1,12 @@
 import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
+import Item from "@models/Item";
+import User from "@models/User";
+import cloudinary from "cloudinary";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
-import cloudinary from "cloudinary";
-const handler = nextConnect();
 
+const handler = nextConnect();
 handler.use(middleware);
 
 // POST api/collections
@@ -20,14 +22,20 @@ handler.post(async (req, res) => {
       const collectionItem = new CollectionItem({
         itemId: req.body.itemId,
         userId: session.user.id,
-        cloudinaryImageUrl: image.url,
+        imageUrl: image.url,
       });
+      const user = await User.findById(session.user.id);
+      user.itemsCollected.addToSet(collectionItem);
+      const item = await Item.findById(req.body.itemId);
+      item.usersWithItemCollected.addToSet(session.user.id);
       const savedCollectionItem = await collectionItem.save();
+      await user.save();
+      await item.save();
       res.status(201).json({
         success: true,
-        message: "Successfully added item",
+        message: "Successfully collected item",
         collectionItemId: savedCollectionItem._id,
-        cloudinaryImageUrl: image.url,
+        imageUrl: image.url,
       });
     } catch (error) {
       res.status(500).json({
@@ -45,7 +53,7 @@ export default handler;
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: "50mb",
+      sizeLimit: "8mb",
     },
   },
 };

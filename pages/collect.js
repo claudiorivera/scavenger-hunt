@@ -13,7 +13,7 @@ import Item from "@models/Item";
 import axios from "axios";
 import { getSession, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 const StyledImage = styled("img")({
   width: "100%",
@@ -69,12 +69,18 @@ const CollectPage = ({ items }) => {
         itemId: item._id,
       });
       if (response.data.success) {
-        setSuccessfulImageSource(response.data.cloudinaryImageUrl);
+        setSuccessfulImageSource(response.data.imageUrl);
         setWasSuccessful(true);
       }
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const clearFoundItem = () => {
+    setWasSuccessful(false);
+    setSuccessfulImageSource("");
+    setPreviewSource("");
   };
 
   if (!session) return <NotLoggedInMessage />;
@@ -93,9 +99,7 @@ const CollectPage = ({ items }) => {
         color="secondary"
         variant="contained"
         onClick={() => {
-          setWasSuccessful(false);
-          setSuccessfulImageSource("");
-          setPreviewSource("");
+          clearFoundItem();
           getNextItem();
         }}
       >
@@ -118,6 +122,7 @@ const CollectPage = ({ items }) => {
             value={fileInput}
           />
           <Button
+            style={{ marginBottom: ".5rem" }}
             size="large"
             startIcon={<AddAPhotoIcon />}
             fullWidth
@@ -130,26 +135,29 @@ const CollectPage = ({ items }) => {
         </label>
       </form>
       {previewSource && (
-        <Container>
-          <StyledImage src={previewSource} alt="Item image" />
-        </Container>
+        <Fragment>
+          <Container>
+            <StyledImage src={previewSource} alt="Item image" />
+          </Container>
+          <StyledButton
+            form="imageUploadForm"
+            type="submit"
+            size="large"
+            fullWidth
+            color="secondary"
+            variant="contained"
+          >
+            Submit Photo
+          </StyledButton>
+        </Fragment>
       )}
-      <StyledButton
-        form="imageUploadForm"
-        type="submit"
-        size="large"
-        fullWidth
-        color="secondary"
-        variant="contained"
-      >
-        Submit Photo
-      </StyledButton>
       <StyledButton
         size="large"
         fullWidth
         color="secondary"
         variant="contained"
         onClick={() => {
+          clearFoundItem();
           getNextItem();
         }}
       >
@@ -182,18 +190,12 @@ export const getServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
   if (session) {
     await middleware.apply(req, res);
-    const items = await Item.find().lean();
-    // TODO: Refactor this so that it's not O(n^2)
-    // Once CollectionItems are implemented, it will be a faster lookup
-    const itemsNotFoundByThisUser = items.filter(
-      (item) =>
-        item.usersWithItemCollected.filter(
-          (user) => user._id.toString() === session.user.id
-        ).length === 0
-    );
+    const items = await Item.where("usersWithItemCollected")
+      .ne(session.user.id)
+      .lean();
     return {
       props: {
-        items: JSON.parse(JSON.stringify(itemsNotFoundByThisUser)),
+        items: JSON.parse(JSON.stringify(items)),
       },
     };
   } else
