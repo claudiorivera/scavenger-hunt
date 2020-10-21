@@ -55,7 +55,7 @@ export default handler;
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: "20mb",
+      sizeLimit: "50mb",
     },
   },
 };
