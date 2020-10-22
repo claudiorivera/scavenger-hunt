@@ -2,9 +2,9 @@ import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
 import Item from "@models/Item";
 import User from "@models/User";
+import axios from "axios";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
-import axios from "axios";
 
 const handler = nextConnect();
 handler.use(middleware);

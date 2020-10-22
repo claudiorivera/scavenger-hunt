@@ -2,7 +2,6 @@ import middleware from "@middleware";
 import User from "@models/User";
 import randomlyGeneratedName from "@util/randomlyGeneratedName";
 import verificationRequest from "@util/verificationRequest";
-import cloudinary from "cloudinary";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import nextConnect from "next-connect";
@@ -45,13 +44,13 @@ handler.use((req, res) =>
             if (user.image) {
               userFound.image = user.image;
             } else {
-              const randomAvatar = await cloudinary.v2.uploader.upload(
-                "https://picsum.photos/460",
-                {
-                  upload_preset: "scavenger-hunt-avatars",
-                }
-              );
-              userFound.image = randomAvatar.secure_url;
+              const url =
+                "https://api.cloudinary.com/v1_1/claudiorivera/image/upload";
+              const response = await axios.post(url, {
+                file: "https://picsum.photos/460",
+                upload_preset: "scavenger-hunt-avatars",
+              });
+              userFound.image = response.data.secure_url;
             }
             await userFound.save();
           } catch (error) {
