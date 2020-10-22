@@ -32,7 +32,7 @@ const AdminPage = ({ user }) => {
   const handleSubmit = async (itemDescription) => {
     try {
       const response = await axios.post("/api/items", { itemDescription });
-      console.log(`response: ${JSON.stringify(response, null, 2)}`);
+      alert(`response: ${JSON.stringify(response.data.message)}`);
     } catch (error) {
       console.error(error);
     }
