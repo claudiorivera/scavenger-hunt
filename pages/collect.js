@@ -81,7 +81,7 @@ const CollectPage = ({ items }) => {
       });
       if (response.data.success) {
         setIsFetching(false);
-        setSuccessfulImageSource(response.data.imageUrl);
+        setSuccessfulImageSource(response.data.savedCollectionItem.imageUrl);
         setWasSuccessful(true);
       }
     } catch (error) {
@@ -100,10 +100,10 @@ const CollectPage = ({ items }) => {
 
   return wasSuccessful ? (
     <Container align="center" maxWidth="xs">
-      <Typography variant="h2">Nice Find!</Typography>
+      <Typography variant="h3">You found {item.itemDescription}!</Typography>
       <img
-        width="140px"
         src={successfulImageSource}
+        width="300px"
         alt="Successfully uploaded photo"
       />
       <StyledButton
@@ -116,7 +116,7 @@ const CollectPage = ({ items }) => {
           getNextItem();
         }}
       >
-        Continue Finding
+        Find More
       </StyledButton>
       <StyledButton
         size="large"
@@ -127,7 +127,7 @@ const CollectPage = ({ items }) => {
           router.push(`/collections/${session.user.id}`);
         }}
       >
-        My Collection
+        View My Collection
       </StyledButton>
     </Container>
   ) : items.length ? (

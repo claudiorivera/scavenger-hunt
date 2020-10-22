@@ -41,16 +41,19 @@ handler.use((req, res) =>
             const userFound = await User.findById(user.id);
             user.name
               ? (userFound.name = user.name)
-              : (userFound.name = randomlyGeneratedName());
+              : // Generate random name, if none is provided
+                (userFound.name = randomlyGeneratedName());
             if (user.image) {
               userFound.image = user.image;
             } else {
-              const url =
-                "https://api.cloudinary.com/v1_1/claudiorivera/image/upload";
-              const response = await axios.post(url, {
-                file: "https://picsum.photos/460",
-                upload_preset: "scavenger-hunt-avatars",
-              });
+              // Generate random avatar, if none is provided
+              const response = await axios.post(
+                `${process.env.CLOUDINARY_BASE_URL}/image/upload`,
+                {
+                  file: "https://picsum.photos/180", //Random 180x180 photo from picsum.photos
+                  upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET_AVATARS,
+                }
+              );
               userFound.image = response.data.secure_url;
             }
             await userFound.save();
