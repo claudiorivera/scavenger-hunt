@@ -39,14 +39,16 @@ handler.use((req, res) =>
         if (isNewUser) {
           try {
             const userFound = await User.findById(user.id);
-            user.name
-              ? (userFound.name = user.name)
-              : // Generate random name, if none is provided
-                (userFound.name = randomlyGeneratedName());
+            // Generate random name, if none is provided
+            if (user.name) {
+              userFound.name = user.name;
+            } else {
+              userFound.name = randomlyGeneratedName();
+            }
+            // Generate random avatar, if none is provided
             if (user.image) {
               userFound.image = user.image;
             } else {
-              // Generate random avatar, if none is provided
               const response = await axios.post(
                 `${process.env.CLOUDINARY_BASE_URL}/image/upload`,
                 {
