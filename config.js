@@ -21,10 +21,6 @@ const userLinks = [
     url: "/leaderboard",
   },
   {
-    title: "Collections",
-    url: "/collections",
-  },
-  {
     title: "Items",
     url: "/items",
   },
