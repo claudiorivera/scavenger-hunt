@@ -8,11 +8,11 @@ const UserSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    default: "https://picsum.photos/460",
+    default: "https://picsum.photos/180",
   },
   isAdmin: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   itemsCollected: [
     {
