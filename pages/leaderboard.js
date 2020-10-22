@@ -19,7 +19,6 @@ const LeaderboardPage = ({ users }) => {
 
   return (
     <Container align="center" maxWidth="xs">
-      {/* <pre>{JSON.stringify(users, null, 2)}</pre> */}
       <Typography variant="h3">Leaderboard</Typography>
       <StyledDivider />
       {users.length > 0 ? (
@@ -64,7 +63,9 @@ export const getServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
   if (session) {
     await middleware.apply(req, res);
-    const users = await User.find().lean();
+    const users = await User.find()
+      .select("_id name itemsCollected image name")
+      .lean();
     const sortedUsers = users.sort(
       (a, b) => b.itemsCollected.length - a.itemsCollected.length
     );
