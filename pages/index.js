@@ -1,16 +1,12 @@
+import LargeAvatar from "@components/LargeAvatar";
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledButton from "@components/StyledButton";
-import { Avatar, Container, styled, Typography } from "@material-ui/core";
+import { Container, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import User from "@models/User";
-import { getSession, signIn, useSession } from "next-auth/client";
+import { getSession, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React from "react";
-
-const LargeAvatar = styled(Avatar)({
-  width: "5rem",
-  height: "5rem",
-});
 
 const HomePage = ({ user }) => {
   const [session] = useSession();
