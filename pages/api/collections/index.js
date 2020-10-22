@@ -35,14 +35,14 @@ handler.post(async (req, res) => {
           process.env.CLOUDINARY_CLOUD_NAME +
           "/w_80,h_80,c_fill,g_center,q_auto:best/" +
           response.data.public_id,
-        userId: session.user.id,
-        itemId: req.body.itemId,
+        user: session.user.id,
+        item: req.body.item,
       });
       const savedCollectionItem = await collectionItem.save();
       const user = await User.findById(session.user.id);
       user.itemsCollected.addToSet(collectionItem);
       await user.save();
-      const item = await Item.findById(req.body.itemId);
+      const item = await Item.findById(req.body.item);
       item.usersWithItemCollected.addToSet(session.user.id);
       await item.save();
       res.status(201).json({
@@ -62,3 +62,11 @@ handler.post(async (req, res) => {
 });
 
 export default handler;
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "50mb",
+    },
+  },
+};

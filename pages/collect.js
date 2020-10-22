@@ -76,8 +76,8 @@ const CollectPage = ({ items }) => {
       setIsFetching(true);
       const response = await axios.post("/api/collections", {
         imageDataString: base64EncodedImage,
-        userId: session.user.id,
-        itemId: item._id,
+        user: session.user.id,
+        item: item._id,
       });
       if (response.data.success) {
         setIsFetching(false);
