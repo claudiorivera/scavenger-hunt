@@ -1,10 +1,14 @@
 import LargeAvatar from "@components/LargeAvatar";
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
-import { Container, Typography } from "@material-ui/core";
+import SmallAvatar from "@components/SmallAvatar";
+import StyledButton from "@components/StyledButton";
+import StyledLink from "@components/StyledLink";
+import { Box, Container, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
 import User from "@models/User";
 import { getSession, useSession } from "next-auth/client";
+import Link from "next/link";
 import React from "react";
 
 const CollectPage = ({ user, items }) => {
@@ -16,6 +20,39 @@ const CollectPage = ({ user, items }) => {
     <Container align="center" maxWidth="xs">
       <LargeAvatar alt={user.name} src={user.image} />
       <Typography variant="body1">{user.name}</Typography>
+      <Typography variant="h5" gutterBottom>
+        Found the Following Items:
+      </Typography>
+      {items.length > 0 ? (
+        items.map(({ _id, thumbnailUrl, item }) => (
+          <Box key={_id} display="flex" alignItems="center">
+            <Box flexGrow="1">
+              <Box display="flex" alignItems="center">
+                <SmallAvatar
+                  style={{ marginRight: "1rem" }}
+                  alt={item.itemDescription}
+                  src={thumbnailUrl}
+                />
+                <StyledLink href={`/items/${item._id}`}>
+                  {item.itemDescription}
+                </StyledLink>
+              </Box>
+            </Box>
+            <Link href={`/items/${item._id}/foundby/${user._id}`}>
+              <StyledButton variant="contained" color="secondary">
+                View Item
+              </StyledButton>
+            </Link>
+          </Box>
+        ))
+      ) : (
+        <Typography variant="h5">
+          Nobody, yet{" "}
+          <span role="img" aria-label="sad face emoji">
+            😢
+          </span>
+        </Typography>
+      )}
     </Container>
   );
 };
@@ -32,7 +69,7 @@ export const getServerSideProps = async ({ req, res, params }) => {
     const items = await CollectionItem.where("user")
       .equals(params.userId)
       .select("_id thumbnailUrl item")
-      .populate("item", "itemDescription -_id")
+      .populate("item", "itemDescription")
       .lean();
     return {
       props: {

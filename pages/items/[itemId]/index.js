@@ -86,10 +86,12 @@ export const getServerSideProps = async ({ req, res, params }) => {
   const session = await getSession({ req });
   if (session) {
     await middleware.apply(req, res);
+    console.log(params.itemId);
     const item = await Item.findById(params.itemId)
       .populate("usersWhoCollected", "_id image name")
       .populate("addedBy", "_id image name")
       .lean();
+    console.log(`${JSON.stringify(item, null, 2)}`);
     return {
       props: {
         item: JSON.parse(JSON.stringify(item)),
