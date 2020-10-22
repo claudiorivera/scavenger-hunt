@@ -43,7 +43,7 @@ handler.post(async (req, res) => {
       user.itemsCollected.addToSet(collectionItem);
       await user.save();
       const item = await Item.findById(req.body.item);
-      item.usersWithItemCollected.addToSet(session.user.id);
+      item.usersWhoCollected.addToSet(session.user.id);
       await item.save();
       res.status(201).json({
         success: true,

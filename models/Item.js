@@ -10,7 +10,7 @@ const ItemSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  usersWithItemCollected: [
+  usersWhoCollected: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

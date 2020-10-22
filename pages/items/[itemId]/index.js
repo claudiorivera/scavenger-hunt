@@ -34,8 +34,8 @@ const ItemDetailsPage = ({ item }) => {
       <Typography variant="h5" gutterBottom>
         Collected by:
       </Typography>
-      {item.usersWithItemCollected.length > 0 ? (
-        item.usersWithItemCollected.map((user) => (
+      {item.usersWhoCollected.length > 0 ? (
+        item.usersWhoCollected.map((user) => (
           <Box key={user._id} display="flex" alignItems="center">
             <Box flexGrow="1">
               <StyledLink href={`/collections/${user._id}`}>
@@ -87,7 +87,7 @@ export const getServerSideProps = async ({ req, res, params }) => {
   if (session) {
     await middleware.apply(req, res);
     const item = await Item.findById(params.itemId)
-      .populate("usersWithItemCollected", "_id image name")
+      .populate("usersWhoCollected", "_id image name")
       .populate("addedBy", "_id image name")
       .lean();
     return {
