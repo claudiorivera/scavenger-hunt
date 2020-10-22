@@ -25,14 +25,14 @@ A game that challenges you to find the most random items around your house. Made
 
 # TODO
 
+- Collection pages should show a user's found items
+- Linking to /collect/itemId should show collect page starting with that item
+- Successful collect page should link to the collection item
+- CollectionItem pages should show the user's item photo
 - Toasts for successfully adding items on admin portal
 - Make a reusable component to use for displaying lists of users or items (ie. photo/name/action)
 - Image preview should be cropped square and not push the action buttons off the screen
-- Collection pages should show a user's found items
-- CollectionItem pages should show the user's item photo
-- Linking to /collect/itemId should show collect page starting with that item
 - Refactor collect page to use a "collecting" and "successful collect" state with Context
-- Successful collect page should link to the collection item
 - Collect page should have a container for the item description that is a fixed size, so that the action buttons below it will stay in place, or use flexbox and justify flex-end on the buttons
 
 # Install
