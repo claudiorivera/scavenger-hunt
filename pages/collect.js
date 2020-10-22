@@ -225,9 +225,9 @@ export const getServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
   if (session) {
     await middleware.apply(req, res);
-    const items = await Item.where("usersWithItemCollected")
+    const items = await Item.where("usersWhoCollected")
       .ne(session.user.id)
-      .select("-addedBy")
+      .select("-addedBy -__v")
       .lean();
     return {
       props: {

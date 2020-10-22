@@ -42,20 +42,21 @@ export const getServerSideProps = async ({ req, res }) => {
   if (session) {
     await middleware.apply(req, res);
     const items = await Item.find().lean();
-    const foundItemIds = await Item.where("usersWithItemCollected")
+    const foundItems = await Item.where("usersWhoCollected")
       .equals(session.user.id)
       .select("_id");
-    const foundIds = foundItemIds.map((item) => item._id);
+    const foundItemIds = foundItems.map((item) => item._id);
     return {
       props: {
         items: JSON.parse(JSON.stringify(items)),
-        foundItemIds: JSON.parse(JSON.stringify(foundIds)),
+        foundItemIds: JSON.parse(JSON.stringify(foundItemIds)),
       },
     };
   } else
     return {
       props: {
         items: [],
+        foundItemIds: [],
       },
     };
 };
