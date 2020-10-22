@@ -2,9 +2,9 @@ import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
 import Item from "@models/Item";
 import User from "@models/User";
-import cloudinary from "cloudinary";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
+import axios from "axios";
 
 const handler = nextConnect();
 handler.use(middleware);
@@ -15,14 +15,13 @@ handler.post(async (req, res) => {
   const session = await getSession({ req });
   if (session) {
     try {
-      const image = await cloudinary.v2.uploader.upload(
-        req.body.imageDataString,
-        {
-          upload_preset: "scavenger-hunt",
-        }
-      );
+      const url = "https://api.cloudinary.com/v1_1/claudiorivera/image/upload";
+      const response = await axios.post(url, {
+        file: req.body.imageDataString,
+        upload_preset: "scavenger-hunt",
+      });
       const collectionItem = new CollectionItem({
-        imageUrl: image.secure_url,
+        imageUrl: response.data.secure_url,
         userId: session.user.id,
         itemId: req.body.itemId,
       });
@@ -37,8 +36,9 @@ handler.post(async (req, res) => {
         success: true,
         message: "Successfully collected item",
         collectionItemId: savedCollectionItem._id,
-        imageUrl: image.secure_url,
+        imageUrl: response.data.secure_url,
       });
+      res.json({ success: false, message: "Nope" });
     } catch (error) {
       res.status(500).json({
         success: false,
