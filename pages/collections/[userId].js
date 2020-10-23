@@ -28,11 +28,13 @@ const CollectPage = ({ user, items }) => {
           <Box key={_id} display="flex" alignItems="center">
             <Box flexGrow="1">
               <Box display="flex" alignItems="center">
-                <SmallAvatar
-                  style={{ marginRight: "1rem" }}
-                  alt={item.itemDescription}
-                  src={thumbnailUrl}
-                />
+                <StyledLink href={`/items/${item._id}/foundby/${user._id}`}>
+                  <SmallAvatar
+                    style={{ marginRight: "1rem" }}
+                    alt={item.itemDescription}
+                    src={thumbnailUrl}
+                  />
+                </StyledLink>
                 <StyledLink href={`/items/${item._id}`}>
                   {item.itemDescription}
                 </StyledLink>
@@ -40,7 +42,7 @@ const CollectPage = ({ user, items }) => {
             </Box>
             <Link href={`/items/${item._id}/foundby/${user._id}`}>
               <StyledButton variant="contained" color="secondary">
-                View Item
+                See Theirs
               </StyledButton>
             </Link>
           </Box>
@@ -68,7 +70,7 @@ export const getServerSideProps = async ({ req, res, params }) => {
       .lean();
     const items = await CollectionItem.where("user")
       .equals(params.userId)
-      .select("_id thumbnailUrl item")
+      .select("thumbnailUrl item")
       .populate("item", "itemDescription")
       .lean();
     return {

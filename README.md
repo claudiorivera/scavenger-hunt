@@ -22,14 +22,14 @@ A game that challenges you to find the most random items around your house. Made
 - Send email link submit button spinner
 - Leaderboard should show list of users ranked by most items found
 - Upload to Cloudinary normally, but have Cloudinary do transformations on the fly via URL that is saved to the db?
+- Collection pages should show a user's found items
+- /items/foundby pages should show the user's item photo
 
 # TODO
 
-- Collection pages should show a user's found items
 - Linking to /collect/itemId should show collect page starting with that item
 - Successful collect page should link to the collection item
-- CollectionItem pages should show the user's item photo
-- Toasts for successfully adding items on admin portal
+- Toasts for successfully adding items on admin portal, instead of the temporary alert()
 - Make a reusable component to use for displaying lists of users or items (ie. photo/name/action)
 - Image preview should be cropped square and not push the action buttons off the screen
 - Refactor collect page to use a "collecting" and "successful collect" state with Context

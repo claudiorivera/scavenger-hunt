@@ -14,7 +14,7 @@ const ItemsPage = ({ items, foundItemIds }) => {
   if (!session) return <NotLoggedInMessage />;
 
   return (
-    <Container align="center" maxWidth="xs">
+    <Container maxWidth="xs">
       <Typography variant="h3">All Items</Typography>
       {items &&
         items.map(({ _id, itemDescription }) => (
@@ -41,7 +41,7 @@ export const getServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
   if (session) {
     await middleware.apply(req, res);
-    const items = await Item.find().lean();
+    const items = await Item.find().select("-__v -addedBy").lean();
     const foundItems = await Item.where("usersWhoCollected")
       .equals(session.user.id)
       .select("_id");

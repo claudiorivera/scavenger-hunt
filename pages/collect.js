@@ -1,11 +1,11 @@
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledButton from "@components/StyledButton";
+import StyledImage from "@components/StyledImage";
 import {
   Button,
   CircularProgress,
   Container,
   Input,
-  styled,
   Typography,
 } from "@material-ui/core";
 import { AddAPhoto as AddAPhotoIcon } from "@material-ui/icons";
@@ -17,11 +17,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment, useEffect, useState } from "react";
 
-const StyledImage = styled("img")({
-  width: "100%",
-  margin: "2rem 0 1rem",
-});
-
 const CollectPage = ({ items }) => {
   const [session] = useSession();
   const [item, setItem] = useState(items[0]);
@@ -32,13 +27,6 @@ const CollectPage = ({ items }) => {
   const [wasSuccessful, setWasSuccessful] = useState(false);
   const [successfulImageSource, setSuccessfulImageSource] = useState("");
   const [isFetching, setIsFetching] = useState(false);
-
-  // TODO: Start with whatever item was passed in as a query, if any
-  useEffect(() => {
-    if (router.query.itemId) {
-      console.log(`query ${router.query.itemId} passed in`);
-    }
-  }, []);
 
   // Adapted from https://medium.com/swlh/simple-react-app-with-context-and-functional-components-a374b7fb66b5
   useEffect(() => {

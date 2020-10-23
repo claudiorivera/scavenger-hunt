@@ -27,9 +27,14 @@ const ItemDetailsPage = ({ item }) => {
         alignItems="center"
         marginBottom="2rem"
       >
-        (<Typography variant="caption">Added by:</Typography>
-        <TinyAvatar alt={item.addedBy.name} src={item.addedBy.image} />
-        {item.addedBy.name})
+        Added by:&nbsp;&nbsp;
+        <StyledLink
+          style={{ display: "flex", alignItems: "center" }}
+          href={`/collections/${item.addedBy._id}`}
+        >
+          <TinyAvatar alt={item.addedBy.name} src={item.addedBy.image} />
+          &nbsp;{item.addedBy.name}
+        </StyledLink>
       </Box>
       <Typography variant="h5" gutterBottom>
         Collected by:
@@ -51,7 +56,7 @@ const ItemDetailsPage = ({ item }) => {
             </Box>
             <Link href={`/items/${item._id}/foundby/${user._id}`}>
               <StyledButton variant="contained" color="secondary">
-                View Item
+                See Theirs
               </StyledButton>
             </Link>
           </Box>
@@ -86,12 +91,11 @@ export const getServerSideProps = async ({ req, res, params }) => {
   const session = await getSession({ req });
   if (session) {
     await middleware.apply(req, res);
-    console.log(params.itemId);
     const item = await Item.findById(params.itemId)
+      .select("-__v")
       .populate("usersWhoCollected", "_id image name")
       .populate("addedBy", "_id image name")
       .lean();
-    console.log(`${JSON.stringify(item, null, 2)}`);
     return {
       props: {
         item: JSON.parse(JSON.stringify(item)),
