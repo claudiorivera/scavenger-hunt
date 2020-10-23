@@ -14,7 +14,7 @@ const ItemsPage = ({ items, foundItemIds }) => {
   if (!session) return <NotLoggedInMessage />;
 
   return (
-    <Container maxWidth="xs">
+    <Container align="center" maxWidth="xs">
       <Typography variant="h3">All Items</Typography>
       {items &&
         items.map(({ _id, itemDescription }) => (
