@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
   },
   isAdmin: {
     type: Boolean,
-    default: true,
+    default: process.env.NODE_ENV !== "production",
   },
   itemsCollected: [
     {
