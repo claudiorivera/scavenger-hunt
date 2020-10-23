@@ -1,7 +1,6 @@
 import StyledButton from "@components/StyledButton";
 import {
   Button,
-  CircularProgress,
   Container,
   Input,
   styled,
@@ -11,6 +10,7 @@ import { AddAPhoto } from "@material-ui/icons";
 import { CollectContext } from "context/Collect";
 import Link from "next/link";
 import React, { Fragment, useContext } from "react";
+import SonicWaiting from "./SonicWaiting";
 
 const StyledImage = styled("img")({
   margin: "2rem 0 1rem",
@@ -20,25 +20,27 @@ const StyledImage = styled("img")({
 
 const Collect = () => {
   const {
-    items,
-    item,
+    uncollectedItems,
+    currentItem,
     handleSubmitFile,
     fileInput,
     previewSource,
     isFetching,
-    clearFoundItem,
+    clearCurrentItem,
     getNextItem,
     handleFileInputChange,
-    wasSuccessful,
+    showCollectSuccess,
   } = useContext(CollectContext);
 
-  return wasSuccessful ? (
+  if (!currentItem) return <img src="/sonic.gif" alt="Loading" />;
+
+  return showCollectSuccess ? (
     ""
   ) : (
     <Fragment>
       <Typography variant="h5">Find</Typography>
       <Typography variant="h3" gutterBottom>
-        {item.itemDescription}
+        {currentItem.itemDescription}
       </Typography>
       <form id="imageUploadForm" onSubmit={handleSubmitFile}>
         {/* Photo picker as a button - https://kiranvj.com/blog/blog/file-upload-in-material-ui/ */}
@@ -77,27 +79,27 @@ const Collect = () => {
             variant="contained"
             disabled={isFetching}
           >
-            {isFetching ? <CircularProgress /> : "Submit Photo"}
+            {isFetching ? <SonicWaiting /> : "Submit Photo"}
           </StyledButton>
         </Fragment>
       )}
       {/* Only show the skip button if there are more uncollected items
       or if we came to the collect page via /items/id "got one?" dialog */}
-      {items.length > 1 && (
+      {uncollectedItems.length > 1 && (
         <StyledButton
           size="large"
           fullWidth
           color="secondary"
           variant="contained"
           onClick={() => {
-            clearFoundItem();
+            clearCurrentItem();
             getNextItem();
           }}
         >
           Skip It!
         </StyledButton>
       )}
-      <Link href={`/items/${item._id}`}>
+      <Link href={`/items/${currentItem._id}`}>
         <StyledButton
           size="large"
           fullWidth

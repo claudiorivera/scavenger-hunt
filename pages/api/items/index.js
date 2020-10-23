@@ -11,17 +11,18 @@ handler.use(middleware);
 // Returns all items
 handler.get(async (req, res) => {
   const session = await getSession({ req });
-
+  // GET api/items?uncollected
+  // Returns the user's uncollected items
   if (session && "uncollected" in req.query) {
     try {
-      const items = await Item.where("usersWhoCollected")
+      const uncollectedItems = await Item.where("usersWhoCollected")
         .ne(session.user.id)
         .select("-addedBy -__v")
         .lean();
       res.json({
         success: true,
         message: "Successfully fetched uncollected items",
-        items,
+        uncollectedItems,
       });
     } catch (error) {
       res.status(500).json({

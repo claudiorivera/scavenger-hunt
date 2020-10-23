@@ -7,36 +7,41 @@ import React, { useContext } from "react";
 
 const CollectSuccess = () => {
   const {
-    item,
-    successfulImageSource,
-    wasSuccessful,
-    clearFoundItem,
+    currentItem,
+    collectSuccessImageUrl,
+    showCollectSuccess,
+    clearCurrentItem,
     getNextItem,
+    uncollectedItems,
   } = useContext(CollectContext);
   const [session] = useSession();
   const router = useRouter();
 
-  return wasSuccessful ? (
+  return showCollectSuccess ? (
     <Container align="center" maxWidth="xs">
-      <Typography variant="h3">You found {item.itemDescription}!</Typography>
+      <Typography variant="h3">
+        You found {currentItem.itemDescription}!
+      </Typography>
       <img
-        src={successfulImageSource}
+        src={collectSuccessImageUrl}
         width="300px"
         alt="Successfully uploaded photo"
       />
-      <StyledButton
-        size="large"
-        fullWidth
-        color="secondary"
-        variant="contained"
-        onClick={() => {
-          router.push("/collect");
-          clearFoundItem();
-          getNextItem();
-        }}
-      >
-        Find More
-      </StyledButton>
+      {uncollectedItems.length > 0 && (
+        <StyledButton
+          size="large"
+          fullWidth
+          color="secondary"
+          variant="contained"
+          onClick={() => {
+            router.push("/collect");
+            clearCurrentItem();
+            getNextItem();
+          }}
+        >
+          Find More
+        </StyledButton>
+      )}
       <StyledButton
         size="large"
         fullWidth

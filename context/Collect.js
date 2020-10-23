@@ -1,28 +1,54 @@
+import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import { useSession } from "next-auth/client";
 import { createContext, useEffect, useState } from "react";
+import useSWR from "swr";
+
+const fetcher = (url) =>
+  axios.get(url).then((res) => res.data.uncollectedItems);
 
 export const CollectContext = createContext();
 
-export const CollectProvider = ({ children, initialItems }) => {
-  const [items, setItems] = useState(initialItems);
+export const CollectProvider = ({
+  children,
+  initialUncollectedItems,
+  startWithItem,
+}) => {
+  const { data: uncollectedItems, mutate } = useSWR(
+    "api/items?uncollected",
+    fetcher,
+    {
+      initialData: initialUncollectedItems,
+    }
+  );
   const [session] = useSession();
-  const [item, setItem] = useState(items[0]);
-  const [fileInput] = useState("");
+  const [currentItemIndex, setCurrentItemIndex] = useState(
+    // If a startWithItem was passed in (via query params on collect page), then the index
+    // is the index of the item in uncollectedItems array that matches the starting item's id
+    // Otherwise, it's 0 (first item)
+    startWithItem
+      ? uncollectedItems.findIndex((item) => item._id === startWithItem._id)
+      : 0
+  );
+  const [currentItem, setCurrentItem] = useState(
+    uncollectedItems[currentItemIndex]
+  );
+  const [fileInput, setFileInput] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [isFetching, setIsFetching] = useState(false);
-  const [currentItemIndex, setCurrentItemIndex] = useState(0);
-  const [successfulImageSource, setSuccessfulImageSource] = useState("");
-  const [wasSuccessful, setWasSuccessful] = useState(false);
+  const [collectSuccessImageUrl, setCollectSuccessImageUrl] = useState("");
+  const [showCollectSuccess, setShowCollectSuccess] = useState(false);
+
+  if (!uncollectedItems) return <CircularProgress />;
 
   // Adapted from https://medium.com/swlh/simple-react-app-with-context-and-functional-components-a374b7fb66b5
   useEffect(() => {
-    setItem({ ...items[currentItemIndex] });
+    setCurrentItem(uncollectedItems[currentItemIndex]);
   }, [currentItemIndex]);
 
   const getNextItem = () => {
     let index = currentItemIndex;
-    index === items.length - 1 ? (index = 0) : index++;
+    index === uncollectedItems.length - 1 ? (index = 0) : index++;
     setCurrentItemIndex(index);
   };
 
@@ -52,25 +78,25 @@ export const CollectProvider = ({ children, initialItems }) => {
       const response = await axios.post("/api/collections", {
         imageDataString: base64EncodedImage,
         user: session.user.id,
-        item: item._id,
+        item: currentItem._id,
       });
       if (response.data.success) {
         setIsFetching(false);
-        setSuccessfulImageSource(response.data.savedCollectionItem.imageUrl);
-        setWasSuccessful(true);
-        const newItems = await axios.get("/api/items?uncollected");
-        setItems(newItems.data.items);
+        setCollectSuccessImageUrl(response.data.savedCollectionItem.imageUrl);
+        setShowCollectSuccess(true);
+        mutate();
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  const clearFoundItem = async () => {
+  const clearCurrentItem = () => {
     setIsFetching(false);
-    setWasSuccessful(false);
-    setSuccessfulImageSource("");
+    setShowCollectSuccess(false);
+    setCollectSuccessImageUrl("");
     setPreviewSource("");
+    setFileInput("");
   };
 
   CollectContext.displayName = "Collect";
@@ -78,9 +104,9 @@ export const CollectProvider = ({ children, initialItems }) => {
   return (
     <CollectContext.Provider
       value={{
-        items,
-        item,
-        setItem,
+        uncollectedItems,
+        currentItem,
+        setCurrentItem,
         handleFileInputChange,
         handleSubmitFile,
         fileInput,
@@ -89,11 +115,11 @@ export const CollectProvider = ({ children, initialItems }) => {
         isFetching,
         setIsFetching,
         getNextItem,
-        clearFoundItem,
-        successfulImageSource,
-        setSuccessfulImageSource,
-        wasSuccessful,
-        setWasSuccessful,
+        clearCurrentItem,
+        collectSuccessImageUrl,
+        setCollectSuccessImageUrl,
+        showCollectSuccess,
+        setShowCollectSuccess,
       }}
     >
       {children}
