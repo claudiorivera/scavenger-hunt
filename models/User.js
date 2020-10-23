@@ -1,3 +1,4 @@
+import { newUsersAdminByDefault } from "@config";
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
@@ -12,7 +13,7 @@ const UserSchema = new mongoose.Schema({
   },
   isAdmin: {
     type: Boolean,
-    default: process.env.NODE_ENV !== "production",
+    default: newUsersAdminByDefault,
   },
   itemsCollected: [
     {
