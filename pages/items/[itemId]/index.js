@@ -5,12 +5,14 @@ import StyledDivider from "@components/StyledDivider";
 import StyledLink from "@components/StyledLink";
 import TinyAvatar from "@components/TinyAvatar";
 import { Box, Container, Typography } from "@material-ui/core";
+import { Visibility } from "@material-ui/icons";
 import middleware from "@middleware";
 import Item from "@models/Item";
 import { getSession, useSession } from "next-auth/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { showItemAttribution } from "@config";
 
 const ItemDetailsPage = ({ item }) => {
   const [session] = useSession();
@@ -21,21 +23,23 @@ const ItemDetailsPage = ({ item }) => {
   return (
     <Container align="center" maxWidth="xs">
       <Typography variant="h3">{item.itemDescription}</Typography>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        marginBottom="2rem"
-      >
-        Added by:&nbsp;&nbsp;
-        <StyledLink
-          style={{ display: "flex", alignItems: "center" }}
-          href={`/collections/${item.addedBy._id}`}
+      {showItemAttribution && (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          marginBottom="2rem"
         >
-          <TinyAvatar alt={item.addedBy.name} src={item.addedBy.image} />
-          &nbsp;{item.addedBy.name}
-        </StyledLink>
-      </Box>
+          Added by:&nbsp;&nbsp;
+          <StyledLink
+            style={{ display: "flex", alignItems: "center" }}
+            href={`/collections/${item.addedBy._id}`}
+          >
+            <TinyAvatar alt={item.addedBy.name} src={item.addedBy.image} />
+            &nbsp;{item.addedBy.name}
+          </StyledLink>
+        </Box>
+      )}
       <Typography variant="h5" gutterBottom>
         Collected by:
       </Typography>
@@ -56,7 +60,7 @@ const ItemDetailsPage = ({ item }) => {
             </Box>
             <Link href={`/items/${item._id}/foundby/${user._id}`}>
               <StyledButton variant="contained" color="secondary">
-                See Theirs
+                <Visibility />
               </StyledButton>
             </Link>
           </Box>

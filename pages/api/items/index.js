@@ -9,19 +9,40 @@ handler.use(middleware);
 
 // GET api/items
 // Returns all items
-handler.get(async (_, res) => {
-  try {
-    const items = await Item.find().lean();
-    res.json({
-      success: true,
-      message: "Successfully fetched all items",
-      items,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message || "Items not found",
-    });
+handler.get(async (req, res) => {
+  const session = await getSession({ req });
+
+  if (session && "uncollected" in req.query) {
+    try {
+      const items = await Item.where("usersWhoCollected")
+        .ne(session.user.id)
+        .select("-addedBy -__v")
+        .lean();
+      res.json({
+        success: true,
+        message: "Successfully fetched uncollected items",
+        items,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error.message || "Unfound items not found",
+      });
+    }
+  } else {
+    try {
+      const items = await Item.find().lean();
+      res.json({
+        success: true,
+        message: "Successfully fetched all items",
+        items,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error.message || "Items not found",
+      });
+    }
   }
 });
 

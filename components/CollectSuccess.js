@@ -1,14 +1,24 @@
+import StyledButton from "@components/StyledButton";
 import { Container, Typography } from "@material-ui/core";
+import { CollectContext } from "context/Collect";
+import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import PropTypes from "prop-types";
-import React from "react";
-import StyledButton from "./StyledButton";
+import React, { useContext } from "react";
 
-const CollectSuccess = ({ itemDescription, successfulImageSource, userid }) => {
+const CollectSuccess = () => {
+  const {
+    item,
+    successfulImageSource,
+    wasSuccessful,
+    clearFoundItem,
+    getNextItem,
+  } = useContext(CollectContext);
+  const [session] = useSession();
   const router = useRouter();
-  return (
+
+  return wasSuccessful ? (
     <Container align="center" maxWidth="xs">
-      <Typography variant="h3">You found {itemDescription}!</Typography>
+      <Typography variant="h3">You found {item.itemDescription}!</Typography>
       <img
         src={successfulImageSource}
         width="300px"
@@ -21,6 +31,8 @@ const CollectSuccess = ({ itemDescription, successfulImageSource, userid }) => {
         variant="contained"
         onClick={() => {
           router.push("/collect");
+          clearFoundItem();
+          getNextItem();
         }}
       >
         Find More
@@ -31,19 +43,15 @@ const CollectSuccess = ({ itemDescription, successfulImageSource, userid }) => {
         color="secondary"
         variant="contained"
         onClick={() => {
-          router.push(`/collections/${userid}`);
+          router.push(`/collections/${session.user.id}`);
         }}
       >
         View My Collection
       </StyledButton>
     </Container>
+  ) : (
+    ""
   );
-};
-
-CollectSuccess.propTypes = {
-  itemDescription: PropTypes.string.isRequired,
-  successfulImageSource: PropTypes.string.isRequired,
-  userid: PropTypes.string.isRequired,
 };
 
 export default CollectSuccess;

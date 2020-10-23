@@ -1,6 +1,7 @@
 const appTitle = "Scavenger Hunt";
-const primaryColor = "#bb4430";
-const secondaryColor = "#dda15e";
+const primaryColor = "#bb4430"; // App bar color
+const secondaryColor = "#dda15e"; // Button color
+const showItemAttribution = false; // Whether to display who added the item under item title
 const adminLinks = [
   {
     title: "Admin",
@@ -26,4 +27,11 @@ const userLinks = [
   },
 ];
 
-export { appTitle, primaryColor, secondaryColor, adminLinks, userLinks };
+export {
+  appTitle,
+  primaryColor,
+  secondaryColor,
+  adminLinks,
+  userLinks,
+  showItemAttribution,
+};

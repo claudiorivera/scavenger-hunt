@@ -17,7 +17,7 @@ const HomePage = ({ user }) => {
   return (
     <Container align="center" maxWidth="xs">
       <LargeAvatar alt={user.name} src={user.image} />
-      <Typography variant="body1">{user.name}</Typography>
+      <Typography variant="h5">{user.name}</Typography>
       <StyledButton
         size="large"
         fullWidth

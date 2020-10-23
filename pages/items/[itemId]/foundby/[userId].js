@@ -16,15 +16,15 @@ const ItemFoundByDetails = ({ collectionItem }) => {
   return (
     <Container align="center" maxWidth="xs">
       <Typography variant="h5" gutterBottom>
-        {collectionItem.user.name} found {collectionItem.item.itemDescription}!
+        {collectionItem.user.name} Found {collectionItem.item.itemDescription}!
       </Typography>
       <StyledImage
         src={collectionItem.imageUrl}
         alt={collectionItem.item.itemDescription}
       />
-      <Link href={`/collect/${collectionItem.item._id}`}>
+      <Link href={`/collect?itemId=${collectionItem.item._id}`}>
         <StyledButton fullWidth variant="contained" color="secondary">
-          Found It?
+          Found It, too?
         </StyledButton>
       </Link>
       <Link href={`/items/${collectionItem.item._id}`}>

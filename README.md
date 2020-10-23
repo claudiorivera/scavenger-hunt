@@ -24,15 +24,13 @@ A game that challenges you to find the most random items around your house. Made
 - Upload to Cloudinary normally, but have Cloudinary do transformations on the fly via URL that is saved to the db?
 - Collection pages should show a user's found items
 - /items/foundby pages should show the user's item photo
+- Refactor collect page to use a "collecting" and "successful collect" state with Context
 
 # TODO
 
-- Linking to /collect/itemId should show collect page starting with that item
-- Successful collect page should link to the collection item
 - Toasts for successfully adding items on admin portal, instead of the temporary alert()
+- Linking to /collect/itemId should show collect page starting with that item
 - Make a reusable component to use for displaying lists of users or items (ie. photo/name/action)
-- Image preview should be cropped square and not push the action buttons off the screen
-- Refactor collect page to use a "collecting" and "successful collect" state with Context
 - Collect page should have a container for the item description that is a fixed size, so that the action buttons below it will stay in place, or use flexbox and justify flex-end on the buttons
 
 # Install

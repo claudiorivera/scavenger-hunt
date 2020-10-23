@@ -4,6 +4,7 @@ import SmallAvatar from "@components/SmallAvatar";
 import StyledButton from "@components/StyledButton";
 import StyledLink from "@components/StyledLink";
 import { Box, Container, Typography } from "@material-ui/core";
+import { Visibility } from "@material-ui/icons";
 import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
 import User from "@models/User";
@@ -19,7 +20,7 @@ const CollectPage = ({ user, items }) => {
   return (
     <Container align="center" maxWidth="xs">
       <LargeAvatar alt={user.name} src={user.image} />
-      <Typography variant="body1">{user.name}</Typography>
+      <Typography variant="h3">{user.name}</Typography>
       <Typography variant="h5" gutterBottom>
         Found the Following Items:
       </Typography>
@@ -42,14 +43,14 @@ const CollectPage = ({ user, items }) => {
             </Box>
             <Link href={`/items/${item._id}/foundby/${user._id}`}>
               <StyledButton variant="contained" color="secondary">
-                See Theirs
+                <Visibility />
               </StyledButton>
             </Link>
           </Box>
         ))
       ) : (
         <Typography variant="h5">
-          Nobody, yet{" "}
+          Nothing, yet{" "}
           <span role="img" aria-label="sad face emoji">
             😢
           </span>
