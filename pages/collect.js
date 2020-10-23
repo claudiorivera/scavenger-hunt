@@ -1,3 +1,4 @@
+import CollectSuccess from "@components/CollectSuccess";
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledButton from "@components/StyledButton";
 import StyledImage from "@components/StyledImage";
@@ -87,37 +88,11 @@ const CollectPage = ({ items }) => {
   if (!session) return <NotLoggedInMessage />;
 
   return wasSuccessful ? (
-    <Container align="center" maxWidth="xs">
-      <Typography variant="h3">You found {item.itemDescription}!</Typography>
-      <img
-        src={successfulImageSource}
-        width="300px"
-        alt="Successfully uploaded photo"
-      />
-      <StyledButton
-        size="large"
-        fullWidth
-        color="secondary"
-        variant="contained"
-        onClick={() => {
-          clearFoundItem();
-          getNextItem();
-        }}
-      >
-        Find More
-      </StyledButton>
-      <StyledButton
-        size="large"
-        fullWidth
-        color="secondary"
-        variant="contained"
-        onClick={() => {
-          router.push(`/collections/${session.user.id}`);
-        }}
-      >
-        View My Collection
-      </StyledButton>
-    </Container>
+    <CollectSuccess
+      itemDescription={item.itemDescription}
+      successfulImageSource={successfulImageSource}
+      userid={session.user.id}
+    />
   ) : items.length ? (
     <Container align="center" maxWidth="xs">
       <Typography variant="h4">Find</Typography>
