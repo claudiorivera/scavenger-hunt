@@ -39,8 +39,8 @@ const ItemFoundByDetails = ({ collectionItem }) => {
 export default ItemFoundByDetails;
 
 export const getServerSideProps = async ({ req, res, params }) => {
-  const session = await getSession({ req });
-  if (session) {
+  try {
+    await getSession({ req });
     await middleware.apply(req, res);
     const collectionItem = await CollectionItem.findOne()
       .where("user")
@@ -56,10 +56,16 @@ export const getServerSideProps = async ({ req, res, params }) => {
         collectionItem: JSON.parse(JSON.stringify(collectionItem)),
       },
     };
-  } else
+  } catch (error) {
     return {
       props: {
-        collectionItem: [],
+        error: {
+          statusCode: error.statusCode || 500,
+          message:
+            error.message ||
+            "Something went wrong while getting server side props in items/id/foundby/userid.js",
+        },
       },
     };
+  }
 };

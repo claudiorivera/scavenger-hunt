@@ -82,8 +82,8 @@ const AdminPage = ({ user }) => {
 export default AdminPage;
 
 export const getServerSideProps = async ({ req, res }) => {
-  const session = await getSession({ req });
-  if (session) {
+  try {
+    const session = await getSession({ req });
     await middleware.apply(req, res);
     const user = await User.findById(session.user.id)
       .select("isAdmin -_id")
@@ -93,10 +93,16 @@ export const getServerSideProps = async ({ req, res }) => {
         user: JSON.parse(JSON.stringify(user)),
       },
     };
-  } else
+  } catch (error) {
     return {
       props: {
-        user: null,
+        error: {
+          statusCode: error.statusCode || 500,
+          message:
+            error.message ||
+            "Something went wrong while getting server side props in admin.js",
+        },
       },
     };
+  }
 };

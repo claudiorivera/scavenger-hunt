@@ -60,8 +60,8 @@ const LeaderboardPage = ({ users }) => {
 export default LeaderboardPage;
 
 export const getServerSideProps = async ({ req, res }) => {
-  const session = await getSession({ req });
-  if (session) {
+  try {
+    await getSession({ req });
     await middleware.apply(req, res);
     const users = await User.find()
       .select("_id name itemsCollected image name")
@@ -74,10 +74,16 @@ export const getServerSideProps = async ({ req, res }) => {
         users: JSON.parse(JSON.stringify(sortedUsers)),
       },
     };
-  } else
+  } catch (error) {
     return {
       props: {
-        users: null,
+        error: {
+          statusCode: error.statusCode || 500,
+          message:
+            error.message ||
+            "Something went wrong while getting server side props in leaderboard.js",
+        },
       },
     };
+  }
 };

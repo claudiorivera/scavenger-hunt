@@ -63,8 +63,8 @@ const CollectPage = ({ user, items }) => {
 export default CollectPage;
 
 export const getServerSideProps = async ({ req, res, params }) => {
-  const session = await getSession({ req });
-  if (session) {
+  try {
+    await getSession({ req });
     await middleware.apply(req, res);
     const user = await User.findById(params.userId)
       .select("_id image name")
@@ -80,10 +80,16 @@ export const getServerSideProps = async ({ req, res, params }) => {
         items: JSON.parse(JSON.stringify(items)),
       },
     };
-  } else
+  } catch (error) {
     return {
       props: {
-        user: null,
+        error: {
+          statusCode: error.statusCode || 500,
+          message:
+            error.message ||
+            "Something went wrong while getting server side props in collections/userid.js",
+        },
       },
     };
+  }
 };

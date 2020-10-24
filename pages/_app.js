@@ -7,6 +7,7 @@ import { Provider } from "next-auth/client";
 import Head from "next/head";
 import PropTypes from "prop-types";
 import React from "react";
+import Error from "next/error";
 
 const App = (props) => {
   const { Component, pageProps } = props;
@@ -18,6 +19,15 @@ const App = (props) => {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
+
+  if (pageProps.error) {
+    return (
+      <Error
+        statusCode={pageProps.error.statusCode}
+        title={pageProps.error.message}
+      />
+    );
+  }
 
   return (
     <React.Fragment>

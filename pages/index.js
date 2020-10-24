@@ -58,8 +58,8 @@ const HomePage = ({ user }) => {
 export default HomePage;
 
 export const getServerSideProps = async ({ req, res }) => {
-  const session = await getSession({ req });
-  if (session) {
+  try {
+    const session = await getSession({ req });
     await middleware.apply(req, res);
     const user = await User.findById(session.user.id)
       .select("_id name image")
@@ -69,10 +69,16 @@ export const getServerSideProps = async ({ req, res }) => {
         user: JSON.parse(JSON.stringify(user)),
       },
     };
-  } else
+  } catch (error) {
     return {
       props: {
-        user: null,
+        error: {
+          statusCode: error.statusCode || 500,
+          message:
+            error.message ||
+            "Something went wrong while getting server side props in index.js",
+        },
       },
     };
+  }
 };

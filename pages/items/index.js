@@ -38,8 +38,8 @@ const ItemsPage = ({ items, foundItemIds }) => {
 export default ItemsPage;
 
 export const getServerSideProps = async ({ req, res }) => {
-  const session = await getSession({ req });
-  if (session) {
+  try {
+    const session = await getSession({ req });
     await middleware.apply(req, res);
     const items = await Item.find().select("-__v -addedBy").lean();
     const foundItems = await Item.where("usersWhoCollected")
@@ -52,11 +52,16 @@ export const getServerSideProps = async ({ req, res }) => {
         foundItemIds: JSON.parse(JSON.stringify(foundItemIds)),
       },
     };
-  } else
+  } catch (error) {
     return {
       props: {
-        items: [],
-        foundItemIds: [],
+        error: {
+          statusCode: error.statusCode || 500,
+          message:
+            error.message ||
+            "Something went wrong while getting server side props in items/index.js.js",
+        },
       },
     };
+  }
 };

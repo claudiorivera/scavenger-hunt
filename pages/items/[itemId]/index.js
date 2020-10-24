@@ -92,8 +92,8 @@ const ItemDetailsPage = ({ item }) => {
 export default ItemDetailsPage;
 
 export const getServerSideProps = async ({ req, res, params }) => {
-  const session = await getSession({ req });
-  if (session) {
+  try {
+    await getSession({ req });
     await middleware.apply(req, res);
     const item = await Item.findById(params.itemId)
       .select("-__v")
@@ -105,10 +105,16 @@ export const getServerSideProps = async ({ req, res, params }) => {
         item: JSON.parse(JSON.stringify(item)),
       },
     };
-  } else
+  } catch (error) {
     return {
       props: {
-        item: [],
+        error: {
+          statusCode: error.statusCode || 500,
+          message:
+            error.message ||
+            "Something went wrong while getting server side props in items/index.js",
+        },
       },
     };
+  }
 };
