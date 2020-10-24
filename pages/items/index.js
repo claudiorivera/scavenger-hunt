@@ -44,7 +44,8 @@ export const getServerSideProps = async ({ req, res }) => {
       res.writeHead(301, {
         Location: "/auth/login",
       });
-      return res.end();
+      res.end();
+      throw new Error("Not logged in");
     }
     await middleware.apply(req, res);
     const items = await Item.find().select("-__v -addedBy").lean();
