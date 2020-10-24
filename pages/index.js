@@ -1,18 +1,14 @@
 import LargeAvatar from "@components/LargeAvatar";
-import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledButton from "@components/StyledButton";
 import { Container, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import User from "@models/User";
-import { getSession, useSession } from "next-auth/client";
+import { getSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React from "react";
 
 const HomePage = ({ user }) => {
-  const [session] = useSession();
   const router = useRouter();
-
-  if (!session || !user) return <NotLoggedInMessage />;
 
   return (
     <Container align="center" maxWidth="xs">
@@ -61,7 +57,7 @@ export const getServerSideProps = async ({ req, res }) => {
   try {
     const session = await getSession({ req });
     if (!session) {
-      res.writeHead(301, {
+      res.writeHead(302, {
         Location: "/auth/login",
       });
       res.end();

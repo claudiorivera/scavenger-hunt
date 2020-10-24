@@ -4,7 +4,7 @@ import { providers } from "next-auth/client";
 import React from "react";
 
 const AuthLoginPage = ({ providers }) => (
-  <Container maxWidth="xs">
+  <Container align="center" maxWidth="xs">
     <LoginForm providers={providers} />
   </Container>
 );

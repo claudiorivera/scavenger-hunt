@@ -85,7 +85,7 @@ export const getServerSideProps = async ({ req, res }) => {
   try {
     const session = await getSession({ req });
     if (!session) {
-      res.writeHead(301, {
+      res.writeHead(302, {
         Location: "/auth/login",
       });
       res.end();

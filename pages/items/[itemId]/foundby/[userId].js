@@ -1,18 +1,13 @@
-import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledButton from "@components/StyledButton";
 import StyledImage from "@components/StyledImage";
 import { Container, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
-import { getSession, useSession } from "next-auth/client";
+import { getSession } from "next-auth/client";
 import Link from "next/link";
 import React from "react";
 
 const ItemFoundByDetails = ({ collectionItem }) => {
-  const [session] = useSession();
-
-  if (!session) return <NotLoggedInMessage />;
-
   return (
     <Container align="center" maxWidth="xs">
       <Typography variant="h5" gutterBottom>
@@ -42,7 +37,7 @@ export const getServerSideProps = async ({ req, res, params }) => {
   try {
     const session = await getSession({ req });
     if (!session) {
-      res.writeHead(301, {
+      res.writeHead(302, {
         Location: "/auth/login",
       });
       res.end();

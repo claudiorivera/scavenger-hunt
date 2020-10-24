@@ -1,5 +1,4 @@
 import LargeAvatar from "@components/LargeAvatar";
-import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import SmallAvatar from "@components/SmallAvatar";
 import StyledButton from "@components/StyledButton";
 import StyledLink from "@components/StyledLink";
@@ -8,15 +7,11 @@ import { Visibility } from "@material-ui/icons";
 import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
 import User from "@models/User";
-import { getSession, useSession } from "next-auth/client";
+import { getSession } from "next-auth/client";
 import Link from "next/link";
 import React from "react";
 
 const CollectPage = ({ user, items }) => {
-  const [session] = useSession();
-
-  if (!session) return <NotLoggedInMessage />;
-
   return (
     <Container align="center" maxWidth="xs">
       <LargeAvatar alt={user.name} src={user.image} />
@@ -66,7 +61,7 @@ export const getServerSideProps = async ({ req, res, params }) => {
   try {
     const session = await getSession({ req });
     if (!session) {
-      res.writeHead(301, {
+      res.writeHead(302, {
         Location: "/auth/login",
       });
       res.end();

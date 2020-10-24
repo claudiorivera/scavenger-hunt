@@ -1,24 +1,20 @@
-import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import SmallAvatar from "@components/SmallAvatar";
 import StyledButton from "@components/StyledButton";
 import StyledDivider from "@components/StyledDivider";
 import StyledLink from "@components/StyledLink";
 import TinyAvatar from "@components/TinyAvatar";
+import { showItemAttribution } from "@config";
 import { Box, Container, Typography } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
 import middleware from "@middleware";
 import Item from "@models/Item";
-import { getSession, useSession } from "next-auth/client";
+import { getSession } from "next-auth/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { showItemAttribution } from "@config";
 
 const ItemDetailsPage = ({ item }) => {
-  const [session] = useSession();
   const router = useRouter();
-
-  if (!session) return <NotLoggedInMessage />;
 
   return (
     <Container align="center" maxWidth="xs">
@@ -95,7 +91,7 @@ export const getServerSideProps = async ({ req, res, params }) => {
   try {
     const session = await getSession({ req });
     if (!session) {
-      res.writeHead(301, {
+      res.writeHead(302, {
         Location: "/auth/login",
       });
       res.end();
