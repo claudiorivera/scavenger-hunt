@@ -3,6 +3,7 @@ import { adminLinks, appTitle, userLinks } from "@config";
 import {
   AppBar,
   Button,
+  CircularProgress,
   Toolbar,
   Typography,
   useMediaQuery,
@@ -12,7 +13,6 @@ import { signIn, signOut, useSession } from "next-auth/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
-import SonicWaiting from "./SonicWaiting";
 
 const Title = styled(Typography)({
   flexGrow: 1,
@@ -42,7 +42,7 @@ const MainAppBar = () => {
         {isOnLoginPage ? null : isMobile ? (
           <MobileMenu userLinks={userLinks} adminLinks={adminLinks} />
         ) : loading ? (
-          <SonicWaiting />
+          <CircularProgress />
         ) : !session ? (
           <Button color="inherit" onClick={signIn}>
             Login

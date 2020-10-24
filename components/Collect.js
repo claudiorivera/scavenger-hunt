@@ -32,7 +32,7 @@ const Collect = () => {
     showCollectSuccess,
   } = useContext(CollectContext);
 
-  if (!currentItem) return <img src="/sonic.gif" alt="Loading" />;
+  if (!currentItem) return <SonicWaiting />;
 
   return showCollectSuccess ? (
     ""

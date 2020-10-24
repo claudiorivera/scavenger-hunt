@@ -3,7 +3,6 @@ import { Menu as MenuIcon } from "@material-ui/icons";
 import { signIn, signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
-import SonicWaiting from "./SonicWaiting";
 
 const MobileMenu = ({ userLinks, adminLinks }) => {
   const [session, loading] = useSession();
@@ -43,7 +42,7 @@ const MobileMenu = ({ userLinks, adminLinks }) => {
         onClose={handleMenuClose}
       >
         {loading ? (
-          <SonicWaiting />
+          <CircularProgress />
         ) : !session ? (
           <MenuItem onClick={signIn}>Login</MenuItem>
         ) : (
