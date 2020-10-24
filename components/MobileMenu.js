@@ -1,4 +1,9 @@
-import { IconButton, Menu, MenuItem } from "@material-ui/core";
+import {
+  CircularProgress,
+  IconButton,
+  Menu,
+  MenuItem,
+} from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
 import { signIn, signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
