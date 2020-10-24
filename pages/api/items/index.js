@@ -17,7 +17,7 @@ handler.get(async (req, res) => {
     try {
       const uncollectedItems = await Item.where("usersWhoCollected")
         .ne(session.user.id)
-        .select("-addedBy -__v")
+        .select("-addedBy -__v -usersWhoCollected")
         .lean();
       res.json({
         success: true,
