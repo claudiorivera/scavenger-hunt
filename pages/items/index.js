@@ -40,6 +40,12 @@ export default ItemsPage;
 export const getServerSideProps = async ({ req, res }) => {
   try {
     const session = await getSession({ req });
+    if (!session) {
+      res.writeHead(301, {
+        Location: "/auth/login",
+      });
+      return res.end();
+    }
     await middleware.apply(req, res);
     const items = await Item.find().select("-__v -addedBy").lean();
     const foundItems = await Item.where("usersWhoCollected")

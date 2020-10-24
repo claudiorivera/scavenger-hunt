@@ -60,6 +60,12 @@ export default HomePage;
 export const getServerSideProps = async ({ req, res }) => {
   try {
     const session = await getSession({ req });
+    if (!session) {
+      res.writeHead(301, {
+        Location: "/auth/login",
+      });
+      return res.end();
+    }
     await middleware.apply(req, res);
     const user = await User.findById(session.user.id)
       .select("_id name image")

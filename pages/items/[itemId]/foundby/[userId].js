@@ -40,7 +40,13 @@ export default ItemFoundByDetails;
 
 export const getServerSideProps = async ({ req, res, params }) => {
   try {
-    await getSession({ req });
+    const session = await getSession({ req });
+    if (!session) {
+      res.writeHead(301, {
+        Location: "/auth/login",
+      });
+      return res.end();
+    }
     await middleware.apply(req, res);
     const collectionItem = await CollectionItem.findOne()
       .where("user")

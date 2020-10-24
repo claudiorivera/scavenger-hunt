@@ -61,7 +61,13 @@ export default LeaderboardPage;
 
 export const getServerSideProps = async ({ req, res }) => {
   try {
-    await getSession({ req });
+    const session = await getSession({ req });
+    if (!session) {
+      res.writeHead(301, {
+        Location: "/auth/login",
+      });
+      return res.end();
+    }
     await middleware.apply(req, res);
     const users = await User.find()
       .select("_id name itemsCollected image name")
