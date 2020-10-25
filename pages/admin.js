@@ -59,7 +59,7 @@ const AdminPage = ({ user }) => {
           InputLabelProps={{
             shrink: true,
           }}
-          variant="filled"
+          variant="outlined"
           value={itemDescription}
           onChange={(e) =>
             setItemDescription(capitalizeLetters(e.target.value))
