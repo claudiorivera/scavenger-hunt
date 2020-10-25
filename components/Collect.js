@@ -21,50 +21,51 @@ const StyledImage = styled("img")({
 const Collect = () => {
   const {
     uncollectedItems,
+    getNextItem,
     currentItem,
     handleSubmitFile,
+    handleFileInputChange,
     fileInput,
     previewSource,
-    isFetching,
-    clearCurrentItem,
-    getNextItem,
-    handleFileInputChange,
+    isUploading,
     showCollectSuccess,
   } = useContext(CollectContext);
-
-  if (!currentItem) return <SonicWaiting />;
 
   return showCollectSuccess ? (
     ""
   ) : (
     <Fragment>
-      <Typography variant="h5">Find</Typography>
-      <Typography variant="h3" gutterBottom>
-        {currentItem.itemDescription}
-      </Typography>
-      <form id="imageUploadForm" onSubmit={handleSubmitFile}>
-        {/* Photo picker as a button - https://kiranvj.com/blog/blog/file-upload-in-material-ui/ */}
-        <label htmlFor="imagePicker">
-          <Input
-            id="imagePicker"
-            style={{ display: "none" }}
-            name="imagePicker"
-            type="file"
-            onChange={handleFileInputChange}
-            value={fileInput}
-          />
-          <Button
-            style={{ marginBottom: ".5rem" }}
-            size="large"
-            fullWidth
-            color="secondary"
-            variant="contained"
-            component="span"
-          >
-            <AddAPhoto />
-          </Button>
-        </label>
-      </form>
+      {currentItem && (
+        <Fragment>
+          <Typography variant="h5">Find</Typography>
+          <Typography variant="h3" gutterBottom>
+            {currentItem.itemDescription}
+          </Typography>
+          {/* Photo picker as a button - https://kiranvj.com/blog/blog/file-upload-in-material-ui/ */}
+          <form id="imageUploadForm" onSubmit={handleSubmitFile}>
+            <label htmlFor="imagePicker">
+              <Input
+                id="imagePicker"
+                style={{ display: "none" }}
+                name="imagePicker"
+                type="file"
+                onChange={handleFileInputChange}
+                value={fileInput}
+              />
+              <Button
+                style={{ marginBottom: ".5rem" }}
+                size="large"
+                fullWidth
+                color="secondary"
+                variant="contained"
+                component="span"
+              >
+                <AddAPhoto />
+              </Button>
+            </label>
+          </form>
+        </Fragment>
+      )}
       {previewSource && (
         <Fragment>
           <Container>
@@ -77,14 +78,13 @@ const Collect = () => {
             fullWidth
             color="secondary"
             variant="contained"
-            disabled={isFetching}
+            disabled={isUploading}
           >
-            {isFetching ? <SonicWaiting /> : "Submit Photo"}
+            {isUploading ? <SonicWaiting /> : "Submit Photo"}
           </StyledButton>
         </Fragment>
       )}
-      {/* Only show the skip button if there are more uncollected items
-      or if we came to the collect page via /items/id "got one?" dialog */}
+      {/* Only show the skip button if there are more uncollected items or if we came to the collect page via /items/id "got one?" dialog */}
       {uncollectedItems.length > 1 && (
         <StyledButton
           size="large"
@@ -92,23 +92,24 @@ const Collect = () => {
           color="secondary"
           variant="contained"
           onClick={() => {
-            clearCurrentItem();
             getNextItem();
           }}
         >
           Skip It!
         </StyledButton>
       )}
-      <Link href={`/items/${currentItem._id}`}>
-        <StyledButton
-          size="large"
-          fullWidth
-          color="secondary"
-          variant="contained"
-        >
-          Who Found This?
-        </StyledButton>
-      </Link>
+      {currentItem && (
+        <Link href={`/items/${currentItem._id}`}>
+          <StyledButton
+            size="large"
+            fullWidth
+            color="secondary"
+            variant="contained"
+          >
+            Who Found This?
+          </StyledButton>
+        </Link>
+      )}
     </Fragment>
   );
 };

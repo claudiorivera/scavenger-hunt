@@ -1,24 +1,36 @@
 import StyledButton from "@components/StyledButton";
-import { Container, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { CollectContext } from "context/Collect";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 
 const CollectSuccess = () => {
   const {
+    uncollectedItems,
     currentItem,
     collectSuccessImageUrl,
     showCollectSuccess,
-    clearCurrentItem,
-    getNextItem,
-    uncollectedItems,
+    setShowCollectSuccess,
+    setFileInput,
+    setPreviewSource,
+    setIsUploading,
+    setCollectSuccessImageUrl,
   } = useContext(CollectContext);
   const [session] = useSession();
   const router = useRouter();
 
+  const clearCurrentItem = () => {
+    setShowCollectSuccess(false);
+    setFileInput("");
+    setPreviewSource("");
+    setIsUploading(false);
+    setCollectSuccessImageUrl("");
+    // TODO: set current item to... ?
+  };
+
   return showCollectSuccess ? (
-    <Container align="center" maxWidth="xs">
+    <Fragment>
       <Typography variant="h3">
         You found {currentItem.itemDescription}!
       </Typography>
@@ -34,9 +46,11 @@ const CollectSuccess = () => {
           color="secondary"
           variant="contained"
           onClick={() => {
-            router.push("/collect");
+            if (router.query) {
+              clearCurrentItem();
+              return router.push("/collect");
+            }
             clearCurrentItem();
-            getNextItem();
           }}
         >
           Find More
@@ -53,7 +67,7 @@ const CollectSuccess = () => {
       >
         View My Collection
       </StyledButton>
-    </Container>
+    </Fragment>
   ) : (
     ""
   );

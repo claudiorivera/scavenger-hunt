@@ -1,29 +1,15 @@
-import { CircularProgress } from "@material-ui/core";
+import useUncollectedItems from "@util/useUncollectedItems";
 import axios from "axios";
 import { useSession } from "next-auth/client";
 import { createContext, useEffect, useState } from "react";
-import useSWR from "swr";
-
-const fetcher = (url) =>
-  axios.get(url).then((res) => res.data.uncollectedItems);
 
 export const CollectContext = createContext();
 
-export const CollectProvider = ({
-  children,
-  initialUncollectedItems,
-  startWithItem,
-}) => {
-  const { data: uncollectedItems, mutate } = useSWR(
-    "api/items?uncollected",
-    fetcher,
-    {
-      initialData: initialUncollectedItems,
-    }
-  );
+export const CollectProvider = ({ children, startWithItem, initialData }) => {
+  const { uncollectedItems } = useUncollectedItems(initialData);
   const [session] = useSession();
   const [currentItemIndex, setCurrentItemIndex] = useState(
-    // If a startWithItem was passed in (via query params on collect page), then the index
+    // If a startWithItem was passed in (via query on collect page), then the index
     // is the index of the item in uncollectedItems array that matches the starting item's id
     // Otherwise, it's 0 (first item)
     startWithItem
@@ -33,13 +19,11 @@ export const CollectProvider = ({
   const [currentItem, setCurrentItem] = useState(
     uncollectedItems[currentItemIndex]
   );
+  const [showCollectSuccess, setShowCollectSuccess] = useState(false);
   const [fileInput, setFileInput] = useState("");
   const [previewSource, setPreviewSource] = useState("");
-  const [isFetching, setIsFetching] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [collectSuccessImageUrl, setCollectSuccessImageUrl] = useState("");
-  const [showCollectSuccess, setShowCollectSuccess] = useState(false);
-
-  if (!uncollectedItems) return <CircularProgress />;
 
   // Adapted from https://medium.com/swlh/simple-react-app-with-context-and-functional-components-a374b7fb66b5
   useEffect(() => {
@@ -74,29 +58,21 @@ export const CollectProvider = ({
 
   const uploadImage = async (base64EncodedImage) => {
     try {
-      setIsFetching(true);
+      setIsUploading(true);
+      // TODO: Upload to Cloudinary directly, before calling our API
+      // Mock photos for now
       const response = await axios.post("/api/collections", {
-        imageDataString: base64EncodedImage,
+        imageUrl: "http://picsum.photos/400",
+        thumbnailUrl: "http://picsum.photos/100",
         user: session.user.id,
         item: currentItem._id,
       });
-      if (response.data.success) {
-        setIsFetching(false);
-        setCollectSuccessImageUrl(response.data.savedCollectionItem.imageUrl);
-        setShowCollectSuccess(true);
-        mutate();
-      }
+      setIsUploading(false);
+      setCollectSuccessImageUrl(response.data.savedCollectionItem.imageUrl);
+      setShowCollectSuccess(true);
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const clearCurrentItem = () => {
-    setIsFetching(false);
-    setShowCollectSuccess(false);
-    setCollectSuccessImageUrl("");
-    setPreviewSource("");
-    setFileInput("");
   };
 
   CollectContext.displayName = "Collect";
@@ -106,22 +82,40 @@ export const CollectProvider = ({
       value={{
         uncollectedItems,
         currentItem,
-        setCurrentItem,
-        handleFileInputChange,
+        getNextItem,
+        showCollectSuccess,
         handleSubmitFile,
+        handleFileInputChange,
         fileInput,
         previewSource,
-        setPreviewSource,
-        isFetching,
-        setIsFetching,
-        getNextItem,
-        clearCurrentItem,
+        isUploading,
         collectSuccessImageUrl,
-        setCollectSuccessImageUrl,
-        showCollectSuccess,
         setShowCollectSuccess,
+        setFileInput,
+        setPreviewSource,
+        setIsUploading,
+        setCollectSuccessImageUrl,
       }}
     >
+      <pre>
+        context:
+        {JSON.stringify(
+          {
+            uncollectedItems,
+            currentItem,
+            getNextItem,
+            showCollectSuccess,
+            handleSubmitFile,
+            handleFileInputChange,
+            fileInput,
+            previewSource,
+            isUploading,
+            collectSuccessImageUrl,
+          },
+          null,
+          2
+        )}
+      </pre>
       {children}
     </CollectContext.Provider>
   );

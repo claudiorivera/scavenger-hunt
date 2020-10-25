@@ -19,11 +19,7 @@ handler.get(async (req, res) => {
         .ne(session.user.id)
         .select("-addedBy -__v -usersWhoCollected")
         .lean();
-      res.json({
-        success: true,
-        message: "Successfully fetched uncollected items",
-        uncollectedItems,
-      });
+      res.json(uncollectedItems);
     } catch (error) {
       res.status(500).json({
         success: false,
