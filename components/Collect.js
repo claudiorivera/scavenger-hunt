@@ -9,6 +9,7 @@ import {
 import { AddAPhoto } from "@material-ui/icons";
 import { CollectContext } from "context/Collect";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { Fragment, useContext } from "react";
 import SonicWaiting from "./SonicWaiting";
 
@@ -19,6 +20,7 @@ const StyledImage = styled("img")({
 });
 
 const Collect = () => {
+  const router = useRouter();
   const {
     uncollectedItems,
     getNextItem,
@@ -92,6 +94,9 @@ const Collect = () => {
           color="secondary"
           variant="contained"
           onClick={() => {
+            if (router.query) {
+              router.push("/collect");
+            }
             getNextItem();
           }}
         >

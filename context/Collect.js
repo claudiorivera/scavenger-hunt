@@ -1,19 +1,21 @@
 import useUncollectedItems from "@util/useUncollectedItems";
 import axios from "axios";
 import { useSession } from "next-auth/client";
+import Error from "next/error";
+import { useRouter } from "next/router";
 import { createContext, useEffect, useState } from "react";
 
 export const CollectContext = createContext();
 
-export const CollectProvider = ({ children, startWithItem, initialData }) => {
-  const { uncollectedItems } = useUncollectedItems(initialData);
+export const CollectProvider = ({ children, initialData }) => {
+  const router = useRouter();
+  const { uncollectedItems, mutate } = useUncollectedItems(initialData);
   const [session] = useSession();
   const [currentItemIndex, setCurrentItemIndex] = useState(
-    // If a startWithItem was passed in (via query on collect page), then the index
-    // is the index of the item in uncollectedItems array that matches the starting item's id
-    // Otherwise, it's 0 (first item)
-    startWithItem
-      ? uncollectedItems.findIndex((item) => item._id === startWithItem._id)
+    // If there's a itemId specified, then the index is the index of the item
+    // in uncollectedItems array that matches the starting item's id, otherwise 0 (first item)
+    router.query?.itemId
+      ? uncollectedItems.findIndex((item) => item._id === router.query.itemId)
       : 0
   );
   const [currentItem, setCurrentItem] = useState(
@@ -59,19 +61,45 @@ export const CollectProvider = ({ children, startWithItem, initialData }) => {
   const uploadImage = async (base64EncodedImage) => {
     try {
       setIsUploading(true);
-      // TODO: Upload to Cloudinary directly, before calling our API
-      // Mock photos for now
-      const response = await axios.post("/api/collections", {
-        imageUrl: "http://picsum.photos/400",
-        thumbnailUrl: "http://picsum.photos/100",
+      // Mock values to start with and default to
+      let imageUrl = "http://picsum.photos/512";
+      let thumbnailUrl = "http://picsum.photos/80";
+      // Post to Cloudinary using upload preset for items
+      const cloudinaryUploadResponse = await axios.post(
+        `${process.env.NEXT_PUBLIC_CLOUDINARY_BASE_URL}/image/upload`,
+        {
+          file: base64EncodedImage,
+          upload_preset: process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET_ITEMS,
+        }
+      );
+      // Create image and thumbnail URLs with proper size/cropping
+      if (cloudinaryUploadResponse.status === 200) {
+        imageUrl =
+          "https://res.cloudinary.com/" +
+          process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME +
+          "/w_512,h_512,c_fill,g_center,q_auto:best/" +
+          cloudinaryUploadResponse.data.public_id;
+        thumbnailUrl =
+          "https://res.cloudinary.com/" +
+          process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME +
+          "/w_80,h_80,c_fill,g_center,q_auto:best/" +
+          cloudinaryUploadResponse.data.public_id;
+      } else {
+        throw new Error("Sorry, something went wrong while trying to upload");
+      }
+      // Add to collections via our API
+      await axios.post("/api/collections", {
+        imageUrl,
+        thumbnailUrl,
         user: session.user.id,
         item: currentItem._id,
       });
       setIsUploading(false);
-      setCollectSuccessImageUrl(response.data.savedCollectionItem.imageUrl);
+      setCollectSuccessImageUrl(imageUrl);
       setShowCollectSuccess(true);
+      mutate();
     } catch (error) {
-      console.error(error);
+      return <Error statusCode={500} title={error.message} />;
     }
   };
 
@@ -80,6 +108,8 @@ export const CollectProvider = ({ children, startWithItem, initialData }) => {
   return (
     <CollectContext.Provider
       value={{
+        currentItemIndex,
+        mutate,
         uncollectedItems,
         currentItem,
         getNextItem,
@@ -101,6 +131,8 @@ export const CollectProvider = ({ children, startWithItem, initialData }) => {
         context:
         {JSON.stringify(
           {
+            currentItemIndex,
+            mutate,
             uncollectedItems,
             currentItem,
             getNextItem,
@@ -111,6 +143,11 @@ export const CollectProvider = ({ children, startWithItem, initialData }) => {
             previewSource,
             isUploading,
             collectSuccessImageUrl,
+            setShowCollectSuccess,
+            setFileInput,
+            setPreviewSource,
+            setIsUploading,
+            setCollectSuccessImageUrl,
           },
           null,
           2

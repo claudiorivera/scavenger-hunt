@@ -15,26 +15,7 @@ handler.post(async (req, res) => {
   const session = await getSession({ req });
   if (session) {
     try {
-      // Post to Cloudinary using upload preset for items
-      // const response = await axios.post(
-      //   `${process.env.CLOUDINARY_BASE_URL}/image/upload`,
-      //   {
-      //     file: req.body.imageDataString,
-      //     upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET_ITEMS,
-      //   }
-      // );
       const collectionItem = new CollectionItem({
-        // Create image and thumbnail URLs, dynamically cropped and centered on-the-fly
-        // imageUrl:
-        //   "https://res.cloudinary.com/" +
-        //   process.env.CLOUDINARY_CLOUD_NAME +
-        //   "/w_512,h_512,c_fill,g_center,q_auto:best/" +
-        //   response.data.public_id,
-        // thumbnailUrl:
-        //   "https://res.cloudinary.com/" +
-        //   process.env.CLOUDINARY_CLOUD_NAME +
-        //   "/w_80,h_80,c_fill,g_center,q_auto:best/" +
-        //   response.data.public_id,
         imageUrl: req.body.imageUrl,
         thumbnailUrl: req.body.thumbnailUrl,
         user: session.user.id,

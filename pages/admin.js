@@ -5,6 +5,7 @@ import User from "@models/User";
 import { capitalizeLetters } from "@util/capitalizeLetters";
 import axios from "axios";
 import { getSession, signIn, useSession } from "next-auth/client";
+import Error from "next/error";
 import React, { useState } from "react";
 
 const AdminPage = ({ user }) => {
@@ -31,10 +32,9 @@ const AdminPage = ({ user }) => {
 
   const handleSubmit = async (itemDescription) => {
     try {
-      const response = await axios.post("/api/items", { itemDescription });
-      alert(`response: ${JSON.stringify(response.data.message)}`);
+      await axios.post("/api/items", { itemDescription });
     } catch (error) {
-      console.error(error);
+      return <Error statusCode={500} title={error.message} />;
     }
   };
 

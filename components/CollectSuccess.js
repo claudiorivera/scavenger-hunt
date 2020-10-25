@@ -7,6 +7,7 @@ import React, { Fragment, useContext } from "react";
 
 const CollectSuccess = () => {
   const {
+    mutate,
     uncollectedItems,
     currentItem,
     collectSuccessImageUrl,
