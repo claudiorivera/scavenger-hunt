@@ -120,22 +120,6 @@ const CollectPage = ({ initialUncollectedItems }) => {
 
   return (
     <Fragment>
-      {/* <pre>
-        {JSON.stringify(
-          {
-            collectSuccessImageUrl,
-            currentItem,
-            currentItemIndex,
-            fileInput,
-            isUploading,
-            previewSource,
-            showCollectSuccess,
-            uncollectedItems,
-          },
-          null,
-          2
-        )}
-      </pre> */}
       <Container maxWidth="xs" align="center">
         {!uncollectedItems.length && (
           <Fragment>
