@@ -19,7 +19,7 @@ const CollectPage = () => {
   if (!uncollectedItems) return <SonicWaiting />;
 
   return (
-    <Container maxWidth="xs">
+    <Container maxWidth="xs" align="center">
       {uncollectedItems.length ? (
         <CollectProvider initialData={uncollectedItems}>
           <Collect />

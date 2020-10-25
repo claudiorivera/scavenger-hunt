@@ -7,7 +7,6 @@ import React, { Fragment, useContext } from "react";
 
 const CollectSuccess = () => {
   const {
-    mutate,
     uncollectedItems,
     currentItem,
     collectSuccessImageUrl,
@@ -17,17 +16,18 @@ const CollectSuccess = () => {
     setPreviewSource,
     setIsUploading,
     setCollectSuccessImageUrl,
+    setCurrentItemIndex,
   } = useContext(CollectContext);
   const [session] = useSession();
   const router = useRouter();
 
-  const clearCurrentItem = () => {
+  const getNextItem = () => {
     setShowCollectSuccess(false);
     setFileInput("");
     setPreviewSource("");
     setIsUploading(false);
     setCollectSuccessImageUrl("");
-    // TODO: set current item to... ?
+    setCurrentItemIndex(0);
   };
 
   return showCollectSuccess ? (
@@ -48,10 +48,10 @@ const CollectSuccess = () => {
           variant="contained"
           onClick={() => {
             if (router.query) {
-              clearCurrentItem();
+              getNextItem();
               return router.push("/collect");
             }
-            clearCurrentItem();
+            getNextItem();
           }}
         >
           Find More

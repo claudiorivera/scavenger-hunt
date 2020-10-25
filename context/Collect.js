@@ -109,7 +109,6 @@ export const CollectProvider = ({ children, initialData }) => {
     <CollectContext.Provider
       value={{
         currentItemIndex,
-        mutate,
         uncollectedItems,
         currentItem,
         getNextItem,
@@ -125,34 +124,9 @@ export const CollectProvider = ({ children, initialData }) => {
         setPreviewSource,
         setIsUploading,
         setCollectSuccessImageUrl,
+        setCurrentItemIndex,
       }}
     >
-      <pre>
-        context:
-        {JSON.stringify(
-          {
-            currentItemIndex,
-            mutate,
-            uncollectedItems,
-            currentItem,
-            getNextItem,
-            showCollectSuccess,
-            handleSubmitFile,
-            handleFileInputChange,
-            fileInput,
-            previewSource,
-            isUploading,
-            collectSuccessImageUrl,
-            setShowCollectSuccess,
-            setFileInput,
-            setPreviewSource,
-            setIsUploading,
-            setCollectSuccessImageUrl,
-          },
-          null,
-          2
-        )}
-      </pre>
       {children}
     </CollectContext.Provider>
   );
