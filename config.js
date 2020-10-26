@@ -2,7 +2,7 @@ const appTitle = "Scavenger Hunt";
 const primaryColor = "#bb4430"; // App bar color
 const secondaryColor = "#dda15e"; // Button color
 const showItemAttribution = false; // Whether to display who added the item under item title
-const newUsersAdminByDefault = process.env.NODE_ENV !== "production"; // Whether to make new users admin by default
+const newUsersAdminByDefault = process.env.NODE_ENV === "production"; // New users admin in development
 const adminLinks = [
   {
     title: "Admin",
