@@ -49,6 +49,7 @@ const AdminPage = ({ user }) => {
         }}
       >
         <TextField
+          autoFocus="true"
           name="newItem"
           required
           id="newItem"
