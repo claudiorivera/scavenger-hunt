@@ -32,10 +32,10 @@ const CollectPage = ({ initialUncollectedItems }) => {
   const [previewSource, setPreviewSource] = useState("");
   const [isUploading, setIsUploading] = useState(false);
 
-  // https://medium.com/swlh/simple-react-app-with-context-and-functional-components-a374b7fb66b5
   useEffect(() => {
     if (uncollectedItems) {
       if ("itemId" in router.query) {
+        // Set the current item index to the index of the item in the query, if any
         const index = uncollectedItems.findIndex(
           (item) => item._id === router.query.itemId
         );
@@ -45,6 +45,7 @@ const CollectPage = ({ initialUncollectedItems }) => {
     }
   }, [currentItemIndex]);
 
+  // https://medium.com/swlh/simple-react-app-with-context-and-functional-components-a374b7fb66b5
   const getNextItemIndex = () => {
     let index = currentItemIndex;
     index === uncollectedItems.length - 1 ? (index = 0) : index++;
@@ -164,6 +165,7 @@ const CollectPage = ({ initialUncollectedItems }) => {
                       style={{ display: "none" }}
                       name="imagePicker"
                       type="file"
+                      inputProps={{ accept: "image/*" }}
                       onChange={handleFileInputChange}
                       value={fileInput}
                     />
