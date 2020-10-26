@@ -2,7 +2,7 @@ import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
 import Item from "@models/Item";
 import User from "@models/User";
-import axios from "axios";
+import Axios from "axios";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
 

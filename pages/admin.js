@@ -3,7 +3,7 @@ import { Container, TextField, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import User from "@models/User";
 import { capitalizeLetters } from "@util/capitalizeLetters";
-import axios from "axios";
+import Axios from "axios";
 import { getSession, signIn, useSession } from "next-auth/client";
 import Error from "next/error";
 import React, { useState } from "react";
@@ -32,7 +32,7 @@ const AdminPage = ({ user }) => {
 
   const handleSubmit = async (itemDescription) => {
     try {
-      await axios.post("/api/items", { itemDescription });
+      await Axios.post("/api/items", { itemDescription });
     } catch (error) {
       return <Error statusCode={500} title={error.message} />;
     }

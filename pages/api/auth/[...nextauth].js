@@ -2,7 +2,7 @@ import middleware from "@middleware";
 import User from "@models/User";
 import randomlyGeneratedName from "@util/randomlyGeneratedName";
 import verificationRequest from "@util/verificationRequest";
-import axios from "axios";
+import Axios from "axios";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import nextConnect from "next-connect";
@@ -49,7 +49,7 @@ handler.use((req, res) =>
             if (user.image) {
               userFound.image = user.image;
             } else {
-              const response = await axios.post(
+              const response = await Axios.post(
                 `${process.env.CLOUDINARY_BASE_URL}/image/upload`,
                 {
                   file: "https://picsum.photos/180", //Random 180x180 photo from picsum.photos
