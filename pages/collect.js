@@ -7,7 +7,7 @@ import { getSession } from "next-auth/client";
 import React from "react";
 
 const CollectPage = ({ initialUncollectedItems }) => {
-  const showDebug = process.env.NODE_ENV !== "production";
+  const showDebug = false;
 
   return (
     <CollectProvider initialUncollectedItems={initialUncollectedItems}>
