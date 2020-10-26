@@ -8,7 +8,7 @@ import { getSession, useSession } from "next-auth/client";
 import React from "react";
 
 const CollectPage = ({ initialUncollectedItems }) => {
-  const showDebug = true;
+  const showDebug = process.env.NODE_ENV !== "production";
   const [session] = useSession();
 
   if (!session) return <NotLoggedInMessage />;
