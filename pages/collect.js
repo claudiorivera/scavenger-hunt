@@ -14,6 +14,26 @@ import { useRouter } from "next/router";
 import React, { Fragment, useEffect, useState } from "react";
 
 const CollectPage = ({ initialUncollectedItems }) => {
+  const Debug = () => (
+    <pre>
+      {JSON.stringify(
+        {
+          uncollectedItems,
+          showCollectSuccess,
+          collectSuccessImageUrl,
+          currentItemIndex,
+          currentItem,
+          fileInput,
+          previewSource,
+          isUploading,
+        },
+        null,
+        2
+      )}
+    </pre>
+  );
+  const showDebug = true;
+
   const [session] = useSession();
   const { uncollectedItems, mutate } = useUncollectedItems(
     initialUncollectedItems
@@ -43,7 +63,7 @@ const CollectPage = ({ initialUncollectedItems }) => {
       }
       setCurrentItem(uncollectedItems[currentItemIndex]);
     }
-  }, [currentItemIndex]);
+  }, [currentItemIndex, showCollectSuccess]);
 
   // https://medium.com/swlh/simple-react-app-with-context-and-functional-components-a374b7fb66b5
   const getNextItemIndex = () => {
@@ -116,6 +136,7 @@ const CollectPage = ({ initialUncollectedItems }) => {
   };
 
   const resetCollectPage = () => {
+    mutate();
     setCurrentItemIndex(getNextItemIndex());
     setFileInput("");
     setPreviewSource("");
@@ -123,33 +144,25 @@ const CollectPage = ({ initialUncollectedItems }) => {
     setShowCollectSuccess(false);
   };
 
-  const Debug = () => (
-    <pre>
-      {JSON.stringify(
-        {
-          uncollectedItems,
-          showCollectSuccess,
-          collectSuccessImageUrl,
-          currentItemIndex,
-          currentItem,
-          fileInput,
-          previewSource,
-          isUploading,
-        },
-        null,
-        2
-      )}
-    </pre>
-  );
+  const handleFindMore = () => {
+    if ("itemId" in router.query) {
+      router.push("/collect");
+      resetCollectPage();
+      setCurrentItemIndex(getNextItemIndex());
+    } else {
+      resetCollectPage();
+      setCurrentItemIndex(getNextItemIndex());
+    }
+  };
 
   if (!session) return <NotLoggedInMessage />;
   if (!uncollectedItems) return <SonicWaiting />;
 
   return (
     <Fragment>
-      <Debug />
+      {showDebug && <Debug />}
       <Container maxWidth="xs" align="center">
-        {!showCollectSuccess && (
+        {!showCollectSuccess && uncollectedItems.length > 0 && (
           <Fragment>
             {currentItem && (
               <Fragment>
@@ -207,14 +220,7 @@ const CollectPage = ({ initialUncollectedItems }) => {
                 fullWidth
                 color="secondary"
                 variant="contained"
-                onClick={() => {
-                  if ("itemId" in router.query) {
-                    setCurrentItemIndex(getNextItemIndex());
-                    router.push("/collect");
-                  } else {
-                    setCurrentItemIndex(getNextItemIndex());
-                  }
-                }}
+                onClick={handleFindMore}
               >
                 Skip It!
               </StyledButton>
@@ -233,7 +239,7 @@ const CollectPage = ({ initialUncollectedItems }) => {
             )}
           </Fragment>
         )}
-        {showCollectSuccess && (
+        {showCollectSuccess && currentItem && (
           <Fragment>
             <Typography variant="h3">
               You found {currentItem.itemDescription}!
@@ -249,16 +255,7 @@ const CollectPage = ({ initialUncollectedItems }) => {
                 fullWidth
                 color="secondary"
                 variant="contained"
-                onClick={() => {
-                  if ("itemId" in router.query) {
-                    router.push("/collect");
-                    resetCollectPage();
-                    setCurrentItemIndex(getNextItemIndex());
-                  } else {
-                    resetCollectPage();
-                    setCurrentItemIndex(getNextItemIndex());
-                  }
-                }}
+                onClick={handleFindMore}
               >
                 Find More
               </StyledButton>
