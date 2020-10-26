@@ -33,6 +33,7 @@ A game that challenges you to find the most random items around your house. Made
 
 # TODO
 
+- "Find more" still not working/refreshing after submit :(
 - Toasts for successfully adding items on admin portal, instead of the temporary alert()
 - Make a reusable component to use for displaying lists of users or items (ie. photo/name/action)
 - Collect page should have a container for the item description that is a fixed size, so that the action buttons below it will stay in place, or use flexbox and justify flex-end on the buttons

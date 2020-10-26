@@ -106,7 +106,6 @@ const CollectPage = ({ initialUncollectedItems }) => {
         user: session.user.id,
         item: currentItem._id,
       });
-      mutate();
       setIsUploading(false);
       setCollectSuccessImageUrl(imageUrl);
       setShowCollectSuccess(true);
@@ -115,33 +114,40 @@ const CollectPage = ({ initialUncollectedItems }) => {
     }
   };
 
+  const resetCollectPage = () => {
+    setCurrentItemIndex(getNextItemIndex());
+    setFileInput("");
+    setPreviewSource("");
+    setCollectSuccessImageUrl("");
+    setShowCollectSuccess(false);
+  };
+
+  const Debug = () => (
+    <pre>
+      {JSON.stringify(
+        {
+          uncollectedItems,
+          showCollectSuccess,
+          collectSuccessImageUrl,
+          currentItemIndex,
+          currentItem,
+          fileInput,
+          previewSource,
+          isUploading,
+        },
+        null,
+        2
+      )}
+    </pre>
+  );
+
   if (!session) return <NotLoggedInMessage />;
   if (!uncollectedItems) return <SonicWaiting />;
 
   return (
     <Fragment>
+      <Debug />
       <Container maxWidth="xs" align="center">
-        {!uncollectedItems.length && (
-          <Fragment>
-            <Typography variant="h3">
-              You Found All The Items!&nbsp;
-              <span role="img" aria-label="celebrate emoji">
-                🎉
-              </span>
-            </Typography>
-            <StyledButton
-              size="large"
-              fullWidth
-              color="secondary"
-              variant="contained"
-              onClick={() => {
-                router.push(`/collections/${session.user.id}`);
-              }}
-            >
-              My Collection
-            </StyledButton>
-          </Fragment>
-        )}
         {!showCollectSuccess && (
           <Fragment>
             {currentItem && (
@@ -200,9 +206,9 @@ const CollectPage = ({ initialUncollectedItems }) => {
                 color="secondary"
                 variant="contained"
                 onClick={() => {
-                  if (router.query) {
-                    router.push("/collect", undefined, { shallow: true });
+                  if ("itemId" in router.query) {
                     setCurrentItemIndex(getNextItemIndex());
+                    router.push("/collect");
                   } else {
                     setCurrentItemIndex(getNextItemIndex());
                   }
@@ -242,12 +248,12 @@ const CollectPage = ({ initialUncollectedItems }) => {
                 color="secondary"
                 variant="contained"
                 onClick={() => {
-                  if (router.query) {
-                    setFileInput("");
+                  if ("itemId" in router.query) {
                     router.push("/collect");
+                    resetCollectPage();
                     setCurrentItemIndex(getNextItemIndex());
                   } else {
-                    setFileInput("");
+                    resetCollectPage();
                     setCurrentItemIndex(getNextItemIndex());
                   }
                 }}
@@ -255,6 +261,27 @@ const CollectPage = ({ initialUncollectedItems }) => {
                 Find More
               </StyledButton>
             )}
+          </Fragment>
+        )}
+        {!uncollectedItems.length && (
+          <Fragment>
+            <Typography variant="h3">
+              You Found All The Items!&nbsp;
+              <span role="img" aria-label="celebrate emoji">
+                🎉
+              </span>
+            </Typography>
+            <StyledButton
+              size="large"
+              fullWidth
+              color="secondary"
+              variant="contained"
+              onClick={() => {
+                router.push(`/collections/${session.user.id}`);
+              }}
+            >
+              My Collection
+            </StyledButton>
           </Fragment>
         )}
       </Container>
