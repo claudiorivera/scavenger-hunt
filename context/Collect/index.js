@@ -38,7 +38,7 @@ export const CollectProvider = ({ children, initialUncollectedItems }) => {
       }
       setCurrentItem(uncollectedItems[currentItemIndex]);
     }
-  }, [currentItemIndex, showCollectSuccess]);
+  }, [currentItemIndex]);
 
   // https://medium.com/swlh/simple-react-app-with-context-and-functional-components-a374b7fb66b5
   const getNextItemIndex = () => {
