@@ -12,28 +12,23 @@ A game that challenges you to find the most random items around your house. Made
 - [NextAuth.js](https://next-auth.js.org) for GitHub OAuth and "Magic Link"
 - [SWR](https://swr.vercel.app)
 
-# New in This Version
+# Features
 
-- Implemented admin user role, page, routes, auth, etc.
-- Added admin page to add items.
+- User authentication and admin roles, including protected routes
+- Log in with email or OAuth (GitHub, or now)
+- Admins can add items to find
+- Collection pages show all of a particular user's found items
+- Users collect items by taking photos, which get uploaded to Cloudinary
 - Items page shows all items and indicates whether current user has found it
-- User can collect items
-- Specific item page should show all users who have found that item
-- Load spinners for photo submit
-- Send email link submit button spinner
-- Leaderboard should show list of users ranked by most items found
-- Upload to Cloudinary normally, but have Cloudinary do transformations on the fly via URL that is saved to the db?
-- Collection pages should show a user's found items
-- /items/foundby pages should show the user's item photo
-- Refactor collect page to use a "collecting" and "successful collect" state with Context
-- Linking to /collect/itemId should show collect page starting with that item
-- Figure out why we're still getting 413 errors - https://vercel.com/knowledge/how-to-bypass-vercel-5mb-body-size-limit-serverless-functions - Upload directly to Cloudinary before calling our API
-- Fix clearing current item when clicking on "find more"
-- Fix collecting the last uncollected item (ie. add conditional checks)
+- Item info page shows all users who have found that item
+- Leaderboard shows list of users ranked by most items found
+- Collection item detail page shows the specific photo a user took
 
-# TODO
+# Future Improvements
 
-- "Find more" still not working/refreshing after submit :(
+- "My Collection" link should correctly take the user to their collection page from the collect page
+- Don't show "got one?" link to users who are viewing the item page for an item that they have already found
+- Don't show "got one?" link to users who are viewing someone's collection item that they also have found
 - Toasts for successfully adding items on admin portal, instead of the temporary alert()
 - Make a reusable component to use for displaying lists of users or items (ie. photo/name/action)
 - Collect page should have a container for the item description that is a fixed size, so that the action buttons below it will stay in place, or use flexbox and justify flex-end on the buttons
@@ -45,7 +40,7 @@ A game that challenges you to find the most random items around your house. Made
 
 # Config
 
-- Add a `.env.local` file with environmental variables as shown in the example `.example-env.local` file. You can also add these on Vercel and do `vercel pull .env.local` on your machine, which saves you a step.
+- Add a `.env.local` file with environmental variables as shown in the example `.example-env.local` file. I reccommend adding these on Vercel first and then run `vercel pull .env.local` on your machine which creates that file for you. This saves you a step, since you'll be entering these into Vercel eventually in any case.
 
 # Dev
 
@@ -53,4 +48,4 @@ A game that challenges you to find the most random items around your house. Made
 
 # Known Bugs
 
-- None yet.
+- "Find more" (after successful collect) does not correctly move on to the next item consistently (depends on how many total items there are to find, how many the user has already found, and also how they got to the collect page). This is a state management "off by one" and/or revalidation bug that I've been unsuccessful in tracking down. I'll revisit this in the future.

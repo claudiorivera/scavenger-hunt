@@ -4,15 +4,14 @@ import middleware from "@middleware";
 import User from "@models/User";
 import { capitalizeLetters } from "@util/capitalizeLetters";
 import Axios from "axios";
-import { getSession, signIn, useSession } from "next-auth/client";
+import { getSession, signIn } from "next-auth/client";
 import Error from "next/error";
 import React, { useState } from "react";
 
 const AdminPage = ({ user }) => {
-  const [session] = useSession();
   const [itemDescription, setItemDescription] = useState("");
 
-  if (!session || !user || !user.isAdmin)
+  if (!user || !user.isAdmin)
     return (
       <Container maxWidth="xs">
         <Typography variant="h5" align="center">

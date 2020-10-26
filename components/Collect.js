@@ -22,6 +22,9 @@ const Collect = () => {
     showCollectSuccess,
     uncollectedItems,
   } = useContext(CollectContext);
+
+  if (!session) return <SonicWaiting />;
+
   return (
     <Fragment>
       <Container maxWidth="xs" align="center">

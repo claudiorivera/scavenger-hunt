@@ -8,13 +8,12 @@ import { Box, Container, Typography } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
 import middleware from "@middleware";
 import Item from "@models/Item";
-import { getSession } from "next-auth/client";
+import { getSession, useSession } from "next-auth/client";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 
-const ItemDetailsPage = ({ item }) => {
-  const router = useRouter();
+const ItemDetailsPage = ({ item, userIdsWhoCollected }) => {
+  const [session] = useSession();
 
   return (
     <Container align="center" maxWidth="xs">
@@ -70,17 +69,13 @@ const ItemDetailsPage = ({ item }) => {
         </Typography>
       )}
       <StyledDivider />
-      <StyledButton
-        size="large"
-        fullWidth
-        color="secondary"
-        variant="contained"
-        onClick={() => {
-          router.push(`/collect?itemId=${item._id}`);
-        }}
-      >
-        Got One?
-      </StyledButton>
+      {!userIdsWhoCollected.includes(session.user.id) && (
+        <Link href={`/collect?itemId=${item._id}`}>
+          <StyledButton fullWidth variant="contained" color="secondary">
+            Found It?
+          </StyledButton>
+        </Link>
+      )}
     </Container>
   );
 };
@@ -103,9 +98,11 @@ export const getServerSideProps = async ({ req, res, params }) => {
       .populate("usersWhoCollected", "_id image name")
       .populate("addedBy", "_id image name")
       .lean();
+    const userIdsWhoCollected = item.usersWhoCollected.map((user) => user._id);
     return {
       props: {
         item: JSON.parse(JSON.stringify(item)),
+        userIdsWhoCollected: JSON.parse(JSON.stringify(userIdsWhoCollected)),
       },
     };
   } catch (error) {
@@ -115,7 +112,7 @@ export const getServerSideProps = async ({ req, res, params }) => {
           statusCode: error.statusCode || 500,
           message:
             error.message ||
-            "Something went wrong while getting server side props in items/index.js",
+            "Something went wrong while getting server side props in items/id/index.js",
         },
       },
     };

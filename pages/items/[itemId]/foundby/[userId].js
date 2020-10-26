@@ -3,11 +3,13 @@ import StyledImage from "@components/StyledImage";
 import { Container, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
-import { getSession } from "next-auth/client";
+import { getSession, useSession } from "next-auth/client";
 import Link from "next/link";
 import React from "react";
 
 const ItemFoundByDetails = ({ collectionItem }) => {
+  const [session] = useSession();
+
   return (
     <Container align="center" maxWidth="xs">
       <Typography variant="h5" gutterBottom>
@@ -17,11 +19,13 @@ const ItemFoundByDetails = ({ collectionItem }) => {
         src={collectionItem.imageUrl}
         alt={collectionItem.item.itemDescription}
       />
-      <Link href={`/collect?itemId=${collectionItem.item._id}`}>
-        <StyledButton fullWidth variant="contained" color="secondary">
-          Found It, too?
-        </StyledButton>
-      </Link>
+      {!collectionItem.item.usersWhoCollected.includes(session.user.id) && (
+        <Link href={`/collect?itemId=${collectionItem.item._id}`}>
+          <StyledButton fullWidth variant="contained" color="secondary">
+            Found It?
+          </StyledButton>
+        </Link>
+      )}
       <Link href={`/items/${collectionItem.item._id}`}>
         <StyledButton fullWidth variant="contained" color="secondary">
           See Who Else Found It
@@ -51,7 +55,7 @@ export const getServerSideProps = async ({ req, res, params }) => {
       .equals(params.itemId)
       .select("imageUrl user -_id item")
       .populate("user", "_id name")
-      .populate("item", "_id itemDescription")
+      .populate("item", "_id itemDescription usersWhoCollected")
       .lean();
     return {
       props: {

@@ -11,46 +11,44 @@ const StyledContainer = styled(Container)({
   padding: ".5rem",
 });
 
-const LeaderboardPage = ({ users }) => {
-  return (
-    <Container align="center" maxWidth="xs">
-      <Typography variant="h3">Leaderboard</Typography>
-      <StyledDivider />
-      {users.length > 0 ? (
-        users.map((user) => (
-          <StyledLink key={user._id} href={`/collections/${user._id}`}>
-            <StyledContainer>
-              <Box display="flex" alignItems="center">
-                <Box flexGrow="2">
-                  <Box flexGrow="1" display="flex" alignItems="center">
-                    <SmallAvatar
-                      style={{ marginRight: "1rem" }}
-                      alt={user.name}
-                      src={user.image}
-                    />
-                    {user.name}
-                  </Box>
-                </Box>
-                <Box>
-                  <Typography variant="body1">
-                    {user.itemsCollected.length} items
-                  </Typography>
+const LeaderboardPage = ({ users }) => (
+  <Container align="center" maxWidth="xs">
+    <Typography variant="h3">Leaderboard</Typography>
+    <StyledDivider />
+    {users.length > 0 ? (
+      users.map((user) => (
+        <StyledLink key={user._id} href={`/collections/${user._id}`}>
+          <StyledContainer>
+            <Box display="flex" alignItems="center">
+              <Box flexGrow="2">
+                <Box flexGrow="1" display="flex" alignItems="center">
+                  <SmallAvatar
+                    style={{ marginRight: "1rem" }}
+                    alt={user.name}
+                    src={user.image}
+                  />
+                  {user.name}
                 </Box>
               </Box>
-            </StyledContainer>
-          </StyledLink>
-        ))
-      ) : (
-        <Typography variant="h5">
-          Nobody's found anything, yet{" "}
-          <span role="img" aria-label="sad face emoji">
-            😢
-          </span>
-        </Typography>
-      )}
-    </Container>
-  );
-};
+              <Box>
+                <Typography variant="body1">
+                  {user.itemsCollected.length} items
+                </Typography>
+              </Box>
+            </Box>
+          </StyledContainer>
+        </StyledLink>
+      ))
+    ) : (
+      <Typography variant="h5">
+        Nobody's found anything, yet{" "}
+        <span role="img" aria-label="sad face emoji">
+          😢
+        </span>
+      </Typography>
+    )}
+  </Container>
+);
 
 export default LeaderboardPage;
 

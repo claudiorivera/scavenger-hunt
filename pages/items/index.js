@@ -7,28 +7,26 @@ import { getSession } from "next-auth/client";
 import Link from "next/link";
 import React from "react";
 
-const ItemsPage = ({ items, foundItemIds }) => {
-  return (
-    <Container align="center" maxWidth="xs">
-      <Typography variant="h3">All Items</Typography>
-      {items &&
-        items.map(({ _id, itemDescription }) => (
-          <Box key={_id} display="flex" alignItems="center">
-            <Link href={`/items/${_id}`}>
-              <StyledButton fullWidth variant="contained" color="secondary">
-                {itemDescription}
-              </StyledButton>
-            </Link>
-            {foundItemIds.includes(_id) ? (
-              <CheckCircle color="secondary" />
-            ) : (
-              <RadioButtonUnchecked color="secondary" />
-            )}
-          </Box>
-        ))}
-    </Container>
-  );
-};
+const ItemsPage = ({ items, foundItemIds }) => (
+  <Container align="center" maxWidth="xs">
+    <Typography variant="h3">All Items</Typography>
+    {items &&
+      items.map(({ _id, itemDescription }) => (
+        <Box key={_id} display="flex" alignItems="center">
+          <Link href={`/items/${_id}`}>
+            <StyledButton fullWidth variant="contained" color="secondary">
+              {itemDescription}
+            </StyledButton>
+          </Link>
+          {foundItemIds.includes(_id) ? (
+            <CheckCircle color="secondary" />
+          ) : (
+            <RadioButtonUnchecked color="secondary" />
+          )}
+        </Box>
+      ))}
+  </Container>
+);
 
 export default ItemsPage;
 

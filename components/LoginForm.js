@@ -1,10 +1,10 @@
+import SonicWaiting from "@components/SonicWaiting";
 import StyledButton from "@components/StyledButton";
 import StyledDivider from "@components/StyledDivider";
 import { TextField, Typography } from "@material-ui/core";
 import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
-import SonicWaiting from "./SonicWaiting";
 
 const LoginForm = ({ providers }) => {
   const router = useRouter();
