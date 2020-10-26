@@ -7,31 +7,29 @@ A game that challenges you to find the most random items around your house. Made
 - React
 - [Next.js](https://nextjs.org)
 - Serverless API Routes
-- Material-UI
+- [next-connect](https://github.com/hoangvvo/next-connect)
 - MongoDB
-- [NextAuth.js](https://next-auth.js.org) for GitHub OAuth and "Magic Link"
+- [NextAuth.js](https://next-auth.js.org) for GitHub OAuth and "Magic Link" email login
 - [SWR](https://swr.vercel.app)
+- Material-UI
 
 # Features
 
 - User authentication and admin roles, including protected routes
-- Log in with email or OAuth (GitHub, or now)
+- Log in with email or OAuth (GitHub, for now)
 - Admins can add items to find
-- Collection pages show all of a particular user's found items
 - Users collect items by taking photos, which get uploaded to Cloudinary
-- Items page shows all items and indicates whether current user has found it
+- Collection pages show all of a particular user's found items
+- Items page shows all items and indicates whether current user has found them
 - Item info page shows all users who have found that item
 - Leaderboard shows list of users ranked by most items found
-- Collection item detail page shows the specific photo a user took
+- Collection item detail page shows the photo a specific user took of an item
 
 # Future Improvements
 
-- "My Collection" link should correctly take the user to their collection page from the collect page
-- Don't show "got one?" link to users who are viewing the item page for an item that they have already found
-- Don't show "got one?" link to users who are viewing someone's collection item that they also have found
-- Toasts for successfully adding items on admin portal, instead of the temporary alert()
+- Toasts for successfully adding items on admin portal
 - Make a reusable component to use for displaying lists of users or items (ie. photo/name/action)
-- Collect page should have a container for the item description that is a fixed size, so that the action buttons below it will stay in place, or use flexbox and justify flex-end on the buttons
+- Collect page actions should be in a fixed position, maybe at the bottom of the view
 - Allow users to change name and avatar
 
 # Install
