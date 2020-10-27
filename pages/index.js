@@ -1,4 +1,5 @@
 import LargeAvatar from "@components/LargeAvatar";
+import SonicWaiting from "@components/SonicWaiting";
 import StyledButton from "@components/StyledButton";
 import { Container, Typography } from "@material-ui/core";
 import middleware from "@middleware";

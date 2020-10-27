@@ -5,7 +5,6 @@ import StyledLink from "@components/StyledLink";
 import { Box, Container, styled, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import User from "@models/User";
-import Error from "next/error";
 import React from "react";
 
 const StyledContainer = styled(Container)({

@@ -1,4 +1,5 @@
 import SmallAvatar from "@components/SmallAvatar";
+import SonicWaiting from "@components/SonicWaiting";
 import StyledButton from "@components/StyledButton";
 import StyledDivider from "@components/StyledDivider";
 import StyledLink from "@components/StyledLink";

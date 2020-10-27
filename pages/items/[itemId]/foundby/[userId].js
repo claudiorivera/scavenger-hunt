@@ -5,7 +5,6 @@ import { Container, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
 import { useSession } from "next-auth/client";
-import Error from "next/error";
 import Link from "next/link";
 import React from "react";
 
