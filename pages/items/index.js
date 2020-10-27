@@ -1,46 +1,50 @@
+import SonicWaiting from "@components/SonicWaiting";
 import StyledButton from "@components/StyledButton";
 import { Box, Container, Typography } from "@material-ui/core";
 import { CheckCircle, RadioButtonUnchecked } from "@material-ui/icons";
 import middleware from "@middleware";
 import Item from "@models/Item";
-import { getSession } from "next-auth/client";
+import { getSession, useSession } from "next-auth/client";
 import Link from "next/link";
 import React from "react";
 
-const ItemsPage = ({ items, foundItemIds }) => (
-  <Container align="center" maxWidth="xs">
-    <Typography variant="h3">All Items</Typography>
-    {items &&
-      items.map(({ _id, itemDescription }) => (
-        <Box key={_id} display="flex" alignItems="center">
-          <Link href={`/items/${_id}`}>
-            <StyledButton fullWidth variant="contained" color="secondary">
-              {itemDescription}
-            </StyledButton>
-          </Link>
-          {foundItemIds.includes(_id) ? (
-            <CheckCircle color="secondary" />
-          ) : (
-            <RadioButtonUnchecked color="secondary" />
-          )}
-        </Box>
-      ))}
-  </Container>
-);
+const ItemsPage = ({ items, foundItemIds }) => {
+  const [session] = useSession();
+
+  if (!session) return <SonicWaiting />;
+
+  return (
+    <Container align="center" maxWidth="xs">
+      <Typography variant="h3">All Items</Typography>
+      {items &&
+        items.map(({ _id, itemDescription }) => (
+          <Box key={_id} display="flex" alignItems="center">
+            <Link href={`/items/${_id}`}>
+              <StyledButton fullWidth variant="contained" color="secondary">
+                {itemDescription}
+              </StyledButton>
+            </Link>
+            {foundItemIds.includes(_id) ? (
+              <CheckCircle color="secondary" />
+            ) : (
+              <RadioButtonUnchecked color="secondary" />
+            )}
+          </Box>
+        ))}
+    </Container>
+  );
+};
 
 export default ItemsPage;
 
 export const getServerSideProps = async ({ req, res }) => {
   try {
-    const session = await getSession({ req });
-    if (!session) {
-      res.writeHead(302, {
-        Location: "/auth/login",
-      });
-      res.end();
-      throw new Error("Not logged in");
-    }
     await middleware.apply(req, res);
+    const session = await getSession({ req });
+    if (!session)
+      throw new Error(
+        "Sorry, something went wrong. Try refreshing or logging out and back in."
+      );
     const items = await Item.find().select("-__v -addedBy").lean();
     const foundItems = await Item.where("usersWhoCollected")
       .equals(session.user.id)

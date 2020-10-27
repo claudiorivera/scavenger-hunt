@@ -3,12 +3,15 @@ import StyledButton from "@components/StyledButton";
 import { Container, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import User from "@models/User";
-import { getSession } from "next-auth/client";
+import { getSession, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React from "react";
 
 const HomePage = ({ user }) => {
+  const [session] = useSession();
   const router = useRouter();
+
+  if (!session) return <SonicWaiting />;
 
   return (
     <Container align="center" maxWidth="xs">
@@ -55,18 +58,19 @@ export default HomePage;
 
 export const getServerSideProps = async ({ req, res }) => {
   try {
-    const session = await getSession({ req });
-    if (!session) {
-      res.writeHead(302, {
-        Location: "/auth/login",
-      });
-      res.end();
-      throw new Error("Not logged in");
-    }
     await middleware.apply(req, res);
+    const session = await getSession({ req });
+    if (!session)
+      throw new Error(
+        "Sorry, something went wrong. Try refreshing or logging out and back in."
+      );
     const user = await User.findById(session.user.id)
       .select("_id name image")
       .lean();
+    if (!user)
+      throw new Error(
+        "Sorry, something went wrong. Try refreshing or logging out and back in."
+      );
     return {
       props: {
         user: JSON.parse(JSON.stringify(user)),

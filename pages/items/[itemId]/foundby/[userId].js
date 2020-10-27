@@ -4,7 +4,7 @@ import StyledImage from "@components/StyledImage";
 import { Container, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
-import { getSession, useSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import Error from "next/error";
 import Link from "next/link";
 import React from "react";
@@ -43,14 +43,6 @@ export default ItemFoundByDetails;
 
 export const getServerSideProps = async ({ req, res, params }) => {
   try {
-    const session = await getSession({ req });
-    if (!session) {
-      res.writeHead(302, {
-        Location: "/auth/login",
-      });
-      res.end();
-      throw new Error("Not logged in");
-    }
     await middleware.apply(req, res);
     const collectionItem = await CollectionItem.findOne()
       .where("user")
