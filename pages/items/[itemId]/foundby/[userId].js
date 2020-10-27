@@ -11,7 +11,7 @@ import React from "react";
 const ItemFoundByDetails = ({ collectionItem }) => {
   const [session] = useSession();
 
-  if (!session) <SonicWaiting />;
+  if (!session) return <SonicWaiting />;
 
   return (
     <Container align="center" maxWidth="xs">
