@@ -1,17 +1,25 @@
+import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import SonicWaiting from "@components/SonicWaiting";
 import StyledButton from "@components/StyledButton";
 import StyledImage from "@components/StyledImage";
 import { Container, Typography } from "@material-ui/core";
-import middleware from "@middleware";
-import CollectionItem from "@models/CollectionItem";
-import { getSession, useSession } from "next-auth/client";
+import fetcher from "@util/fetcher";
+import { useSession } from "next-auth/client";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
+import useSWR from "swr";
 
-const ItemFoundByDetails = ({ collectionItem }) => {
+const ItemFoundByDetails = () => {
   const [session] = useSession();
+  const router = useRouter();
+  const { data: collectionItem } = useSWR(
+    `/api/collections?userId=${router.query.userId}&itemId=${router.query.itemId}`,
+    fetcher
+  );
 
-  if (!session) return <SonicWaiting />;
+  if (!session) return <NotLoggedInMessage />;
+  if (!collectionItem) return <SonicWaiting />;
 
   return (
     <Container align="center" maxWidth="xs">
@@ -39,34 +47,3 @@ const ItemFoundByDetails = ({ collectionItem }) => {
 };
 
 export default ItemFoundByDetails;
-
-export const getServerSideProps = async ({ req, res, params }) => {
-  try {
-    await middleware.apply(req, res);
-    const collectionItem = await CollectionItem.findOne()
-      .where("user")
-      .equals(params.userId)
-      .where("item")
-      .equals(params.itemId)
-      .select("imageUrl user -_id item")
-      .populate("user", "_id name")
-      .populate("item", "_id itemDescription usersWhoCollected")
-      .lean();
-    return {
-      props: {
-        collectionItem: JSON.parse(JSON.stringify(collectionItem)),
-      },
-    };
-  } catch (error) {
-    return {
-      props: {
-        error: {
-          statusCode: error.statusCode || 500,
-          message:
-            error.message ||
-            "Something went wrong while getting server side props in items/id/foundby/userid.js",
-        },
-      },
-    };
-  }
-};

@@ -13,12 +13,25 @@ handler.use(middleware);
 handler.get(async (req, res) => {
   try {
     if (!("userId" in req.query)) throw new Error("No user specified");
-    const items = await CollectionItem.where("user")
-      .equals(req.query.userId)
-      .select("thumbnailUrl item")
-      .populate("item", "itemDescription")
-      .lean();
-    res.json(items);
+    if ("itemId" in req.query) {
+      const item = await CollectionItem.findOne()
+        .where("user")
+        .equals(req.query.userId)
+        .where("item")
+        .equals(req.query.itemId)
+        .select("imageUrl user -_id item")
+        .populate("user", "_id name")
+        .populate("item", "_id itemDescription usersWhoCollected")
+        .lean();
+      res.json(item);
+    } else {
+      const items = await CollectionItem.where("user")
+        .equals(req.query.userId)
+        .select("thumbnailUrl item")
+        .populate("item", "itemDescription")
+        .lean();
+      res.json(items);
+    }
   } catch (error) {
     res.status(500).json({
       success: false,
