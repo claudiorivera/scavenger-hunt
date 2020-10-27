@@ -18,7 +18,6 @@ handler.get(async (req, res) => {
     res.json(item);
   } catch (error) {
     res.status(500).json({
-      success: false,
       message: error.message || "Item not found",
     });
   }

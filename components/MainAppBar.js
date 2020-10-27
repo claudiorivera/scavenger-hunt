@@ -28,9 +28,9 @@ const StyledAppBar = styled(AppBar)({
 
 const MainAppBar = () => {
   const [session, loading] = useSession();
+  const router = useRouter();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
-  const router = useRouter();
   const isOnLoginPage = router.asPath.startsWith("/auth/login");
 
   return (

@@ -7,8 +7,8 @@ import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 
 const LoginForm = ({ providers }) => {
-  const router = useRouter();
   const [session] = useSession();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [isFetching, setIsFetching] = useState(false);
 

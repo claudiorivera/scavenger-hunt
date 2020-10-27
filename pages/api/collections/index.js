@@ -34,7 +34,6 @@ handler.get(async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({
-      success: false,
       message: error.message || "Unable to fetch user's collection",
     });
   }
@@ -63,7 +62,6 @@ handler.post(async (req, res) => {
     res.status(201).json(savedCollectionItem);
   } catch (error) {
     res.status(500).json({
-      success: false,
       message: error.message || "Unable to add item to collection",
     });
   }

@@ -10,8 +10,8 @@ import React from "react";
 
 const HomePage = () => {
   const [session] = useSession();
-  const { user } = useCurrentUser();
   const router = useRouter();
+  const { user } = useCurrentUser();
 
   if (!session) return <NotLoggedInMessage />;
   if (!user) return <SonicWaiting />;

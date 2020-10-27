@@ -6,6 +6,8 @@ import nextConnect from "next-connect";
 const handler = nextConnect();
 handler.use(middleware);
 
+// GET api/users
+// Returns all users, sorted by most items collected
 handler.get(async (req, res) => {
   try {
     const session = await getSession({ req });
@@ -19,7 +21,6 @@ handler.get(async (req, res) => {
     res.json(sortedUsers);
   } catch (error) {
     res.status(500).json({
-      success: false,
       message: error.message || "Unable to get users",
     });
   }

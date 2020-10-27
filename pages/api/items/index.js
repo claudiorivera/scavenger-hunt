@@ -9,9 +9,11 @@ handler.use(middleware);
 
 // GET api/items
 // Returns all items
+// GET api/items?uncollected
+// Returns the user's uncollected items
+// GET api/items?collected
+// Returns the user's collected items
 handler.get(async (req, res) => {
-  // GET api/items?uncollected
-  // Returns the user's uncollected items
   if ("uncollected" in req.query) {
     try {
       const session = await getSession({ req });
@@ -23,7 +25,6 @@ handler.get(async (req, res) => {
       res.json(uncollectedItems);
     } catch (error) {
       res.status(500).json({
-        success: false,
         message: error.message || "Unfound items not found",
       });
     }
@@ -38,7 +39,6 @@ handler.get(async (req, res) => {
       res.json(collectedItems);
     } catch (error) {
       res.status(500).json({
-        success: false,
         message: error.message || "Collected items not found",
       });
     }
@@ -48,7 +48,6 @@ handler.get(async (req, res) => {
       res.json(items);
     } catch (error) {
       res.status(500).json({
-        success: false,
         message: error.message || "Items not found",
       });
     }
@@ -70,7 +69,6 @@ handler.post(async (req, res) => {
     res.status(201).json(savedItem);
   } catch (error) {
     res.status(500).json({
-      success: false,
       message: error.message || "Unable to add item",
     });
   }

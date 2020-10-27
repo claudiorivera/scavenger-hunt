@@ -12,6 +12,7 @@ import React, { Fragment, useState } from "react";
 const MobileMenu = ({ userLinks, adminLinks }) => {
   const [session, loading] = useSession();
   const router = useRouter();
+
   // https://material-ui.com/components/app-bar/#app-bar-with-menu
   const [anchorEl, setAnchorEl] = useState(null);
   const isMobileMenuOpen = Boolean(anchorEl);
@@ -21,6 +22,7 @@ const MobileMenu = ({ userLinks, adminLinks }) => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <Fragment>
       <IconButton

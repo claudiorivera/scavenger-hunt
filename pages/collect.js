@@ -11,7 +11,7 @@ import useSWR from "swr";
 const CollectPage = () => {
   const [session] = useSession();
   const { data: uncollectedItems } = useSWR("/api/items?uncollected", fetcher);
-  const showDebug = true;
+  const showDebug = false;
 
   if (!session) return <NotLoggedInMessage />;
   if (!uncollectedItems) return <SonicWaiting />;

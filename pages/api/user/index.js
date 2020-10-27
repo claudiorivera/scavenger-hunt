@@ -6,6 +6,8 @@ import nextConnect from "next-connect";
 const handler = nextConnect();
 handler.use(middleware);
 
+// GET api/user
+// Returns the current user
 handler.get(async (req, res) => {
   try {
     const session = await getSession({ req });
@@ -16,7 +18,6 @@ handler.get(async (req, res) => {
     res.json(user);
   } catch (error) {
     res.status(500).json({
-      success: false,
       message: error.message || "Unable to get user",
     });
   }

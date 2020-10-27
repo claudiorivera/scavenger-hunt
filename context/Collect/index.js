@@ -10,17 +10,14 @@ CollectContext.displayName = "CollectContext";
 
 export const CollectProvider = ({ children }) => {
   const [session] = useSession();
-  const { uncollectedItems, mutate } = useUncollectedItems();
   const router = useRouter();
-
+  const { uncollectedItems, mutate } = useUncollectedItems();
   const [showCollectSuccess, setShowCollectSuccess] = useState(false);
   const [collectSuccessImageUrl, setCollectSuccessImageUrl] = useState("");
-
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
   const [currentItem, setCurrentItem] = useState(
     uncollectedItems[currentItemIndex]
   );
-
   const [fileInput, setFileInput] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [isUploading, setIsUploading] = useState(false);

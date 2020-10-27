@@ -11,6 +11,7 @@ import React, { Fragment, useContext } from "react";
 
 const Collect = () => {
   const [session] = useSession();
+  const router = useRouter();
   const {
     collectSuccessImageUrl,
     currentItem,
@@ -23,7 +24,6 @@ const Collect = () => {
     showCollectSuccess,
     uncollectedItems,
   } = useContext(CollectContext);
-  const router = useRouter();
 
   if (!session) return <SonicWaiting />;
 
