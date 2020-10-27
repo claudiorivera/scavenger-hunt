@@ -6,6 +6,7 @@ import { Button, Container, Input, Typography } from "@material-ui/core";
 import { AddAPhoto } from "@material-ui/icons";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { Fragment, useContext } from "react";
 
 const Collect = () => {
@@ -22,6 +23,7 @@ const Collect = () => {
     showCollectSuccess,
     uncollectedItems,
   } = useContext(CollectContext);
+  const router = useRouter();
 
   if (!session) return <SonicWaiting />;
 

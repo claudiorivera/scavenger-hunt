@@ -27,6 +27,7 @@ A game that challenges you to find the most random items around your house. Made
 
 # Future Improvements
 
+- /items/itemId/foundby/userId needs to be rebuilt
 - Toasts for successfully adding items on admin portal
 - Make a reusable component to use for displaying lists of users or items (ie. photo/name/action)
 - Collect page actions should be in a fixed position, maybe at the bottom of the view

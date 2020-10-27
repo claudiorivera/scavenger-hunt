@@ -1,31 +1,25 @@
 import StyledButton from "@components/StyledButton";
 import { Container, TextField, Typography } from "@material-ui/core";
-import middleware from "@middleware";
-import User from "@models/User";
 import { capitalizeLetters } from "@util/capitalizeLetters";
+import useCurrentUser from "@util/useCurrentUser";
 import Axios from "axios";
-import { getSession, signIn } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import Error from "next/error";
 import React, { useState } from "react";
 
-const AdminPage = ({ user }) => {
+const AdminPage = () => {
+  const [session] = useSession();
+  const { user } = useCurrentUser();
   const [itemDescription, setItemDescription] = useState("");
 
-  if (!user || !user.isAdmin)
+  if (!session) return <NotLoggedInMessage />;
+
+  if (!user?.isAdmin)
     return (
       <Container maxWidth="xs">
         <Typography variant="h5" align="center">
-          You must be logged in as an admin to view this content.
+          You must be logged in as an admin to view this page.
         </Typography>
-        <StyledButton
-          size="large"
-          fullWidth
-          color="secondary"
-          variant="contained"
-          onClick={signIn}
-        >
-          Login
-        </StyledButton>
       </Container>
     );
 
@@ -80,36 +74,3 @@ const AdminPage = ({ user }) => {
 };
 
 export default AdminPage;
-
-export const getServerSideProps = async ({ req, res }) => {
-  try {
-    const session = await getSession({ req });
-    if (!session) {
-      res.writeHead(302, {
-        Location: "/auth/login",
-      });
-      res.end();
-      throw new Error("Not logged in");
-    }
-    await middleware.apply(req, res);
-    const user = await User.findById(session.user.id)
-      .select("isAdmin -_id")
-      .lean();
-    return {
-      props: {
-        user: JSON.parse(JSON.stringify(user)),
-      },
-    };
-  } catch (error) {
-    return {
-      props: {
-        error: {
-          statusCode: error.statusCode || 500,
-          message:
-            error.message ||
-            "Something went wrong while getting server side props in admin.js",
-        },
-      },
-    };
-  }
-};

@@ -1,3 +1,4 @@
+import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import SmallAvatar from "@components/SmallAvatar";
 import SonicWaiting from "@components/SonicWaiting";
 import StyledButton from "@components/StyledButton";
@@ -7,16 +8,22 @@ import TinyAvatar from "@components/TinyAvatar";
 import { showItemAttribution } from "@config";
 import { Box, Container, Typography } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
-import middleware from "@middleware";
-import Item from "@models/Item";
+import fetcher from "@util/fetcher";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
+import useSWR from "swr";
 
-const ItemDetailsPage = ({ item, userIdsWhoCollected }) => {
+const ItemDetailsPage = () => {
   const [session] = useSession();
+  const router = useRouter();
+  const { data: item } = useSWR(`/api/items/${router.query.itemId}`, fetcher);
 
-  if (!session) return <SonicWaiting />;
+  if (!session) return <NotLoggedInMessage />;
+  if (!item) return <SonicWaiting />;
+
+  const userIdsWhoCollected = item.usersWhoCollected.map((user) => user._id);
 
   return (
     <Container align="center" maxWidth="xs">
@@ -84,32 +91,3 @@ const ItemDetailsPage = ({ item, userIdsWhoCollected }) => {
 };
 
 export default ItemDetailsPage;
-
-export const getServerSideProps = async ({ req, res, params }) => {
-  try {
-    await middleware.apply(req, res);
-    const item = await Item.findById(params.itemId)
-      .select("-__v")
-      .populate("usersWhoCollected", "_id image name")
-      .populate("addedBy", "_id image name")
-      .lean();
-    const userIdsWhoCollected = item.usersWhoCollected.map((user) => user._id);
-    return {
-      props: {
-        item: JSON.parse(JSON.stringify(item)),
-        userIdsWhoCollected: JSON.parse(JSON.stringify(userIdsWhoCollected)),
-      },
-    };
-  } catch (error) {
-    return {
-      props: {
-        error: {
-          statusCode: error.statusCode || 500,
-          message:
-            error.message ||
-            "Something went wrong while getting server side props in items/id/index.js",
-        },
-      },
-    };
-  }
-};

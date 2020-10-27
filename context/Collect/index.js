@@ -8,11 +8,9 @@ import React, { createContext, useEffect, useState } from "react";
 export const CollectContext = createContext();
 CollectContext.displayName = "CollectContext";
 
-export const CollectProvider = ({ children, initialUncollectedItems }) => {
+export const CollectProvider = ({ children }) => {
   const [session] = useSession();
-  const { uncollectedItems, mutate } = useUncollectedItems(
-    initialUncollectedItems
-  );
+  const { uncollectedItems, mutate } = useUncollectedItems();
   const router = useRouter();
 
   const [showCollectSuccess, setShowCollectSuccess] = useState(false);

@@ -1,16 +1,23 @@
 import Collect from "@components/Collect";
 import DebugCollectPage from "@components/DebugCollectPage";
+import NotLoggedInMessage from "@components/NotLoggedInMessage";
+import SonicWaiting from "@components/SonicWaiting";
 import { CollectProvider } from "@context/Collect";
-import middleware from "@middleware";
-import Item from "@models/Item";
-import { getSession } from "next-auth/client";
+import fetcher from "@util/fetcher";
+import { useSession } from "next-auth/client";
 import React from "react";
+import useSWR from "swr";
 
-const CollectPage = ({ initialUncollectedItems }) => {
-  const showDebug = false;
+const CollectPage = () => {
+  const [session] = useSession();
+  const { data: uncollectedItems } = useSWR("/api/items?uncollected", fetcher);
+  const showDebug = true;
+
+  if (!session) return <NotLoggedInMessage />;
+  if (!uncollectedItems) return <SonicWaiting />;
 
   return (
-    <CollectProvider initialUncollectedItems={initialUncollectedItems}>
+    <CollectProvider>
       {showDebug && <DebugCollectPage />}
       <Collect />
     </CollectProvider>
@@ -18,26 +25,3 @@ const CollectPage = ({ initialUncollectedItems }) => {
 };
 
 export default CollectPage;
-
-export const getServerSideProps = async ({ req, res }) => {
-  const session = await getSession({ req });
-  if (session) {
-    await middleware.apply(req, res);
-    const initialUncollectedItems = await Item.where("usersWhoCollected")
-      .ne(session.user.id)
-      .select("-addedBy -__v -usersWhoCollected")
-      .lean();
-    return {
-      props: {
-        initialUncollectedItems: JSON.parse(
-          JSON.stringify(initialUncollectedItems)
-        ),
-      },
-    };
-  } else
-    return {
-      props: {
-        initialUncollectedItems: [],
-      },
-    };
-};

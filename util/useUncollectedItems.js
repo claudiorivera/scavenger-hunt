@@ -1,13 +1,10 @@
 import useSWR from "swr";
 import fetcher from "@util/fetcher";
 
-const useUncollectedItems = (initialData) => {
+const useUncollectedItems = () => {
   const { data: uncollectedItems, error, mutate } = useSWR(
     "/api/items?uncollected",
-    fetcher,
-    {
-      initialData,
-    }
+    fetcher
   );
   return {
     uncollectedItems,
