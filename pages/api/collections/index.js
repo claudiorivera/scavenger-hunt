@@ -1,0 +1,70 @@
+import middleware from "@middleware";
+import CollectionItem from "@models/CollectionItem";
+import Item from "@models/Item";
+import User from "@models/User";
+import { getSession } from "next-auth/client";
+import nextConnect from "next-connect";
+
+const handler = nextConnect();
+handler.use(middleware);
+
+// GET api/collections?userId=
+// Returns collection items for the given user id
+handler.get(async (req, res) => {
+  try {
+    if (!("userId" in req.query)) throw new Error("No user specified");
+    if ("itemId" in req.query) {
+      const item = await CollectionItem.findOne()
+        .where("user")
+        .equals(req.query.userId)
+        .where("item")
+        .equals(req.query.itemId)
+        .select("imageUrl user -_id item")
+        .populate("user", "_id name")
+        .populate("item", "_id itemDescription usersWhoCollected")
+        .lean();
+      res.json(item);
+    } else {
+      const items = await CollectionItem.where("user")
+        .equals(req.query.userId)
+        .select("thumbnailUrl item")
+        .populate("item", "itemDescription")
+        .lean();
+      res.json(items);
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || "Unable to fetch user's collection",
+    });
+  }
+});
+
+// POST api/collections
+// Adds collection item
+handler.post(async (req, res) => {
+  try {
+    const session = await getSession({ req });
+    if (!session) throw new Error("User not logged in");
+    const { imageUrl, thumbnailUrl, item } = req.body;
+    const collectionItem = new CollectionItem({
+      imageUrl,
+      thumbnailUrl,
+      item,
+      user: session.user.id,
+    });
+    const savedCollectionItem = await collectionItem.save();
+    const user = await User.findById(session.user.id);
+    user.itemsCollected.addToSet(collectionItem);
+    await user.save();
+    const originalItem = await Item.findById(req.body.item);
+    originalItem.usersWhoCollected.addToSet(session.user.id);
+    await originalItem.save();
+    res.status(201).json(savedCollectionItem);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || "Unable to add item to collection",
+    });
+  }
+});
+
+export default handler;

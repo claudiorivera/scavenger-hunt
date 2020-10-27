@@ -1,0 +1,21 @@
+import { Container, Link, Typography } from "@material-ui/core";
+import { styled } from "@material-ui/styles";
+import { useRouter } from "next/router";
+import React from "react";
+
+const StyledLink = styled(Link)({
+  cursor: "pointer",
+});
+
+const AuthErrorPage = () => {
+  const router = useRouter();
+  return (
+    <Container maxWidth="xs">
+      <Typography variant="h5">Sorry, something went wrong.</Typography>
+      <StyledLink href="/auth/login">Click here to try again</StyledLink>.
+      <Typography variant="body1">Error Code: {router.query.error}</Typography>
+    </Container>
+  );
+};
+
+export default AuthErrorPage;
