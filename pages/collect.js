@@ -27,13 +27,19 @@ export const getServerSideProps = async ({ req, res }) => {
       .ne(session.user.id)
       .select("-addedBy -__v -usersWhoCollected")
       .lean();
-    return {
-      props: {
-        initialUncollectedItems: JSON.parse(
-          JSON.stringify(initialUncollectedItems)
-        ),
-      },
-    };
+    if (!initialUncollectedItems) {
+      throw new Error(
+        "Sorry, something went wrong. Try refreshing or logging out and back in."
+      );
+    } else {
+      return {
+        props: {
+          initialUncollectedItems: JSON.parse(
+            JSON.stringify(initialUncollectedItems)
+          ),
+        },
+      };
+    }
   } else
     return {
       props: {

@@ -46,12 +46,18 @@ export const getServerSideProps = async ({ req, res }) => {
       .equals(session.user.id)
       .select("_id");
     const foundItemIds = foundItems.map((item) => item._id);
-    return {
-      props: {
-        items: JSON.parse(JSON.stringify(items)),
-        foundItemIds: JSON.parse(JSON.stringify(foundItemIds)),
-      },
-    };
+    if (!items || !foundItems) {
+      throw new Error(
+        "Sorry, something went wrong. Try refreshing or logging out and back in."
+      );
+    } else {
+      return {
+        props: {
+          items: JSON.parse(JSON.stringify(items)),
+          foundItemIds: JSON.parse(JSON.stringify(foundItemIds)),
+        },
+      };
+    }
   } catch (error) {
     return {
       props: {

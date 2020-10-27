@@ -5,6 +5,7 @@ import { Box, Container, styled, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import User from "@models/User";
 import { getSession } from "next-auth/client";
+import Error from "next/error";
 import React from "react";
 
 const StyledContainer = styled(Container)({
@@ -69,11 +70,17 @@ export const getServerSideProps = async ({ req, res }) => {
     const sortedUsers = users.sort(
       (a, b) => b.itemsCollected.length - a.itemsCollected.length
     );
-    return {
-      props: {
-        users: JSON.parse(JSON.stringify(sortedUsers)),
-      },
-    };
+    if (!users) {
+      throw new Error(
+        "Sorry, something went wrong. Try refreshing or logging out and back in."
+      );
+    } else {
+      return {
+        props: {
+          users: JSON.parse(JSON.stringify(sortedUsers)),
+        },
+      };
+    }
   } catch (error) {
     return {
       props: {

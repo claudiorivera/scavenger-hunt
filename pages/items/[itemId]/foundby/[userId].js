@@ -5,6 +5,7 @@ import { Container, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
 import { getSession, useSession } from "next-auth/client";
+import Error from "next/error";
 import Link from "next/link";
 import React from "react";
 
@@ -60,11 +61,17 @@ export const getServerSideProps = async ({ req, res, params }) => {
       .populate("user", "_id name")
       .populate("item", "_id itemDescription usersWhoCollected")
       .lean();
-    return {
-      props: {
-        collectionItem: JSON.parse(JSON.stringify(collectionItem)),
-      },
-    };
+    if (!collectionItem) {
+      throw new Error(
+        "Sorry, something went wrong. Try refreshing or logging out and back in."
+      );
+    } else {
+      return {
+        props: {
+          collectionItem: JSON.parse(JSON.stringify(collectionItem)),
+        },
+      };
+    }
   } catch (error) {
     return {
       props: {

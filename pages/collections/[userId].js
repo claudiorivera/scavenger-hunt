@@ -74,12 +74,18 @@ export const getServerSideProps = async ({ req, res, params }) => {
       .select("thumbnailUrl item")
       .populate("item", "itemDescription")
       .lean();
-    return {
-      props: {
-        user: JSON.parse(JSON.stringify(user)),
-        items: JSON.parse(JSON.stringify(items)),
-      },
-    };
+    if (!user || !items) {
+      throw new Error(
+        "Sorry, something went wrong. Try refreshing the page, or logging out and back in."
+      );
+    } else {
+      return {
+        props: {
+          user: JSON.parse(JSON.stringify(user)),
+          items: JSON.parse(JSON.stringify(items)),
+        },
+      };
+    }
   } catch (error) {
     return {
       props: {
