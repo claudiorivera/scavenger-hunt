@@ -1,3 +1,4 @@
+import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledButton from "@components/StyledButton";
 import { Container, TextField, Typography } from "@material-ui/core";
 import { capitalizeLetters } from "@util/capitalizeLetters";
