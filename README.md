@@ -28,8 +28,7 @@ A game that challenges you to find the most random items around your house. Made
 # Future Improvements
 
 - Toasts for successfully adding items on admin portal
-- Make a reusable component to use for displaying lists of users or items (ie. photo/name/action)
-- Collect page actions should be in a fixed position, maybe at the bottom of the view
+- Collect page actions should be in a fixed position, instead of moving based on item description
 - Allow users to change name and avatar
 
 # Install
@@ -46,4 +45,4 @@ A game that challenges you to find the most random items around your house. Made
 
 # Known Bugs
 
-- "Find more" (after successful collect) does not correctly move on to the next item consistently (depends on how many total items there are to find, how many the user has already found, and also how they got to the collect page). This is a state management "off by one" and/or revalidation bug that I've been unsuccessful in tracking down. I'll revisit this in the future.
+- "Find more" (after successful collect) does not correctly move on to the next item consistently (depends on how many total items there are to find, how many the user has already found, and also how the user got to the collect page). This is a state management "off by one" and/or revalidation bug that I've been unsuccessful in tracking down. I'll revisit this in the future.
