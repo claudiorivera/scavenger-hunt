@@ -1,19 +1,15 @@
-import SonicWaiting from "@components/SonicWaiting";
 import StyledButton from "@components/StyledButton";
 import { Container, TextField, Typography } from "@material-ui/core";
 import middleware from "@middleware";
 import User from "@models/User";
 import { capitalizeLetters } from "@util/capitalizeLetters";
 import Axios from "axios";
-import { getSession, signIn, useSession } from "next-auth/client";
+import { getSession, signIn } from "next-auth/client";
 import Error from "next/error";
 import React, { useState } from "react";
 
 const AdminPage = ({ user }) => {
-  const [session] = useSession();
   const [itemDescription, setItemDescription] = useState("");
-
-  if (!session) return <SonicWaiting />;
 
   if (!user || !user.isAdmin)
     return (
@@ -87,8 +83,15 @@ export default AdminPage;
 
 export const getServerSideProps = async ({ req, res }) => {
   try {
-    await middleware.apply(req, res);
     const session = await getSession({ req });
+    if (!session) {
+      res.writeHead(302, {
+        Location: "/auth/login",
+      });
+      res.end();
+      throw new Error("Not logged in");
+    }
+    await middleware.apply(req, res);
     const user = await User.findById(session.user.id)
       .select("isAdmin -_id")
       .lean();
