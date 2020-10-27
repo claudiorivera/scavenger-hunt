@@ -15,6 +15,8 @@ import React from "react";
 const ItemDetailsPage = ({ item, userIdsWhoCollected }) => {
   const [session] = useSession();
 
+  if (!session) <SonicWaiting />;
+
   return (
     <Container align="center" maxWidth="xs">
       <Typography variant="h3">{item.itemDescription}</Typography>

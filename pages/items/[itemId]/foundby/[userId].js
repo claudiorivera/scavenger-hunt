@@ -1,3 +1,4 @@
+import SonicWaiting from "@components/SonicWaiting";
 import StyledButton from "@components/StyledButton";
 import StyledImage from "@components/StyledImage";
 import { Container, Typography } from "@material-ui/core";
@@ -9,6 +10,8 @@ import React from "react";
 
 const ItemFoundByDetails = ({ collectionItem }) => {
   const [session] = useSession();
+
+  if (!session) <SonicWaiting />;
 
   return (
     <Container align="center" maxWidth="xs">
