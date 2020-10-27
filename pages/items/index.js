@@ -41,27 +41,17 @@ export const getServerSideProps = async ({ req, res }) => {
   try {
     await middleware.apply(req, res);
     const session = await getSession({ req });
-    if (!session)
-      throw new Error(
-        "Sorry, something went wrong. Try refreshing or logging out and back in."
-      );
     const items = await Item.find().select("-__v -addedBy").lean();
     const foundItems = await Item.where("usersWhoCollected")
       .equals(session.user.id)
       .select("_id");
     const foundItemIds = foundItems.map((item) => item._id);
-    if (!items || !foundItems) {
-      throw new Error(
-        "Sorry, something went wrong. Try refreshing or logging out and back in."
-      );
-    } else {
-      return {
-        props: {
-          items: JSON.parse(JSON.stringify(items)),
-          foundItemIds: JSON.parse(JSON.stringify(foundItemIds)),
-        },
-      };
-    }
+    return {
+      props: {
+        items: JSON.parse(JSON.stringify(items)),
+        foundItemIds: JSON.parse(JSON.stringify(foundItemIds)),
+      },
+    };
   } catch (error) {
     return {
       props: {

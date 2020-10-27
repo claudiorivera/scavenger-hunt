@@ -27,18 +27,10 @@ export const getServerSideProps = async ({ req, res }) => {
   try {
     await middleware.apply(req, res);
     const session = await getSession({ req });
-    if (!session)
-      throw new Error(
-        "Sorry, something went wrong. Try refreshing or logging out and back in."
-      );
     const initialUncollectedItems = await Item.where("usersWhoCollected")
       .ne(session.user.id)
       .select("-addedBy -__v -usersWhoCollected")
       .lean();
-    if (!initialUncollectedItems)
-      throw new Error(
-        "Sorry, something went wrong. Try refreshing or logging out and back in."
-      );
     return {
       props: {
         initialUncollectedItems: JSON.parse(

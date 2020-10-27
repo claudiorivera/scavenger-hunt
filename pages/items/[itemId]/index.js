@@ -93,18 +93,12 @@ export const getServerSideProps = async ({ req, res, params }) => {
       .populate("addedBy", "_id image name")
       .lean();
     const userIdsWhoCollected = item.usersWhoCollected.map((user) => user._id);
-    if (!item) {
-      throw new Error(
-        "Sorry, something went wrong. Try refreshing or logging out and back in."
-      );
-    } else {
-      return {
-        props: {
-          item: JSON.parse(JSON.stringify(item)),
-          userIdsWhoCollected: JSON.parse(JSON.stringify(userIdsWhoCollected)),
-        },
-      };
-    }
+    return {
+      props: {
+        item: JSON.parse(JSON.stringify(item)),
+        userIdsWhoCollected: JSON.parse(JSON.stringify(userIdsWhoCollected)),
+      },
+    };
   } catch (error) {
     return {
       props: {

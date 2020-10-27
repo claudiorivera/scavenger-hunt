@@ -68,10 +68,6 @@ export const getServerSideProps = async ({ req, res }) => {
     const sortedUsers = users.sort(
       (a, b) => b.itemsCollected.length - a.itemsCollected.length
     );
-    if (!users)
-      throw new Error(
-        "Sorry, something went wrong. Try refreshing or logging out and back in."
-      );
     return {
       props: {
         users: JSON.parse(JSON.stringify(sortedUsers)),

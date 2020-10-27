@@ -73,10 +73,6 @@ export const getServerSideProps = async ({ req, res, params }) => {
       .select("thumbnailUrl item")
       .populate("item", "itemDescription")
       .lean();
-    if (!user || !items)
-      throw new Error(
-        "Sorry, something went wrong. Try refreshing the page, or logging out and back in."
-      );
     return {
       props: {
         user: JSON.parse(JSON.stringify(user)),

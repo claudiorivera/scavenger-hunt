@@ -60,17 +60,9 @@ export const getServerSideProps = async ({ req, res }) => {
   try {
     await middleware.apply(req, res);
     const session = await getSession({ req });
-    if (!session)
-      throw new Error(
-        "Sorry, something went wrong. Try refreshing or logging out and back in."
-      );
     const user = await User.findById(session.user.id)
       .select("_id name image")
       .lean();
-    if (!user)
-      throw new Error(
-        "Sorry, something went wrong. Try refreshing or logging out and back in."
-      );
     return {
       props: {
         user: JSON.parse(JSON.stringify(user)),

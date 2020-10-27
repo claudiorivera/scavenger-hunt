@@ -53,17 +53,11 @@ export const getServerSideProps = async ({ req, res, params }) => {
       .populate("user", "_id name")
       .populate("item", "_id itemDescription usersWhoCollected")
       .lean();
-    if (!collectionItem) {
-      throw new Error(
-        "Sorry, something went wrong. Try refreshing or logging out and back in."
-      );
-    } else {
-      return {
-        props: {
-          collectionItem: JSON.parse(JSON.stringify(collectionItem)),
-        },
-      };
-    }
+    return {
+      props: {
+        collectionItem: JSON.parse(JSON.stringify(collectionItem)),
+      },
+    };
   } catch (error) {
     return {
       props: {
