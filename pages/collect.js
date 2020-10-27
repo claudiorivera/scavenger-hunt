@@ -14,7 +14,7 @@ const CollectPage = () => {
   const showDebug = false;
 
   if (!session) return <NotLoggedInMessage />;
-  if (!uncollectedItems) return <SonicWaiting />;
+  if (!uncollectedItems) return null;
 
   return (
     <CollectProvider>

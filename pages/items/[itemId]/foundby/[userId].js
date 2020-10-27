@@ -1,5 +1,4 @@
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
-import SonicWaiting from "@components/SonicWaiting";
 import StyledButton from "@components/StyledButton";
 import StyledImage from "@components/StyledImage";
 import { Container, Typography } from "@material-ui/core";
@@ -19,7 +18,7 @@ const ItemFoundByDetails = () => {
   );
 
   if (!session) return <NotLoggedInMessage />;
-  if (!collectionItem) return <SonicWaiting />;
+  if (!collectionItem) return null;
 
   return (
     <Container align="center" maxWidth="xs">

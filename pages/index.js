@@ -14,7 +14,7 @@ const HomePage = () => {
   const { user } = useCurrentUser();
 
   if (!session) return <NotLoggedInMessage />;
-  if (!user) return <SonicWaiting />;
+  if (!user) return null;
 
   return (
     <Container align="center" maxWidth="xs">

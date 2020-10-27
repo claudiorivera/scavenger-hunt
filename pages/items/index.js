@@ -16,7 +16,7 @@ const ItemsPage = () => {
   const { data: collectedItems } = useSWR("/api/items?collected", fetcher);
 
   if (!session) return <NotLoggedInMessage />;
-  if (!items || !collectedItems) return <SonicWaiting />;
+  if (!items || !collectedItems) return null;
 
   const collectedItemIds = collectedItems.map((item) => item._id);
 

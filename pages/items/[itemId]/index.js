@@ -21,7 +21,7 @@ const ItemDetailsPage = () => {
   const { data: item } = useSWR(`/api/items/${router.query.itemId}`, fetcher);
 
   if (!session) return <NotLoggedInMessage />;
-  if (!item) return <SonicWaiting />;
+  if (!item) return null;
 
   const userIdsWhoCollected = item.usersWhoCollected.map((user) => user._id);
 

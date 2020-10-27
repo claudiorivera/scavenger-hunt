@@ -8,6 +8,7 @@ import { useSession } from "next-auth/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment, useContext } from "react";
+import NotLoggedInMessage from "./NotLoggedInMessage";
 
 const Collect = () => {
   const [session] = useSession();
@@ -25,7 +26,7 @@ const Collect = () => {
     uncollectedItems,
   } = useContext(CollectContext);
 
-  if (!session) return <SonicWaiting />;
+  if (!session) return <NotLoggedInMessage />;
 
   return (
     <Fragment>

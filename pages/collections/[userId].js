@@ -1,14 +1,10 @@
 import LargeAvatar from "@components/LargeAvatar";
+import MediumAvatar from "@components/MediumAvatar";
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
-import SmallAvatar from "@components/SmallAvatar";
-import SonicWaiting from "@components/SonicWaiting";
-import StyledButton from "@components/StyledButton";
 import StyledLink from "@components/StyledLink";
-import { Box, Container, Typography } from "@material-ui/core";
-import { Visibility } from "@material-ui/icons";
+import { Box, Container, Grid, Tooltip, Typography } from "@material-ui/core";
 import fetcher from "@util/fetcher";
 import { useSession } from "next-auth/client";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import useSWR from "swr";
@@ -23,7 +19,7 @@ const CollectionsPage = () => {
   );
 
   if (!session) return <NotLoggedInMessage />;
-  if (!user || !items) return <SonicWaiting />;
+  if (!user || !items) return null;
 
   return (
     <Container align="center" maxWidth="xs">
@@ -33,29 +29,25 @@ const CollectionsPage = () => {
         Found the Following Items:
       </Typography>
       {items.length > 0 ? (
-        items.map(({ _id, thumbnailUrl, item }) => (
-          <Box key={_id} display="flex" alignItems="center">
-            <Box flexGrow="1">
-              <Box display="flex" alignItems="center">
-                <StyledLink href={`/items/${item._id}/foundby/${user._id}`}>
-                  <SmallAvatar
-                    style={{ marginRight: "1rem" }}
-                    alt={item.itemDescription}
-                    src={thumbnailUrl}
-                  />
-                </StyledLink>
-                <StyledLink href={`/items/${item._id}`}>
-                  {item.itemDescription}
-                </StyledLink>
-              </Box>
-            </Box>
-            <Link href={`/items/${item._id}/foundby/${user._id}`}>
-              <StyledButton variant="contained" color="secondary">
-                <Visibility />
-              </StyledButton>
-            </Link>
-          </Box>
-        ))
+        <Box display="flex" flexWrap="wrap" justifyContent="center">
+          {items.map(({ _id, thumbnailUrl, item }) => (
+            <StyledLink
+              key={_id}
+              href={`/items/${item._id}/foundby/${user._id}`}
+            >
+              <Tooltip
+                title={item.itemDescription}
+                aria-label={item.itemDescription}
+              >
+                <MediumAvatar
+                  style={{ margin: ".5rem" }}
+                  alt={item.itemDescription}
+                  src={thumbnailUrl}
+                />
+              </Tooltip>
+            </StyledLink>
+          ))}
+        </Box>
       ) : (
         <Typography variant="h5">
           Nothing, yet{" "}

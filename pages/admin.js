@@ -43,7 +43,7 @@ const AdminPage = () => {
         }}
       >
         <TextField
-          autoFocus="true"
+          autoFocus={true}
           name="newItem"
           required
           id="newItem"

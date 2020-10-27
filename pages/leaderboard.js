@@ -18,7 +18,7 @@ const LeaderboardPage = () => {
   const { data: users } = useSWR("/api/users", fetcher);
 
   if (!session) return <NotLoggedInMessage />;
-  if (!users) return <SonicWaiting />;
+  if (!users) return null;
 
   return (
     <Container align="center" maxWidth="xs">
