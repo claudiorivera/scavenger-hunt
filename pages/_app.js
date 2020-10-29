@@ -1,4 +1,5 @@
 import MainAppBar from "@components/MainAppBar";
+import MaintenanceModeMessage from "@components/MaintenanceModeMessage";
 import { appTitle } from "@config";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -27,6 +28,10 @@ const App = (props) => {
         title={pageProps.error.message}
       />
     );
+  }
+
+  if (process.env.NEXT_PUBLIC_MAINTENANCE === "true") {
+    return <MaintenanceModeMessage />;
   }
 
   return (
