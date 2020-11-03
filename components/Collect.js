@@ -102,7 +102,7 @@ const Collect = () => {
                   color="secondary"
                   variant="contained"
                 >
-                  Who Found This?
+                  See Who Found This
                 </StyledButton>
               </Link>
             )}

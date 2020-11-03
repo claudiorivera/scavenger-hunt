@@ -38,7 +38,7 @@ const ItemFoundByDetails = () => {
       )}
       <Link href={`/items/${collectionItem.item._id}`}>
         <StyledButton fullWidth variant="contained" color="secondary">
-          See Who Else Found It
+          See Who Found This
         </StyledButton>
       </Link>
     </Container>
