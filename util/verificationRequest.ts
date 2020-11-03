@@ -5,27 +5,30 @@ import nodemailer from "nodemailer";
 const verificationRequest = ({
   identifier: email,
   url,
-  token,
-  baseUrl,
   provider,
+}: {
+  identifier: string;
+  url: string;
+  provider: {
+    server: string;
+    from: string;
+  };
 }) => {
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     const { server, from } = provider;
-    // Strip protocol from URL and use domain as site name
-    const site = baseUrl.replace(/^https?:\/\//, "");
 
     nodemailer.createTransport(server).sendMail(
       {
         to: email,
         from,
         subject: `Sign in to ${appTitle}`,
-        text: text({ url, site, email }),
-        html: html({ url, site, email }),
+        text: text({ url }),
+        html: html({ url, email }),
       },
       (error) => {
         if (error) {
-          logger.error("SEND_VERIFICATION_EMAIL_ERROR", email, error);
-          return reject(new Error("SEND_VERIFICATION_EMAIL_ERROR", error));
+          console.error("SEND_VERIFICATION_EMAIL_ERROR", email, error);
+          return reject(new Error("SEND_VERIFICATION_EMAIL_ERROR"));
         }
         return resolve();
       }
@@ -34,7 +37,7 @@ const verificationRequest = ({
 };
 
 // Email HTML body
-const html = ({ url, site, email }) => {
+const html = ({ url, email }: { url: string; email: string }) => {
   // Insert invisible space into domains and email address to prevent both the
   // email address and the domain from being turned into a hyperlink by email
   // clients like Outlook and Apple mail, as this is confusing because it seems
@@ -85,6 +88,6 @@ const html = ({ url, site, email }) => {
 };
 
 // Email text body – fallback for email clients that don't render HTML
-const text = ({ url }) => `Sign in to ${appTitle}\n${url}\n\n`;
+const text = ({ url }: { url: string }) => `Sign in to ${appTitle}\n${url}\n\n`;
 
 export default verificationRequest;

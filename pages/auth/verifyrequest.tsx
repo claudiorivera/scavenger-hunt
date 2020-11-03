@@ -9,8 +9,8 @@ const AuthVerifyRequestPage = () => {
 
   if (session) router.push("/");
   return (
-    <Container align="center" maxWidth="xs">
-      <Typography variant="body1">
+    <Container maxWidth="xs">
+      <Typography variant="body1" align="center">
         Check your email for a login link from notifications@claudiorivera.com.
         Be sure to check your spam folder.
       </Typography>

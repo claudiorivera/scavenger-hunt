@@ -1,0 +1,32 @@
+{
+  "exclude": ["node_modules, .next, .vercel"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@models/*": ["models/*"],
+      "@util/*": ["util/*"],
+      "@config": ["config.js"],
+      "@middleware": ["middleware"],
+      "@theme": ["styles/theme.js"],
+      "@context/*": ["context/*"]
+    },
+    "target": "es5",
+    "lib": ["es6", "dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "models/User.ts"]
+}

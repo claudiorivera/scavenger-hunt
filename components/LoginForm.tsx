@@ -6,7 +6,14 @@ import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 
-const LoginForm = ({ providers }) => {
+const LoginForm = ({
+  providers,
+}: {
+  providers: {
+    id: string;
+    name: string;
+  }[];
+}) => {
   const [session] = useSession();
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -16,7 +23,7 @@ const LoginForm = ({ providers }) => {
 
   return (
     <Fragment>
-      <Typography variant="h5">
+      <Typography variant="h5" align="center">
         Please login with one of the following:
       </Typography>
       {providers &&

@@ -1231,10 +1231,55 @@
   resolved "https://registry.yarnpkg.com/@sqltools/formatter/-/formatter-1.2.2.tgz#9390a8127c0dcba61ebd7fdcc748655e191bdd68"
   integrity sha512-/5O7Fq6Vnv8L6ucmPjaWbVG1XkP4FO+w5glqfkIsq3Xw4oyNAdJddbnYodNDAfjVUvo/rrSCTom4kAND7T1o5Q==
 
+"@types/bson@*":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@types/bson/-/bson-4.0.3.tgz#30889d2ffde6262abbe38659364c631454999fbf"
+  integrity sha512-mVRvYnTOZJz3ccpxhr3wgxVmSeiYinW+zlzQz3SXWaJmD1DuL05Jeq7nKw3SnbKmbleW5qrLG5vdyWe/A9sXhw==
+  dependencies:
+    "@types/node" "*"
+
 "@types/json-schema@^7.0.5":
   version "7.0.6"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.6.tgz#f4c7ec43e81b319a9815115031709f26987891f0"
   integrity sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw==
+
+"@types/mongodb@*":
+  version "3.5.32"
+  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.5.32.tgz#c3f72a9a157922e6b9a05690552abe8479e79232"
+  integrity sha512-lBV8D5S5UNlWihHYQkEebqQTRazm5SglwQ126ls03eeYk2NJN4P72udUxJtyuKSmSFKvhLeekfNoPcyFa3BNdQ==
+  dependencies:
+    "@types/bson" "*"
+    "@types/node" "*"
+
+"@types/mongoose@^5.7.37":
+  version "5.7.37"
+  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.7.37.tgz#8aa6960a52e551ee49edbb6b0dce587bbb66762b"
+  integrity sha512-PRAZiDZvo3D1Dzs1xtFQBT8YTZIXI9MexkTWyTwIy6C/6jAEGQen2ayg4NjHhjM+5eE4isHq0vbUjzzVWu2qJQ==
+  dependencies:
+    "@types/mongodb" "*"
+    "@types/node" "*"
+
+"@types/next-auth@^3.1.14":
+  version "3.1.14"
+  resolved "https://registry.yarnpkg.com/@types/next-auth/-/next-auth-3.1.14.tgz#03f9f96f7d986f2c7290646ff288b63a8605496c"
+  integrity sha512-XL70zlxHCmhAkHg4P6lE+gf9WUeM65UZsjwGUDGDPNQTrB3euwm7Z25WlLxG0Z0rsdZmBsXw5kiS+dmuZ/xqlA==
+  dependencies:
+    "@types/node" "*"
+    "@types/react" "*"
+    jose "^1.28.0"
+    typeorm "^0.2.24"
+
+"@types/node@*", "@types/node@^14.14.6":
+  version "14.14.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.6.tgz#146d3da57b3c636cc0d1769396ce1cfa8991147f"
+  integrity sha512-6QlRuqsQ/Ox/aJEQWBEJG7A9+u7oSYl3mem/K8IzxXG/kAGbV1YPD9Bg9Zw3vyxC/YP+zONKwy8hGkSt1jxFMw==
+
+"@types/nodemailer@^6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@types/nodemailer/-/nodemailer-6.4.0.tgz#d8c039be3ed685c4719a026455555be82c124b74"
+  integrity sha512-KY7bFWB0MahRZvVW4CuW83qcCDny59pJJ0MQ5ifvfcjNwPlIT0vW4uARO4u1gtkYnWdhSvURegecY/tzcukJcA==
+  dependencies:
+    "@types/node" "*"
 
 "@types/prop-types@*":
   version "15.7.3"
@@ -3571,7 +3616,7 @@ jest-worker@24.9.0:
     merge-stream "^2.0.0"
     supports-color "^6.1.0"
 
-jose@^1.27.2:
+jose@^1.27.2, jose@^1.28.0:
   version "1.28.0"
   resolved "https://registry.yarnpkg.com/jose/-/jose-1.28.0.tgz#0803f8c71f43cd293a9d931c555c30531f5ca5dc"
   integrity sha512-JmfDRzt/HSj8ipd9TsDtEHoLUnLYavG+7e8F6s1mx2jfVSfXOTaFQsJUydbjJpTnTDHP1+yKL9Ke7ktS/a0Eiw==
@@ -5934,6 +5979,11 @@ typeorm@^0.2.24:
     xml2js "^0.4.23"
     yargonaut "^1.1.2"
     yargs "^16.0.3"
+
+typescript@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.5.tgz#ae9dddfd1069f1cb5beb3ef3b2170dd7c1332389"
+  integrity sha512-ywmr/VrTVCmNTJ6iV2LwIrfG1P+lv6luD8sUJs+2eI9NLGigaN+nUQc13iHqisq7bra9lnmUSYqbJvegraBOPQ==
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
