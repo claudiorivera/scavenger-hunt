@@ -23,4 +23,22 @@ handler.get(async (req, res) => {
   }
 });
 
+// PUT api/user/userId
+// Updates the user with the given id and returns that user
+handler.put(async (req, res) => {
+  try {
+    const session = await getSession({ req });
+    if (!session) throw new Error("User not logged in");
+    const user = await User.findById(req.query.userId);
+    user.name = req.body.name;
+    user.image = req.body.image;
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || "Unable to update user",
+    });
+  }
+});
+
 export default handler;
