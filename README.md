@@ -25,11 +25,14 @@ A game that challenges you to find the most random items around your house. Made
 - Leaderboard shows list of users ranked by most items found
 - Collection item detail page shows the photo a specific user took of an item
 
+# New In This Version
+
+- Users can update their name and avatar on the "My Profile" page.
+
 # Future Improvements
 
 - Toasts for successfully adding items on admin portal
 - Collect page actions should be in a fixed position, instead of moving based on item description
-- Allow users to change name and avatar
 
 # Install
 

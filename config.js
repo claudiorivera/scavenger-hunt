@@ -26,6 +26,10 @@ const userLinks = [
     title: "Items",
     url: "/items",
   },
+  {
+    title: "My Profile",
+    url: "/profile",
+  },
 ];
 
 export {
