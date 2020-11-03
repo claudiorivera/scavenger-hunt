@@ -53,6 +53,17 @@ const HomePage = () => {
       >
         My Collection
       </StyledButton>
+      <StyledButton
+        size="large"
+        fullWidth
+        color="secondary"
+        variant="contained"
+        onClick={() => {
+          router.push("/profile");
+        }}
+      >
+        My Profile
+      </StyledButton>
     </Container>
   );
 };
