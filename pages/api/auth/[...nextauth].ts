@@ -3,19 +3,11 @@ import User from "@models/User";
 import randomlyGeneratedName from "@util/randomlyGeneratedName";
 import verificationRequest from "@util/verificationRequest";
 import Axios from "axios";
-import NextAuth, { User as NextAuthUser } from "next-auth";
+import NextAuth from "next-auth";
+import { Session } from "next-auth/client";
 import Providers from "next-auth/providers";
-import { GenericObject, SessionBase } from "next-auth/_utils";
+import { GenericObject } from "next-auth/_utils";
 import nextConnect from "next-connect";
-
-interface INextAuthUser extends NextAuthUser {
-  id: number;
-  isAdmin: boolean;
-}
-
-interface ISessionBase extends SessionBase {
-  user: INextAuthUser;
-}
 
 const handler = nextConnect();
 
@@ -46,13 +38,7 @@ handler.use((req, res) =>
       jwt: true,
     },
     callbacks: {
-      jwt: async (
-        token,
-        user: INextAuthUser,
-        _account,
-        _profile,
-        isNewUser
-      ) => {
+      jwt: async (token, user, _account, _profile, isNewUser) => {
         if (isNewUser) {
           try {
             const userFound = await User.findById(user.id);
@@ -91,7 +77,7 @@ handler.use((req, res) =>
         }
         return Promise.resolve(token);
       },
-      session: async (session: ISessionBase, sessionToken: GenericObject) => {
+      session: async (session: Session, sessionToken: GenericObject) => {
         session.user.id = sessionToken.uid;
         session.user.isAdmin = sessionToken.isAdmin;
         return Promise.resolve(session);
