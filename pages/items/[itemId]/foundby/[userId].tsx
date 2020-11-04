@@ -11,6 +11,7 @@ import useSWR from "swr";
 
 const ItemFoundByDetails = () => {
   const [session] = useSession();
+
   const router = useRouter();
   const { data: collectionItem } = useSWR(
     `/api/collections?userId=${router.query.userId}&itemId=${router.query.itemId}`,
@@ -21,8 +22,8 @@ const ItemFoundByDetails = () => {
   if (!collectionItem) return null;
 
   return (
-    <Container align="center" maxWidth="xs">
-      <Typography variant="h5" gutterBottom>
+    <Container maxWidth="xs">
+      <Typography align="center" variant="h5" gutterBottom>
         {collectionItem.user.name} Found {collectionItem.item.itemDescription}!
       </Typography>
       <StyledImage
