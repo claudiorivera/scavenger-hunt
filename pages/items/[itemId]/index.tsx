@@ -1,6 +1,5 @@
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import SmallAvatar from "@components/SmallAvatar";
-import SonicWaiting from "@components/SonicWaiting";
 import StyledButton from "@components/StyledButton";
 import StyledDivider from "@components/StyledDivider";
 import StyledLink from "@components/StyledLink";
@@ -8,6 +7,7 @@ import TinyAvatar from "@components/TinyAvatar";
 import { showItemAttribution } from "@config";
 import { Box, Container, Typography } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
+import { IUser } from "@models/User";
 import fetcher from "@util/fetcher";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
@@ -23,11 +23,15 @@ const ItemDetailsPage = () => {
   if (!session) return <NotLoggedInMessage />;
   if (!item) return null;
 
-  const userIdsWhoCollected = item.usersWhoCollected.map((user) => user._id);
+  const userIdsWhoCollected = item.usersWhoCollected.map(
+    (user: IUser) => user._id
+  );
 
   return (
-    <Container align="center" maxWidth="xs">
-      <Typography variant="h3">{item.itemDescription}</Typography>
+    <Container maxWidth="xs">
+      <Typography align="center" variant="h3">
+        {item.itemDescription}
+      </Typography>
       {showItemAttribution && (
         <Box
           display="flex"
@@ -49,7 +53,7 @@ const ItemDetailsPage = () => {
         Collected by:
       </Typography>
       {item.usersWhoCollected.length > 0 ? (
-        item.usersWhoCollected.map((user) => (
+        item.usersWhoCollected.map((user: IUser) => (
           <Box key={user._id} display="flex" alignItems="center">
             <Box flexGrow="1">
               <StyledLink href={`/collections/${user._id}`}>
