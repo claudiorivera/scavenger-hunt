@@ -3,9 +3,19 @@ import User from "@models/User";
 import randomlyGeneratedName from "@util/randomlyGeneratedName";
 import verificationRequest from "@util/verificationRequest";
 import Axios from "axios";
-import NextAuth from "next-auth";
+import NextAuth, { User as NextAuthUser } from "next-auth";
 import Providers from "next-auth/providers";
+import { GenericObject, SessionBase } from "next-auth/_utils";
 import nextConnect from "next-connect";
+
+interface INextAuthUser extends NextAuthUser {
+  id: number;
+  isAdmin: boolean;
+}
+
+interface ISessionBase extends SessionBase {
+  user: INextAuthUser;
+}
 
 const handler = nextConnect();
 
@@ -21,7 +31,8 @@ handler.use((req, res) =>
       Providers.Email({
         server: process.env.EMAIL_SERVER,
         from: process.env.EMAIL_FROM,
-        sendVerificationRequest: verificationRequest,
+        // TODO: Find the correct way to do this
+        sendVerificationRequest: verificationRequest as any,
       }),
     ],
     database: process.env.MONGODB_URI,
@@ -35,7 +46,13 @@ handler.use((req, res) =>
       jwt: true,
     },
     callbacks: {
-      jwt: async (token, user, _account, _profile, isNewUser) => {
+      jwt: async (
+        token,
+        user: INextAuthUser,
+        _account,
+        _profile,
+        isNewUser
+      ) => {
         if (isNewUser) {
           try {
             const userFound = await User.findById(user.id);
@@ -74,9 +91,9 @@ handler.use((req, res) =>
         }
         return Promise.resolve(token);
       },
-      session: async (session, token) => {
-        session.user.id = token.uid;
-        session.user.isAdmin = token.isAdmin;
+      session: async (session: ISessionBase, sessionToken: GenericObject) => {
+        session.user.id = sessionToken.uid;
+        session.user.isAdmin = sessionToken.isAdmin;
         return Promise.resolve(session);
       },
     },
