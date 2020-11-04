@@ -11,10 +11,6 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
-    "@types/mongoose": "^5.7.37",
-    "@types/next-auth": "^3.1.14",
-    "@types/node": "^14.14.6",
-    "@types/nodemailer": "^6.4.0",
     "axios": "0.21.0",
     "mongoose": "5.10.11",
     "next": "^10.0.0",
@@ -30,6 +26,10 @@
     "mongodb": "^3.6.2"
   },
   "devDependencies": {
+    "@types/mongoose": "^5.7.37",
+    "@types/next-auth": "^3.1.14",
+    "@types/node": "^14.14.6",
+    "@types/nodemailer": "^6.4.0",
     "typescript": "^4.0.5"
   }
 }
