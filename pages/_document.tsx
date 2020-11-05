@@ -1,7 +1,13 @@
 // https://github.com/mui-org/material-ui/tree/master/examples/nextjs
 import { ServerStyleSheets } from "@material-ui/core/styles";
 import theme from "@theme";
-import Document, { Head, Html, Main, NextScript } from "next/document";
+import Document, {
+  DocumentContext,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from "next/document";
 import React from "react";
 
 class MyDocument extends Document {
@@ -23,7 +29,7 @@ class MyDocument extends Document {
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with server-side generation (SSG).
-MyDocument.getInitialProps = async (ctx) => {
+MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 

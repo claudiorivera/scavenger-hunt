@@ -4,6 +4,7 @@ import SonicWaiting from "@components/SonicWaiting";
 import StyledDivider from "@components/StyledDivider";
 import StyledLink from "@components/StyledLink";
 import { Box, Container, styled, Typography } from "@material-ui/core";
+import { IUser } from "@models/User";
 import fetcher from "@util/fetcher";
 import { useSession } from "next-auth/client";
 import React from "react";
@@ -21,11 +22,13 @@ const LeaderboardPage = () => {
   if (!users) return null;
 
   return (
-    <Container align="center" maxWidth="xs">
-      <Typography variant="h3">Leaderboard</Typography>
+    <Container maxWidth="xs">
+      <Typography align="center" variant="h3">
+        Leaderboard
+      </Typography>
       <StyledDivider />
       {users.length > 0 ? (
-        users.map((user) => (
+        users.map((user: IUser) => (
           <StyledLink
             color="inherit"
             key={user._id}

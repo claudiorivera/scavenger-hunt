@@ -2,6 +2,7 @@ import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
 import Item from "@models/Item";
 import User from "@models/User";
+import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
 
@@ -10,7 +11,7 @@ handler.use(middleware);
 
 // GET api/collections?userId=
 // Returns collection items for the given user id
-handler.get(async (req, res) => {
+handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (!("userId" in req.query)) throw new Error("No user specified");
     if ("itemId" in req.query) {
@@ -41,7 +42,7 @@ handler.get(async (req, res) => {
 
 // POST api/collections
 // Adds collection item
-handler.post(async (req, res) => {
+handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
     if (!session) throw new Error("User not logged in");

@@ -3,6 +3,7 @@ import User from "@models/User";
 import randomlyGeneratedName from "@util/randomlyGeneratedName";
 import verificationRequest from "@util/verificationRequest";
 import Axios from "axios";
+import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import { Session } from "next-auth/client";
 import Providers from "next-auth/providers";
@@ -13,7 +14,7 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
-handler.use((req, res) =>
+handler.use((req: NextApiRequest, res: NextApiResponse) =>
   NextAuth(req, res, {
     providers: [
       Providers.GitHub({

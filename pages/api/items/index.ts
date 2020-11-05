@@ -1,5 +1,6 @@
 import middleware from "@middleware";
 import Item from "@models/Item";
+import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
 
@@ -13,7 +14,7 @@ handler.use(middleware);
 // Returns the user's uncollected items
 // GET api/items?collected
 // Returns the user's collected items
-handler.get(async (req, res) => {
+handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   if ("uncollected" in req.query) {
     try {
       const session = await getSession({ req });
@@ -56,7 +57,7 @@ handler.get(async (req, res) => {
 
 // POST api/items
 // Adds item and returns the item
-handler.post(async (req, res) => {
+handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
     if (!session) throw new Error("User not logged in");

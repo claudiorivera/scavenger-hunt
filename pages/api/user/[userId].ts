@@ -1,5 +1,6 @@
 import middleware from "@middleware";
 import User from "@models/User";
+import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
 
@@ -8,7 +9,7 @@ handler.use(middleware);
 
 // GET api/user/userId
 // Returns the given user
-handler.get(async (req, res) => {
+handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
     if (!session) throw new Error("User not logged in");
@@ -25,7 +26,7 @@ handler.get(async (req, res) => {
 
 // PUT api/user/userId
 // Updates the user with the given id and returns that user
-handler.put(async (req, res) => {
+handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
     if (!session) throw new Error("User not logged in");

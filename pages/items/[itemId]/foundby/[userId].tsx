@@ -27,8 +27,8 @@ const ItemFoundByDetails = () => {
         {collectionItem.user.name} Found {collectionItem.item.itemDescription}!
       </Typography>
       <Image
-        height="500px"
-        width="500px"
+        height="512px"
+        width="512px"
         src={collectionItem.imageUrl}
         alt={collectionItem.item.itemDescription}
       />

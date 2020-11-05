@@ -1,5 +1,6 @@
 import middleware from "@middleware";
 import Item from "@models/Item";
+import { NextApiRequest, NextApiResponse } from "next";
 import nextConnect from "next-connect";
 
 const handler = nextConnect();
@@ -8,7 +9,7 @@ handler.use(middleware);
 
 // GET api/items/id
 // Returns the item
-handler.get(async (req, res) => {
+handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const item = await Item.findById(req.query.itemId)
       .select("-__v")
