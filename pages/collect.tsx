@@ -1,7 +1,6 @@
 import Collect from "@components/Collect";
 import DebugCollectPage from "@components/DebugCollectPage";
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
-import SonicWaiting from "@components/SonicWaiting";
 import { CollectProvider } from "@context/Collect";
 import fetcher from "@util/fetcher";
 import { useSession } from "next-auth/client";

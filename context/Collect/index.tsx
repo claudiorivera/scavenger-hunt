@@ -1,14 +1,36 @@
+import { IItem } from "@models/Item";
 import useUncollectedItems from "@util/useUncollectedItems";
 import Axios from "axios";
 import { useSession } from "next-auth/client";
 import Error from "next/error";
 import { useRouter } from "next/router";
-import React, { createContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  FC,
+  FormEvent,
+  SyntheticEvent,
+  useEffect,
+  useState,
+} from "react";
 
-export const CollectContext = createContext();
+type ContextProps = {
+  showCollectSuccess: boolean;
+  collectSuccessImageUrl: string;
+  currentItemIndex: number;
+  currentItem: IItem;
+  fileInput: string;
+  previewSource: string;
+  isUploading: boolean;
+  uncollectedItems: IItem[];
+  handleFileInputChange: (e: SyntheticEvent<EventTarget>) => void;
+  handleFindMore: () => void;
+  handleSubmitFile: (e: FormEvent) => void;
+};
+
+export const CollectContext = createContext<Partial<ContextProps>>({});
 CollectContext.displayName = "CollectContext";
 
-export const CollectProvider = ({ children }) => {
+export const CollectProvider: FC = ({ children }) => {
   const [session] = useSession();
   const router = useRouter();
   const { uncollectedItems, mutate } = useUncollectedItems();
@@ -27,7 +49,7 @@ export const CollectProvider = ({ children }) => {
       if ("itemId" in router.query) {
         // Set the current item index to the index of the item in the query, if any
         const index = uncollectedItems.findIndex(
-          (item) => item._id === router.query.itemId
+          (item: IItem) => item._id === router.query.itemId
         );
         setCurrentItemIndex(index === -1 ? 0 : index);
       }
@@ -43,26 +65,27 @@ export const CollectProvider = ({ children }) => {
   };
 
   // Photo picker and upload https://www.youtube.com/watch?v=Rw_QeJLnCK4
-  const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
+  // TS event type https://stackoverflow.com/a/59105621/6520955
+  const handleFileInputChange = (e: SyntheticEvent<EventTarget>) => {
+    const file = (e.target as HTMLFormElement).files[0];
     previewFile(file);
   };
 
-  const previewFile = (file) => {
+  const previewFile = (file: Blob) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource(reader.result);
+      setPreviewSource(reader.result as string);
     };
   };
 
-  const handleSubmitFile = (e) => {
+  const handleSubmitFile = (e: FormEvent) => {
     e.preventDefault();
     if (!previewSource) return;
     uploadImage(previewSource);
   };
 
-  const uploadImage = async (base64EncodedImage) => {
+  const uploadImage = async (base64EncodedImage: string) => {
     try {
       setIsUploading(true);
       let imageUrl = "";
@@ -88,13 +111,13 @@ export const CollectProvider = ({ children }) => {
           "/w_80,h_80,c_fill,g_center,q_auto:best/" +
           cloudinaryUploadResponse.data.public_id;
       } else {
-        throw new Error("Sorry, something went wrong while trying to upload");
+        throw "Something went wrong while uploading";
       }
       // Add to collections
       await Axios.post("/api/collections", {
         imageUrl,
         thumbnailUrl,
-        user: session.user.id,
+        user: session?.user.id,
         item: currentItem._id,
       });
       setIsUploading(false);

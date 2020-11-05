@@ -1,6 +1,5 @@
 import LargeAvatar from "@components/LargeAvatar";
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
-import SonicWaiting from "@components/SonicWaiting";
 import StyledButton from "@components/StyledButton";
 import { Container, Typography } from "@material-ui/core";
 import useCurrentUser from "@util/useCurrentUser";
@@ -17,9 +16,11 @@ const HomePage = () => {
   if (!user) return null;
 
   return (
-    <Container align="center" maxWidth="xs">
+    <Container maxWidth="xs">
       <LargeAvatar alt={user.name} src={user.image} />
-      <Typography variant="h5">{user.name}</Typography>
+      <Typography align="center" variant="h5">
+        {user.name}
+      </Typography>
       <StyledButton
         size="large"
         fullWidth
