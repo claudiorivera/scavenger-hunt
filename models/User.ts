@@ -1,13 +1,6 @@
 import { newUsersAdminByDefault } from "@config";
-import { ICollectionItem } from "@models/CollectionItem";
-import { Document, model, models, Schema, Types } from "mongoose";
-
-export interface IUser extends Document {
-  name: string;
-  image: string;
-  isAdmin: boolean;
-  itemsCollected: [ICollectionItem["_id"]];
-}
+import { model, models, Schema, Types } from "mongoose";
+import { IUser } from "types";
 
 const UserSchema: Schema = new Schema({
   // _id: Schema.Types.ObjectId, // TODO: Do we need this line??

@@ -1,11 +1,5 @@
-import { IUser } from "@models/User";
-import { Document, model, models, Schema, Types } from "mongoose";
-
-export interface IItem extends Document {
-  itemDescription: string;
-  addedBy: IUser["_id"];
-  usersWhoCollected: [IUser["_id"]];
-}
+import { model, models, Schema, Types } from "mongoose";
+import { IItem } from "types";
 
 const ItemSchema = new Schema({
   itemDescription: {
