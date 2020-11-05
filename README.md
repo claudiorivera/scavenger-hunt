@@ -24,15 +24,16 @@ A game that challenges you to find the most random items around your house. Made
 - Item info page shows all users who have found that item
 - Leaderboard shows list of users ranked by most items found
 - Collection item detail page shows the photo a specific user took of an item
+- Users can update their name and avatar on the "My Profile" page.
 
 # New In This Version
 
-- Users can update their name and avatar on the "My Profile" page.
+- Migrated entire codebase to TypeScript
 
 # Future Improvements
 
 - Toasts for successfully adding items on admin portal
-- Collect page actions should be in a fixed position, instead of moving based on item description
+- Collect page actions should be in a fixed position, instead of moving based on item description (or display a cropped square preview image)
 
 # Install
 
@@ -48,4 +49,4 @@ A game that challenges you to find the most random items around your house. Made
 
 # Known Bugs
 
-- "Find more" (after successful collect) does not correctly move on to the next item consistently (depends on how many total items there are to find, how many the user has already found, and also how the user got to the collect page). This is a state management "off by one" and/or revalidation bug that I've been unsuccessful in tracking down. I'll revisit this in the future.
+- "Find more" (after successful collect) does not correctly move on to the next item consistently (it has trouble handling the last uncollected item). This is a state management "off by one" and/or revalidation bug that I've been unsuccessful in tracking down. I'll revisit this in the future.
