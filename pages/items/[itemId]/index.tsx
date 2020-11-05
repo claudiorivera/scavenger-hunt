@@ -41,6 +41,7 @@ const ItemDetailsPage = () => {
         >
           Added by:&nbsp;&nbsp;
           <StyledLink
+            color="inherit"
             style={{ display: "flex", alignItems: "center" }}
             href={`/collections/${item.addedBy._id}`}
           >
@@ -56,7 +57,7 @@ const ItemDetailsPage = () => {
         item.usersWhoCollected.map((user: IUser) => (
           <Box key={user._id} display="flex" alignItems="center">
             <Box flexGrow="1">
-              <StyledLink href={`/collections/${user._id}`}>
+              <StyledLink color="inherit" href={`/collections/${user._id}`}>
                 <Box display="flex" alignItems="center">
                   <SmallAvatar
                     style={{ marginRight: "1rem" }}

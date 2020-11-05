@@ -12,8 +12,10 @@ const AuthErrorPage = () => {
   return (
     <Container maxWidth="xs">
       <Typography variant="h5">Sorry, something went wrong.</Typography>
-      <StyledLink href="/auth/login">Click here to try again</StyledLink>.
-      <Typography variant="body1">Error Code: {router.query.error}</Typography>
+      <StyledLink color="inherit" href="/auth/login">
+        Click here to try again
+      </StyledLink>
+      .<Typography variant="body1">Error Code: {router.query.error}</Typography>
     </Container>
   );
 };

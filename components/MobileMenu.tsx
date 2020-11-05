@@ -6,18 +6,28 @@ import {
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
 import { signIn, signOut, useSession } from "next-auth/client";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
+import { ILinks } from "types";
+import StyledLink from "./StyledLink";
 
-const MobileMenu = ({ userLinks, adminLinks }) => {
+const MobileMenu = ({
+  userLinks,
+  adminLinks,
+}: {
+  userLinks: ILinks[];
+  adminLinks: ILinks[];
+}) => {
   const [session, loading] = useSession();
   const router = useRouter();
 
   // https://material-ui.com/components/app-bar/#app-bar-with-menu
   const [anchorEl, setAnchorEl] = useState(null);
   const isMobileMenuOpen = Boolean(anchorEl);
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleMenuOpen = (event: PointerEvent) => {
+    // TODO: Find the correct way to do this
+    setAnchorEl(event.currentTarget as any);
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -29,7 +39,10 @@ const MobileMenu = ({ userLinks, adminLinks }) => {
         edge="start"
         color="inherit"
         aria-label="menu"
-        onClick={handleMenuOpen}
+        onClick={(e) => {
+          // TODO: Find the correct way to do this
+          handleMenuOpen(e as any);
+        }}
       >
         <MenuIcon />
       </IconButton>
@@ -51,7 +64,11 @@ const MobileMenu = ({ userLinks, adminLinks }) => {
         {loading ? (
           <CircularProgress />
         ) : !session ? (
-          <MenuItem onClick={signIn}>Login</MenuItem>
+          <MenuItem>
+            <StyledLink color="inherit" href="/auth/login">
+              Login
+            </StyledLink>
+          </MenuItem>
         ) : (
           <div>
             {userLinks.map(({ url, title }) => (

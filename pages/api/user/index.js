@@ -17,7 +17,7 @@ handler.get(async (req, res) => {
       .lean();
     res.json(user);
   } catch (error) {
-    res.status(500).json({
+    res.status(401).json({
       message: error.message || "Unable to get user",
     });
   }

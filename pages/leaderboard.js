@@ -26,7 +26,11 @@ const LeaderboardPage = () => {
       <StyledDivider />
       {users.length > 0 ? (
         users.map((user) => (
-          <StyledLink key={user._id} href={`/collections/${user._id}`}>
+          <StyledLink
+            color="inherit"
+            key={user._id}
+            href={`/collections/${user._id}`}
+          >
             <StyledContainer>
               <Box display="flex" alignItems="center">
                 <Box flexGrow="2">

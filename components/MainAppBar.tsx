@@ -9,7 +9,7 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import { styled, useTheme } from "@material-ui/core/styles";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { signOut, useSession } from "next-auth/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
@@ -20,6 +20,7 @@ const Title = styled(Typography)({
   color: "white",
   fontWeight: 700,
   fontSize: "1.5rem",
+  cursor: "pointer",
 });
 
 const StyledAppBar = styled(AppBar)({
@@ -37,16 +38,16 @@ const MainAppBar = () => {
     <StyledAppBar position="sticky">
       <Toolbar>
         <Link href="/" passHref>
-          <Title component={"a"}>{appTitle}</Title>
+          <Title>{appTitle}</Title>
         </Link>
         {isOnLoginPage ? null : isMobile ? (
           <MobileMenu userLinks={userLinks} adminLinks={adminLinks} />
         ) : loading ? (
           <CircularProgress />
         ) : !session ? (
-          <Button color="inherit" onClick={signIn}>
-            Login
-          </Button>
+          <Link href="/auth/login">
+            <Button color="inherit">Login</Button>
+          </Link>
         ) : (
           <Fragment>
             {userLinks.map(({ title, url }) => (
