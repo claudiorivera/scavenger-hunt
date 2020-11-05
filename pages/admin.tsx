@@ -24,7 +24,7 @@ const AdminPage = () => {
       </Container>
     );
 
-  const handleSubmit = async (itemDescription) => {
+  const handleSubmit = async (itemDescription: string) => {
     try {
       await Axios.post("/api/items", { itemDescription });
     } catch (error) {
@@ -33,8 +33,10 @@ const AdminPage = () => {
   };
 
   return (
-    <Container align="center" maxWidth="xs">
-      <Typography variant="h3">Admin</Typography>
+    <Container maxWidth="xs">
+      <Typography align="center" variant="h3">
+        Admin
+      </Typography>
       <form
         onSubmit={(e) => {
           e.preventDefault();

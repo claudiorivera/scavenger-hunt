@@ -1,10 +1,10 @@
 import SonicWaiting from "@components/SonicWaiting";
 import StyledButton from "@components/StyledButton";
-import StyledImage from "@components/StyledImage";
 import { CollectContext } from "@context/Collect";
 import { Button, Container, Input, Typography } from "@material-ui/core";
 import { AddAPhoto } from "@material-ui/icons";
 import { useSession } from "next-auth/client";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment, useContext } from "react";
@@ -72,7 +72,13 @@ const Collect = () => {
               {previewSource && (
                 <Fragment>
                   <Container>
-                    <StyledImage src={previewSource} alt="Item image" />
+                    <Image
+                      unoptimized
+                      width="400px"
+                      height="500px"
+                      src={previewSource}
+                      alt="Item image"
+                    />
                   </Container>
                   <StyledButton
                     form="imageUploadForm"
@@ -114,12 +120,13 @@ const Collect = () => {
           )}
         {showCollectSuccess && currentItem && (
           <Fragment>
-            <Typography variant="h3">
+            <Typography align="center" variant="h3">
               You found {currentItem.itemDescription}!
             </Typography>
-            <img
-              src={collectSuccessImageUrl}
-              width="300px"
+            <Image
+              src={collectSuccessImageUrl as string}
+              height="500px"
+              width="500px"
               alt="Successfully uploaded photo"
             />
             {uncollectedItems && uncollectedItems.length > 0 && (

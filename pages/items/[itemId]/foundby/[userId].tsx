@@ -1,9 +1,9 @@
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledButton from "@components/StyledButton";
-import StyledImage from "@components/StyledImage";
 import { Container, Typography } from "@material-ui/core";
 import fetcher from "@util/fetcher";
 import { useSession } from "next-auth/client";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -26,7 +26,9 @@ const ItemFoundByDetails = () => {
       <Typography align="center" variant="h5" gutterBottom>
         {collectionItem.user.name} Found {collectionItem.item.itemDescription}!
       </Typography>
-      <StyledImage
+      <Image
+        height="500px"
+        width="500px"
         src={collectionItem.imageUrl}
         alt={collectionItem.item.itemDescription}
       />
