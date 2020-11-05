@@ -54,10 +54,11 @@ handler.use((req: NextApiRequest, res: NextApiResponse) =>
               userFound.image = user.image;
             } else {
               const response = await Axios.post(
-                `${process.env.CLOUDINARY_BASE_URL}/image/upload`,
+                `${process.env.NEXT_PUBLIC_CLOUDINARY_BASE_URL}/image/upload`,
                 {
                   file: "https://picsum.photos/180", //Random 180x180 photo from picsum.photos
-                  upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET_AVATARS,
+                  upload_preset:
+                    process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET_AVATARS,
                 }
               );
               userFound.image = response.data.secure_url;
