@@ -1,4 +1,4 @@
-import { ILinks } from "types";
+import { ILinks } from "@types";
 
 const appTitle: string = "Scavenger Hunt";
 const primaryColor: string = "#bb4430"; // App bar color

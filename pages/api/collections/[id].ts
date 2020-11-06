@@ -2,11 +2,11 @@ import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
 import Item from "@models/Item";
 import User from "@models/User";
+import { ICollectionItem, IItem, IUser } from "@types";
 import { Types } from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
-import { ICollectionItem, IItem, IUser } from "types";
 
 const handler = nextConnect();
 

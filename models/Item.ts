@@ -1,5 +1,5 @@
+import { IItem } from "@types";
 import { model, models, Schema, Types } from "mongoose";
-import { IItem } from "types";
 
 const ItemSchema = new Schema({
   itemDescription: {

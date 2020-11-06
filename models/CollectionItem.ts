@@ -1,5 +1,5 @@
+import { ICollectionItem } from "@types";
 import { model, models, Schema, Types } from "mongoose";
-import { ICollectionItem } from "types";
 
 const CollectionItemSchema = new Schema({
   imageUrl: {

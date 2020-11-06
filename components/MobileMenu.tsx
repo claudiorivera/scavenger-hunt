@@ -5,11 +5,10 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
-import { signIn, signOut, useSession } from "next-auth/client";
-import Link from "next/link";
+import { ILinks } from "@types";
+import { signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
-import { ILinks } from "types";
 import StyledLink from "./StyledLink";
 
 const MobileMenu = ({

@@ -1,9 +1,8 @@
 import { newUsersAdminByDefault } from "@config";
+import { IUser } from "@types";
 import { model, models, Schema, Types } from "mongoose";
-import { IUser } from "types";
 
 const UserSchema: Schema = new Schema({
-  // _id: Schema.Types.ObjectId, // TODO: Do we need this line??
   name: {
     type: String,
     default: "No Name",
