@@ -1,13 +1,5 @@
-import { IItem } from "@models/Item";
-import { IUser } from "@models/User";
-import { Document, model, models, Schema, Types } from "mongoose";
-
-export interface ICollectionItem extends Document {
-  imageUrl: string;
-  thumbnailUrl: string;
-  user: IUser["_id"];
-  item: IItem["_id"];
-}
+import { model, models, Schema, Types } from "mongoose";
+import { ICollectionItem } from "types";
 
 const CollectionItemSchema = new Schema({
   imageUrl: {
