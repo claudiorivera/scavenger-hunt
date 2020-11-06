@@ -2,7 +2,7 @@ import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledButton from "@components/StyledButton";
 import { Box, Container, Typography } from "@material-ui/core";
 import { CheckCircle, RadioButtonUnchecked } from "@material-ui/icons";
-import { IItem } from "@models/Item";
+import { IItem } from "@types";
 import fetcher from "@util/fetcher";
 import useItems from "@util/useItems";
 import { useSession } from "next-auth/client";

@@ -1,4 +1,4 @@
-import { IItem } from "@models/Item";
+import { IItem } from "@types";
 import useUncollectedItems from "@util/useUncollectedItems";
 import Axios from "axios";
 import { useSession } from "next-auth/client";
