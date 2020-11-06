@@ -1,10 +1,9 @@
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import SmallAvatar from "@components/SmallAvatar";
-import SonicWaiting from "@components/SonicWaiting";
 import StyledDivider from "@components/StyledDivider";
 import StyledLink from "@components/StyledLink";
 import { Box, Container, styled, Typography } from "@material-ui/core";
-import { IUser } from "@models/User";
+import { IUser } from "@types";
 import fetcher from "@util/fetcher";
 import { useSession } from "next-auth/client";
 import React from "react";

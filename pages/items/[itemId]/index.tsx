@@ -7,7 +7,7 @@ import TinyAvatar from "@components/TinyAvatar";
 import { showItemAttribution } from "@config";
 import { Box, Container, Typography } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
-import { IUser } from "@models/User";
+import { IUser } from "@types";
 import fetcher from "@util/fetcher";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
