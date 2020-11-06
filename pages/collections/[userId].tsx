@@ -62,7 +62,7 @@ const CollectionsPage = () => {
           )}
         </Box>
       ) : (
-        <Typography variant="h5">
+        <Typography align="center" variant="h5">
           Nothing, yet{" "}
           <span role="img" aria-label="sad face emoji">
             😢
