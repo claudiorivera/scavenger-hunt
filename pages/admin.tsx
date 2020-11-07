@@ -2,7 +2,17 @@ import MediumAvatar from "@components/MediumAvatar";
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledButton from "@components/StyledButton";
 import StyledDivider from "@components/StyledDivider";
-import { Box, Container, TextField, Typography } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import { capitalizeLetters } from "@util/capitalizeLetters";
 import useCurrentUser from "@util/useCurrentUser";
 import Axios from "axios";
@@ -16,6 +26,8 @@ const AdminPage = () => {
   const { user } = useCurrentUser();
   const [itemDescription, setItemDescription] = useState("");
   const { data: items, mutate } = useSWR("/api/collections");
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<number>();
 
   if (!session) return <NotLoggedInMessage />;
 
@@ -77,29 +89,62 @@ const AdminPage = () => {
         </StyledButton>
       </form>
       <StyledDivider />
-      {/* TODO: Add confirmation and style the pointer */}
       {items && (
         <Box display="flex" flexWrap="wrap" justifyContent="center">
           {items.map(
             ({ _id, thumbnailUrl }: { _id: number; thumbnailUrl: string }) => (
               <MediumAvatar
                 key={_id}
-                style={{ margin: ".5rem" }}
+                style={{ margin: ".5rem", cursor: "pointer" }}
                 alt={"a collection item"}
                 src={thumbnailUrl}
-                onClick={async () => {
-                  try {
-                    await Axios.delete(`/api/collections/${_id}`);
-                    mutate();
-                  } catch (error) {
-                    return <Error statusCode={500} title={error.message} />;
-                  }
+                onClick={() => {
+                  setItemToDelete(_id);
+                  setIsDeleteDialogOpen(true);
                 }}
               />
             )
           )}
         </Box>
       )}
+      <Dialog
+        open={isDeleteDialogOpen}
+        onClose={() => {
+          setIsDeleteDialogOpen(false);
+        }}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Delete?</DialogTitle>
+        <DialogContent>
+          Are you sure you want to delete this collection item?
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              setIsDeleteDialogOpen(false);
+            }}
+            color="secondary"
+            variant="outlined"
+          >
+            No
+          </Button>
+          <Button
+            onClick={async () => {
+              try {
+                await Axios.delete(`/api/collections/${itemToDelete}`);
+                setIsDeleteDialogOpen(false);
+                mutate();
+              } catch (error) {
+                return <Error statusCode={500} title={error.message} />;
+              }
+            }}
+            color="primary"
+            variant="outlined"
+          >
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };
