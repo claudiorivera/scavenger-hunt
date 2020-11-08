@@ -225,6 +225,7 @@ const AdminPage = () => {
                     await Axios.delete(`/api/users/${userToDelete}`);
                     setIsUserDeleteDialogOpen(false);
                     mutateUsers();
+                    mutateCollectionItems();
                   } catch (error) {
                     return <Error statusCode={500} title={error.message} />;
                   }
