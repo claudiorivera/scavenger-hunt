@@ -30,13 +30,14 @@ A game that challenges you to find the most random items around your house. Made
 # New In This Version
 
 - Admins can delete collection items
+- Admins can delete users
 
 # Future Improvements
 
-- Allow admins to delete users
-- Allow admins to delete all collection items and all users (restart the game)
 - Allow admins to delete items
+- Allow admins to flag users as admins
 - Allow users to delete their profiles
+- Allow admins to delete all collection items and all users (restart the game)
 - Toasts/confirmation for successfully adding items on admin portal
 - Collect page actions should be in a fixed position, instead of moving based on item description (or display a cropped square preview image)
 
