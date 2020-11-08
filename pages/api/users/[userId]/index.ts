@@ -1,5 +1,8 @@
 import middleware from "@middleware";
+import CollectionItem from "@models/CollectionItem";
+import Item from "@models/Item";
 import User from "@models/User";
+import { ICollectionItem, IItem, IUser } from "@types";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
@@ -35,6 +38,35 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
     user.image = req.body.image;
     await user.save();
     res.json(user);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || "Unable to update user",
+    });
+  }
+});
+
+// DELETE api/users/:userId
+// Deletes the user with the given id
+handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const session = await getSession({ req });
+    if (!session) throw new Error("User not logged in");
+    const user: IUser = await User.findById(req.query.userId);
+    const collectionItems: ICollectionItem[] = await CollectionItem.where(
+      "user"
+    ).equals(user._id);
+    collectionItems.forEach(async (collectionItem) => {
+      await collectionItem.remove();
+    });
+    const items: IItem[] = await Item.where("usersWhoCollected").equals(
+      user._id
+    );
+    items.forEach(async (item: IItem) => {
+      item.usersWhoCollected.pull(user._id);
+      await item.save();
+    });
+    await user.remove();
+    res.json({ message: "Successfully deleted user" });
   } catch (error) {
     res.status(500).json({
       message: error.message || "Unable to update user",
