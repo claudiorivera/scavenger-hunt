@@ -32,7 +32,7 @@ const ItemDetailsPage = () => {
       <Typography align="center" variant="h3">
         {item.itemDescription}
       </Typography>
-      {showItemAttribution && (
+      {showItemAttribution && item.addedBy && (
         <Box
           display="flex"
           justifyContent="center"
@@ -50,7 +50,7 @@ const ItemDetailsPage = () => {
           </StyledLink>
         </Box>
       )}
-      <Typography variant="h5" gutterBottom>
+      <Typography align="center" variant="h5" gutterBottom>
         Collected by:
       </Typography>
       {item.usersWhoCollected.length > 0 ? (
@@ -76,7 +76,7 @@ const ItemDetailsPage = () => {
           </Box>
         ))
       ) : (
-        <Typography variant="h5">
+        <Typography align="center" variant="h5">
           Nobody, yet{" "}
           <span role="img" aria-label="sad face emoji">
             😢
