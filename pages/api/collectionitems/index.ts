@@ -15,7 +15,10 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
     if (!session) throw new Error("User not logged in");
-    const items = await CollectionItem.find().select("_id thumbnailUrl").lean();
+    const items = await CollectionItem.find()
+      .select("_id thumbnailUrl")
+      .populate("item", "itemDescription")
+      .lean();
     res.json(items);
   } catch (error) {
     res.status(500).json({

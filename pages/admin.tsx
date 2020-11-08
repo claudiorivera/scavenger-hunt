@@ -11,23 +11,31 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  Tooltip,
   Typography,
 } from "@material-ui/core";
+import { IItem } from "@types";
 import { capitalizeLetters } from "@util/capitalizeLetters";
+import fetcher from "@util/fetcher";
 import useCurrentUser from "@util/useCurrentUser";
 import Axios from "axios";
 import { useSession } from "next-auth/client";
 import Error from "next/error";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import useSWR from "swr";
 
 const AdminPage = () => {
   const [session] = useSession();
   const { user } = useCurrentUser();
   const [itemDescription, setItemDescription] = useState("");
-  const { data: items, mutate } = useSWR("/api/collectionitems");
+  const { data: items, mutate: mutateCollectionItems } = useSWR(
+    "/api/collectionitems"
+  );
+  const { data: users, mutate: mutateUsers } = useSWR("/api/users", fetcher);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<number>();
+  const [isUserDeleteDialogOpen, setIsUserDeleteDialogOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<number>();
 
   if (!session) return <NotLoggedInMessage />;
   if (!user) return null;
@@ -51,7 +59,7 @@ const AdminPage = () => {
   return (
     <Container maxWidth="xs">
       <Typography align="center" variant="h3">
-        Admin
+        Add New Item
       </Typography>
       <form
         onSubmit={(e) => {
@@ -88,63 +96,148 @@ const AdminPage = () => {
           Add Item
         </StyledButton>
       </form>
-      <StyledDivider />
       {items && (
-        <Box display="flex" flexWrap="wrap" justifyContent="center">
-          {items.map(
-            ({ _id, thumbnailUrl }: { _id: number; thumbnailUrl: string }) => (
-              <MediumAvatar
-                key={_id}
-                style={{ margin: ".5rem", cursor: "pointer" }}
-                alt={"a collection item"}
-                src={thumbnailUrl}
-                onClick={() => {
-                  setItemToDelete(_id);
-                  setIsDeleteDialogOpen(true);
-                }}
-              />
-            )
-          )}
-        </Box>
-      )}
-      <Dialog
-        open={isDeleteDialogOpen}
-        onClose={() => {
-          setIsDeleteDialogOpen(false);
-        }}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Delete?</DialogTitle>
-        <DialogContent>
-          Are you sure you want to delete this collection item?
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => {
+        <Fragment>
+          <StyledDivider />
+          <Typography align="center" variant="h3">
+            Delete Collection Items
+          </Typography>
+          <Box display="flex" flexWrap="wrap" justifyContent="center">
+            {items.map(
+              ({
+                _id,
+                thumbnailUrl,
+                item,
+              }: {
+                _id: number;
+                thumbnailUrl: string;
+                item: IItem;
+              }) => (
+                <Tooltip key={_id} title={item.itemDescription}>
+                  <MediumAvatar
+                    style={{ margin: ".5rem", cursor: "pointer" }}
+                    alt={"a collection item"}
+                    src={thumbnailUrl}
+                    onClick={() => {
+                      setItemToDelete(_id);
+                      setIsDeleteDialogOpen(true);
+                    }}
+                  />
+                </Tooltip>
+              )
+            )}
+          </Box>
+          <Dialog
+            open={isDeleteDialogOpen}
+            onClose={() => {
               setIsDeleteDialogOpen(false);
             }}
-            color="secondary"
-            variant="outlined"
+            aria-labelledby="form-dialog-title"
           >
-            No
-          </Button>
-          <Button
-            onClick={async () => {
-              try {
-                await Axios.delete(`/api/collectionitems/${itemToDelete}`);
-                setIsDeleteDialogOpen(false);
-                mutate();
-              } catch (error) {
-                return <Error statusCode={500} title={error.message} />;
-              }
+            <DialogTitle id="form-dialog-title">Delete?</DialogTitle>
+            <DialogContent>
+              Are you sure you want to delete this collection item?
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => {
+                  setIsDeleteDialogOpen(false);
+                }}
+                color="secondary"
+                variant="outlined"
+              >
+                No
+              </Button>
+              <Button
+                onClick={async () => {
+                  try {
+                    await Axios.delete(`/api/collectionitems/${itemToDelete}`);
+                    setIsDeleteDialogOpen(false);
+                    mutateCollectionItems();
+                  } catch (error) {
+                    return <Error statusCode={500} title={error.message} />;
+                  }
+                }}
+                color="primary"
+                variant="outlined"
+              >
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </Fragment>
+      )}
+      {users && (
+        <Fragment>
+          <StyledDivider />
+          <Typography align="center" variant="h3">
+            Delete Users
+          </Typography>
+          <Box display="flex" flexWrap="wrap" justifyContent="center">
+            {users.map(
+              ({
+                _id,
+                image,
+                name,
+              }: {
+                _id: number;
+                image: string;
+                name: string;
+              }) => (
+                <Tooltip key={_id} title={name}>
+                  <MediumAvatar
+                    style={{ margin: ".5rem", cursor: "pointer" }}
+                    alt={name}
+                    src={image}
+                    onClick={() => {
+                      setUserToDelete(_id);
+                      setIsUserDeleteDialogOpen(true);
+                    }}
+                  />
+                </Tooltip>
+              )
+            )}
+          </Box>
+          <Dialog
+            open={isUserDeleteDialogOpen}
+            onClose={() => {
+              setIsUserDeleteDialogOpen(false);
             }}
-            color="primary"
-            variant="outlined"
+            aria-labelledby="form-dialog-title"
           >
-            Yes
-          </Button>
-        </DialogActions>
-      </Dialog>
+            <DialogTitle id="form-dialog-title">Delete?</DialogTitle>
+            <DialogContent>
+              Are you sure you want to delete this user?
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => {
+                  setIsUserDeleteDialogOpen(false);
+                }}
+                color="secondary"
+                variant="outlined"
+              >
+                No
+              </Button>
+              <Button
+                onClick={async () => {
+                  try {
+                    await Axios.delete(`/api/users/${userToDelete}`);
+                    setIsUserDeleteDialogOpen(false);
+                    mutateUsers();
+                  } catch (error) {
+                    return <Error statusCode={500} title={error.message} />;
+                  }
+                }}
+                color="primary"
+                variant="outlined"
+              >
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </Fragment>
+      )}
     </Container>
   );
 };
