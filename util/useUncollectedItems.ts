@@ -3,7 +3,7 @@ import fetcher from "@util/fetcher";
 
 const useUncollectedItems = () => {
   const { data: uncollectedItems, error, mutate } = useSWR(
-    "/api/items?uncollected",
+    "/api/items/uncollected",
     fetcher
   );
   return {

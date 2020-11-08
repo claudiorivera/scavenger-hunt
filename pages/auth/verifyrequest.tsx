@@ -8,6 +8,7 @@ const AuthVerifyRequestPage = () => {
   const router = useRouter();
 
   if (session) router.push("/");
+
   return (
     <Container maxWidth="xs">
       <Typography variant="body1" align="center">

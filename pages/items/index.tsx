@@ -13,7 +13,7 @@ import useSWR from "swr";
 const ItemsPage = () => {
   const [session] = useSession();
   const { items } = useItems();
-  const { data: collectedItems } = useSWR("/api/items?collected", fetcher);
+  const { data: collectedItems } = useSWR("/api/items/collected", fetcher);
 
   if (!session) return <NotLoggedInMessage />;
   if (!items || !collectedItems) return null;

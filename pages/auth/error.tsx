@@ -1,14 +1,11 @@
-import { Container, Link, Typography } from "@material-ui/core";
-import { styled } from "@material-ui/styles";
+import StyledLink from "@components/StyledLink";
+import { Container, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 import React from "react";
 
-const StyledLink = styled(Link)({
-  cursor: "pointer",
-});
-
 const AuthErrorPage = () => {
   const router = useRouter();
+
   return (
     <Container maxWidth="xs">
       <Typography variant="h5">Sorry, something went wrong.</Typography>

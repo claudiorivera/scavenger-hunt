@@ -11,10 +11,9 @@ import useSWR from "swr";
 
 const ItemFoundByDetails = () => {
   const [session] = useSession();
-
   const router = useRouter();
   const { data: collectionItem } = useSWR(
-    `/api/collections?userId=${router.query.userId}&itemId=${router.query.itemId}`,
+    `/api/users/${router.query.userId}/items/${router.query.itemId}`,
     fetcher
   );
 

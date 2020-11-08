@@ -25,13 +25,13 @@ const AdminPage = () => {
   const [session] = useSession();
   const { user } = useCurrentUser();
   const [itemDescription, setItemDescription] = useState("");
-  const { data: items, mutate } = useSWR("/api/collections");
+  const { data: items, mutate } = useSWR("/api/collectionitems");
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<number>();
 
   if (!session) return <NotLoggedInMessage />;
-
-  if (!user?.isAdmin)
+  if (!user) return null;
+  if (!user.isAdmin)
     return (
       <Container maxWidth="xs">
         <Typography variant="h5" align="center">
@@ -131,7 +131,7 @@ const AdminPage = () => {
           <Button
             onClick={async () => {
               try {
-                await Axios.delete(`/api/collections/${itemToDelete}`);
+                await Axios.delete(`/api/collectionitems/${itemToDelete}`);
                 setIsDeleteDialogOpen(false);
                 mutate();
               } catch (error) {

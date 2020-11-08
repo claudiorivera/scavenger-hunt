@@ -13,9 +13,9 @@ import useSWR from "swr";
 const CollectionsPage = () => {
   const [session] = useSession();
   const router = useRouter();
-  const { data: user } = useSWR(`/api/user/${router.query.userId}`, fetcher);
+  const { data: user } = useSWR(`/api/users/${router.query.userId}`, fetcher);
   const { data: items } = useSWR(
-    `/api/collections?userId=${router.query.userId}`,
+    `/api/users/${router.query.userId}/collection`,
     fetcher
   );
 

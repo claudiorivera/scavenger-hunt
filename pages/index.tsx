@@ -9,8 +9,8 @@ import React from "react";
 
 const HomePage = () => {
   const [session] = useSession();
-  const router = useRouter();
   const { user } = useCurrentUser();
+  const router = useRouter();
 
   if (!session) return <NotLoggedInMessage />;
   if (!user) return null;

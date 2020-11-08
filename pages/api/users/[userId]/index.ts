@@ -7,14 +7,14 @@ import nextConnect from "next-connect";
 const handler = nextConnect();
 handler.use(middleware);
 
-// GET api/user/userId
+// GET api/users/:userId
 // Returns the given user
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
     if (!session) throw new Error("User not logged in");
     const user = await User.findById(req.query.userId)
-      .select("_id image name")
+      .select("_id image name isAdmin")
       .lean();
     res.json(user);
   } catch (error) {
@@ -24,7 +24,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   }
 });
 
-// PUT api/user/userId
+// PUT api/users/:userId
 // Updates the user with the given id and returns that user
 handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
   try {

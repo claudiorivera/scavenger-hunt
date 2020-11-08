@@ -7,11 +7,11 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
-// GET api/items/id
-// Returns the item
+// GET api/items/:id
+// Returns the item with the given id
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const item = await Item.findById(req.query.itemId)
+    const item = await Item.findById(req.query.id)
       .select("-__v")
       .populate("usersWhoCollected", "_id image name")
       .populate("addedBy", "_id image name")

@@ -114,7 +114,7 @@ export const CollectProvider: FC = ({ children }) => {
         throw "Something went wrong while uploading";
       }
       // Add to collections
-      await Axios.post("/api/collections", {
+      await Axios.post("/api/collectionitems", {
         imageUrl,
         thumbnailUrl,
         user: session?.user.id,

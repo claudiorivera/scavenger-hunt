@@ -12,8 +12,8 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
-// GET api/collections/id
-// Returns the collection item
+// GET api/collectionitems/:id
+// Returns the collection item with the given id
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
@@ -27,8 +27,8 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   }
 });
 
-// DELETE api/collections/id
-// Deletes the collection item
+// DELETE api/collectionitems/:id
+// Deletes the collection item with the given id
 handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });

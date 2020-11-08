@@ -102,7 +102,7 @@ const ProfilePage = () => {
   const handleSaveChanges = async () => {
     try {
       setIsSavingChanges(true);
-      const response = await Axios.put(`/api/user/${user._id}`, {
+      const response = await Axios.put(`/api/users/${user._id}`, {
         name,
         image,
       });
