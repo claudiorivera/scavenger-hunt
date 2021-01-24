@@ -56,3 +56,4 @@ A game that challenges you to find the most random items around your house. Made
 # Known Bugs
 
 - "Find more" (after successful collect) does not correctly move on to the next item consistently (it has trouble handling the last uncollected item). This is a state management "off by one" and/or revalidation bug that I've been unsuccessful in tracking down. I'll revisit this in the future.
+- GitHub OAuth doesn't play super nicely with Vercel preview deployments. Trying to find a good solution.
