@@ -1,6 +1,5 @@
 import middleware from "@middleware";
 import User from "@models/User";
-import { IUser } from "@types";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
@@ -18,7 +17,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
       .select("_id name itemsCollected image name")
       .lean();
     const sortedUsers = users.sort(
-      (a: IUser, b: IUser) => b.itemsCollected.length - a.itemsCollected.length
+      (a, b) => b.itemsCollected.length - a.itemsCollected.length
     );
     res.json(sortedUsers);
   } catch (error) {
