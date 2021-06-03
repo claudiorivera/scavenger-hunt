@@ -245,10 +245,10 @@
     "@types/bson" "*"
     "@types/node" "*"
 
-"@types/mongoose@5.11.59":
-  version "5.11.59"
-  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.11.59.tgz#2e4973f7fb2cb54a64ed734c51a845474646432d"
-  integrity sha512-UZx/TE/whLnxYOSkjray8DZzv/B3g32olHK/kL6vm1YAnA+lXKUfi2bKnmko008lLEPyUynyvDLYNRjXrHBxFw==
+"@types/mongoose@5.11.77":
+  version "5.11.77"
+  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.11.77.tgz#7106f3093861349558cb242bdc9c7e13a94a8147"
+  integrity sha512-wBnAbulCj4cs13ow3bbzyjQHTYAGwgAiKkz6MnUEKUvj7oFToZMcP32DMO++TEfO+w/8taAKUfPl8z8mLZIA7Q==
   dependencies:
     mongoose "*"
 
