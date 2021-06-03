@@ -5,9 +5,7 @@ import verificationRequest from "@util/verificationRequest";
 import Axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
-import { Session } from "next-auth/client";
 import Providers from "next-auth/providers";
-import { GenericObject } from "next-auth/_utils";
 import nextConnect from "next-connect";
 
 const handler = nextConnect();
@@ -42,15 +40,15 @@ handler.use((req: NextApiRequest, res: NextApiResponse) =>
       jwt: async (token, user, _account, _profile, isNewUser) => {
         if (isNewUser) {
           try {
-            const userFound = await User.findById(user.id);
+            const userFound = await User.findById(user?.id);
             // Generate random name, if none is provided
-            if (user.name) {
+            if (user?.name) {
               userFound.name = user.name;
             } else {
               userFound.name = randomlyGeneratedName();
             }
             // Generate random avatar, if none is provided
-            if (user.image) {
+            if (user?.image) {
               userFound.image = user.image;
             } else {
               const response = await Axios.post(
@@ -79,9 +77,9 @@ handler.use((req: NextApiRequest, res: NextApiResponse) =>
         }
         return Promise.resolve(token);
       },
-      session: async (session: Session, sessionToken: GenericObject) => {
-        session.user.id = sessionToken.uid;
-        session.user.isAdmin = sessionToken.isAdmin;
+      session: async (session, sessionToken) => {
+        session.user.id = sessionToken.uid as string;
+        session.user.isAdmin = sessionToken.isAdmin as boolean;
         return Promise.resolve(session);
       },
     },
