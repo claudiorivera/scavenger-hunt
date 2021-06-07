@@ -7,7 +7,6 @@ A game that challenges you to find the most random items around your house. Made
 - React
 - TypeScript
 - [Next.js](https://nextjs.org)
-- Serverless API Routes
 - [next-connect](https://github.com/hoangvvo/next-connect)
 - MongoDB
 - [NextAuth.js](https://next-auth.js.org) for GitHub OAuth and "Magic Link" email login
