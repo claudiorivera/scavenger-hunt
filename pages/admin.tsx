@@ -14,11 +14,12 @@ import {
   Tooltip,
   Typography,
 } from "@material-ui/core";
-import { IItem } from "@types";
+import { CollectionItem, User } from "@types";
 import { capitalizeLetters } from "@util/capitalizeLetters";
 import fetcher from "@util/fetcher";
 import useCurrentUser from "@util/useCurrentUser";
 import Axios from "axios";
+import { Types } from "mongoose";
 import { useSession } from "next-auth/client";
 import Error from "next/error";
 import React, { Fragment, useState } from "react";
@@ -33,9 +34,9 @@ const AdminPage = () => {
   );
   const { data: users, mutate: mutateUsers } = useSWR("/api/users", fetcher);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState<number>();
+  const [itemToDelete, setItemToDelete] = useState<Types.ObjectId>();
   const [isUserDeleteDialogOpen, setIsUserDeleteDialogOpen] = useState(false);
-  const [userToDelete, setUserToDelete] = useState<number>();
+  const [userToDelete, setUserToDelete] = useState<Types.ObjectId>();
 
   if (!session) return <NotLoggedInMessage />;
   if (!user) return null;
@@ -103,29 +104,19 @@ const AdminPage = () => {
             Delete Collection Items
           </Typography>
           <Box display="flex" flexWrap="wrap" justifyContent="center">
-            {items.map(
-              ({
-                _id,
-                thumbnailUrl,
-                item,
-              }: {
-                _id: number;
-                thumbnailUrl: string;
-                item: IItem;
-              }) => (
-                <Tooltip key={_id} title={item.itemDescription}>
-                  <MediumAvatar
-                    style={{ margin: ".5rem", cursor: "pointer" }}
-                    alt={"a collection item"}
-                    src={thumbnailUrl}
-                    onClick={() => {
-                      setItemToDelete(_id);
-                      setIsDeleteDialogOpen(true);
-                    }}
-                  />
-                </Tooltip>
-              )
-            )}
+            {items.map(({ _id, thumbnailUrl, item }: CollectionItem) => (
+              <Tooltip key={String(_id)} title={item.itemDescription}>
+                <MediumAvatar
+                  style={{ margin: ".5rem", cursor: "pointer" }}
+                  alt={"a collection item"}
+                  src={thumbnailUrl}
+                  onClick={() => {
+                    setItemToDelete(_id);
+                    setIsDeleteDialogOpen(true);
+                  }}
+                />
+              </Tooltip>
+            ))}
           </Box>
           <Dialog
             open={isDeleteDialogOpen}
@@ -174,29 +165,19 @@ const AdminPage = () => {
             Delete Users
           </Typography>
           <Box display="flex" flexWrap="wrap" justifyContent="center">
-            {users.map(
-              ({
-                _id,
-                image,
-                name,
-              }: {
-                _id: number;
-                image: string;
-                name: string;
-              }) => (
-                <Tooltip key={_id} title={name}>
-                  <MediumAvatar
-                    style={{ margin: ".5rem", cursor: "pointer" }}
-                    alt={name}
-                    src={image}
-                    onClick={() => {
-                      setUserToDelete(_id);
-                      setIsUserDeleteDialogOpen(true);
-                    }}
-                  />
-                </Tooltip>
-              )
-            )}
+            {users.map(({ _id, image, name }: User) => (
+              <Tooltip key={String(_id)} title={name}>
+                <MediumAvatar
+                  style={{ margin: ".5rem", cursor: "pointer" }}
+                  alt={name}
+                  src={image}
+                  onClick={() => {
+                    setUserToDelete(_id);
+                    setIsUserDeleteDialogOpen(true);
+                  }}
+                />
+              </Tooltip>
+            ))}
           </Box>
           <Dialog
             open={isUserDeleteDialogOpen}

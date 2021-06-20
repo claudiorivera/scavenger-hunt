@@ -7,7 +7,7 @@ import TinyAvatar from "@components/TinyAvatar";
 import { showItemAttribution } from "@config";
 import { Box, Container, Typography } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
-import { IUser } from "@types";
+import { User } from "@types";
 import fetcher from "@util/fetcher";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
@@ -24,7 +24,7 @@ const ItemDetailsPage = () => {
   if (!item) return null;
 
   const userIdsWhoCollected = item.usersWhoCollected.map(
-    (user: IUser) => user._id
+    (user: User) => user._id
   );
 
   return (
@@ -54,8 +54,8 @@ const ItemDetailsPage = () => {
         Collected by:
       </Typography>
       {item.usersWhoCollected.length > 0 ? (
-        item.usersWhoCollected.map((user: IUser) => (
-          <Box key={user._id} display="flex" alignItems="center">
+        item.usersWhoCollected.map((user: User) => (
+          <Box key={String(user._id)} display="flex" alignItems="center">
             <Box flexGrow="1">
               <StyledLink color="inherit" href={`/collections/${user._id}`}>
                 <Box display="flex" alignItems="center">
@@ -68,7 +68,7 @@ const ItemDetailsPage = () => {
                 </Box>
               </StyledLink>
             </Box>
-            <Link href={`/items/${item._id}/foundby/${user._id}`}>
+            <Link passHref href={`/items/${item._id}/foundby/${user._id}`}>
               <StyledButton variant="contained" color="secondary">
                 <Visibility />
               </StyledButton>
@@ -85,7 +85,7 @@ const ItemDetailsPage = () => {
       )}
       <StyledDivider />
       {!userIdsWhoCollected.includes(session.user.id) && (
-        <Link href={`/collect?itemId=${item._id}`}>
+        <Link passHref href={`/collect?itemId=${item._id}`}>
           <StyledButton fullWidth variant="contained" color="secondary">
             Found It?
           </StyledButton>

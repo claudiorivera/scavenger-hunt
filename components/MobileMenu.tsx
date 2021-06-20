@@ -5,19 +5,18 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
-import { ILinks } from "@types";
+import { Link } from "@types";
 import { signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 import StyledLink from "./StyledLink";
 
-const MobileMenu = ({
-  userLinks,
-  adminLinks,
-}: {
-  userLinks: ILinks[];
-  adminLinks: ILinks[];
-}) => {
+interface MobileMenuProps {
+  userLinks: Link[];
+  adminLinks: Link[];
+}
+
+const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
   const [session, loading] = useSession();
   const router = useRouter();
 

@@ -1,6 +1,6 @@
 import SonicWaiting from "@components/SonicWaiting";
 import StyledButton from "@components/StyledButton";
-import { CollectContext } from "@context/Collect";
+import { CollectContext } from "@context/CollectContext";
 import { Button, Container, Input, Typography } from "@material-ui/core";
 import { AddAPhoto } from "@material-ui/icons";
 import { useSession } from "next-auth/client";
@@ -105,7 +105,7 @@ const Collect = () => {
                 </StyledButton>
               )}
               {currentItem && (
-                <Link href={`/items/${currentItem._id}`}>
+                <Link passHref href={`/items/${currentItem._id}`}>
                   <StyledButton
                     size="large"
                     fullWidth

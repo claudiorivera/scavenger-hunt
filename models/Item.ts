@@ -1,4 +1,4 @@
-import { IItem } from "@types";
+import { Item } from "@types";
 import { model, models, Schema, Types } from "mongoose";
 
 const ItemSchema = new Schema({
@@ -20,4 +20,4 @@ const ItemSchema = new Schema({
   ],
 });
 
-export default models.Item || model<IItem>("Item", ItemSchema);
+export default models.Item || model<Item>("Item", ItemSchema);

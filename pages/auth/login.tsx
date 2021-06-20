@@ -4,14 +4,14 @@ import { GetServerSideProps } from "next";
 import { providers } from "next-auth/client";
 import React from "react";
 
-const AuthLoginPage = ({
-  providers,
-}: {
+interface AuthLoginPageProps {
   providers: {
     id: string;
     name: string;
   }[];
-}) => (
+}
+
+const AuthLoginPage = ({ providers }: AuthLoginPageProps) => (
   <Container maxWidth="xs">
     <LoginForm providers={providers} />
   </Container>
