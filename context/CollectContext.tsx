@@ -60,7 +60,7 @@ export const CollectProvider = ({ children }: CollectProviderProps) => {
       }
       setCurrentItem(uncollectedItems[currentItemIndex]);
     }
-  }, [currentItemIndex]);
+  }, [currentItemIndex, uncollectedItems, router.query]);
 
   // https://medium.com/swlh/simple-react-app-with-context-and-functional-components-a374b7fb66b5
   const getNextItemIndex = () => {
