@@ -1,5 +1,5 @@
 import { newUsersAdminByDefault } from "@config";
-import { IUser } from "@types";
+import { User } from "@types";
 import { model, models, Schema, Types } from "mongoose";
 
 const UserSchema: Schema = new Schema({
@@ -24,4 +24,4 @@ const UserSchema: Schema = new Schema({
   ],
 });
 
-export default models.User || model<IUser>("User", UserSchema);
+export default models.User || model<User>("User", UserSchema);

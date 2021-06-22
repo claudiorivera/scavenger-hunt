@@ -2,7 +2,6 @@ import middleware from "@middleware";
 import CollectionItem from "@models/CollectionItem";
 import Item from "@models/Item";
 import User from "@models/User";
-import { ICollectionItem, IItem, IUser } from "@types";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
@@ -51,17 +50,13 @@ handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
     if (!session) throw new Error("User not logged in");
-    const user: IUser = await User.findById(req.query.userId);
-    const collectionItems: ICollectionItem[] = await CollectionItem.where(
-      "user"
-    ).equals(user._id);
+    const user = await User.findById(req.query.userId);
+    const collectionItems = await CollectionItem.where("user").equals(user._id);
     collectionItems.forEach(async (collectionItem) => {
       await collectionItem.remove();
     });
-    const items: IItem[] = await Item.where("usersWhoCollected").equals(
-      user._id
-    );
-    items.forEach(async (item: IItem) => {
+    const items = await Item.where("usersWhoCollected").equals(user._id);
+    items.forEach(async (item) => {
       item.usersWhoCollected.pull(user._id);
       await item.save();
     });

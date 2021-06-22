@@ -32,13 +32,13 @@ const ItemFoundByDetails = () => {
         alt={collectionItem.item.itemDescription}
       />
       {!collectionItem.item.usersWhoCollected.includes(session.user.id) && (
-        <Link href={`/collect?itemId=${collectionItem.item._id}`}>
+        <Link passHref href={`/collect?itemId=${collectionItem.item._id}`}>
           <StyledButton fullWidth variant="contained" color="secondary">
             Found It?
           </StyledButton>
         </Link>
       )}
-      <Link href={`/items/${collectionItem.item._id}`}>
+      <Link passHref href={`/items/${collectionItem.item._id}`}>
         <StyledButton fullWidth variant="contained" color="secondary">
           See Who Found This
         </StyledButton>

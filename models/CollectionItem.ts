@@ -1,4 +1,4 @@
-import { ICollectionItem } from "@types";
+import { CollectionItem } from "@types";
 import { model, models, Schema, Types } from "mongoose";
 
 const CollectionItemSchema = new Schema({
@@ -23,4 +23,4 @@ const CollectionItemSchema = new Schema({
 });
 
 export default models.CollectionItem ||
-  model<ICollectionItem>("CollectionItem", CollectionItemSchema);
+  model<CollectionItem>("CollectionItem", CollectionItemSchema);

@@ -3,7 +3,7 @@ import MediumAvatar from "@components/MediumAvatar";
 import NotLoggedInMessage from "@components/NotLoggedInMessage";
 import StyledLink from "@components/StyledLink";
 import { Box, Container, Tooltip, Typography } from "@material-ui/core";
-import { IItem } from "@types";
+import { Item } from "@types";
 import fetcher from "@util/fetcher";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
@@ -41,7 +41,7 @@ const CollectionsPage = () => {
             }: {
               _id: number;
               thumbnailUrl: string;
-              item: IItem;
+              item: Item;
             }) => (
               <StyledLink
                 key={_id}

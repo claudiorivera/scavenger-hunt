@@ -6,14 +6,14 @@ import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 
-const LoginForm = ({
-  providers,
-}: {
+interface LoginFormProps {
   providers: {
     id: string;
     name: string;
   }[];
-}) => {
+}
+
+const LoginForm = ({ providers }: LoginFormProps) => {
   const [session] = useSession();
   const router = useRouter();
   const [email, setEmail] = useState("");

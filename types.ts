@@ -1,26 +1,29 @@
 import { Document, Types } from "mongoose";
 
-export interface ILinks {
+export interface Link {
   title: string;
   url: string;
 }
 
-export interface IUser extends Document {
+export interface User {
   name: string;
-  image: string;
+  image?: string;
   isAdmin: boolean;
-  itemsCollected: Types.Array<ICollectionItem>;
+  itemsCollected: Types.Array<CollectionItem>;
+  _id: Types.ObjectId;
 }
 
-export interface IItem extends Document {
+export interface Item {
   itemDescription: string;
-  addedBy: IUser["_id"];
-  usersWhoCollected: Types.Array<IUser>;
+  addedBy: User;
+  usersWhoCollected: Types.Array<User>;
+  _id: Types.ObjectId;
 }
 
-export interface ICollectionItem extends Document {
+export interface CollectionItem {
   imageUrl: string;
   thumbnailUrl: string;
-  user: IUser["_id"];
-  item: IItem["_id"];
+  user: User;
+  item: Item;
+  _id: Types.ObjectId;
 }

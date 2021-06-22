@@ -1,12 +1,12 @@
-import { IItem } from "@types";
+import { Item } from "@types";
 import useUncollectedItems from "@util/useUncollectedItems";
 import Axios from "axios";
+import mongoose from "mongoose";
 import { useSession } from "next-auth/client";
 import Error from "next/error";
 import { useRouter } from "next/router";
 import React, {
   createContext,
-  FC,
   FormEvent,
   SyntheticEvent,
   useEffect,
@@ -17,11 +17,11 @@ type ContextProps = {
   showCollectSuccess: boolean;
   collectSuccessImageUrl: string;
   currentItemIndex: number;
-  currentItem: IItem;
+  currentItem: Item;
   fileInput: string;
   previewSource: string;
   isUploading: boolean;
-  uncollectedItems: IItem[];
+  uncollectedItems: Item[];
   handleFileInputChange: (e: SyntheticEvent<EventTarget>) => void;
   handleFindMore: () => void;
   handleSubmitFile: (e: FormEvent) => void;
@@ -30,7 +30,11 @@ type ContextProps = {
 export const CollectContext = createContext<Partial<ContextProps>>({});
 CollectContext.displayName = "CollectContext";
 
-export const CollectProvider: FC = ({ children }) => {
+interface CollectProviderProps {
+  children: React.ReactNode;
+}
+
+export const CollectProvider = ({ children }: CollectProviderProps) => {
   const [session] = useSession();
   const router = useRouter();
   const { uncollectedItems, mutate } = useUncollectedItems();
@@ -49,13 +53,14 @@ export const CollectProvider: FC = ({ children }) => {
       if ("itemId" in router.query) {
         // Set the current item index to the index of the item in the query, if any
         const index = uncollectedItems.findIndex(
-          (item: IItem) => item._id === router.query.itemId
+          (item: Item) =>
+            item._id === mongoose.Types.ObjectId(router.query.itemId as string)
         );
         setCurrentItemIndex(index === -1 ? 0 : index);
       }
       setCurrentItem(uncollectedItems[currentItemIndex]);
     }
-  }, [currentItemIndex]);
+  }, [currentItemIndex, uncollectedItems, router.query]);
 
   // https://medium.com/swlh/simple-react-app-with-context-and-functional-components-a374b7fb66b5
   const getNextItemIndex = () => {

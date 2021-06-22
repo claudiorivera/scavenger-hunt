@@ -45,19 +45,19 @@ const MainAppBar = () => {
         ) : loading ? (
           <CircularProgress />
         ) : !session ? (
-          <Link href="/auth/login">
+          <Link passHref href="/auth/login">
             <Button color="inherit">Login</Button>
           </Link>
         ) : (
           <Fragment>
             {userLinks.map(({ title, url }) => (
-              <Link key={title} href={url}>
+              <Link passHref key={title} href={url}>
                 <Button color="inherit">{title}</Button>
               </Link>
             ))}
             {session.user.isAdmin &&
               adminLinks.map(({ title, url }) => (
-                <Link key={title} href={url}>
+                <Link passHref key={title} href={url}>
                   <Button color="inherit">{title}</Button>
                 </Link>
               ))}

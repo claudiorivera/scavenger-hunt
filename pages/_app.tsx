@@ -4,7 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "@theme";
 import { Provider } from "next-auth/client";
-import { AppProps } from "next/dist/next-server/lib/router/router";
+import { AppProps } from "next/app";
 import Error from "next/error";
 import Head from "next/head";
 import PropTypes from "prop-types";

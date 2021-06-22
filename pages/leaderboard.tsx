@@ -3,7 +3,7 @@ import SmallAvatar from "@components/SmallAvatar";
 import StyledDivider from "@components/StyledDivider";
 import StyledLink from "@components/StyledLink";
 import { Box, Container, styled, Typography } from "@material-ui/core";
-import { IUser } from "@types";
+import { User } from "@types";
 import fetcher from "@util/fetcher";
 import { useSession } from "next-auth/client";
 import React from "react";
@@ -27,10 +27,10 @@ const LeaderboardPage = () => {
       </Typography>
       <StyledDivider />
       {users.length > 0 ? (
-        users.map((user: IUser) => (
+        users.map((user: User) => (
           <StyledLink
             color="inherit"
-            key={user._id}
+            key={String(user._id)}
             href={`/collections/${user._id}`}
           >
             <StyledContainer>
@@ -56,7 +56,7 @@ const LeaderboardPage = () => {
         ))
       ) : (
         <Typography variant="h5">
-          Nobody's found anything, yet{" "}
+          Nobody&apos;s found anything, yet{" "}
           <span role="img" aria-label="sad face emoji">
             😢
           </span>
