@@ -1,8 +1,7 @@
 import useSWR from "swr";
-import fetcher from "@util/fetcher";
 
 const useItems = () => {
-  const { data: items, error, mutate } = useSWR("/api/items", fetcher);
+  const { data: items, error, mutate } = useSWR("/api/items");
   return {
     items,
     isLoading: !error && !items,

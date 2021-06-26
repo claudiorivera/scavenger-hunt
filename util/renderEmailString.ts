@@ -1,43 +1,11 @@
-// https://next-auth.js.org/providers/email#customising-emails
-import { appTitle, primaryColor } from "@config";
-import nodemailer from "nodemailer";
+import { appTitle, primaryColor } from "config";
 
-const verificationRequest = ({
-  identifier: email,
-  url,
-  provider,
-}: {
-  identifier: string;
+interface Params {
   url: string;
-  provider: {
-    server: string;
-    from: string;
-  };
-}) => {
-  return new Promise<void>((resolve, reject) => {
-    const { server, from } = provider;
+  email: string;
+}
 
-    nodemailer.createTransport(server).sendMail(
-      {
-        to: email,
-        from,
-        subject: `Sign in to ${appTitle}`,
-        text: text({ url }),
-        html: html({ url, email }),
-      },
-      (error) => {
-        if (error) {
-          console.error("SEND_VERIFICATION_EMAIL_ERROR", email, error);
-          return reject(new Error("SEND_VERIFICATION_EMAIL_ERROR"));
-        }
-        return resolve();
-      }
-    );
-  });
-};
-
-// Email HTML body
-const html = ({ url, email }: { url: string; email: string }) => {
+const renderEmailString = ({ url, email }: Params): string => {
   // Insert invisible space into domains and email address to prevent both the
   // email address and the domain from being turned into a hyperlink by email
   // clients like Outlook and Apple mail, as this is confusing because it seems
@@ -87,7 +55,4 @@ const html = ({ url, email }: { url: string; email: string }) => {
 `;
 };
 
-// Email text body – fallback for email clients that don't render HTML
-const text = ({ url }: { url: string }) => `Sign in to ${appTitle}\n${url}\n\n`;
-
-export default verificationRequest;
+export default renderEmailString;

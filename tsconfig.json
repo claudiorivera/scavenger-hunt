@@ -2,16 +2,6 @@
   "exclude": ["node_modules, .next, .vercel"],
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "@components/*": ["components/*"],
-      "@models/*": ["models/*"],
-      "@util/*": ["util/*"],
-      "@config": ["config.ts"],
-      "@middleware": ["middleware"],
-      "@theme": ["styles/theme.ts"],
-      "@context/*": ["context/*"],
-      "@types": ["types.ts"]
-    },
     "target": "es5",
     "lib": ["es6", "dom", "dom.iterable", "esnext"],
     "allowJs": true,

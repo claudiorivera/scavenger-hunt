@@ -1,5 +1,5 @@
-import middleware from "@middleware";
-import CollectionItem from "@models/CollectionItem";
+import middleware from "middleware";
+import { CollectionItem } from "models";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
@@ -13,12 +13,14 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
     if (!session) throw new Error("User not logged in");
-    const items = await CollectionItem.where("user")
+
+    const collectionItems = await CollectionItem.where("user")
       .equals(req.query.userId)
       .select("thumbnailUrl item")
       .populate("item", "itemDescription")
       .lean();
-    res.json(items);
+
+    res.json(collectionItems);
   } catch (error) {
     res.status(500).json({
       message: error.message || "Unable to fetch user's collection",

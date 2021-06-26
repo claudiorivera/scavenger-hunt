@@ -1,8 +1,7 @@
-import LargeAvatar from "@components/LargeAvatar";
-import NotLoggedInMessage from "@components/NotLoggedInMessage";
-import StyledButton from "@components/StyledButton";
-import { Container, Typography } from "@material-ui/core";
-import useCurrentUser from "@util/useCurrentUser";
+import { Avatar, Grid, Typography } from "@material-ui/core";
+import { NotLoggedInMessage } from "components";
+import { StyledButton } from "components/shared";
+import { useCurrentUser } from "hooks";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React from "react";
@@ -16,11 +15,14 @@ const HomePage = () => {
   if (!user) return null;
 
   return (
-    <Container maxWidth="xs">
-      <LargeAvatar alt={user.name} src={user.image} />
-      <Typography align="center" variant="h5">
-        {user.name}
-      </Typography>
+    <Grid container direction="column" alignItems="center">
+      <Avatar
+        alt={user.name}
+        src={user.image}
+        style={{ width: "5rem", height: "5rem" }}
+      />
+      <Typography variant="h5">{user.name}</Typography>
+
       <StyledButton
         size="large"
         fullWidth
@@ -65,7 +67,7 @@ const HomePage = () => {
       >
         My Profile
       </StyledButton>
-    </Container>
+    </Grid>
   );
 };
 

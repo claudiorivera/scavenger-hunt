@@ -1,5 +1,3 @@
-import MobileMenu from "@components/MobileMenu";
-import { adminLinks, appTitle, userLinks } from "@config";
 import {
   AppBar,
   Button,
@@ -9,10 +7,12 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import { styled, useTheme } from "@material-ui/core/styles";
+import { adminLinks, appTitle, userLinks } from "config";
 import { signOut, useSession } from "next-auth/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
+import MobileMenu from "./MobileMenu";
 
 const Title = styled(Typography)({
   flexGrow: 1,

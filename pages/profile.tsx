@@ -1,24 +1,21 @@
-import LargeAvatar from "@components/LargeAvatar";
-import NotLoggedInMessage from "@components/NotLoggedInMessage";
-import SonicWaiting from "@components/SonicWaiting";
-import StyledButton from "@components/StyledButton";
 import {
   Badge,
-  Box,
   Button,
   CircularProgress,
-  Container,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  Grid,
   Input,
   TextField,
   Typography,
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-import useCurrentUser from "@util/useCurrentUser";
-import Axios from "axios";
+import axios from "axios";
+import { NotLoggedInMessage } from "components";
+import { LargeAvatar, SonicWaiting, StyledButton } from "components/shared";
+import { useCurrentUser } from "hooks";
 import { useSession } from "next-auth/client";
 import Error from "next/error";
 import { useRouter } from "next/router";
@@ -74,8 +71,8 @@ const ProfilePage = () => {
   const uploadImage = async (base64EncodedImage: string) => {
     try {
       // Post to Cloudinary using upload preset for avatars
-      const cloudinaryUploadResponse = await Axios.post(
-        `${process.env.NEXT_PUBLIC_CLOUDINARY_BASE_URL}/image/upload`,
+      const cloudinaryUploadResponse = await axios.post(
+        `${process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL}`,
         {
           file: base64EncodedImage,
           upload_preset:
@@ -102,7 +99,7 @@ const ProfilePage = () => {
   const handleSaveChanges = async () => {
     try {
       setIsSavingChanges(true);
-      const response = await Axios.put(`/api/users/${user._id}`, {
+      const response = await axios.put(`/api/users/${user._id}`, {
         name,
         image,
       });
@@ -117,7 +114,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <>
       <form id="imageUploadForm">
         <label htmlFor="imagePicker">
           <Input
@@ -129,7 +126,7 @@ const ProfilePage = () => {
             onChange={handleFileInputChange}
             value={fileInput}
           />
-          <Box display="flex" justifyContent="center">
+          <Grid container>
             <span style={{ cursor: "pointer" }}>
               <Badge
                 overlap="circle"
@@ -144,24 +141,28 @@ const ProfilePage = () => {
                 )}
               </Badge>
             </span>
-          </Box>
+          </Grid>
         </label>
       </form>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
+      <Grid
+        container
         onClick={handleDialogOpen}
+        justify="center"
+        alignItems="center"
       >
-        <Typography style={{ cursor: "pointer" }} variant="h5">
-          {name}
-        </Typography>
-        <EditIcon
-          style={{ cursor: "pointer" }}
-          fontSize="small"
-          color="primary"
-        />
-      </Box>
+        <Grid item>
+          <Typography style={{ cursor: "pointer" }} variant="h5">
+            {name}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <EditIcon
+            style={{ cursor: "pointer" }}
+            fontSize="small"
+            color="primary"
+          />
+        </Grid>
+      </Grid>
       <Dialog
         open={isDialogOpen}
         onClose={handleDialogClose}
@@ -195,7 +196,7 @@ const ProfilePage = () => {
       >
         {isSavingChanges ? <SonicWaiting /> : "Save Changes"}
       </StyledButton>
-    </Container>
+    </>
   );
 };
 

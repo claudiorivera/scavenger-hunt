@@ -1,7 +1,13 @@
-import { Item } from "@types";
-import { model, models, Schema, Types } from "mongoose";
+import { model, models, PopulatedDoc, Schema, Types } from "mongoose";
+import { User } from "./User";
 
-const ItemSchema = new Schema({
+export interface Item {
+  _id: Types.ObjectId;
+  itemDescription: string;
+  addedBy: PopulatedDoc<User & Document>;
+  usersWhoCollected: [PopulatedDoc<User & Document>];
+}
+const ItemSchema = new Schema<Item>({
   itemDescription: {
     type: String,
     required: true,

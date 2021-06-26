@@ -1,14 +1,13 @@
-import SonicWaiting from "@components/SonicWaiting";
-import StyledButton from "@components/StyledButton";
-import { CollectContext } from "@context/CollectContext";
-import { Button, Container, Input, Typography } from "@material-ui/core";
+import { Button, Input, Typography } from "@material-ui/core";
 import { AddAPhoto } from "@material-ui/icons";
+import { CollectContext } from "contexts/CollectContext";
 import { useSession } from "next-auth/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { Fragment, useContext } from "react";
+import { useContext } from "react";
 import NotLoggedInMessage from "./NotLoggedInMessage";
+import { SonicWaiting, StyledButton } from "./shared";
 
 const Collect = () => {
   const [session] = useSession();
@@ -29,142 +28,138 @@ const Collect = () => {
   if (!session) return <NotLoggedInMessage />;
 
   return (
-    <Fragment>
-      <Container maxWidth="xs">
-        {!showCollectSuccess &&
-          uncollectedItems &&
-          uncollectedItems.length > 0 && (
-            <Fragment>
-              {currentItem && (
-                <Fragment>
-                  <Typography align="center" variant="h5">
-                    Find
-                  </Typography>
-                  <Typography align="center" variant="h3" gutterBottom>
-                    {currentItem.itemDescription}
-                  </Typography>
-                  {/* Photo picker as a button - https://kiranvj.com/blog/blog/file-upload-in-material-ui/ */}
-                  <form id="imageUploadForm" onSubmit={handleSubmitFile}>
-                    <label htmlFor="imagePicker">
-                      <Input
-                        id="imagePicker"
-                        style={{ display: "none" }}
-                        name="imagePicker"
-                        type="file"
-                        inputProps={{ accept: "image/*" }}
-                        onChange={handleFileInputChange}
-                        value={fileInput}
-                      />
-                      <Button
-                        style={{ marginBottom: ".5rem" }}
-                        size="large"
-                        fullWidth
-                        color="secondary"
-                        variant="contained"
-                        component="span"
-                      >
-                        <AddAPhoto />
-                      </Button>
-                    </label>
-                  </form>
-                </Fragment>
-              )}
-              {previewSource && (
-                <Fragment>
-                  <Container>
-                    <Image
-                      unoptimized
-                      width="400px"
-                      height="500px"
-                      src={previewSource}
-                      alt="Item image"
-                    />
-                  </Container>
-                  <StyledButton
-                    form="imageUploadForm"
-                    type="submit"
+    <>
+      {!showCollectSuccess && uncollectedItems && uncollectedItems.length && (
+        <>
+          {currentItem && (
+            <>
+              <Typography variant="h5">Find</Typography>
+              <Typography variant="h3" gutterBottom>
+                {currentItem.itemDescription}
+              </Typography>
+              {/* Photo picker as a button - https://kiranvj.com/blog/blog/file-upload-in-material-ui/ */}
+              <form
+                id="imageUploadForm"
+                onSubmit={handleSubmitFile}
+                style={{ width: "100%" }}
+              >
+                <label htmlFor="imagePicker">
+                  <Input
+                    id="imagePicker"
+                    style={{ display: "none" }}
+                    name="imagePicker"
+                    type="file"
+                    inputProps={{ accept: "image/*" }}
+                    onChange={handleFileInputChange}
+                    value={fileInput}
+                  />
+                  <Button
+                    style={{ marginBottom: ".5rem" }}
                     size="large"
                     fullWidth
                     color="secondary"
                     variant="contained"
-                    disabled={isUploading}
+                    component="span"
                   >
-                    {isUploading ? <SonicWaiting /> : "Submit Photo"}
-                  </StyledButton>
-                </Fragment>
-              )}
-              {uncollectedItems.length > 1 && (
-                <StyledButton
-                  size="large"
-                  fullWidth
-                  color="secondary"
-                  variant="contained"
-                  onClick={handleFindMore}
-                >
-                  Skip It!
-                </StyledButton>
-              )}
-              {currentItem && (
-                <Link passHref href={`/items/${currentItem._id}`}>
-                  <StyledButton
-                    size="large"
-                    fullWidth
-                    color="secondary"
-                    variant="contained"
-                  >
-                    See Who Found This
-                  </StyledButton>
-                </Link>
-              )}
-            </Fragment>
+                    <AddAPhoto />
+                  </Button>
+                </label>
+              </form>
+            </>
           )}
-        {showCollectSuccess && currentItem && (
-          <Fragment>
-            <Typography align="center" variant="h3">
-              You found {currentItem.itemDescription}!
-            </Typography>
-            <Image
-              src={collectSuccessImageUrl as string}
-              height="500px"
-              width="500px"
-              alt="Successfully uploaded photo"
-            />
-            {uncollectedItems && uncollectedItems.length > 0 && (
+          {previewSource && (
+            <>
+              <Image
+                unoptimized
+                width="400px"
+                height="400px"
+                src={previewSource}
+                alt="Item image"
+              />
               <StyledButton
+                form="imageUploadForm"
+                type="submit"
                 size="large"
                 fullWidth
                 color="secondary"
                 variant="contained"
-                onClick={handleFindMore}
+                disabled={isUploading}
               >
-                Find More
+                {isUploading ? <SonicWaiting /> : "Submit Photo"}
               </StyledButton>
-            )}
-          </Fragment>
-        )}
-        {uncollectedItems && !uncollectedItems.length && (
-          <Fragment>
-            <Typography variant="h3">
-              You Found All The Items!&nbsp;
-              <span role="img" aria-label="celebrate emoji">
-                🎉
-              </span>
-            </Typography>
+            </>
+          )}
+          {uncollectedItems.length && (
             <StyledButton
               size="large"
               fullWidth
               color="secondary"
               variant="contained"
-              onClick={() => {
-                router.push(`/collections/${session.user.id}`);
-              }}
+              onClick={handleFindMore}
             >
-              My Collection
+              Skip It!
             </StyledButton>
-          </Fragment>
-        )}
-      </Container>
-    </Fragment>
+          )}
+          {currentItem && (
+            <Link passHref href={`/items/${currentItem._id}`}>
+              <StyledButton
+                size="large"
+                fullWidth
+                color="secondary"
+                variant="contained"
+              >
+                See Who Found This
+              </StyledButton>
+            </Link>
+          )}
+        </>
+      )}
+      {showCollectSuccess && currentItem && (
+        <>
+          <Typography variant="h3">
+            You found {currentItem.itemDescription}!
+          </Typography>
+          <Image
+            src={collectSuccessImageUrl as string}
+            height="500px"
+            width="500px"
+            alt="Successfully uploaded photo"
+          />
+          {uncollectedItems && uncollectedItems.length && (
+            <StyledButton
+              size="large"
+              fullWidth
+              color="secondary"
+              variant="contained"
+              onClick={handleFindMore}
+            >
+              Find More
+            </StyledButton>
+          )}
+        </>
+      )}
+      {uncollectedItems && !uncollectedItems.length && (
+        <>
+          <Typography variant="h3">
+            You Found All The Items!&nbsp;
+            <span role="img" aria-label="celebrate emoji">
+              🎉
+            </span>
+          </Typography>
+          <StyledButton
+            size="large"
+            fullWidth
+            color="secondary"
+            variant="contained"
+            onClick={() => {
+              router.push(`/collections/${session.user.id}`);
+            }}
+          >
+            My Collection
+          </StyledButton>
+        </>
+      )}
+    </>
   );
 };
 

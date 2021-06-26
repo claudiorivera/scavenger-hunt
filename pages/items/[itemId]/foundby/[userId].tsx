@@ -1,7 +1,6 @@
-import NotLoggedInMessage from "@components/NotLoggedInMessage";
-import StyledButton from "@components/StyledButton";
-import { Container, Typography } from "@material-ui/core";
-import fetcher from "@util/fetcher";
+import { Typography } from "@material-ui/core";
+import { NotLoggedInMessage } from "components";
+import { StyledButton } from "components/shared";
 import { useSession } from "next-auth/client";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,16 +12,15 @@ const ItemFoundByDetails = () => {
   const [session] = useSession();
   const router = useRouter();
   const { data: collectionItem } = useSWR(
-    `/api/users/${router.query.userId}/items/${router.query.itemId}`,
-    fetcher
+    `/api/users/${router.query.userId}/items/${router.query.itemId}`
   );
 
   if (!session) return <NotLoggedInMessage />;
   if (!collectionItem) return null;
 
   return (
-    <Container maxWidth="xs">
-      <Typography align="center" variant="h5" gutterBottom>
+    <>
+      <Typography variant="h5" gutterBottom>
         {collectionItem.user.name} Found {collectionItem.item.itemDescription}!
       </Typography>
       <Image
@@ -43,7 +41,7 @@ const ItemFoundByDetails = () => {
           See Who Found This
         </StyledButton>
       </Link>
-    </Container>
+    </>
   );
 };
 

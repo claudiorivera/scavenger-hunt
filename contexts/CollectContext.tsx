@@ -1,6 +1,6 @@
-import { Item } from "@types";
-import useUncollectedItems from "@util/useUncollectedItems";
-import Axios from "axios";
+import axios from "axios";
+import { useUncollectedItems } from "hooks";
+import { Item } from "models/Item";
 import mongoose from "mongoose";
 import { useSession } from "next-auth/client";
 import Error from "next/error";
@@ -96,8 +96,8 @@ export const CollectProvider = ({ children }: CollectProviderProps) => {
       let imageUrl = "";
       let thumbnailUrl = "";
       // Post to Cloudinary using upload preset for items
-      const cloudinaryUploadResponse = await Axios.post(
-        `${process.env.NEXT_PUBLIC_CLOUDINARY_BASE_URL}/image/upload`,
+      const cloudinaryUploadResponse = await axios.post(
+        `${process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL}`,
         {
           file: base64EncodedImage,
           upload_preset: process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET_ITEMS,
@@ -119,7 +119,7 @@ export const CollectProvider = ({ children }: CollectProviderProps) => {
         throw "Something went wrong while uploading";
       }
       // Add to collections
-      await Axios.post("/api/collectionitems", {
+      await axios.post("/api/collectionitems", {
         imageUrl,
         thumbnailUrl,
         user: session?.user.id,

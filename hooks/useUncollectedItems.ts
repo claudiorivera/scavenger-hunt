@@ -1,11 +1,11 @@
 import useSWR from "swr";
-import fetcher from "@util/fetcher";
 
 const useUncollectedItems = () => {
-  const { data: uncollectedItems, error, mutate } = useSWR(
-    "/api/items/uncollected",
-    fetcher
-  );
+  const {
+    data: uncollectedItems,
+    error,
+    mutate,
+  } = useSWR("/api/items/uncollected");
   return {
     uncollectedItems,
     isLoading: !error && !uncollectedItems,

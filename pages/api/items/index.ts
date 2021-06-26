@@ -1,5 +1,5 @@
-import middleware from "@middleware";
-import Item from "@models/Item";
+import middleware from "middleware";
+import { Item } from "models";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
@@ -13,6 +13,7 @@ handler.use(middleware);
 handler.get(async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
     const items = await Item.find().lean();
+
     res.json(items);
   } catch (error) {
     res.status(500).json({
@@ -27,16 +28,18 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
     if (!session) throw new Error("User not logged in");
+
     const { itemDescription } = req.body;
     const item = new Item({
       itemDescription,
       addedBy: session.user.id,
     });
     const savedItem = await item.save();
+
     res.status(201).json(savedItem);
   } catch (error) {
     res.status(500).json({
-      message: error.message || "Unable to add item",
+      message: error.message || "Unable to create new item",
     });
   }
 });

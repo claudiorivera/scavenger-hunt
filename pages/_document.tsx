@@ -1,6 +1,5 @@
 // https://github.com/mui-org/material-ui/tree/master/examples/nextjs
 import { ServerStyleSheets } from "@material-ui/core/styles";
-import theme from "@theme";
 import Document, {
   DocumentContext,
   Head,
@@ -9,6 +8,7 @@ import Document, {
   NextScript,
 } from "next/document";
 import React from "react";
+import theme from "styles/theme";
 
 class MyDocument extends Document {
   render() {
