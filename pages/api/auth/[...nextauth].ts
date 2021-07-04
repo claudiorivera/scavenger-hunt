@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import nextConnect from "next-connect";
-import { getRandomImage } from "util/index";
+import { createRandomName, getRandomImage } from "util/index";
 import { sendVerificationRequest } from "util/sendVerificationRequest";
 
 const handler = nextConnect();
@@ -42,7 +42,7 @@ handler.use((req: NextApiRequest, res: NextApiResponse) =>
             const userToUpdate = await User.findByIdAndUpdate(
               user.id,
               {
-                name: user.name || "A User",
+                name: user.name || createRandomName(),
                 image: user.image || (await getRandomImage()),
                 isAdmin: isNewUserAdminByDefault,
                 itemsCollected: [],
