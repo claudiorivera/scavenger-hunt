@@ -1,25 +1,27 @@
-import { newUsersAdminByDefault } from "@config";
-import { User } from "@types";
-import { model, models, Schema, Types } from "mongoose";
+import { model, models, PopulatedDoc, Schema, Types } from "mongoose";
+import { Item } from "./Item";
 
-const UserSchema: Schema = new Schema({
+export interface User {
+  _id: Types.ObjectId;
+  name: string;
+  image: string;
+  isAdmin: boolean;
+  itemsCollected: [PopulatedDoc<Item & Document>];
+}
+const UserSchema = new Schema<User>({
   name: {
     type: String,
-    default: "No Name",
   },
   image: {
     type: String,
-    default: "https://picsum.photos/180",
   },
   isAdmin: {
     type: Boolean,
-    default: newUsersAdminByDefault,
   },
   itemsCollected: [
     {
       type: Types.ObjectId,
       ref: "CollectionItem",
-      required: true,
     },
   ],
 });

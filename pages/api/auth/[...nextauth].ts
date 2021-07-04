@@ -1,12 +1,12 @@
-import middleware from "@middleware";
-import User from "@models/User";
-import randomlyGeneratedName from "@util/randomlyGeneratedName";
-import verificationRequest from "@util/verificationRequest";
-import Axios from "axios";
+import { isNewUserAdminByDefault } from "config";
+import middleware from "middleware";
+import { User } from "models";
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import nextConnect from "next-connect";
+import { createRandomName, getRandomImage } from "util/index";
+import { sendVerificationRequest } from "util/sendVerificationRequest";
 
 const handler = nextConnect();
 
@@ -21,9 +21,8 @@ handler.use((req: NextApiRequest, res: NextApiResponse) =>
       }),
       Providers.Email({
         server: process.env.EMAIL_SERVER,
-        from: process.env.EMAIL_FROM,
-        // TODO: Find the correct way to do this
-        sendVerificationRequest: verificationRequest as any,
+        from: process.env.NEXT_PUBLIC_EMAIL_FROM,
+        sendVerificationRequest,
       }),
     ],
     database: process.env.MONGODB_URI,
@@ -38,30 +37,20 @@ handler.use((req: NextApiRequest, res: NextApiResponse) =>
     },
     callbacks: {
       jwt: async (token, user, _account, _profile, isNewUser) => {
-        if (isNewUser) {
+        if (user && isNewUser) {
           try {
-            const userFound = await User.findById(user?.id);
-            // Generate random name, if none is provided
-            if (user?.name) {
-              userFound.name = user.name;
-            } else {
-              userFound.name = randomlyGeneratedName();
-            }
-            // Generate random avatar, if none is provided
-            if (user?.image) {
-              userFound.image = user.image;
-            } else {
-              const response = await Axios.post(
-                `${process.env.NEXT_PUBLIC_CLOUDINARY_BASE_URL}/image/upload`,
-                {
-                  file: "https://picsum.photos/180", //Random 180x180 photo from picsum.photos
-                  upload_preset:
-                    process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET_AVATARS,
-                }
-              );
-              userFound.image = response.data.secure_url;
-            }
-            await userFound.save();
+            const userToUpdate = await User.findByIdAndUpdate(
+              user.id,
+              {
+                name: user.name || createRandomName(),
+                image: user.image || (await getRandomImage()),
+                isAdmin: isNewUserAdminByDefault,
+                itemsCollected: [],
+              },
+              { new: true }
+            ).exec();
+
+            await userToUpdate.save();
           } catch (error) {
             console.error(error);
           }
@@ -69,12 +58,13 @@ handler.use((req: NextApiRequest, res: NextApiResponse) =>
         if (user) {
           token.uid = user.id;
           try {
-            const userFound = await User.findById(user.id);
-            token.isAdmin = userFound?.isAdmin;
+            const existingUser = await User.findById(user.id);
+            token.isAdmin = existingUser.isAdmin;
           } catch (error) {
             console.error(error);
           }
         }
+
         return Promise.resolve(token);
       },
       session: async (session, sessionToken) => {

@@ -1,5 +1,5 @@
-import middleware from "@middleware";
-import Item from "@models/Item";
+import middleware from "middleware";
+import { Item } from "models";
 import { NextApiRequest, NextApiResponse } from "next";
 import nextConnect from "next-connect";
 
@@ -16,6 +16,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
       .populate("usersWhoCollected", "_id image name")
       .populate("addedBy", "_id image name")
       .lean();
+
     res.json(item);
   } catch (error) {
     res.status(500).json({

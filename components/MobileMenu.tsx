@@ -5,11 +5,11 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
-import { Link } from "@types";
+import { Link } from "interfaces/types";
 import { signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import React, { Fragment, useState } from "react";
-import StyledLink from "./StyledLink";
+import { useState } from "react";
+import { StyledLink } from "./shared";
 
 interface MobileMenuProps {
   userLinks: Link[];
@@ -32,7 +32,7 @@ const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
   };
 
   return (
-    <Fragment>
+    <>
       <IconButton
         edge="start"
         color="inherit"
@@ -103,7 +103,7 @@ const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
           </div>
         )}
       </Menu>
-    </Fragment>
+    </>
   );
 };
 

@@ -1,29 +1,27 @@
-import MediumAvatar from "@components/MediumAvatar";
-import NotLoggedInMessage from "@components/NotLoggedInMessage";
-import StyledButton from "@components/StyledButton";
-import StyledDivider from "@components/StyledDivider";
 import {
-  Box,
+  Avatar,
   Button,
-  Container,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  Grid,
   TextField,
   Tooltip,
   Typography,
 } from "@material-ui/core";
-import { CollectionItem, User } from "@types";
-import { capitalizeLetters } from "@util/capitalizeLetters";
-import fetcher from "@util/fetcher";
-import useCurrentUser from "@util/useCurrentUser";
-import Axios from "axios";
+import axios from "axios";
+import { NotLoggedInMessage } from "components";
+import { StyledButton } from "components/shared";
+import { useCurrentUser } from "hooks";
+import { CollectionItem } from "models/CollectionItem";
+import { User } from "models/User";
 import { Types } from "mongoose";
 import { useSession } from "next-auth/client";
 import Error from "next/error";
-import React, { Fragment, useState } from "react";
+import { useState } from "react";
 import useSWR from "swr";
+import { capitalizeEachWordOfString } from "util/index";
 
 const AdminPage = () => {
   const [session] = useSession();
@@ -32,7 +30,7 @@ const AdminPage = () => {
   const { data: items, mutate: mutateCollectionItems } = useSWR(
     "/api/collectionitems"
   );
-  const { data: users, mutate: mutateUsers } = useSWR("/api/users", fetcher);
+  const { data: users, mutate: mutateUsers } = useSWR("/api/users");
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<Types.ObjectId>();
   const [isUserDeleteDialogOpen, setIsUserDeleteDialogOpen] = useState(false);
@@ -42,32 +40,29 @@ const AdminPage = () => {
   if (!user) return null;
   if (!user.isAdmin)
     return (
-      <Container maxWidth="xs">
-        <Typography variant="h5" align="center">
-          You must be logged in as an admin to view this page.
-        </Typography>
-      </Container>
+      <Typography variant="h5" align="center" gutterBottom>
+        You must be logged in as an admin to view this page.
+      </Typography>
     );
 
   const handleSubmit = async (itemDescription: string) => {
     try {
-      await Axios.post("/api/items", { itemDescription });
+      await axios.post("/api/items", { itemDescription });
     } catch (error) {
       return <Error statusCode={500} title={error.message} />;
     }
   };
 
   return (
-    <Container maxWidth="xs">
-      <Typography align="center" variant="h3">
-        Add New Item
-      </Typography>
+    <>
+      <Typography variant="h3">Add New Item</Typography>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit(itemDescription);
           setItemDescription("");
         }}
+        style={{ width: "100%", marginBottom: "2rem" }}
       >
         <TextField
           autoFocus={true}
@@ -84,7 +79,7 @@ const AdminPage = () => {
           variant="outlined"
           value={itemDescription}
           onChange={(e) =>
-            setItemDescription(capitalizeLetters(e.target.value))
+            setItemDescription(capitalizeEachWordOfString(e.target.value))
           }
         />
         <StyledButton
@@ -98,26 +93,32 @@ const AdminPage = () => {
         </StyledButton>
       </form>
       {items && (
-        <Fragment>
-          <StyledDivider />
-          <Typography align="center" variant="h3">
+        <>
+          <Typography variant="h3" align="center">
             Delete Collection Items
           </Typography>
-          <Box display="flex" flexWrap="wrap" justifyContent="center">
+          <Grid container justify="center" style={{ marginBottom: "2rem" }}>
             {items.map(({ _id, thumbnailUrl, item }: CollectionItem) => (
-              <Tooltip key={String(_id)} title={item.itemDescription}>
-                <MediumAvatar
-                  style={{ margin: ".5rem", cursor: "pointer" }}
-                  alt={"a collection item"}
-                  src={thumbnailUrl}
-                  onClick={() => {
-                    setItemToDelete(_id);
-                    setIsDeleteDialogOpen(true);
-                  }}
-                />
-              </Tooltip>
+              <Grid item key={String(_id)}>
+                <Tooltip title={item.itemDescription}>
+                  <Avatar
+                    style={{
+                      margin: ".5rem",
+                      cursor: "pointer",
+                      width: "3rem",
+                      height: "3rem",
+                    }}
+                    alt={"a collection item"}
+                    src={thumbnailUrl}
+                    onClick={() => {
+                      setItemToDelete(_id);
+                      setIsDeleteDialogOpen(true);
+                    }}
+                  />
+                </Tooltip>
+              </Grid>
             ))}
-          </Box>
+          </Grid>
           <Dialog
             open={isDeleteDialogOpen}
             onClose={() => {
@@ -142,7 +143,7 @@ const AdminPage = () => {
               <Button
                 onClick={async () => {
                   try {
-                    await Axios.delete(`/api/collectionitems/${itemToDelete}`);
+                    await axios.delete(`/api/collectionitems/${itemToDelete}`);
                     setIsDeleteDialogOpen(false);
                     mutateCollectionItems();
                   } catch (error) {
@@ -156,29 +157,29 @@ const AdminPage = () => {
               </Button>
             </DialogActions>
           </Dialog>
-        </Fragment>
+        </>
       )}
       {users && (
-        <Fragment>
-          <StyledDivider />
-          <Typography align="center" variant="h3">
-            Delete Users
-          </Typography>
-          <Box display="flex" flexWrap="wrap" justifyContent="center">
-            {users.map(({ _id, image, name }: User) => (
-              <Tooltip key={String(_id)} title={name}>
-                <MediumAvatar
-                  style={{ margin: ".5rem", cursor: "pointer" }}
-                  alt={name}
-                  src={image}
-                  onClick={() => {
-                    setUserToDelete(_id);
-                    setIsUserDeleteDialogOpen(true);
-                  }}
-                />
-              </Tooltip>
-            ))}
-          </Box>
+        <>
+          <Typography variant="h3">Delete Users</Typography>
+          {users.map(({ _id, image, name }: User) => (
+            <Tooltip key={String(_id)} title={name}>
+              <Avatar
+                style={{
+                  margin: ".5rem",
+                  cursor: "pointer",
+                  width: "3rem",
+                  height: "3rem",
+                }}
+                alt={name}
+                src={image}
+                onClick={() => {
+                  setUserToDelete(_id);
+                  setIsUserDeleteDialogOpen(true);
+                }}
+              />
+            </Tooltip>
+          ))}
           <Dialog
             open={isUserDeleteDialogOpen}
             onClose={() => {
@@ -203,7 +204,7 @@ const AdminPage = () => {
               <Button
                 onClick={async () => {
                   try {
-                    await Axios.delete(`/api/users/${userToDelete}`);
+                    await axios.delete(`/api/users/${userToDelete}`);
                     setIsUserDeleteDialogOpen(false);
                     mutateUsers();
                     mutateCollectionItems();
@@ -218,9 +219,9 @@ const AdminPage = () => {
               </Button>
             </DialogActions>
           </Dialog>
-        </Fragment>
+        </>
       )}
-    </Container>
+    </>
   );
 };
 

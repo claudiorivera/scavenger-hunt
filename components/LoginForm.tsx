@@ -1,10 +1,8 @@
-import SonicWaiting from "@components/SonicWaiting";
-import StyledButton from "@components/StyledButton";
-import StyledDivider from "@components/StyledDivider";
 import { TextField, Typography } from "@material-ui/core";
 import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import React, { Fragment, useState } from "react";
+import { useState } from "react";
+import { SonicWaiting, StyledButton } from "./shared";
 
 interface LoginFormProps {
   providers: {
@@ -22,8 +20,8 @@ const LoginForm = ({ providers }: LoginFormProps) => {
   if (session) router.push("/");
 
   return (
-    <Fragment>
-      <Typography variant="h5" align="center">
+    <>
+      <Typography variant="h5" align="center" gutterBottom>
         Please login with one of the following:
       </Typography>
       {providers &&
@@ -44,13 +42,13 @@ const LoginForm = ({ providers }: LoginFormProps) => {
               {provider.name}
             </StyledButton>
           ))}
-      <StyledDivider />
       <form
         onSubmit={(e) => {
           e.preventDefault();
           setIsFetching(true);
           signIn("email", { email });
         }}
+        style={{ width: "100%" }}
       >
         <TextField
           name="email"
@@ -78,7 +76,7 @@ const LoginForm = ({ providers }: LoginFormProps) => {
           {isFetching ? <SonicWaiting /> : "Send Me A Login Link"}
         </StyledButton>
       </form>
-    </Fragment>
+    </>
   );
 };
 

@@ -1,7 +1,16 @@
-import { CollectionItem } from "@types";
-import { model, models, Schema, Types } from "mongoose";
+import { model, models, Schema, Types, Document, PopulatedDoc } from "mongoose";
+import { Item } from "./Item";
+import { User } from "./User";
 
-const CollectionItemSchema = new Schema({
+export interface CollectionItem {
+  _id: Types.ObjectId;
+  imageUrl: string;
+  thumbnailUrl: string;
+  user: PopulatedDoc<User & Document>;
+  item: PopulatedDoc<Item & Document>;
+}
+
+const CollectionItemSchema = new Schema<CollectionItem>({
   imageUrl: {
     type: String,
     required: true,

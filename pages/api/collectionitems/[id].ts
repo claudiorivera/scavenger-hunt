@@ -1,7 +1,5 @@
-import middleware from "@middleware";
-import CollectionItem from "@models/CollectionItem";
-import Item from "@models/Item";
-import User from "@models/User";
+import middleware from "middleware";
+import { CollectionItem, Item, User } from "models";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
@@ -16,11 +14,13 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
     if (!session) throw new Error("User not logged in");
-    const item = await CollectionItem.findById(req.query.id).lean();
-    res.json(item);
+
+    const collectionItem = await CollectionItem.findById(req.query.id).lean();
+
+    res.json(collectionItem);
   } catch (error) {
     res.status(500).json({
-      message: error.message || "Item not found",
+      message: error.message || "Collection item not found",
     });
   }
 });
@@ -31,15 +31,18 @@ handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
     if (!session) throw new Error("User not logged in");
-    const item = await CollectionItem.findById(req.query.id);
-    const collectionId = item._id;
-    const originalItem = await Item.findById(item.item);
-    const user = await User.findById(item.user);
+
+    const collectionItem = await CollectionItem.findById(req.query.id);
+    const originalItem = await Item.findById(collectionItem.item);
+    const user = await User.findById(collectionItem.user);
+
     originalItem.usersWhoCollected.pull(user._id);
-    user.itemsCollected.pull(collectionId);
+    user.itemsCollected.pull(collectionItem._id);
+
     await originalItem.save();
     await user.save();
-    await item.remove();
+    await collectionItem.remove();
+
     res.json({ message: "Successfully deleted collection item" });
   } catch (error) {
     res.status(500).json({

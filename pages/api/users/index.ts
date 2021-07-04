@@ -1,5 +1,5 @@
-import middleware from "@middleware";
-import User from "@models/User";
+import middleware from "middleware";
+import { User } from "models";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
@@ -13,12 +13,15 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
     if (!session) throw new Error("User not logged");
+
     const users = await User.find()
       .select("_id name itemsCollected image name")
       .lean();
+
     const sortedUsers = users.sort(
       (a, b) => b.itemsCollected.length - a.itemsCollected.length
     );
+
     res.json(sortedUsers);
   } catch (error) {
     res.status(500).json({

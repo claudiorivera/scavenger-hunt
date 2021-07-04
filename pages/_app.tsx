@@ -1,19 +1,21 @@
-import MainAppBar from "@components/MainAppBar";
-import { appTitle } from "@config";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { Container, CssBaseline, Grid } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
-import theme from "@theme";
+import { MainAppBar } from "components";
+import { appTitle } from "config";
 import { Provider } from "next-auth/client";
 import { AppProps } from "next/app";
 import Error from "next/error";
 import Head from "next/head";
 import PropTypes from "prop-types";
-import React from "react";
+import { useEffect } from "react";
+import theme from "styles/theme";
+import { SWRConfig } from "swr";
+import { fetcher } from "util/index";
 
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles && jssStyles.parentElement) {
@@ -31,7 +33,7 @@ const App = (props: AppProps) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>{appTitle}</title>
         <meta
@@ -60,11 +62,21 @@ const App = (props: AppProps) => {
       <ThemeProvider theme={theme}>
         <Provider session={pageProps.session}>
           <CssBaseline />
-          <MainAppBar />
-          <Component {...pageProps} />
+          <SWRConfig
+            value={{
+              fetcher,
+            }}
+          >
+            <MainAppBar />
+            <Container maxWidth="xs">
+              <Grid container direction="column" alignItems="center">
+                <Component {...pageProps} />
+              </Grid>
+            </Container>
+          </SWRConfig>
         </Provider>
       </ThemeProvider>
-    </React.Fragment>
+    </>
   );
 };
 

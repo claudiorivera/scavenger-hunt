@@ -1,23 +1,25 @@
-import StyledButton from "@components/StyledButton";
-import { Container, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { signIn } from "next-auth/client";
 import React from "react";
+import { StyledButton } from "./shared";
 
 const NotLoggedInMessage = () => (
-  <Container maxWidth="xs">
-    <Typography align="center" variant="h5">
-      You must be logged in to view this page.
+  <>
+    <Typography variant="h5" align="center" gutterBottom>
+      You must be logged in to view this page
     </Typography>
     <StyledButton
       size="large"
       fullWidth
       color="secondary"
       variant="contained"
-      onClick={signIn}
+      onClick={() => {
+        signIn();
+      }}
     >
       Login
     </StyledButton>
-  </Container>
+  </>
 );
 
 export default NotLoggedInMessage;

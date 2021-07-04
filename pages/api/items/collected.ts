@@ -1,5 +1,5 @@
-import middleware from "@middleware";
-import Item from "@models/Item";
+import middleware from "middleware";
+import { Item } from "models";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import nextConnect from "next-connect";
@@ -14,14 +14,16 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const session = await getSession({ req });
     if (!session) throw new Error("User not logged in");
+
     const collectedItems = await Item.where("usersWhoCollected")
       .equals(session.user.id)
       .select("-addedBy -__v -usersWhoCollected")
       .lean();
+
     res.json(collectedItems);
   } catch (error) {
     res.status(500).json({
-      message: error.message || "Collected items not found",
+      message: error.message || "User's collected items not found",
     });
   }
 });

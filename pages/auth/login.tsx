@@ -1,5 +1,4 @@
-import LoginForm from "@components/LoginForm";
-import { Container } from "@material-ui/core";
+import { LoginForm } from "components";
 import { GetServerSideProps } from "next";
 import { providers } from "next-auth/client";
 import React from "react";
@@ -12,9 +11,7 @@ interface AuthLoginPageProps {
 }
 
 const AuthLoginPage = ({ providers }: AuthLoginPageProps) => (
-  <Container maxWidth="xs">
-    <LoginForm providers={providers} />
-  </Container>
+  <LoginForm providers={providers} />
 );
 
 export default AuthLoginPage;

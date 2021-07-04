@@ -1,10 +1,7 @@
-import LargeAvatar from "@components/LargeAvatar";
-import MediumAvatar from "@components/MediumAvatar";
-import NotLoggedInMessage from "@components/NotLoggedInMessage";
-import StyledLink from "@components/StyledLink";
-import { Box, Container, Tooltip, Typography } from "@material-ui/core";
-import { Item } from "@types";
-import fetcher from "@util/fetcher";
+import { Avatar, Grid, Tooltip, Typography } from "@material-ui/core";
+import { NotLoggedInMessage } from "components";
+import { StyledLink } from "components/shared";
+import { Item } from "models/Item";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React from "react";
@@ -13,26 +10,27 @@ import useSWR from "swr";
 const CollectionsPage = () => {
   const [session] = useSession();
   const router = useRouter();
-  const { data: user } = useSWR(`/api/users/${router.query.userId}`, fetcher);
+  const { data: user } = useSWR(`/api/users/${router.query.userId}`);
   const { data: items } = useSWR(
-    `/api/users/${router.query.userId}/collection`,
-    fetcher
+    `/api/users/${router.query.userId}/collection`
   );
 
   if (!session) return <NotLoggedInMessage />;
   if (!user || !items) return null;
 
   return (
-    <Container maxWidth="xs">
-      <LargeAvatar alt={user.name} src={user.image} />
-      <Typography align="center" variant="h3">
-        {user.name}
-      </Typography>
-      <Typography align="center" variant="h5" gutterBottom>
+    <>
+      <Avatar
+        style={{ width: "5rem", height: "5rem" }}
+        alt={user.name}
+        src={user.image}
+      />
+      <Typography variant="h3">{user.name}</Typography>
+      <Typography variant="h5" gutterBottom>
         Found the Following Items:
       </Typography>
       {items.length > 0 ? (
-        <Box display="flex" flexWrap="wrap" justifyContent="center">
+        <Grid container justify="center">
           {items.map(
             ({
               _id,
@@ -43,33 +41,32 @@ const CollectionsPage = () => {
               thumbnailUrl: string;
               item: Item;
             }) => (
-              <StyledLink
-                key={_id}
-                href={`/items/${item._id}/foundby/${user._id}`}
-              >
-                <Tooltip
-                  title={item.itemDescription}
-                  aria-label={item.itemDescription}
-                >
-                  <MediumAvatar
-                    style={{ margin: ".5rem" }}
-                    alt={item.itemDescription}
-                    src={thumbnailUrl}
-                  />
-                </Tooltip>
-              </StyledLink>
+              <Grid item key={_id}>
+                <StyledLink href={`/items/${item._id}/foundby/${user._id}`}>
+                  <Tooltip
+                    title={item.itemDescription}
+                    aria-label={item.itemDescription}
+                  >
+                    <Avatar
+                      style={{ margin: ".5rem", width: "3rem", height: "3rem" }}
+                      alt={item.itemDescription}
+                      src={thumbnailUrl}
+                    />
+                  </Tooltip>
+                </StyledLink>
+              </Grid>
             )
           )}
-        </Box>
+        </Grid>
       ) : (
-        <Typography align="center" variant="h5">
+        <Typography variant="h5">
           Nothing, yet{" "}
           <span role="img" aria-label="sad face emoji">
             😢
           </span>
         </Typography>
       )}
-    </Container>
+    </>
   );
 };
 
