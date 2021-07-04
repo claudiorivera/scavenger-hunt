@@ -36,7 +36,7 @@ const Collect = () => {
               <Typography variant="h5" gutterBottom>
                 Find
               </Typography>
-              <Typography variant="h3" gutterBottom>
+              <Typography variant="h3" gutterBottom align="center">
                 {currentItem.itemDescription}
               </Typography>
               {/* Photo picker as a button - https://kiranvj.com/blog/blog/file-upload-in-material-ui/ */}
