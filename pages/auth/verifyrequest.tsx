@@ -10,8 +10,17 @@ const AuthVerifyRequestPage = () => {
   if (session) router.push("/");
 
   return (
-    <Typography variant="body1">{`Check your email for a login link from ${process.env.NEXT_PUBLIC_EMAIL_FROM}.
-        Be sure to check your spam folder.`}</Typography>
+    <>
+      <Typography variant="body1" align="center">
+        Check your email for a login link from
+      </Typography>
+      <Typography variant="h6" align="center" gutterBottom>
+        {process.env.NEXT_PUBLIC_EMAIL_FROM}
+      </Typography>
+      <Typography variant="body1" align="center">
+        Be sure to check your spam folder!
+      </Typography>
+    </>
   );
 };
 

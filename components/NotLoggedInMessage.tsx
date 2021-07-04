@@ -5,8 +5,8 @@ import { StyledButton } from "./shared";
 
 const NotLoggedInMessage = () => (
   <>
-    <Typography variant="h5">
-      You must be logged in to view this page.
+    <Typography variant="h5" align="center" gutterBottom>
+      You must be logged in to view this page
     </Typography>
     <StyledButton
       size="large"

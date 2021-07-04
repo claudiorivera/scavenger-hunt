@@ -29,11 +29,13 @@ const Collect = () => {
 
   return (
     <>
-      {!showCollectSuccess && uncollectedItems && uncollectedItems.length && (
+      {!showCollectSuccess && uncollectedItems && uncollectedItems.length > 0 && (
         <>
           {currentItem && (
             <>
-              <Typography variant="h5">Find</Typography>
+              <Typography variant="h5" gutterBottom>
+                Find
+              </Typography>
               <Typography variant="h3" gutterBottom>
                 {currentItem.itemDescription}
               </Typography>
@@ -89,7 +91,7 @@ const Collect = () => {
               </StyledButton>
             </>
           )}
-          {uncollectedItems.length && (
+          {uncollectedItems.length > 0 && (
             <StyledButton
               size="large"
               fullWidth
@@ -116,7 +118,7 @@ const Collect = () => {
       )}
       {showCollectSuccess && currentItem && (
         <>
-          <Typography variant="h3">
+          <Typography variant="h3" align="center" gutterBottom>
             You found {currentItem.itemDescription}!
           </Typography>
           <Image
@@ -125,7 +127,7 @@ const Collect = () => {
             width="500px"
             alt="Successfully uploaded photo"
           />
-          {uncollectedItems && uncollectedItems.length && (
+          {uncollectedItems && uncollectedItems.length > 0 && (
             <StyledButton
               size="large"
               fullWidth
@@ -140,7 +142,7 @@ const Collect = () => {
       )}
       {uncollectedItems && !uncollectedItems.length && (
         <>
-          <Typography variant="h3">
+          <Typography variant="h3" align="center" gutterBottom>
             You Found All The Items!&nbsp;
             <span role="img" aria-label="celebrate emoji">
               🎉

@@ -13,6 +13,15 @@ const theme = createMuiTheme({
     contrastThreshold: 3,
     tonalOffset: 0.2,
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 830,
+      lg: 1280,
+      xl: 1920,
+    },
+  },
 });
 
 export default theme;

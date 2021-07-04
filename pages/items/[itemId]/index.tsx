@@ -4,7 +4,6 @@ import { NotLoggedInMessage } from "components";
 import {
   SmallAvatar,
   StyledButton,
-  StyledDivider,
   StyledLink,
   TinyAvatar,
 } from "components/shared";
@@ -32,7 +31,12 @@ const ItemDetailsPage = () => {
     <>
       <Typography variant="h3">{item.itemDescription}</Typography>
       {showItemAttribution && item.addedBy && (
-        <Grid container alignItems="center" justify="center">
+        <Grid
+          container
+          alignItems="center"
+          justify="center"
+          style={{ marginBottom: "1rem" }}
+        >
           <Typography variant="caption">Added by:&nbsp;&nbsp;</Typography>
           <StyledLink
             color="inherit"
@@ -47,9 +51,14 @@ const ItemDetailsPage = () => {
       <Typography variant="h5" gutterBottom>
         Collected by:
       </Typography>
-      {item.usersWhoCollected.length ? (
+      {item.usersWhoCollected.length > 0 ? (
         item.usersWhoCollected.map((user: User) => (
-          <Grid container key={String(user._id)} alignItems="center">
+          <Grid
+            container
+            key={String(user._id)}
+            alignItems="center"
+            style={{ marginBottom: "1rem" }}
+          >
             <Grid item>
               <StyledLink color="inherit" href={`/collections/${user._id}`}>
                 <SmallAvatar
@@ -79,7 +88,6 @@ const ItemDetailsPage = () => {
           </span>
         </Typography>
       )}
-      <StyledDivider />
       {!userIdsWhoCollected.includes(session.user.id) && (
         <Link passHref href={`/collect?itemId=${item._id}`}>
           <StyledButton fullWidth variant="contained" color="secondary">

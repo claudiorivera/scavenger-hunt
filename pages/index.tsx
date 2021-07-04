@@ -21,7 +21,9 @@ const HomePage = () => {
         src={user.image}
         style={{ width: "5rem", height: "5rem" }}
       />
-      <Typography variant="h5">{user.name}</Typography>
+      <Typography variant="h5" gutterBottom>
+        {user.name}
+      </Typography>
 
       <StyledButton
         size="large"

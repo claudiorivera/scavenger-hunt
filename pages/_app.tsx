@@ -7,7 +7,7 @@ import { AppProps } from "next/app";
 import Error from "next/error";
 import Head from "next/head";
 import PropTypes from "prop-types";
-import React from "react";
+import { useEffect } from "react";
 import theme from "styles/theme";
 import { SWRConfig } from "swr";
 import { fetcher } from "util/index";
@@ -15,7 +15,7 @@ import { fetcher } from "util/index";
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles && jssStyles.parentElement) {
@@ -33,7 +33,7 @@ const App = (props: AppProps) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>{appTitle}</title>
         <meta
@@ -76,7 +76,7 @@ const App = (props: AppProps) => {
           </SWRConfig>
         </Provider>
       </ThemeProvider>
-    </React.Fragment>
+    </>
   );
 };
 

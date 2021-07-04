@@ -1,17 +1,18 @@
 import {
-  Box,
+  Avatar,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  Grid,
   TextField,
   Tooltip,
   Typography,
 } from "@material-ui/core";
 import axios from "axios";
 import { NotLoggedInMessage } from "components";
-import { MediumAvatar, StyledButton, StyledDivider } from "components/shared";
+import { StyledButton } from "components/shared";
 import { useCurrentUser } from "hooks";
 import { CollectionItem } from "models/CollectionItem";
 import { User } from "models/User";
@@ -39,7 +40,7 @@ const AdminPage = () => {
   if (!user) return null;
   if (!user.isAdmin)
     return (
-      <Typography variant="h5">
+      <Typography variant="h5" align="center" gutterBottom>
         You must be logged in as an admin to view this page.
       </Typography>
     );
@@ -61,6 +62,7 @@ const AdminPage = () => {
           handleSubmit(itemDescription);
           setItemDescription("");
         }}
+        style={{ width: "100%", marginBottom: "2rem" }}
       >
         <TextField
           autoFocus={true}
@@ -92,23 +94,31 @@ const AdminPage = () => {
       </form>
       {items && (
         <>
-          <StyledDivider />
-          <Typography variant="h3">Delete Collection Items</Typography>
-          <Box display="flex" flexWrap="wrap" justifyContent="center">
+          <Typography variant="h3" align="center">
+            Delete Collection Items
+          </Typography>
+          <Grid container justify="center" style={{ marginBottom: "2rem" }}>
             {items.map(({ _id, thumbnailUrl, item }: CollectionItem) => (
-              <Tooltip key={String(_id)} title={item.itemDescription}>
-                <MediumAvatar
-                  style={{ margin: ".5rem", cursor: "pointer" }}
-                  alt={"a collection item"}
-                  src={thumbnailUrl}
-                  onClick={() => {
-                    setItemToDelete(_id);
-                    setIsDeleteDialogOpen(true);
-                  }}
-                />
-              </Tooltip>
+              <Grid item key={String(_id)}>
+                <Tooltip title={item.itemDescription}>
+                  <Avatar
+                    style={{
+                      margin: ".5rem",
+                      cursor: "pointer",
+                      width: "3rem",
+                      height: "3rem",
+                    }}
+                    alt={"a collection item"}
+                    src={thumbnailUrl}
+                    onClick={() => {
+                      setItemToDelete(_id);
+                      setIsDeleteDialogOpen(true);
+                    }}
+                  />
+                </Tooltip>
+              </Grid>
             ))}
-          </Box>
+          </Grid>
           <Dialog
             open={isDeleteDialogOpen}
             onClose={() => {
@@ -151,23 +161,25 @@ const AdminPage = () => {
       )}
       {users && (
         <>
-          <StyledDivider />
           <Typography variant="h3">Delete Users</Typography>
-          <Box display="flex" flexWrap="wrap" justifyContent="center">
-            {users.map(({ _id, image, name }: User) => (
-              <Tooltip key={String(_id)} title={name}>
-                <MediumAvatar
-                  style={{ margin: ".5rem", cursor: "pointer" }}
-                  alt={name}
-                  src={image}
-                  onClick={() => {
-                    setUserToDelete(_id);
-                    setIsUserDeleteDialogOpen(true);
-                  }}
-                />
-              </Tooltip>
-            ))}
-          </Box>
+          {users.map(({ _id, image, name }: User) => (
+            <Tooltip key={String(_id)} title={name}>
+              <Avatar
+                style={{
+                  margin: ".5rem",
+                  cursor: "pointer",
+                  width: "3rem",
+                  height: "3rem",
+                }}
+                alt={name}
+                src={image}
+                onClick={() => {
+                  setUserToDelete(_id);
+                  setIsUserDeleteDialogOpen(true);
+                }}
+              />
+            </Tooltip>
+          ))}
           <Dialog
             open={isUserDeleteDialogOpen}
             onClose={() => {

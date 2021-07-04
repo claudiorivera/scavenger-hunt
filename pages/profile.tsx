@@ -151,7 +151,7 @@ const ProfilePage = () => {
         alignItems="center"
       >
         <Grid item>
-          <Typography style={{ cursor: "pointer" }} variant="h5">
+          <Typography style={{ cursor: "pointer" }} variant="h5" gutterBottom>
             {name}
           </Typography>
         </Grid>

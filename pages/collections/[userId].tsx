@@ -1,6 +1,6 @@
-import { Grid, Tooltip, Typography } from "@material-ui/core";
+import { Avatar, Grid, Tooltip, Typography } from "@material-ui/core";
 import { NotLoggedInMessage } from "components";
-import { LargeAvatar, MediumAvatar, StyledLink } from "components/shared";
+import { StyledLink } from "components/shared";
 import { Item } from "models/Item";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
@@ -20,7 +20,11 @@ const CollectionsPage = () => {
 
   return (
     <>
-      <LargeAvatar alt={user.name} src={user.image} />
+      <Avatar
+        style={{ width: "5rem", height: "5rem" }}
+        alt={user.name}
+        src={user.image}
+      />
       <Typography variant="h3">{user.name}</Typography>
       <Typography variant="h5" gutterBottom>
         Found the Following Items:
@@ -43,8 +47,8 @@ const CollectionsPage = () => {
                     title={item.itemDescription}
                     aria-label={item.itemDescription}
                   >
-                    <MediumAvatar
-                      style={{ margin: ".5rem" }}
+                    <Avatar
+                      style={{ margin: ".5rem", width: "3rem", height: "3rem" }}
                       alt={item.itemDescription}
                       src={thumbnailUrl}
                     />

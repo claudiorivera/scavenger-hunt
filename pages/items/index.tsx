@@ -21,7 +21,9 @@ const ItemsPage = () => {
 
   return (
     <>
-      <Typography variant="h3">All Items</Typography>
+      <Typography variant="h3" gutterBottom>
+        All Items
+      </Typography>
       {items.map(({ _id, itemDescription }: Item) => (
         <Grid
           container

@@ -31,7 +31,7 @@ const MainAppBar = () => {
   const [session, loading] = useSession();
   const router = useRouter();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isOnLoginPage = router.asPath.startsWith("/auth/login");
 
   return (

@@ -1,6 +1,6 @@
 import { Grid, Typography } from "@material-ui/core";
 import { NotLoggedInMessage } from "components";
-import { SmallAvatar, StyledDivider, StyledLink } from "components/shared";
+import { SmallAvatar, StyledLink } from "components/shared";
 import { User } from "models/User";
 import { useSession } from "next-auth/client";
 import React from "react";
@@ -15,8 +15,9 @@ const LeaderboardPage = () => {
 
   return (
     <>
-      <Typography variant="h3">Leaderboard</Typography>
-      <StyledDivider />
+      <Typography variant="h3" gutterBottom>
+        Leaderboard
+      </Typography>
       {users.length > 0 ? (
         users.map((user: User) => (
           <StyledLink
@@ -25,7 +26,11 @@ const LeaderboardPage = () => {
             href={`/collections/${user._id}`}
             style={{ width: "100%" }}
           >
-            <Grid container alignItems="center" justify="space-between">
+            <Grid
+              container
+              alignItems="center"
+              style={{ marginBottom: "1rem" }}
+            >
               <Grid item>
                 <SmallAvatar
                   style={{ marginRight: "1rem" }}
