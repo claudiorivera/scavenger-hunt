@@ -1,12 +1,7 @@
-import { Grid, Typography } from "@material-ui/core";
+import { Avatar, Grid, Typography } from "@material-ui/core";
 import { Visibility } from "@material-ui/icons";
 import { NotLoggedInMessage } from "components";
-import {
-  SmallAvatar,
-  StyledButton,
-  StyledLink,
-  TinyAvatar,
-} from "components/shared";
+import { StyledButton, StyledLink } from "components/shared";
 import { showItemAttribution } from "config";
 import { User } from "models/User";
 import { useSession } from "next-auth/client";
@@ -43,7 +38,11 @@ const ItemDetailsPage = () => {
             style={{ display: "flex", alignItems: "center" }}
             href={`/collections/${item.addedBy._id}`}
           >
-            <TinyAvatar alt={item.addedBy.name} src={item.addedBy.image} />
+            <Avatar
+              alt={item.addedBy.name}
+              src={item.addedBy.image}
+              style={{ width: "1rem", height: "1rem" }}
+            />
             &nbsp;{item.addedBy.name}
           </StyledLink>
         </Grid>
@@ -61,8 +60,8 @@ const ItemDetailsPage = () => {
           >
             <Grid item>
               <StyledLink color="inherit" href={`/collections/${user._id}`}>
-                <SmallAvatar
-                  style={{ marginRight: "1rem" }}
+                <Avatar
+                  style={{ marginRight: "1rem", width: "3rem", height: "3rem" }}
                   alt={user.name}
                   src={user.image}
                 />

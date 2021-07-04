@@ -1,6 +1,6 @@
-import { Grid, Typography } from "@material-ui/core";
+import { Avatar, Grid, Typography } from "@material-ui/core";
 import { NotLoggedInMessage } from "components";
-import { SmallAvatar, StyledLink } from "components/shared";
+import { StyledLink } from "components/shared";
 import { User } from "models/User";
 import { useSession } from "next-auth/client";
 import React from "react";
@@ -32,8 +32,8 @@ const LeaderboardPage = () => {
               style={{ marginBottom: "1rem" }}
             >
               <Grid item>
-                <SmallAvatar
-                  style={{ marginRight: "1rem" }}
+                <Avatar
+                  style={{ marginRight: "1rem", width: "3rem", height: "3rem" }}
                   alt={user.name}
                   src={user.image}
                 />

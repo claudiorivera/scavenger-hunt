@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Badge,
   Button,
   CircularProgress,
@@ -14,7 +15,7 @@ import {
 import EditIcon from "@material-ui/icons/Edit";
 import axios from "axios";
 import { NotLoggedInMessage } from "components";
-import { LargeAvatar, SonicWaiting, StyledButton } from "components/shared";
+import { SonicWaiting, StyledButton } from "components/shared";
 import { useCurrentUser } from "hooks";
 import { useSession } from "next-auth/client";
 import Error from "next/error";
@@ -137,7 +138,11 @@ const ProfilePage = () => {
                 {isUploadingPhoto ? (
                   <CircularProgress />
                 ) : (
-                  <LargeAvatar alt={name} src={image} />
+                  <Avatar
+                    alt={name}
+                    src={image}
+                    style={{ width: "5rem", height: "5rem" }}
+                  />
                 )}
               </Badge>
             </span>
