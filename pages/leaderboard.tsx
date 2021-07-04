@@ -38,7 +38,7 @@ const LeaderboardPage = () => {
                   src={user.image}
                 />
               </Grid>
-              <Grid item xs={8}>
+              <Grid item style={{ flexGrow: 1 }}>
                 {user.name}
               </Grid>
               <Grid item>

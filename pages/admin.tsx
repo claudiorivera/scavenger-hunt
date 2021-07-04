@@ -55,7 +55,9 @@ const AdminPage = () => {
 
   return (
     <>
-      <Typography variant="h3">Add New Item</Typography>
+      <Typography variant="h3" align="center">
+        Add New Item
+      </Typography>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -162,24 +164,26 @@ const AdminPage = () => {
       {users && (
         <>
           <Typography variant="h3">Delete Users</Typography>
-          {users.map(({ _id, image, name }: User) => (
-            <Tooltip key={String(_id)} title={name}>
-              <Avatar
-                style={{
-                  margin: ".5rem",
-                  cursor: "pointer",
-                  width: "3rem",
-                  height: "3rem",
-                }}
-                alt={name}
-                src={image}
-                onClick={() => {
-                  setUserToDelete(_id);
-                  setIsUserDeleteDialogOpen(true);
-                }}
-              />
-            </Tooltip>
-          ))}
+          <Grid container justify="center" style={{ marginBottom: "2rem" }}>
+            {users.map(({ _id, image, name }: User) => (
+              <Tooltip key={String(_id)} title={name}>
+                <Avatar
+                  style={{
+                    margin: ".5rem",
+                    cursor: "pointer",
+                    width: "3rem",
+                    height: "3rem",
+                  }}
+                  alt={name}
+                  src={image}
+                  onClick={() => {
+                    setUserToDelete(_id);
+                    setIsUserDeleteDialogOpen(true);
+                  }}
+                />
+              </Tooltip>
+            ))}
+          </Grid>
           <Dialog
             open={isUserDeleteDialogOpen}
             onClose={() => {

@@ -31,7 +31,7 @@ const ItemsPage = () => {
           justify="space-between"
           alignItems="center"
         >
-          <Grid item xs={11}>
+          <Grid item style={{ flexGrow: 1 }}>
             <Link passHref href={`/items/${_id}`}>
               <StyledButton fullWidth variant="contained" color="secondary">
                 {itemDescription}
