@@ -11,7 +11,6 @@ import { adminLinks, appTitle, userLinks } from "config";
 import { signOut, useSession } from "next-auth/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { Fragment } from "react";
 import MobileMenu from "./MobileMenu";
 
 const Title = styled(Typography)({
@@ -49,7 +48,7 @@ const MainAppBar = () => {
             <Button color="inherit">Login</Button>
           </Link>
         ) : (
-          <Fragment>
+          <>
             {userLinks.map(({ title, url }) => (
               <Link passHref key={title} href={url}>
                 <Button color="inherit">{title}</Button>
@@ -69,7 +68,7 @@ const MainAppBar = () => {
             >
               Log Out
             </Button>
-          </Fragment>
+          </>
         )}
       </Toolbar>
     </StyledAppBar>

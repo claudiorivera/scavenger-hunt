@@ -8,7 +8,7 @@ import { Menu as MenuIcon } from "@material-ui/icons";
 import { Link } from "interfaces/types";
 import { signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import React, { Fragment, useState } from "react";
+import { useState } from "react";
 import { StyledLink } from "./shared";
 
 interface MobileMenuProps {
@@ -32,7 +32,7 @@ const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
   };
 
   return (
-    <Fragment>
+    <>
       <IconButton
         edge="start"
         color="inherit"
@@ -103,7 +103,7 @@ const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
           </div>
         )}
       </Menu>
-    </Fragment>
+    </>
   );
 };
 
