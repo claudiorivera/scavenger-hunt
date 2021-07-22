@@ -21,11 +21,10 @@ const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
   const router = useRouter();
 
   // https://material-ui.com/components/app-bar/#app-bar-with-menu
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const isMobileMenuOpen = Boolean(anchorEl);
-  const handleMenuOpen = (event: PointerEvent) => {
-    // TODO: Find the correct way to do this
-    setAnchorEl(event.currentTarget as any);
+  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -38,8 +37,7 @@ const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
         color="inherit"
         aria-label="menu"
         onClick={(e) => {
-          // TODO: Find the correct way to do this
-          handleMenuOpen(e as any);
+          handleMenuOpen(e);
         }}
       >
         <MenuIcon />
