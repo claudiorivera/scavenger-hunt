@@ -1,4 +1,4 @@
-# scavenger-hunt
+# Scavenger Hunt
 
 A game that challenges you to find the most random items around your house. Made for a virtual party our friends are throwing.
 
