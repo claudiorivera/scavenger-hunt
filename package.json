@@ -22,8 +22,8 @@
     "swr": "0.5.6",
     "unique-names-generator": "4.6.0"
   },
-  "peerOptionalDependencies": {
-    "mongodb": "^3.6.2"
+  "optionalDependencies": {
+    "mongodb": "3.6.0"
   },
   "devDependencies": {
     "@types/node": "14.17.11",
