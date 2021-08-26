@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useUncollectedItems } from "hooks";
 import { Item } from "models/Item";
-import mongoose from "mongoose";
 import { useSession } from "next-auth/client";
 import Error from "next/error";
 import { useRouter } from "next/router";
@@ -53,8 +52,7 @@ export const CollectProvider = ({ children }: CollectProviderProps) => {
       if ("itemId" in router.query) {
         // Set the current item index to the index of the item in the query, if any
         const index = uncollectedItems.findIndex(
-          (item: Item) =>
-            item._id === mongoose.Types.ObjectId(router.query.itemId as string)
+          (item: Item) => String(item._id) === router.query.itemId
         );
         setCurrentItemIndex(index === -1 ? 0 : index);
       }
