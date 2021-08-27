@@ -18,7 +18,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     const collectionItem = await CollectionItem.findById(req.query.id).lean();
 
     res.json(collectionItem);
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       message: error.message || "Collection item not found",
     });
@@ -44,7 +44,7 @@ handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
     await collectionItem.remove();
 
     res.json({ message: "Successfully deleted collection item" });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       message: error.message || "Item not found",
     });

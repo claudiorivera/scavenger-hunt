@@ -25,7 +25,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
       .lean();
 
     res.json(collectionItem);
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       message: error.message || "Unable to fetch user's collection item",
     });

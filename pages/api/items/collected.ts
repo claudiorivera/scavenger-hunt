@@ -21,7 +21,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
       .lean();
 
     res.json(collectedItems);
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       message: error.message || "User's collected items not found",
     });

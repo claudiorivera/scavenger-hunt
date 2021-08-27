@@ -23,7 +23,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     );
 
     res.json(sortedUsers);
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       message: error.message || "Unable to get users",
     });

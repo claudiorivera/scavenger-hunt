@@ -48,7 +48,7 @@ const AdminPage = () => {
   const handleSubmit = async (itemDescription: string) => {
     try {
       await axios.post("/api/items", { itemDescription });
-    } catch (error) {
+    } catch (error: any) {
       return <Error statusCode={500} title={error.message} />;
     }
   };
@@ -148,7 +148,7 @@ const AdminPage = () => {
                     await axios.delete(`/api/collectionitems/${itemToDelete}`);
                     setIsDeleteDialogOpen(false);
                     mutateCollectionItems();
-                  } catch (error) {
+                  } catch (error: any) {
                     return <Error statusCode={500} title={error.message} />;
                   }
                 }}
@@ -212,7 +212,7 @@ const AdminPage = () => {
                     setIsUserDeleteDialogOpen(false);
                     mutateUsers();
                     mutateCollectionItems();
-                  } catch (error) {
+                  } catch (error: any) {
                     return <Error statusCode={500} title={error.message} />;
                   }
                 }}

@@ -19,7 +19,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
       .lean();
 
     res.json(user);
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       message: error.message || "Unable to get user",
     });
@@ -39,7 +39,7 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
     await user.save();
 
     res.json(user);
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       message: error.message || "Unable to update user",
     });
@@ -68,7 +68,7 @@ handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
     await user.remove();
 
     res.json({ message: "Successfully deleted user" });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       message: error.message || "Unable to update user",
     });
