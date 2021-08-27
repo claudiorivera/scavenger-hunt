@@ -92,7 +92,7 @@ const ProfilePage = () => {
       } else {
         throw "Sorry, something went wrong while trying to upload";
       }
-    } catch (error) {
+    } catch (error: any) {
       return <Error statusCode={500} title={error.message} />;
     }
   };
@@ -109,7 +109,7 @@ const ProfilePage = () => {
       } else {
         throw "Unable to update profile";
       }
-    } catch (error) {
+    } catch (error: any) {
       return <Error statusCode={500} title={error.message} />;
     }
   };

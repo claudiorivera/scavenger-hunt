@@ -126,7 +126,7 @@ export const CollectProvider = ({ children }: CollectProviderProps) => {
       setIsUploading(false);
       setCollectSuccessImageUrl(imageUrl);
       setShowCollectSuccess(true);
-    } catch (error) {
+    } catch (error: any) {
       return <Error statusCode={500} title={error.message} />;
     }
   };

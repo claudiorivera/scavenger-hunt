@@ -19,7 +19,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
       .lean();
 
     res.json(user);
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       message: error.message || "Unable to get current user",
     });

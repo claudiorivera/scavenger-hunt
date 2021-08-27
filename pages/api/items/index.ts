@@ -15,7 +15,7 @@ handler.get(async (_req: NextApiRequest, res: NextApiResponse) => {
     const items = await Item.find().lean();
 
     res.json(items);
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       message: error.message || "Items not found",
     });
@@ -37,7 +37,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     const savedItem = await item.save();
 
     res.status(201).json(savedItem);
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       message: error.message || "Unable to create new item",
     });
