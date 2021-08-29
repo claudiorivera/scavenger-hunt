@@ -6,7 +6,7 @@ export interface User {
   name: string;
   image: string;
   isAdmin: boolean;
-  itemsCollected: [PopulatedDoc<Item & Document>];
+  itemsCollected: PopulatedDoc<Item & Document>[];
 }
 const UserSchema = new Schema<User>({
   name: {
