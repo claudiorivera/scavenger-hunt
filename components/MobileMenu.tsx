@@ -5,7 +5,7 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
-import { Link } from "interfaces/types";
+import { Link } from "types";
 import { signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
