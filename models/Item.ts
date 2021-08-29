@@ -5,7 +5,7 @@ export interface Item {
   _id: Types.ObjectId;
   itemDescription: string;
   addedBy: PopulatedDoc<User & Document>;
-  usersWhoCollected: [PopulatedDoc<User & Document>];
+  usersWhoCollected: PopulatedDoc<User & Document>[];
 }
 const ItemSchema = new Schema<Item>({
   itemDescription: {

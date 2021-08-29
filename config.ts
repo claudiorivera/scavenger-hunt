@@ -1,4 +1,4 @@
-import { Link } from "interfaces/types";
+import { Link } from "types";
 
 const appTitle: string = "Scavenger Hunt";
 const primaryColor: string = "#bb4430"; // App bar color
