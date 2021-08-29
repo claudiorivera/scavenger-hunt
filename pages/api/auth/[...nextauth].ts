@@ -39,11 +39,12 @@ handler.use((req: NextApiRequest, res: NextApiResponse) =>
       jwt: async (token, user, _account, _profile, isNewUser) => {
         if (user && isNewUser) {
           try {
+            const randomImage = await getRandomImage();
             const userToUpdate = await User.findByIdAndUpdate(
               user.id,
               {
                 name: user.name || createRandomName(),
-                image: user.image || (await getRandomImage()),
+                image: user.image || randomImage,
                 isAdmin: isNewUserAdminByDefault,
                 itemsCollected: [],
               },
