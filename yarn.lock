@@ -2528,10 +2528,10 @@ mongodb-connection-string-url@^2.0.0:
     "@types/whatwg-url" "^8.2.1"
     whatwg-url "^9.1.0"
 
-mongodb@3.6.11:
-  version "3.6.11"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.11.tgz#8a59a0491a92b00a8c925f72ed9d9a5b054aebb2"
-  integrity sha512-4Y4lTFHDHZZdgMaHmojtNAlqkvddX2QQBEN0K//GzxhGwlI9tZ9R0vhbjr1Decw+TF7qK0ZLjQT292XgHRRQgw==
+mongodb@3.6.12:
+  version "3.6.12"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.12.tgz#a8c152ae0c6c953b88d3b03714e2b885d6c2cae4"
+  integrity sha512-ErHpF4P4disEIQB8Nns2twIMVXcvmlwjpKqfVnyB/hhd/L5We48LfoBYjBjuUSiSqL6ffmcygPTgjvpy2LETRQ==
   dependencies:
     bl "^2.2.1"
     bson "^1.1.4"
