@@ -12,7 +12,7 @@
     "@material-ui/core": "4.12.3",
     "@material-ui/icons": "4.11.2",
     "axios": "0.21.4",
-    "mongoose": "6.0.8",
+    "mongoose": "6.0.9",
     "next": "11.1.2",
     "next-auth": "3.29.0",
     "next-connect": "0.10.2",
