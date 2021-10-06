@@ -94,7 +94,7 @@ export const CollectProvider = ({ children }: CollectProviderProps) => {
       let imageUrl = "";
       let thumbnailUrl = "";
       // Post to Cloudinary using upload preset for items
-      const cloudinaryUploadResponse = await axios.post(
+      const cloudinaryUploadResponse = await axios.post<any>(
         `${process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL}`,
         {
           file: base64EncodedImage,

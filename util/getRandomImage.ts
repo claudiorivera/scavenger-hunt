@@ -2,7 +2,7 @@ import axios from "axios";
 
 const getRandomImage = async () => {
   try {
-    const response = await axios.post(
+    const response = await axios.post<any>(
       `${process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL}`,
       {
         file: "https://picsum.photos/180", //Random 180x180 photo from picsum.photos

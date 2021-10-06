@@ -72,7 +72,7 @@ const ProfilePage = () => {
   const uploadImage = async (base64EncodedImage: string) => {
     try {
       // Post to Cloudinary using upload preset for avatars
-      const cloudinaryUploadResponse = await axios.post(
+      const cloudinaryUploadResponse = await axios.post<any>(
         `${process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL}`,
         {
           file: base64EncodedImage,
