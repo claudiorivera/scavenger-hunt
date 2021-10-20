@@ -23,7 +23,7 @@
     "unique-names-generator": "4.6.0"
   },
   "optionalDependencies": {
-    "mongodb": "3.7.2"
+    "mongodb": "3.7.3"
   },
   "devDependencies": {
     "@types/node": "14.17.27",
