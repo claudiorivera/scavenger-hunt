@@ -1,9 +1,16 @@
 {
-  "exclude": ["node_modules, .next, .vercel"],
+  "exclude": [
+    "node_modules, .next, .vercel"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es5",
-    "lib": ["es6", "dom", "dom.iterable", "esnext"],
+    "lib": [
+      "es6",
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,7 +25,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "typeRoots": ["types"]
+    "typeRoots": [
+      "types"
+    ],
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",
