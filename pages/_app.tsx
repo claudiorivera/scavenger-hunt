@@ -2,7 +2,7 @@ import { Container, CssBaseline, Grid } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MainAppBar } from "components";
 import { appTitle } from "config";
-import { Provider } from "next-auth/client";
+import { SessionProvider } from "next-auth/react";
 import { AppProps } from "next/app";
 import Error from "next/error";
 import Head from "next/head";
@@ -60,7 +60,7 @@ const App = (props: AppProps) => {
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <ThemeProvider theme={theme}>
-        <Provider session={pageProps.session}>
+        <SessionProvider session={pageProps.session}>
           <CssBaseline />
           <SWRConfig
             value={{
@@ -74,7 +74,7 @@ const App = (props: AppProps) => {
               </Grid>
             </Container>
           </SWRConfig>
-        </Provider>
+        </SessionProvider>
       </ThemeProvider>
     </>
   );

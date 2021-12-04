@@ -4,14 +4,14 @@ import { NotLoggedInMessage } from "components";
 import { StyledButton, StyledLink } from "components/shared";
 import { showItemAttribution } from "config";
 import { User } from "models/User";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import useSWR from "swr";
 
 const ItemDetailsPage = () => {
-  const [session] = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const { data: item } = useSWR(`/api/items/${router.query.itemId}`);
 

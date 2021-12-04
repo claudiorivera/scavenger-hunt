@@ -4,13 +4,13 @@ import { NotLoggedInMessage } from "components";
 import { StyledButton } from "components/shared";
 import { useItems } from "hooks";
 import { Item } from "models/Item";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import useSWR from "swr";
 
 const ItemsPage = () => {
-  const [session] = useSession();
+  const { data: session } = useSession();
   const { items } = useItems();
   const { data: collectedItems } = useSWR("/api/items/collected");
 

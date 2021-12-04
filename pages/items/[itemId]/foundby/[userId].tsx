@@ -1,7 +1,7 @@
 import { Typography } from "@material-ui/core";
 import { NotLoggedInMessage } from "components";
 import { StyledButton } from "components/shared";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -9,7 +9,7 @@ import React from "react";
 import useSWR from "swr";
 
 const ItemFoundByDetails = () => {
-  const [session] = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const { data: collectionItem } = useSWR(
     `/api/users/${router.query.userId}/items/${router.query.itemId}`

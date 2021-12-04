@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useUncollectedItems } from "hooks";
 import { Item } from "models/Item";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import Error from "next/error";
 import { useRouter } from "next/router";
 import React, {
@@ -34,7 +34,7 @@ interface CollectProviderProps {
 }
 
 export const CollectProvider = ({ children }: CollectProviderProps) => {
-  const [session] = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const { uncollectedItems, mutate } = useUncollectedItems();
   const [showCollectSuccess, setShowCollectSuccess] = useState(false);
