@@ -2,12 +2,12 @@ import { Avatar, Grid, Typography } from "@material-ui/core";
 import { NotLoggedInMessage } from "components";
 import { StyledButton } from "components/shared";
 import { useCurrentUser } from "hooks";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
 
 const HomePage = () => {
-  const [session] = useSession();
+  const { data: session } = useSession();
   const { user } = useCurrentUser();
   const router = useRouter();
 

@@ -1,5 +1,5 @@
 import { TextField, Typography } from "@material-ui/core";
-import { signIn, useSession } from "next-auth/client";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SonicWaiting, StyledButton } from "./shared";
@@ -12,7 +12,7 @@ interface LoginFormProps {
 }
 
 const LoginForm = ({ providers }: LoginFormProps) => {
-  const [session] = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [isFetching, setIsFetching] = useState(false);

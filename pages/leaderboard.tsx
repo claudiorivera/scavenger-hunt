@@ -2,12 +2,12 @@ import { Avatar, Grid, Typography } from "@material-ui/core";
 import { NotLoggedInMessage } from "components";
 import { StyledLink } from "components/shared";
 import { User } from "models/User";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import React from "react";
 import useSWR from "swr";
 
 const LeaderboardPage = () => {
-  const [session] = useSession();
+  const { data: session } = useSession();
   const { data: users } = useSWR("/api/users");
 
   if (!session) return <NotLoggedInMessage />;

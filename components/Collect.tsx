@@ -1,7 +1,7 @@
 import { Button, Input, Typography } from "@material-ui/core";
 import { AddAPhoto } from "@material-ui/icons";
 import { CollectContext } from "contexts/CollectContext";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -10,7 +10,7 @@ import NotLoggedInMessage from "./NotLoggedInMessage";
 import { SonicWaiting, StyledButton } from "./shared";
 
 const Collect = () => {
-  const [session] = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const {
     collectSuccessImageUrl,

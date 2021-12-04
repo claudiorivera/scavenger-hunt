@@ -2,13 +2,13 @@ import { Avatar, Grid, Tooltip, Typography } from "@material-ui/core";
 import { NotLoggedInMessage } from "components";
 import { StyledLink } from "components/shared";
 import { Item } from "models/Item";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
 import useSWR from "swr";
 
 const CollectionsPage = () => {
-  const [session] = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const { data: user } = useSWR(`/api/users/${router.query.userId}`);
   const { data: items } = useSWR(

@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { styled, useTheme } from "@material-ui/core/styles";
 import { adminLinks, appTitle, userLinks } from "config";
-import { signOut, useSession } from "next-auth/client";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import MobileMenu from "./MobileMenu";
@@ -27,7 +27,8 @@ const StyledAppBar = styled(AppBar)({
 });
 
 const MainAppBar = () => {
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
   const router = useRouter();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));

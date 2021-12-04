@@ -6,7 +6,7 @@ import {
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
 import { Link } from "types";
-import { signOut, useSession } from "next-auth/client";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { StyledLink } from "./shared";
@@ -17,7 +17,8 @@ interface MobileMenuProps {
 }
 
 const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
   const router = useRouter();
 
   // https://material-ui.com/components/app-bar/#app-bar-with-menu

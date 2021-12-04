@@ -17,14 +17,14 @@ import { useCurrentUser } from "hooks";
 import { CollectionItem } from "models/CollectionItem";
 import { User } from "models/User";
 import { Types } from "mongoose";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import Error from "next/error";
 import { useState } from "react";
 import useSWR from "swr";
 import { capitalizeEachWordOfString } from "util/index";
 
 const AdminPage = () => {
-  const [session] = useSession();
+  const { data: session } = useSession();
   const { user } = useCurrentUser();
   const [itemDescription, setItemDescription] = useState("");
   const { data: items, mutate: mutateCollectionItems } = useSWR(

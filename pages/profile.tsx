@@ -17,13 +17,13 @@ import axios from "axios";
 import { NotLoggedInMessage } from "components";
 import { SonicWaiting, StyledButton } from "components/shared";
 import { useCurrentUser } from "hooks";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import Error from "next/error";
 import { useRouter } from "next/router";
 import React, { FormEvent, SyntheticEvent, useEffect, useState } from "react";
 
 const ProfilePage = () => {
-  const [session] = useSession();
+  const { data: session } = useSession();
   const { user } = useCurrentUser();
   const router = useRouter();
   const [name, setName] = useState("");
