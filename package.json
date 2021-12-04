@@ -11,9 +11,9 @@
   "dependencies": {
     "@material-ui/core": "4.12.3",
     "@material-ui/icons": "4.11.2",
-    "@next-auth/mongodb-adapter": "^1.0.0",
+    "@next-auth/mongodb-adapter": "1.0.0",
     "axios": "0.24.0",
-    "mongodb": "^4.2.1",
+    "mongodb": "4.2.1",
     "mongoose": "6.0.14",
     "next": "12.0.6",
     "next-auth": "4.0.2",
