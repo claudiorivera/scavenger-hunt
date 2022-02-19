@@ -21,7 +21,7 @@ const ItemsPage = () => {
 
   return (
     <>
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h3" align="center" gutterBottom>
         All Items
       </Typography>
       {items.map(({ _id, itemDescription }: Item) => (

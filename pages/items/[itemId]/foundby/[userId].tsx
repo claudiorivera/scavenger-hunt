@@ -32,7 +32,7 @@ const ItemFoundByDetails = ({ userId, itemId }: ItemFoundByDetailsProps) => {
 
   return (
     <>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" align="center" gutterBottom>
         {collectionItem.user.name} Found {collectionItem.item.itemDescription}!
       </Typography>
       <Image

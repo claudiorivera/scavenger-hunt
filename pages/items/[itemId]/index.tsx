@@ -35,7 +35,9 @@ const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
 
   return (
     <>
-      <Typography variant="h3">{item.itemDescription}</Typography>
+      <Typography variant="h3" align="center">
+        {item.itemDescription}
+      </Typography>
       {showItemAttribution && item.addedBy && (
         <Grid
           container
@@ -58,7 +60,7 @@ const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
           </StyledLink>
         </Grid>
       )}
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" align="center" gutterBottom>
         Collected by:
       </Typography>
       {item.usersWhoCollected.length > 0 ? (
@@ -91,7 +93,7 @@ const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
           </Grid>
         ))
       ) : (
-        <Typography variant="h5">
+        <Typography variant="h5" align="center">
           Nobody, yet{" "}
           <span role="img" aria-label="sad face emoji">
             😢

@@ -33,8 +33,10 @@ const CollectionsPage = ({ userId }: CollectionsPageProps) => {
         alt={user.name}
         src={user.image}
       />
-      <Typography variant="h3">{user.name}</Typography>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h3" align="center">
+        {user.name}
+      </Typography>
+      <Typography variant="h5" align="center" gutterBottom>
         Found the Following Items:
       </Typography>
       {items.length > 0 ? (
@@ -67,7 +69,7 @@ const CollectionsPage = ({ userId }: CollectionsPageProps) => {
           )}
         </Grid>
       ) : (
-        <Typography variant="h5">
+        <Typography variant="h5" align="center">
           Nothing, yet{" "}
           <span role="img" aria-label="sad face emoji">
             😢

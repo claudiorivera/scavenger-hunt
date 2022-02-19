@@ -167,7 +167,9 @@ const AdminPage = () => {
       )}
       {users && (
         <>
-          <Typography variant="h3">Delete Users</Typography>
+          <Typography variant="h3" align="center">
+            Delete Users
+          </Typography>
           <Grid
             container
             justifyContent="center"

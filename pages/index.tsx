@@ -21,7 +21,7 @@ const HomePage = () => {
         src={user.image}
         style={{ width: "5rem", height: "5rem" }}
       />
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" align="center" gutterBottom>
         {user.name}
       </Typography>
 
