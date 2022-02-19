@@ -15,7 +15,7 @@ const LeaderboardPage = () => {
 
   return (
     <>
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h3" align="center" gutterBottom>
         Leaderboard
       </Typography>
       {users.length > 0 ? (
@@ -42,7 +42,7 @@ const LeaderboardPage = () => {
                 {user.name}
               </Grid>
               <Grid item>
-                <Typography variant="body1">
+                <Typography variant="body1" align="center">
                   {user.itemsCollected.length} items
                 </Typography>
               </Grid>
@@ -50,7 +50,7 @@ const LeaderboardPage = () => {
           </StyledLink>
         ))
       ) : (
-        <Typography variant="h5">
+        <Typography variant="h5" align="center">
           Nobody&apos;s found anything, yet{" "}
           <span role="img" aria-label="sad face emoji">
             😢

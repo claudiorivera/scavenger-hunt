@@ -21,14 +21,14 @@ const ItemsPage = () => {
 
   return (
     <>
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h3" align="center" gutterBottom>
         All Items
       </Typography>
       {items.map(({ _id, itemDescription }: Item) => (
         <Grid
           container
           key={String(_id)}
-          justify="space-between"
+          justifyContent="space-between"
           alignItems="center"
         >
           <Grid item style={{ flexGrow: 1 }}>

@@ -4,16 +4,27 @@ import { NotLoggedInMessage } from "components";
 import { StyledButton, StyledLink } from "components/shared";
 import { showItemAttribution } from "config";
 import { User } from "models/User";
+import { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 import useSWR from "swr";
 
-const ItemDetailsPage = () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: {
+      itemId: context.query.itemId,
+    },
+  };
+};
+
+type ItemDetailsPageProps = {
+  itemId: string;
+};
+
+const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
   const { data: session } = useSession();
-  const router = useRouter();
-  const { data: item } = useSWR(`/api/items/${router.query.itemId}`);
+  const { data: item } = useSWR(`/api/items/${itemId}`);
 
   if (!session) return <NotLoggedInMessage />;
   if (!item) return null;
@@ -24,12 +35,14 @@ const ItemDetailsPage = () => {
 
   return (
     <>
-      <Typography variant="h3">{item.itemDescription}</Typography>
+      <Typography variant="h3" align="center">
+        {item.itemDescription}
+      </Typography>
       {showItemAttribution && item.addedBy && (
         <Grid
           container
           alignItems="center"
-          justify="center"
+          justifyContent="center"
           style={{ marginBottom: "1rem" }}
         >
           <Typography variant="caption">Added by:&nbsp;&nbsp;</Typography>
@@ -47,7 +60,7 @@ const ItemDetailsPage = () => {
           </StyledLink>
         </Grid>
       )}
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" align="center" gutterBottom>
         Collected by:
       </Typography>
       {item.usersWhoCollected.length > 0 ? (
@@ -80,7 +93,7 @@ const ItemDetailsPage = () => {
           </Grid>
         ))
       ) : (
-        <Typography variant="h5">
+        <Typography variant="h5" align="center">
           Nobody, yet{" "}
           <span role="img" aria-label="sad face emoji">
             😢

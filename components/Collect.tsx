@@ -33,10 +33,10 @@ const Collect = () => {
         <>
           {currentItem && (
             <>
-              <Typography variant="h5" gutterBottom>
+              <Typography variant="h5" align="center" gutterBottom>
                 Find
               </Typography>
-              <Typography variant="h3" gutterBottom align="center">
+              <Typography variant="h3" align="center" gutterBottom>
                 {currentItem.itemDescription}
               </Typography>
               {/* Photo picker as a button - https://kiranvj.com/blog/blog/file-upload-in-material-ui/ */}
