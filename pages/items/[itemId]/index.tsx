@@ -4,16 +4,27 @@ import { NotLoggedInMessage } from "components";
 import { StyledButton, StyledLink } from "components/shared";
 import { showItemAttribution } from "config";
 import { User } from "models/User";
+import { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 import useSWR from "swr";
 
-const ItemDetailsPage = () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: {
+      itemId: context.query.itemId,
+    },
+  };
+};
+
+type ItemDetailsPageProps = {
+  itemId: string;
+};
+
+const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
   const { data: session } = useSession();
-  const router = useRouter();
-  const { data: item } = useSWR(`/api/items/${router.query.itemId}`);
+  const { data: item } = useSWR(`/api/items/${itemId}`);
 
   if (!session) return <NotLoggedInMessage />;
   if (!item) return null;
@@ -29,7 +40,7 @@ const ItemDetailsPage = () => {
         <Grid
           container
           alignItems="center"
-          justify="center"
+          justifyContent="center"
           style={{ marginBottom: "1rem" }}
         >
           <Typography variant="caption">Added by:&nbsp;&nbsp;</Typography>

@@ -1,18 +1,30 @@
 import { Typography } from "@material-ui/core";
 import { NotLoggedInMessage } from "components";
 import { StyledButton } from "components/shared";
+import { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 import useSWR from "swr";
 
-const ItemFoundByDetails = () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: {
+      userId: context.query.userId,
+      itemId: context.query.itemId,
+    },
+  };
+};
+
+type ItemFoundByDetailsProps = {
+  userId: string;
+  itemId: string;
+};
+const ItemFoundByDetails = ({ userId, itemId }: ItemFoundByDetailsProps) => {
   const { data: session } = useSession();
-  const router = useRouter();
   const { data: collectionItem } = useSWR(
-    `/api/users/${router.query.userId}/items/${router.query.itemId}`
+    `/api/users/${userId}/items/${itemId}`
   );
 
   if (!session) return <NotLoggedInMessage />;

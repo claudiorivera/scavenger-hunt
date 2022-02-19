@@ -2,18 +2,26 @@ import { Avatar, Grid, Tooltip, Typography } from "@material-ui/core";
 import { NotLoggedInMessage } from "components";
 import { StyledLink } from "components/shared";
 import { Item } from "models/Item";
+import { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import React from "react";
 import useSWR from "swr";
 
-const CollectionsPage = () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: {
+      userId: context.query.userId,
+    },
+  };
+};
+
+type CollectionsPageProps = {
+  userId: string;
+};
+const CollectionsPage = ({ userId }: CollectionsPageProps) => {
   const { data: session } = useSession();
-  const router = useRouter();
-  const { data: user } = useSWR(`/api/users/${router.query.userId}`);
-  const { data: items } = useSWR(
-    `/api/users/${router.query.userId}/collection`
-  );
+  const { data: user } = useSWR(`/api/users/${userId}`);
+  const { data: items } = useSWR(`/api/users/${userId}/collection`);
 
   if (!session) return <NotLoggedInMessage />;
   if (!user || !items) return null;
@@ -30,7 +38,7 @@ const CollectionsPage = () => {
         Found the Following Items:
       </Typography>
       {items.length > 0 ? (
-        <Grid container justify="center">
+        <Grid container justifyContent="center">
           {items.map(
             ({
               _id,
