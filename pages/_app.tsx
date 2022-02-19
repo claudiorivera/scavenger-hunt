@@ -1,5 +1,9 @@
-import { Container, CssBaseline, Grid } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { Container, CssBaseline, Grid } from "@mui/material";
+import {
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+} from "@mui/material/styles";
 import { MainAppBar } from "components";
 import { appTitle } from "config";
 import { SessionProvider } from "next-auth/react";
@@ -59,23 +63,25 @@ const App = (props: AppProps) => {
         />
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
-      <ThemeProvider theme={theme}>
-        <SessionProvider session={pageProps.session}>
-          <CssBaseline />
-          <SWRConfig
-            value={{
-              fetcher,
-            }}
-          >
-            <MainAppBar />
-            <Container maxWidth="xs">
-              <Grid container direction="column" alignItems="center">
-                <Component {...pageProps} />
-              </Grid>
-            </Container>
-          </SWRConfig>
-        </SessionProvider>
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <SessionProvider session={pageProps.session}>
+            <CssBaseline />
+            <SWRConfig
+              value={{
+                fetcher,
+              }}
+            >
+              <MainAppBar />
+              <Container maxWidth="xs">
+                <Grid container direction="column" alignItems="center">
+                  <Component {...pageProps} />
+                </Grid>
+              </Container>
+            </SWRConfig>
+          </SessionProvider>
+        </ThemeProvider>
+      </StyledEngineProvider>
     </>
   );
 };

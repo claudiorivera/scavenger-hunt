@@ -1,10 +1,5 @@
-import {
-  CircularProgress,
-  IconButton,
-  Menu,
-  MenuItem,
-} from "@material-ui/core";
-import { Menu as MenuIcon } from "@material-ui/icons";
+import { CircularProgress, IconButton, Menu, MenuItem } from "@mui/material";
+import { Menu as MenuIcon } from "@mui/icons-material";
 import { Link } from "types";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -40,6 +35,7 @@ const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
         onClick={(e) => {
           handleMenuOpen(e);
         }}
+        size="large"
       >
         <MenuIcon />
       </IconButton>

@@ -1,5 +1,5 @@
-import { Avatar, Grid, Typography } from "@material-ui/core";
-import { Visibility } from "@material-ui/icons";
+import { Avatar, Grid, Typography } from "@mui/material";
+import { Visibility } from "@mui/icons-material";
 import { NotLoggedInMessage } from "components";
 import { StyledButton, StyledLink } from "components/shared";
 import { showItemAttribution } from "config";
@@ -29,7 +29,7 @@ const ItemDetailsPage = () => {
         <Grid
           container
           alignItems="center"
-          justify="center"
+          justifyContent="center"
           style={{ marginBottom: "1rem" }}
         >
           <Typography variant="caption">Added by:&nbsp;&nbsp;</Typography>

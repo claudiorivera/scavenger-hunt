@@ -9,7 +9,7 @@ import {
   TextField,
   Tooltip,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import axios from "axios";
 import { NotLoggedInMessage } from "components";
 import { StyledButton } from "components/shared";
@@ -99,7 +99,11 @@ const AdminPage = () => {
           <Typography variant="h3" align="center">
             Delete Collection Items
           </Typography>
-          <Grid container justify="center" style={{ marginBottom: "2rem" }}>
+          <Grid
+            container
+            justifyContent="center"
+            style={{ marginBottom: "2rem" }}
+          >
             {items.map(({ _id, thumbnailUrl, item }: CollectionItem) => (
               <Grid item key={String(_id)}>
                 <Tooltip title={item.itemDescription}>
@@ -164,7 +168,11 @@ const AdminPage = () => {
       {users && (
         <>
           <Typography variant="h3">Delete Users</Typography>
-          <Grid container justify="center" style={{ marginBottom: "2rem" }}>
+          <Grid
+            container
+            justifyContent="center"
+            style={{ marginBottom: "2rem" }}
+          >
             {users.map(({ _id, image, name }: User) => (
               <Tooltip key={String(_id)} title={name}>
                 <Avatar

@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { signIn } from "next-auth/react";
 import React from "react";
 import { StyledButton } from "./shared";

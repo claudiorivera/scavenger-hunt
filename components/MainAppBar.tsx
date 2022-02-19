@@ -5,8 +5,8 @@ import {
   Toolbar,
   Typography,
   useMediaQuery,
-} from "@material-ui/core";
-import { styled, useTheme } from "@material-ui/core/styles";
+} from "@mui/material";
+import { styled, useTheme } from "@mui/material/styles";
 import { adminLinks, appTitle, userLinks } from "config";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
@@ -31,7 +31,7 @@ const MainAppBar = () => {
   const loading = status === "loading";
   const router = useRouter();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isOnLoginPage = router.asPath.startsWith("/auth/login");
 
   return (

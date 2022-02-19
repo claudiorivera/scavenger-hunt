@@ -1,5 +1,5 @@
-import { Grid, Typography } from "@material-ui/core";
-import { CheckCircle, RadioButtonUnchecked } from "@material-ui/icons";
+import { Grid, Typography } from "@mui/material";
+import { CheckCircle, RadioButtonUnchecked } from "@mui/icons-material";
 import { NotLoggedInMessage } from "components";
 import { StyledButton } from "components/shared";
 import { useItems } from "hooks";
@@ -28,7 +28,7 @@ const ItemsPage = () => {
         <Grid
           container
           key={String(_id)}
-          justify="space-between"
+          justifyContent="space-between"
           alignItems="center"
         >
           <Grid item style={{ flexGrow: 1 }}>

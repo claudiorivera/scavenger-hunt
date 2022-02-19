@@ -1,4 +1,4 @@
-import { Avatar, Grid, Tooltip, Typography } from "@material-ui/core";
+import { Avatar, Grid, Tooltip, Typography } from "@mui/material";
 import { NotLoggedInMessage } from "components";
 import { StyledLink } from "components/shared";
 import { Item } from "models/Item";
@@ -30,7 +30,7 @@ const CollectionsPage = () => {
         Found the Following Items:
       </Typography>
       {items.length > 0 ? (
-        <Grid container justify="center">
+        <Grid container justifyContent="center">
           {items.map(
             ({
               _id,

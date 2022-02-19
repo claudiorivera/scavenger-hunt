@@ -1,4 +1,4 @@
-import { Avatar, Grid, Typography } from "@material-ui/core";
+import { Avatar, Grid, Typography } from "@mui/material";
 import { NotLoggedInMessage } from "components";
 import { StyledLink } from "components/shared";
 import { User } from "models/User";

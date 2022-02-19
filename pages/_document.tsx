@@ -1,5 +1,5 @@
 // https://github.com/mui-org/material-ui/tree/master/examples/nextjs
-import { ServerStyleSheets } from "@material-ui/core/styles";
+import ServerStyleSheets from "@mui/styles/ServerStyleSheets";
 import Document, {
   DocumentContext,
   Head,

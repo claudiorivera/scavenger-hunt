@@ -1,5 +1,5 @@
-import { Button, Input, Typography } from "@material-ui/core";
-import { AddAPhoto } from "@material-ui/icons";
+import { Button, Input, Typography } from "@mui/material";
+import { AddAPhoto } from "@mui/icons-material";
 import { CollectContext } from "contexts/CollectContext";
 import { useSession } from "next-auth/react";
 import Image from "next/image";

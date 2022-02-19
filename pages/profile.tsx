@@ -11,8 +11,8 @@ import {
   Input,
   TextField,
   Typography,
-} from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
 import { NotLoggedInMessage } from "components";
 import { SonicWaiting, StyledButton } from "components/shared";
@@ -130,7 +130,7 @@ const ProfilePage = () => {
           <Grid container>
             <span style={{ cursor: "pointer" }}>
               <Badge
-                overlap="circle"
+                overlap="circular"
                 color="primary"
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 badgeContent={"Edit"}
@@ -152,7 +152,7 @@ const ProfilePage = () => {
       <Grid
         container
         onClick={handleDialogOpen}
-        justify="center"
+        justifyContent="center"
         alignItems="center"
       >
         <Grid item>

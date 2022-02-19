@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { NotLoggedInMessage } from "components";
 import { StyledButton } from "components/shared";
 import { useSession } from "next-auth/react";

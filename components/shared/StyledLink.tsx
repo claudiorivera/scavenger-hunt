@@ -1,4 +1,4 @@
-import { Link, styled } from "@material-ui/core";
+import { Link, styled } from "@mui/material";
 
 const StyledLink = styled(Link)({
   cursor: "pointer",
