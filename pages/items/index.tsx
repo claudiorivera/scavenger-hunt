@@ -28,7 +28,7 @@ const ItemsPage = () => {
         <Grid
           container
           key={String(_id)}
-          justify="space-between"
+          justifyContent="space-between"
           alignItems="center"
         >
           <Grid item style={{ flexGrow: 1 }}>

@@ -130,7 +130,7 @@ const ProfilePage = () => {
           <Grid container>
             <span style={{ cursor: "pointer" }}>
               <Badge
-                overlap="circle"
+                overlap="circular"
                 color="primary"
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 badgeContent={"Edit"}
@@ -152,7 +152,7 @@ const ProfilePage = () => {
       <Grid
         container
         onClick={handleDialogOpen}
-        justify="center"
+        justifyContent="center"
         alignItems="center"
       >
         <Grid item>
