@@ -25,11 +25,12 @@ A game that challenges you to find the most random items around your house. Made
 - Leaderboard shows list of users ranked by most items found
 - Collection item detail page shows the photo a specific user took of an item
 - Users can update their name and avatar on the "My Profile" page.
+- Admins can delete collection items
+- Admins can delete users
 
 # New In This Version
 
-- Admins can delete collection items
-- Admins can delete users
+- Uses [pnpm](https://pnpm.io) for package management
 
 # Future Improvements
 
@@ -42,7 +43,7 @@ A game that challenges you to find the most random items around your house. Made
 
 # Install
 
-`yarn`
+`pnpm i`
 
 # Config
 
@@ -50,9 +51,4 @@ A game that challenges you to find the most random items around your house. Made
 
 # Dev
 
-`yarn dev`
-
-# Known Bugs
-
-- "Find more" (after successful collect) does not correctly move on to the next item consistently (it has trouble handling the last uncollected item). This is a state management "off by one" and/or revalidation bug that I've been unsuccessful in tracking down. I'll revisit this in the future.
-- GitHub OAuth doesn't play super nicely with Vercel preview deployments. Trying to find a good solution.
+`pnpm dev`
