@@ -1,13 +1,14 @@
-import { Button, Input, Typography } from "@material-ui/core";
+import { Button, CircularProgress, Input, Typography } from "@material-ui/core";
 import { AddAPhoto } from "@material-ui/icons";
 import { CollectContext } from "contexts/CollectContext";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import { useContext } from "react";
+
 import NotLoggedInMessage from "./NotLoggedInMessage";
-import { SonicWaiting, StyledButton } from "./shared";
+import { StyledButton } from "./shared";
 
 const Collect = () => {
   const { data: session } = useSession();
@@ -87,7 +88,7 @@ const Collect = () => {
                 variant="contained"
                 disabled={isUploading}
               >
-                {isUploading ? <SonicWaiting /> : "Submit Photo"}
+                {isUploading ? <CircularProgress /> : "Submit Photo"}
               </StyledButton>
             </>
           )}
