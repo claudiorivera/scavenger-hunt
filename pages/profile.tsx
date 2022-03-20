@@ -15,11 +15,11 @@ import {
 import EditIcon from "@material-ui/icons/Edit";
 import axios from "axios";
 import { NotLoggedInMessage } from "components";
-import { SonicWaiting, StyledButton } from "components/shared";
+import { StyledButton } from "components/shared";
 import { useCurrentUser } from "hooks";
-import { useSession } from "next-auth/react";
 import Error from "next/error";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import React, { FormEvent, SyntheticEvent, useEffect, useState } from "react";
 
 const ProfilePage = () => {
@@ -204,7 +204,7 @@ const ProfilePage = () => {
         onClick={handleSaveChanges}
         disabled={isSavingChanges}
       >
-        {isSavingChanges ? <SonicWaiting /> : "Save Changes"}
+        {isSavingChanges ? <CircularProgress /> : "Save Changes"}
       </StyledButton>
     </>
   );

@@ -1,8 +1,9 @@
-import { TextField, Typography } from "@material-ui/core";
-import { signIn, useSession } from "next-auth/react";
+import { CircularProgress, TextField, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
+import { signIn, useSession } from "next-auth/react";
 import { useState } from "react";
-import { SonicWaiting, StyledButton } from "./shared";
+
+import { StyledButton } from "./shared";
 
 interface LoginFormProps {
   providers: {
@@ -73,7 +74,7 @@ const LoginForm = ({ providers }: LoginFormProps) => {
           variant="contained"
           disabled={isFetching}
         >
-          {isFetching ? <SonicWaiting /> : "Send Me A Login Link"}
+          {isFetching ? <CircularProgress /> : "Send Me A Login Link"}
         </StyledButton>
       </form>
     </>
