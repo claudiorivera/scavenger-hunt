@@ -2,9 +2,9 @@ import { Typography } from "@material-ui/core";
 import { NotLoggedInMessage } from "components";
 import { StyledButton } from "components/shared";
 import { GetServerSideProps } from "next";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import React from "react";
 import useSWR from "swr";
 

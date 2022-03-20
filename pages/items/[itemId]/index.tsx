@@ -5,8 +5,8 @@ import { StyledButton, StyledLink } from "components/shared";
 import { showItemAttribution } from "config";
 import { User } from "models/User";
 import { GetServerSideProps } from "next";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import React from "react";
 import useSWR from "swr";
 

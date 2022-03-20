@@ -8,9 +8,10 @@ import {
 } from "@material-ui/core";
 import { styled, useTheme } from "@material-ui/core/styles";
 import { adminLinks, appTitle, userLinks } from "config";
-import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/react";
+
 import MobileMenu from "./MobileMenu";
 
 const Title = styled(Typography)({

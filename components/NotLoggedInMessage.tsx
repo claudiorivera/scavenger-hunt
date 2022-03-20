@@ -1,6 +1,7 @@
 import { Typography } from "@material-ui/core";
 import { signIn } from "next-auth/react";
 import React from "react";
+
 import { StyledButton } from "./shared";
 
 const NotLoggedInMessage = () => (
