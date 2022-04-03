@@ -1,8 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@material-ui/core': 4.12.3
-  '@material-ui/icons': 4.11.2
+  '@material-ui/core': 4.12.4
+  '@material-ui/icons': 4.11.3
   '@next-auth/mongodb-adapter': 1.0.3
   '@types/node': 16.11.26
   '@types/nodemailer': 6.4.4
@@ -25,8 +25,8 @@ specifiers:
   unique-names-generator: 4.7.1
 
 dependencies:
-  '@material-ui/core': 4.12.3_react-dom@18.0.0+react@18.0.0
-  '@material-ui/icons': 4.11.2_ef2b6dfe8d15f4269acda5ee29cf2d2c
+  '@material-ui/core': 4.12.4_react-dom@18.0.0+react@18.0.0
+  '@material-ui/icons': 4.11.3_6c6fa1720b74bc18b278a0db385a2244
   '@next-auth/mongodb-adapter': 1.0.3_mongodb@4.4.1+next-auth@4.3.1
   axios: 0.26.1
   mongodb: 4.4.1
@@ -102,10 +102,9 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@material-ui/core/4.12.3_react-dom@18.0.0+react@18.0.0:
-    resolution: {integrity: sha512-sdpgI/PL56QVsEJldwEe4FFaFTLUqN+rd7sSZiRCdx2E/C7z5yK0y/khAWVBH24tXwto7I1hCzNWfJGZIYJKnw==}
+  /@material-ui/core/4.12.4_react-dom@18.0.0+react@18.0.0:
+    resolution: {integrity: sha512-tr7xekNlM9LjA6pagJmL8QCgZXaubWUwkJnoYcMKd4gw/t4XiyvnTkjdGrUVicyB2BsdaAv1tvow45bPM4sSwQ==}
     engines: {node: '>=8.0.0'}
-    deprecated: 'You can now upgrade to @mui/material. See the guide: https://mui.com/guides/migration-v4/'
     peerDependencies:
       '@types/react': ^16.8.6 || ^17.0.0
       react: ^16.8.0 || ^17.0.0
@@ -115,10 +114,10 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.17.7
-      '@material-ui/styles': 4.11.4_react-dom@18.0.0+react@18.0.0
-      '@material-ui/system': 4.12.1_react-dom@18.0.0+react@18.0.0
+      '@material-ui/styles': 4.11.5_react-dom@18.0.0+react@18.0.0
+      '@material-ui/system': 4.12.2_react-dom@18.0.0+react@18.0.0
       '@material-ui/types': 5.1.0
-      '@material-ui/utils': 4.11.2_react-dom@18.0.0+react@18.0.0
+      '@material-ui/utils': 4.11.3_react-dom@18.0.0+react@18.0.0
       '@types/react-transition-group': 4.4.4
       clsx: 1.1.1
       hoist-non-react-statics: 3.3.2
@@ -130,10 +129,9 @@ packages:
       react-transition-group: 4.4.2_react-dom@18.0.0+react@18.0.0
     dev: false
 
-  /@material-ui/icons/4.11.2_ef2b6dfe8d15f4269acda5ee29cf2d2c:
-    resolution: {integrity: sha512-fQNsKX2TxBmqIGJCSi3tGTO/gZ+eJgWmMJkgDiOfyNaunNaxcklJQFaFogYcFl0qFuaEz1qaXYXboa/bUXVSOQ==}
+  /@material-ui/icons/4.11.3_6c6fa1720b74bc18b278a0db385a2244:
+    resolution: {integrity: sha512-IKHlyx6LDh8n19vzwH5RtHIOHl9Tu90aAAxcbWME6kp4dmvODM3UvOHJeMIDzUbd4muuJKHmlNoBN+mDY4XkBA==}
     engines: {node: '>=8.0.0'}
-    deprecated: 'You can now upgrade to @mui/icons. See the guide: https://mui.com/guides/migration-v4/'
     peerDependencies:
       '@material-ui/core': ^4.0.0
       '@types/react': ^16.8.6 || ^17.0.0
@@ -144,15 +142,14 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.17.7
-      '@material-ui/core': 4.12.3_react-dom@18.0.0+react@18.0.0
+      '@material-ui/core': 4.12.4_react-dom@18.0.0+react@18.0.0
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
     dev: false
 
-  /@material-ui/styles/4.11.4_react-dom@18.0.0+react@18.0.0:
-    resolution: {integrity: sha512-KNTIZcnj/zprG5LW0Sao7zw+yG3O35pviHzejMdcSGCdWbiO8qzRgOYL8JAxAsWBKOKYwVZxXtHWaB5T2Kvxew==}
+  /@material-ui/styles/4.11.5_react-dom@18.0.0+react@18.0.0:
+    resolution: {integrity: sha512-o/41ot5JJiUsIETME9wVLAJrmIWL3j0R0Bj2kCOLbSfqEkKf0fmaPt+5vtblUh5eXr2S+J/8J3DaCb10+CzPGA==}
     engines: {node: '>=8.0.0'}
-    deprecated: 'You can now upgrade to @mui/styles. See the guide: https://mui.com/guides/migration-v4/'
     peerDependencies:
       '@types/react': ^16.8.6 || ^17.0.0
       react: ^16.8.0 || ^17.0.0
@@ -164,7 +161,7 @@ packages:
       '@babel/runtime': 7.17.7
       '@emotion/hash': 0.8.0
       '@material-ui/types': 5.1.0
-      '@material-ui/utils': 4.11.2_react-dom@18.0.0+react@18.0.0
+      '@material-ui/utils': 4.11.3_react-dom@18.0.0+react@18.0.0
       clsx: 1.1.1
       csstype: 2.6.20
       hoist-non-react-statics: 3.3.2
@@ -181,10 +178,9 @@ packages:
       react-dom: 18.0.0_react@18.0.0
     dev: false
 
-  /@material-ui/system/4.12.1_react-dom@18.0.0+react@18.0.0:
-    resolution: {integrity: sha512-lUdzs4q9kEXZGhbN7BptyiS1rLNHe6kG9o8Y307HCvF4sQxbCgpL2qi+gUk+yI8a2DNk48gISEQxoxpgph0xIw==}
+  /@material-ui/system/4.12.2_react-dom@18.0.0+react@18.0.0:
+    resolution: {integrity: sha512-6CSKu2MtmiJgcCGf6nBQpM8fLkuB9F55EKfbdTC80NND5wpTmKzwdhLYLH3zL4cLlK0gVaaltW7/wMuyTnN0Lw==}
     engines: {node: '>=8.0.0'}
-    deprecated: 'You can now upgrade to @mui/system. See the guide: https://mui.com/guides/migration-v4/'
     peerDependencies:
       '@types/react': ^16.8.6 || ^17.0.0
       react: ^16.8.0 || ^17.0.0
@@ -194,7 +190,7 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.17.7
-      '@material-ui/utils': 4.11.2_react-dom@18.0.0+react@18.0.0
+      '@material-ui/utils': 4.11.3_react-dom@18.0.0+react@18.0.0
       csstype: 2.6.20
       prop-types: 15.8.1
       react: 18.0.0
@@ -210,8 +206,8 @@ packages:
         optional: true
     dev: false
 
-  /@material-ui/utils/4.11.2_react-dom@18.0.0+react@18.0.0:
-    resolution: {integrity: sha512-Uul8w38u+PICe2Fg2pDKCaIG7kOyhowZ9vjiC1FsVwPABTW8vPPKfF6OvxRq3IiBaI1faOJmgdvMG7rMJARBhA==}
+  /@material-ui/utils/4.11.3_react-dom@18.0.0+react@18.0.0:
+    resolution: {integrity: sha512-ZuQPV4rBK/V1j2dIkSSEcH5uT6AaHuKWFfotADHsC0wVL1NLd2WkFCm4ZZbX33iO4ydl6V0GPngKm8HZQ2oujg==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0
