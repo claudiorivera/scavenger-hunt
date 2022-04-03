@@ -1,16 +1,24 @@
 {
-  "exclude": [
-    "node_modules, .next, .vercel"
-  ],
+  "exclude": ["node_modules, .next, .vercel"],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "src",
+    "paths": {
+      "~components": ["./components"],
+      "~contexts": ["./contexts"],
+      "~config": ["./config"],
+      "~hooks": ["./hooks"],
+      "~lib": ["./lib"],
+      "~lib/*": ["./lib/*"],
+      "~middleware": ["./middleware"],
+      "~models": ["./models"],
+      "~models/*": ["./models/*"],
+      "~prisma/*": ["../prisma/*"],
+      "~styles/*": ["./styles/*"],
+      "~types": ["./types"],
+      "~util/*": ["./util/*"]
+    },
     "target": "es5",
-    "lib": [
-      "es6",
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["es6", "dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -25,9 +33,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "typeRoots": [
-      "types"
-    ],
+    "typeRoots": ["types"],
     "incremental": true
   },
   "include": [

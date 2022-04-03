@@ -7,16 +7,15 @@ A game that challenges you to find the most random items around your house. Made
 - React
 - TypeScript
 - [Next.js](https://nextjs.org)
-- [next-connect](https://github.com/hoangvvo/next-connect)
 - MongoDB
-- [NextAuth.js](https://next-auth.js.org) for GitHub OAuth and "Magic Link" email login
+- [NextAuth.js](https://next-auth.js.org)
 - [SWR](https://swr.vercel.app)
 - Material-UI
 
 # Features
 
 - User authentication and admin roles, including protected routes
-- Log in with email or OAuth (GitHub, for now)
+- Sign in with email or GitHub
 - Admins can add items to find
 - Users collect items by taking photos, which get uploaded to Cloudinary
 - Collection pages show all of a particular user's found items
