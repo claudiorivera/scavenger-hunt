@@ -12,7 +12,7 @@ specifiers:
   eslint-plugin-simple-import-sort: 7.0.0
   eslint-plugin-unused-imports: 2.0.0
   mongodb: 4.5.0
-  mongoose: 6.2.11
+  mongoose: 6.3.0
   next: 12.1.5
   next-auth: 4.3.2
   next-connect: 0.12.2
@@ -30,7 +30,7 @@ dependencies:
   '@next-auth/mongodb-adapter': 1.0.3_mongodb@4.5.0+next-auth@4.3.2
   axios: 0.26.1
   mongodb: 4.5.0
-  mongoose: 6.2.11
+  mongoose: 6.3.0
   next: 12.1.5_react-dom@18.0.0+react@18.0.0
   next-auth: 4.3.2_293f37d500369a03b239180d5cb6a3fb
   next-connect: 0.12.2
@@ -1609,18 +1609,6 @@ packages:
       whatwg-url: 11.0.0
     dev: false
 
-  /mongodb/4.3.1:
-    resolution: {integrity: sha512-sNa8APSIk+r4x31ZwctKjuPSaeKuvUeNb/fu/3B6dRM02HpEgig7hTHM8A/PJQTlxuC/KFWlDlQjhsk/S43tBg==}
-    engines: {node: '>=12.9.0'}
-    dependencies:
-      bson: 4.6.2
-      denque: 2.0.1
-      mongodb-connection-string-url: 2.5.2
-      socks: 2.6.2
-    optionalDependencies:
-      saslprep: 1.0.3
-    dev: false
-
   /mongodb/4.5.0:
     resolution: {integrity: sha512-A2l8MjEpKojnhbCM0MK3+UOGUSGvTNNSv7AkP1fsT7tkambrkkqN/5F2y+PhzsV0Nbv58u04TETpkaSEdI2zKA==}
     engines: {node: '>=12.9.0'}
@@ -1633,13 +1621,13 @@ packages:
       saslprep: 1.0.3
     dev: false
 
-  /mongoose/6.2.11:
-    resolution: {integrity: sha512-YqYAFTOqKthsFduM1IZCArIAwScFJKWoE3pEwmnR7UMw9mynEnOc6c4gBvAon+NtPdB0RAP6ppd3aOvLrVth2g==}
+  /mongoose/6.3.0:
+    resolution: {integrity: sha512-3x2pEGlZ5SorqcL0/hmUIAzzHIh6a/VIAEv3zAmc93qDtSz3WBbF8PwYYHcXm6Awfck9/zFOV9KIUEE+HjVepA==}
     engines: {node: '>=12.0.0'}
     dependencies:
       bson: 4.6.2
       kareem: 2.3.5
-      mongodb: 4.3.1
+      mongodb: 4.5.0
       mpath: 0.8.4
       mquery: 4.0.2
       ms: 2.1.3
