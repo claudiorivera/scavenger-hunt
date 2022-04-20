@@ -1,24 +1,26 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("MONGODB_URI")
+  provider             = "mysql"
+  url                  = env("PLANETSCALE_PRISMA_DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 model Account {
-  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  id                String  @id @default(cuid())
   userId            String
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.String
-  access_token      String? @db.String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.String
+  id_token          String? @db.Text
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -27,7 +29,7 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  id           String   @id @default(cuid())
   sessionToken String   @unique
   userId       String
   expires      DateTime
@@ -35,7 +37,6 @@ model Session {
 }
 
 model VerificationToken {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
   token      String   @unique
   expires    DateTime
@@ -44,7 +45,7 @@ model VerificationToken {
 }
 
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
   emailVerified DateTime?
@@ -58,19 +59,19 @@ model User {
 }
 
 model Item {
-  id             String          @id @default(auto()) @map("_id") @db.ObjectId
+  id             String          @id @default(cuid())
   description    String
   createdBy      User            @relation(fields: [createdById], references: [id], onDelete: Cascade)
-  createdById    String          @db.ObjectId
+  createdById    String
   collectedItems CollectedItem[]
 }
 
 model CollectedItem {
-  id             String @id @default(auto()) @map("_id") @db.ObjectId
+  id             String @id @default(cuid())
   imageUrl       String
   thumbnailUrl   String
   originalItem   Item   @relation(fields: [originalItemId], references: [id], onDelete: Cascade)
-  originalItemId String @db.ObjectId
+  originalItemId String
   foundBy        User   @relation(fields: [foundById], references: [id], onDelete: Cascade)
-  foundById      String @db.ObjectId
+  foundById      String
 }

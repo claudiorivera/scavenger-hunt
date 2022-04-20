@@ -12,7 +12,7 @@
       "~middleware": ["./middleware"],
       "~models": ["./models"],
       "~models/*": ["./models/*"],
-      "~prisma/*": ["../prisma/*"],
+      "~prisma/*": ["./prisma/*"],
       "~styles/*": ["./styles/*"],
       "~types": ["./types"],
       "~util/*": ["./util/*"]
