@@ -4,7 +4,7 @@ specifiers:
   '@material-ui/core': 4.12.4
   '@material-ui/icons': 4.11.3
   '@next-auth/mongodb-adapter': 1.0.3
-  '@types/node': 16.11.27
+  '@types/node': 16.11.28
   '@types/nodemailer': 6.4.4
   axios: 0.26.1
   eslint: 8.14.0
@@ -42,7 +42,7 @@ dependencies:
   unique-names-generator: 4.7.1
 
 devDependencies:
-  '@types/node': 16.11.27
+  '@types/node': 16.11.28
   '@types/nodemailer': 6.4.4
   eslint: 8.14.0
   eslint-config-next: 12.1.5_f9aca591fe836eec9a0024e01b547f29
@@ -381,13 +381,13 @@ packages:
     resolution: {integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=}
     dev: true
 
-  /@types/node/16.11.27:
-    resolution: {integrity: sha512-C1pD3kgLoZ56Uuy5lhfOxie4aZlA3UMGLX9rXteq4WitEZH6Rl80mwactt9QG0w0gLFlN/kLBTFnGXtDVWvWQw==}
+  /@types/node/16.11.28:
+    resolution: {integrity: sha512-l/y1ZZpWqevemVQmk0Q1TPohlJTul7u9ysq3bw6xlRDO8z+98JBI6gp4JS0OK8YkWUdYxnJU35H4vOzuiOFIag==}
 
   /@types/nodemailer/6.4.4:
     resolution: {integrity: sha512-Ksw4t7iliXeYGvIQcSIgWQ5BLuC/mljIEbjf615svhZL10PE9t+ei8O9gDaD3FPCasUJn9KTLwz2JFJyiiyuqw==}
     dependencies:
-      '@types/node': 16.11.27
+      '@types/node': 16.11.28
     dev: true
 
   /@types/prop-types/15.7.4:
@@ -419,7 +419,7 @@ packages:
   /@types/whatwg-url/8.2.1:
     resolution: {integrity: sha512-2YubE1sjj5ifxievI5Ge1sckb9k/Er66HyR2c+3+I6VDUUg1TLPdYYTEbQ+DjRkS4nTxMJhgWfSfMRD2sl2EYQ==}
     dependencies:
-      '@types/node': 16.11.27
+      '@types/node': 16.11.28
       '@types/webidl-conversions': 6.1.1
     dev: false
 
