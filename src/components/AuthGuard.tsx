@@ -1,4 +1,4 @@
-// AuthGuard.tsx
+import { CircularProgress } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect } from "react";
 
@@ -21,5 +21,5 @@ export const AuthGuard = ({ children }: AuthGuardProps) => {
     return <>{children}</>;
   }
 
-  return null;
+  return <CircularProgress />;
 };
