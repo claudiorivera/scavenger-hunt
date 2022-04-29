@@ -26,7 +26,7 @@
     "unique-names-generator": "4.7.1"
   },
   "devDependencies": {
-    "@types/node": "16.11.31",
+    "@types/node": "16.11.32",
     "@types/nodemailer": "6.4.4",
     "eslint": "8.14.0",
     "eslint-config-next": "12.1.5",
