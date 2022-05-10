@@ -1,25 +1,12 @@
-import {
-  CircularProgress,
-  IconButton,
-  Menu,
-  MenuItem,
-} from "@material-ui/core";
-import { Menu as MenuIcon } from "@material-ui/icons";
+import { Menu as MenuIcon } from "@mui/icons-material";
+import { Box, IconButton, Menu, MenuItem } from "@mui/material";
+import { adminLinks, userLinks } from "config";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
-import { Link } from "types";
 
-import { StyledLink } from "./shared";
-
-interface MobileMenuProps {
-  userLinks: Link[];
-  adminLinks: Link[];
-}
-
-const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
-  const { data: session, status } = useSession();
-  const loading = status === "loading";
+const MobileMenu = () => {
+  const { data: session } = useSession();
   const router = useRouter();
 
   // https://material-ui.com/components/app-bar/#app-bar-with-menu
@@ -32,6 +19,8 @@ const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
     setAnchorEl(null);
   };
 
+  if (!session) return null;
+
   return (
     <>
       <IconButton
@@ -41,6 +30,7 @@ const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
         onClick={(e) => {
           handleMenuOpen(e);
         }}
+        size="large"
       >
         <MenuIcon />
       </IconButton>
@@ -59,17 +49,28 @@ const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
         open={isMobileMenuOpen}
         onClose={handleMenuClose}
       >
-        {loading ? (
-          <CircularProgress />
-        ) : !session ? (
-          <MenuItem>
-            <StyledLink color="inherit" href="/auth/login">
-              Login
-            </StyledLink>
+        <Box>
+          {userLinks.map(({ url, title }) => (
+            <MenuItem
+              key={title}
+              onClick={() => {
+                handleMenuClose();
+                router.push(url);
+              }}
+            >
+              {title}
+            </MenuItem>
+          ))}
+          <MenuItem
+            onClick={() => {
+              handleMenuClose();
+              signOut();
+            }}
+          >
+            Sign Out
           </MenuItem>
-        ) : (
-          <div>
-            {userLinks.map(({ url, title }) => (
+          {session.user.isAdmin &&
+            adminLinks.map(({ title, url }) => (
               <MenuItem
                 key={title}
                 onClick={() => {
@@ -80,28 +81,7 @@ const MobileMenu = ({ userLinks, adminLinks }: MobileMenuProps) => {
                 {title}
               </MenuItem>
             ))}
-            <MenuItem
-              onClick={() => {
-                handleMenuClose();
-                signOut();
-              }}
-            >
-              Log Out
-            </MenuItem>
-            {session.user.isAdmin &&
-              adminLinks.map(({ title, url }) => (
-                <MenuItem
-                  key={title}
-                  onClick={() => {
-                    handleMenuClose();
-                    router.push(url);
-                  }}
-                >
-                  {title}
-                </MenuItem>
-              ))}
-          </div>
-        )}
+        </Box>
       </Menu>
     </>
   );

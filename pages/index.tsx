@@ -1,6 +1,5 @@
-import { Avatar, Grid, Typography } from "@material-ui/core";
+import { Avatar, Button, Grid, Typography } from "@mui/material";
 import { NotLoggedInMessage } from "components";
-import { StyledButton } from "components/shared";
 import { useCurrentUser } from "hooks";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
@@ -15,7 +14,7 @@ const HomePage = () => {
   if (!user) return null;
 
   return (
-    <Grid container direction="column" alignItems="center">
+    <Grid container direction="column" alignItems="center" gap={2}>
       <Avatar
         alt={user.name}
         src={user.image}
@@ -25,7 +24,7 @@ const HomePage = () => {
         {user.name}
       </Typography>
 
-      <StyledButton
+      <Button
         size="large"
         fullWidth
         color="secondary"
@@ -35,8 +34,8 @@ const HomePage = () => {
         }}
       >
         Collect Items
-      </StyledButton>
-      <StyledButton
+      </Button>
+      <Button
         size="large"
         fullWidth
         color="secondary"
@@ -46,8 +45,8 @@ const HomePage = () => {
         }}
       >
         Leaderboard
-      </StyledButton>
-      <StyledButton
+      </Button>
+      <Button
         size="large"
         fullWidth
         color="secondary"
@@ -57,8 +56,8 @@ const HomePage = () => {
         }}
       >
         My Collection
-      </StyledButton>
-      <StyledButton
+      </Button>
+      <Button
         size="large"
         fullWidth
         color="secondary"
@@ -68,7 +67,7 @@ const HomePage = () => {
         }}
       >
         My Profile
-      </StyledButton>
+      </Button>
     </Grid>
   );
 };

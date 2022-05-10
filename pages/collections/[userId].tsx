@@ -1,6 +1,5 @@
-import { Avatar, Grid, Tooltip, Typography } from "@material-ui/core";
+import { Avatar, Grid, Link, Tooltip, Typography } from "@mui/material";
 import { NotLoggedInMessage } from "components";
-import { StyledLink } from "components/shared";
 import { Item } from "models/Item";
 import { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
@@ -52,7 +51,7 @@ const CollectionsPage = ({ userId }: CollectionsPageProps) => {
               item: Item;
             }) => (
               <Grid item key={_id}>
-                <StyledLink href={`/items/${item._id}/foundby/${user._id}`}>
+                <Link href={`/items/${item._id}/foundby/${user._id}`}>
                   <Tooltip
                     title={item.itemDescription}
                     aria-label={item.itemDescription}
@@ -63,7 +62,7 @@ const CollectionsPage = ({ userId }: CollectionsPageProps) => {
                       src={thumbnailUrl}
                     />
                   </Tooltip>
-                </StyledLink>
+                </Link>
               </Grid>
             )
           )}

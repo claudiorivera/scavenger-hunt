@@ -9,10 +9,9 @@ import {
   TextField,
   Tooltip,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import axios from "axios";
 import { NotLoggedInMessage } from "components";
-import { StyledButton } from "components/shared";
 import { useCurrentUser } from "hooks";
 import { CollectionItem } from "models/CollectionItem";
 import { User } from "models/User";
@@ -84,7 +83,7 @@ const AdminPage = () => {
             setItemDescription(capitalizeEachWordOfString(e.target.value))
           }
         />
-        <StyledButton
+        <Button
           type="submit"
           size="large"
           fullWidth
@@ -92,7 +91,7 @@ const AdminPage = () => {
           variant="contained"
         >
           Add Item
-        </StyledButton>
+        </Button>
       </form>
       {items && (
         <>

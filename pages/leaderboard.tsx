@@ -1,7 +1,7 @@
-import { Avatar, Grid, Typography } from "@material-ui/core";
+import { Avatar, Box, Grid, Typography } from "@mui/material";
 import { NotLoggedInMessage } from "components";
-import { StyledLink } from "components/shared";
 import { User } from "models/User";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
 import React from "react";
 import useSWR from "swr";
@@ -20,34 +20,30 @@ const LeaderboardPage = () => {
       </Typography>
       {users.length > 0 ? (
         users.map((user: User) => (
-          <StyledLink
-            color="inherit"
+          <Box
             key={String(user._id)}
-            href={`/collections/${user._id}`}
-            style={{ width: "100%" }}
+            sx={{ cursor: "pointer", width: "100%", mb: 1 }}
           >
-            <Grid
-              container
-              alignItems="center"
-              style={{ marginBottom: "1rem" }}
-            >
-              <Grid item>
-                <Avatar
-                  style={{ marginRight: "1rem", width: "3rem", height: "3rem" }}
-                  alt={user.name}
-                  src={user.image}
-                />
+            <Link href={`/collections/${user._id}`}>
+              <Grid container alignItems="center" sx={{ mb: 1 }} gap={1}>
+                <Grid item>
+                  <Avatar
+                    sx={{ mr: 1, width: 40, height: 40 }}
+                    alt={user.name}
+                    src={user.image}
+                  />
+                </Grid>
+                <Grid item sx={{ flexGrow: 1 }}>
+                  {user.name}
+                </Grid>
+                <Grid item>
+                  <Typography variant="body1" align="center">
+                    {user.itemsCollected.length} items
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid item style={{ flexGrow: 1 }}>
-                {user.name}
-              </Grid>
-              <Grid item>
-                <Typography variant="body1" align="center">
-                  {user.itemsCollected.length} items
-                </Typography>
-              </Grid>
-            </Grid>
-          </StyledLink>
+            </Link>
+          </Box>
         ))
       ) : (
         <Typography variant="h5" align="center">

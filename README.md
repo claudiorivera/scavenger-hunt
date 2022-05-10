@@ -9,7 +9,7 @@ A game that challenges you to find the most random items around your house. Made
 - [Next.js](https://nextjs.org)
 - [next-connect](https://github.com/hoangvvo/next-connect)
 - MongoDB
-- [NextAuth.js](https://next-auth.js.org) for GitHub OAuth and "Magic Link" email login
+- [NextAuth.js](https://next-auth.js.org) for GitHub OAuth and "Magic Link" email sign-in
 - [SWR](https://swr.vercel.app)
 - Material-UI
 

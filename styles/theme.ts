@@ -1,26 +1,16 @@
-import { createTheme } from "@material-ui/core/styles";
-import { primaryColor, secondaryColor } from "config";
+import { amber, deepOrange } from "@mui/material/colors";
+import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
-    type: "light",
     primary: {
-      main: primaryColor,
+      main: deepOrange[900],
     },
     secondary: {
-      main: secondaryColor,
+      main: amber[500],
     },
     contrastThreshold: 3,
     tonalOffset: 0.2,
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 830,
-      lg: 1280,
-      xl: 1920,
-    },
   },
 });
 

@@ -1,3 +1,4 @@
+import EditIcon from "@mui/icons-material/Edit";
 import {
   Avatar,
   Badge,
@@ -11,11 +12,9 @@ import {
   Input,
   TextField,
   Typography,
-} from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
+} from "@mui/material";
 import axios from "axios";
 import { NotLoggedInMessage } from "components";
-import { StyledButton } from "components/shared";
 import { useCurrentUser } from "hooks";
 import Error from "next/error";
 import { useRouter } from "next/router";
@@ -196,7 +195,7 @@ const ProfilePage = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      <StyledButton
+      <Button
         size="large"
         fullWidth
         color="secondary"
@@ -205,7 +204,7 @@ const ProfilePage = () => {
         disabled={isSavingChanges}
       >
         {isSavingChanges ? <CircularProgress /> : "Save Changes"}
-      </StyledButton>
+      </Button>
     </>
   );
 };
