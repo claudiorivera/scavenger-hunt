@@ -18,7 +18,7 @@ const HomePage = () => {
       <Avatar
         alt={user.name}
         src={user.image}
-        style={{ width: "5rem", height: "5rem" }}
+        sx={{ width: 100, height: 100 }}
       />
       <Typography variant="h5" align="center" gutterBottom>
         {user.name}

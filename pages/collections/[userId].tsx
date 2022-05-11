@@ -28,7 +28,7 @@ const CollectionsPage = ({ userId }: CollectionsPageProps) => {
   return (
     <>
       <Avatar
-        style={{ width: "5rem", height: "5rem" }}
+        sx={{ width: 100, height: 100 }}
         alt={user.name}
         src={user.image}
       />
@@ -57,7 +57,7 @@ const CollectionsPage = ({ userId }: CollectionsPageProps) => {
                     aria-label={item.itemDescription}
                   >
                     <Avatar
-                      style={{ margin: ".5rem", width: "3rem", height: "3rem" }}
+                      sx={{ m: 1, width: 50, height: 50 }}
                       alt={item.itemDescription}
                       src={thumbnailUrl}
                     />

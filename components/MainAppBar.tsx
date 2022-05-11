@@ -18,20 +18,19 @@ const MainAppBar = () => {
   return (
     <AppBar
       sx={{
-        marginBottom: 4,
+        mb: 4,
       }}
       position="sticky"
     >
       <Toolbar>
         <Link href="/">
           <Typography
+            variant="h6"
             sx={{
               flexGrow: 1,
               textDecoration: "none",
-              color: "white",
-              fontWeight: 700,
-              fontSize: "1.5rem",
               cursor: "pointer",
+              fontWeight: "bold",
             }}
           >
             {appTitle}

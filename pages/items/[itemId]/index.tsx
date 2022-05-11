@@ -42,7 +42,7 @@ const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
           container
           alignItems="center"
           justifyContent="center"
-          sx={{ marginBottom: "1rem" }}
+          sx={{ mb: 2 }}
         >
           <Typography variant="caption">Added by:&nbsp;&nbsp;</Typography>
           <Link href={`/collections/${item.addedBy._id}`}>
@@ -57,7 +57,7 @@ const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
               <Avatar
                 alt={item.addedBy.name}
                 src={item.addedBy.image}
-                sx={{ width: "1rem", height: "1rem" }}
+                sx={{ width: 20, height: 20 }}
               />
               <Typography variant="caption">{item.addedBy.name}</Typography>
             </Box>
@@ -73,12 +73,12 @@ const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
             container
             key={String(user._id)}
             alignItems="center"
-            sx={{ marginBottom: "1rem" }}
+            sx={{ mb: 2 }}
           >
             <Grid item sx={{ cursor: "pointer" }}>
               <Link color="inherit" href={`/collections/${user._id}`}>
                 <Avatar
-                  sx={{ marginRight: "1rem", width: "3rem", height: "3rem" }}
+                  sx={{ mr: 2, width: 50, height: 50 }}
                   alt={user.name}
                   src={user.image}
                 />

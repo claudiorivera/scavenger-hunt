@@ -54,7 +54,7 @@ const Collect = () => {
                 <label htmlFor="imagePicker">
                   <Input
                     id="imagePicker"
-                    style={{ display: "none" }}
+                    sx={{ display: "none" }}
                     name="imagePicker"
                     type="file"
                     inputProps={{ accept: "image/*" }}
