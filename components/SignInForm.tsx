@@ -1,18 +1,16 @@
-import { CircularProgress, TextField, Typography } from "@material-ui/core";
+import { Button, CircularProgress, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
 import { useState } from "react";
 
-import { StyledButton } from "./shared";
-
-interface LoginFormProps {
+interface SignInFormProps {
   providers: {
     id: string;
     name: string;
   }[];
 }
 
-const LoginForm = ({ providers }: LoginFormProps) => {
+const SignInForm = ({ providers }: SignInFormProps) => {
   const { data: session } = useSession();
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -29,7 +27,7 @@ const LoginForm = ({ providers }: LoginFormProps) => {
         Object.values(providers)
           .filter((provider) => provider.id !== "email")
           .map((provider) => (
-            <StyledButton
+            <Button
               key={provider.id}
               type="submit"
               size="large"
@@ -41,7 +39,7 @@ const LoginForm = ({ providers }: LoginFormProps) => {
               }}
             >
               {provider.name}
-            </StyledButton>
+            </Button>
           ))}
       <form
         onSubmit={(e) => {
@@ -66,7 +64,7 @@ const LoginForm = ({ providers }: LoginFormProps) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <StyledButton
+        <Button
           type="submit"
           size="large"
           fullWidth
@@ -75,10 +73,10 @@ const LoginForm = ({ providers }: LoginFormProps) => {
           disabled={isFetching}
         >
           {isFetching ? <CircularProgress /> : "Send Me A Login Link"}
-        </StyledButton>
+        </Button>
       </form>
     </>
   );
 };
 
-export default LoginForm;
+export default SignInForm;

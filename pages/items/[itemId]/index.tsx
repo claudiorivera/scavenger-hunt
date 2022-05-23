@@ -1,7 +1,6 @@
-import { Avatar, Grid, Typography } from "@material-ui/core";
-import { Visibility } from "@material-ui/icons";
+import { Visibility } from "@mui/icons-material";
+import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
 import { NotLoggedInMessage } from "components";
-import { StyledButton, StyledLink } from "components/shared";
 import { showItemAttribution } from "config";
 import { User } from "models/User";
 import { GetServerSideProps } from "next";
@@ -43,21 +42,26 @@ const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
           container
           alignItems="center"
           justifyContent="center"
-          style={{ marginBottom: "1rem" }}
+          sx={{ mb: 2 }}
         >
           <Typography variant="caption">Added by:&nbsp;&nbsp;</Typography>
-          <StyledLink
-            color="inherit"
-            style={{ display: "flex", alignItems: "center" }}
-            href={`/collections/${item.addedBy._id}`}
-          >
-            <Avatar
-              alt={item.addedBy.name}
-              src={item.addedBy.image}
-              style={{ width: "1rem", height: "1rem" }}
-            />
-            &nbsp;{item.addedBy.name}
-          </StyledLink>
+          <Link href={`/collections/${item.addedBy._id}`}>
+            <Box
+              sx={{
+                display: "flex",
+                gap: 1,
+                alignItems: "center",
+                cursor: "pointer",
+              }}
+            >
+              <Avatar
+                alt={item.addedBy.name}
+                src={item.addedBy.image}
+                sx={{ width: 20, height: 20 }}
+              />
+              <Typography variant="caption">{item.addedBy.name}</Typography>
+            </Box>
+          </Link>
         </Grid>
       )}
       <Typography variant="h5" align="center" gutterBottom>
@@ -69,25 +73,25 @@ const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
             container
             key={String(user._id)}
             alignItems="center"
-            style={{ marginBottom: "1rem" }}
+            sx={{ mb: 2 }}
           >
-            <Grid item>
-              <StyledLink color="inherit" href={`/collections/${user._id}`}>
+            <Grid item sx={{ cursor: "pointer" }}>
+              <Link color="inherit" href={`/collections/${user._id}`}>
                 <Avatar
-                  style={{ marginRight: "1rem", width: "3rem", height: "3rem" }}
+                  sx={{ mr: 2, width: 50, height: 50 }}
                   alt={user.name}
                   src={user.image}
                 />
-              </StyledLink>
+              </Link>
             </Grid>
-            <Grid item style={{ flexGrow: 1 }}>
+            <Grid item sx={{ flexGrow: 1 }}>
               {user.name}
             </Grid>
             <Grid item>
-              <Link passHref href={`/items/${item._id}/foundby/${user._id}`}>
-                <StyledButton variant="contained" color="secondary">
+              <Link href={`/items/${item._id}/foundby/${user._id}`}>
+                <Button variant="contained" color="secondary">
                   <Visibility />
-                </StyledButton>
+                </Button>
               </Link>
             </Grid>
           </Grid>
@@ -101,10 +105,10 @@ const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
         </Typography>
       )}
       {!userIdsWhoCollected.includes(session.user.id) && (
-        <Link passHref href={`/collect?itemId=${item._id}`}>
-          <StyledButton fullWidth variant="contained" color="secondary">
+        <Link href={`/collect?itemId=${item._id}`}>
+          <Button fullWidth variant="contained" color="secondary">
             Found It?
-          </StyledButton>
+          </Button>
         </Link>
       )}
     </>

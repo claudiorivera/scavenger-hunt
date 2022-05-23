@@ -1,5 +1,11 @@
-import { Button, CircularProgress, Input, Typography } from "@material-ui/core";
-import { AddAPhoto } from "@material-ui/icons";
+import { AddAPhoto } from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Input,
+  Typography,
+} from "@mui/material";
 import { CollectContext } from "contexts/CollectContext";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +14,6 @@ import { useSession } from "next-auth/react";
 import { useContext } from "react";
 
 import NotLoggedInMessage from "./NotLoggedInMessage";
-import { StyledButton } from "./shared";
 
 const Collect = () => {
   const { data: session } = useSession();
@@ -49,7 +54,7 @@ const Collect = () => {
                 <label htmlFor="imagePicker">
                   <Input
                     id="imagePicker"
-                    style={{ display: "none" }}
+                    sx={{ display: "none" }}
                     name="imagePicker"
                     type="file"
                     inputProps={{ accept: "image/*" }}
@@ -57,7 +62,7 @@ const Collect = () => {
                     value={fileInput}
                   />
                   <Button
-                    style={{ marginBottom: ".5rem" }}
+                    sx={{ mb: 2 }}
                     size="large"
                     fullWidth
                     color="secondary"
@@ -72,14 +77,16 @@ const Collect = () => {
           )}
           {previewSource && (
             <>
-              <Image
-                unoptimized
-                width="400px"
-                height="400px"
-                src={previewSource}
-                alt="Item image"
-              />
-              <StyledButton
+              <Box sx={{ mb: 1 }}>
+                <Image
+                  unoptimized
+                  width="400px"
+                  height="400px"
+                  src={previewSource}
+                  alt="Item image"
+                />
+              </Box>
+              <Button
                 form="imageUploadForm"
                 type="submit"
                 size="large"
@@ -87,32 +94,34 @@ const Collect = () => {
                 color="secondary"
                 variant="contained"
                 disabled={isUploading}
+                sx={{ mb: 2 }}
               >
                 {isUploading ? <CircularProgress /> : "Submit Photo"}
-              </StyledButton>
+              </Button>
             </>
           )}
           {uncollectedItems.length > 0 && (
-            <StyledButton
+            <Button
               size="large"
               fullWidth
               color="secondary"
               variant="contained"
               onClick={handleFindMore}
+              sx={{ mb: 2 }}
             >
               Skip It!
-            </StyledButton>
+            </Button>
           )}
           {currentItem && (
             <Link passHref href={`/items/${currentItem._id}`}>
-              <StyledButton
+              <Button
                 size="large"
                 fullWidth
                 color="secondary"
                 variant="contained"
               >
                 See Who Found This
-              </StyledButton>
+              </Button>
             </Link>
           )}
         </>
@@ -129,7 +138,7 @@ const Collect = () => {
             alt="Successfully uploaded photo"
           />
           {uncollectedItems && uncollectedItems.length > 0 && (
-            <StyledButton
+            <Button
               size="large"
               fullWidth
               color="secondary"
@@ -137,7 +146,7 @@ const Collect = () => {
               onClick={handleFindMore}
             >
               Find More
-            </StyledButton>
+            </Button>
           )}
         </>
       )}
@@ -149,7 +158,7 @@ const Collect = () => {
               🎉
             </span>
           </Typography>
-          <StyledButton
+          <Button
             size="large"
             fullWidth
             color="secondary"
@@ -159,7 +168,7 @@ const Collect = () => {
             }}
           >
             My Collection
-          </StyledButton>
+          </Button>
         </>
       )}
     </>

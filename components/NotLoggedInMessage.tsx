@@ -1,15 +1,12 @@
-import { Typography } from "@material-ui/core";
+import { Button, Typography } from "@mui/material";
 import { signIn } from "next-auth/react";
-import React from "react";
-
-import { StyledButton } from "./shared";
 
 const NotLoggedInMessage = () => (
   <>
     <Typography variant="h5" align="center" gutterBottom>
       You must be logged in to view this page
     </Typography>
-    <StyledButton
+    <Button
       size="large"
       fullWidth
       color="secondary"
@@ -19,7 +16,7 @@ const NotLoggedInMessage = () => (
       }}
     >
       Login
-    </StyledButton>
+    </Button>
   </>
 );
 

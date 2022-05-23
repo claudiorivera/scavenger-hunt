@@ -1,6 +1,5 @@
-import { Typography } from "@material-ui/core";
+import { Box, Button, Typography } from "@mui/material";
 import { NotLoggedInMessage } from "components";
-import { StyledButton } from "components/shared";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,23 +34,25 @@ const ItemFoundByDetails = ({ userId, itemId }: ItemFoundByDetailsProps) => {
       <Typography variant="h5" align="center" gutterBottom>
         {collectionItem.user.name} Found {collectionItem.item.itemDescription}!
       </Typography>
-      <Image
-        height="512px"
-        width="512px"
-        src={collectionItem.imageUrl}
-        alt={collectionItem.item.itemDescription}
-      />
+      <Box sx={{ mb: 1 }}>
+        <Image
+          height="512px"
+          width="512px"
+          src={collectionItem.imageUrl}
+          alt={collectionItem.item.itemDescription}
+        />
+      </Box>
       {!collectionItem.item.usersWhoCollected.includes(session.user.id) && (
         <Link passHref href={`/collect?itemId=${collectionItem.item._id}`}>
-          <StyledButton fullWidth variant="contained" color="secondary">
+          <Button fullWidth variant="contained" color="secondary">
             Found It?
-          </StyledButton>
+          </Button>
         </Link>
       )}
       <Link passHref href={`/items/${collectionItem.item._id}`}>
-        <StyledButton fullWidth variant="contained" color="secondary">
+        <Button fullWidth variant="contained" color="secondary">
           See Who Found This
-        </StyledButton>
+        </Button>
       </Link>
     </>
   );

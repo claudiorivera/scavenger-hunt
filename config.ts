@@ -1,10 +1,10 @@
 import { Link } from "types";
 
-const appTitle: string = "Scavenger Hunt";
-const primaryColor: string = "#bb4430"; // App bar color
-const secondaryColor: string = "#dda15e"; // Button color
-const showItemAttribution: boolean = false; // Whether to display who added the item under item title
-const isNewUserAdminByDefault: boolean = false; // Whether new users are admins by default
+const appTitle = "Scavenger Hunt";
+const primaryColor = "#bf360c"; // App bar color
+const secondaryColor = "#ffc107"; // Button color
+const showItemAttribution = true; // Whether to display who added the item under item title
+const isNewUserAdminByDefault = false; // Whether new users are admins by default
 
 const adminLinks: Link[] = [
   {
@@ -36,11 +36,11 @@ const userLinks: Link[] = [
 ];
 
 export {
+  adminLinks,
   appTitle,
+  isNewUserAdminByDefault,
   primaryColor,
   secondaryColor,
-  adminLinks,
-  userLinks,
   showItemAttribution,
-  isNewUserAdminByDefault,
+  userLinks,
 };

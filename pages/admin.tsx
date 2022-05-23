@@ -9,10 +9,9 @@ import {
   TextField,
   Tooltip,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import axios from "axios";
 import { NotLoggedInMessage } from "components";
-import { StyledButton } from "components/shared";
 import { useCurrentUser } from "hooks";
 import { CollectionItem } from "models/CollectionItem";
 import { User } from "models/User";
@@ -84,7 +83,7 @@ const AdminPage = () => {
             setItemDescription(capitalizeEachWordOfString(e.target.value))
           }
         />
-        <StyledButton
+        <Button
           type="submit"
           size="large"
           fullWidth
@@ -92,27 +91,23 @@ const AdminPage = () => {
           variant="contained"
         >
           Add Item
-        </StyledButton>
+        </Button>
       </form>
       {items && (
         <>
           <Typography variant="h3" align="center">
             Delete Collection Items
           </Typography>
-          <Grid
-            container
-            justifyContent="center"
-            style={{ marginBottom: "2rem" }}
-          >
+          <Grid container justifyContent="center" sx={{ mb: 4 }}>
             {items.map(({ _id, thumbnailUrl, item }: CollectionItem) => (
               <Grid item key={String(_id)}>
                 <Tooltip title={item.itemDescription}>
                   <Avatar
-                    style={{
-                      margin: ".5rem",
+                    sx={{
+                      m: 1,
                       cursor: "pointer",
-                      width: "3rem",
-                      height: "3rem",
+                      width: 50,
+                      height: 50,
                     }}
                     alt={"a collection item"}
                     src={thumbnailUrl}
@@ -170,19 +165,15 @@ const AdminPage = () => {
           <Typography variant="h3" align="center">
             Delete Users
           </Typography>
-          <Grid
-            container
-            justifyContent="center"
-            style={{ marginBottom: "2rem" }}
-          >
+          <Grid container justifyContent="center" sx={{ mb: 2 }}>
             {users.map(({ _id, image, name }: User) => (
               <Tooltip key={String(_id)} title={name}>
                 <Avatar
-                  style={{
-                    margin: ".5rem",
+                  sx={{
+                    m: 1,
                     cursor: "pointer",
-                    width: "3rem",
-                    height: "3rem",
+                    width: 50,
+                    height: 50,
                   }}
                   alt={name}
                   src={image}

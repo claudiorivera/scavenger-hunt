@@ -1,3 +1,4 @@
+import EditIcon from "@mui/icons-material/Edit";
 import {
   Avatar,
   Badge,
@@ -11,11 +12,9 @@ import {
   Input,
   TextField,
   Typography,
-} from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
+} from "@mui/material";
 import axios from "axios";
 import { NotLoggedInMessage } from "components";
-import { StyledButton } from "components/shared";
 import { useCurrentUser } from "hooks";
 import Error from "next/error";
 import { useRouter } from "next/router";
@@ -127,7 +126,7 @@ const ProfilePage = () => {
             onChange={handleFileInputChange}
             value={fileInput}
           />
-          <Grid container>
+          <Grid container sx={{ mb: 2 }}>
             <span style={{ cursor: "pointer" }}>
               <Badge
                 overlap="circular"
@@ -141,7 +140,7 @@ const ProfilePage = () => {
                   <Avatar
                     alt={name}
                     src={image}
-                    style={{ width: "5rem", height: "5rem" }}
+                    sx={{ width: 100, height: 100 }}
                   />
                 )}
               </Badge>
@@ -157,7 +156,7 @@ const ProfilePage = () => {
       >
         <Grid item>
           <Typography
-            style={{ cursor: "pointer" }}
+            sx={{ cursor: "pointer" }}
             variant="h5"
             align="center"
             gutterBottom
@@ -167,12 +166,22 @@ const ProfilePage = () => {
         </Grid>
         <Grid item>
           <EditIcon
-            style={{ cursor: "pointer" }}
+            sx={{ cursor: "pointer" }}
             fontSize="small"
             color="primary"
           />
         </Grid>
       </Grid>
+      <Button
+        size="large"
+        fullWidth
+        color="secondary"
+        variant="contained"
+        onClick={handleSaveChanges}
+        disabled={isSavingChanges}
+      >
+        {isSavingChanges ? <CircularProgress /> : "Save Changes"}
+      </Button>
       <Dialog
         open={isDialogOpen}
         onClose={handleDialogClose}
@@ -196,16 +205,6 @@ const ProfilePage = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      <StyledButton
-        size="large"
-        fullWidth
-        color="secondary"
-        variant="contained"
-        onClick={handleSaveChanges}
-        disabled={isSavingChanges}
-      >
-        {isSavingChanges ? <CircularProgress /> : "Save Changes"}
-      </StyledButton>
     </>
   );
 };

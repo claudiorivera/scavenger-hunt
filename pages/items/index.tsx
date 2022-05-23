@@ -1,7 +1,6 @@
-import { Grid, Typography } from "@material-ui/core";
-import { CheckCircle, RadioButtonUnchecked } from "@material-ui/icons";
+import { CheckCircle, RadioButtonUnchecked } from "@mui/icons-material";
+import { Button, Grid, Typography } from "@mui/material";
 import { NotLoggedInMessage } from "components";
-import { StyledButton } from "components/shared";
 import { useItems } from "hooks";
 import { Item } from "models/Item";
 import Link from "next/link";
@@ -26,16 +25,17 @@ const ItemsPage = () => {
       </Typography>
       {items.map(({ _id, itemDescription }: Item) => (
         <Grid
+          gap={1}
           container
           key={String(_id)}
           justifyContent="space-between"
           alignItems="center"
         >
-          <Grid item style={{ flexGrow: 1 }}>
-            <Link passHref href={`/items/${_id}`}>
-              <StyledButton fullWidth variant="contained" color="secondary">
+          <Grid item sx={{ flexGrow: 1, mb: 2 }}>
+            <Link href={`/items/${_id}`}>
+              <Button fullWidth variant="contained" color="secondary">
                 {itemDescription}
-              </StyledButton>
+              </Button>
             </Link>
           </Grid>
           <Grid item>
