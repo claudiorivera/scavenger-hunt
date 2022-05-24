@@ -31,7 +31,7 @@
     "unique-names-generator": "4.7.1"
   },
   "devDependencies": {
-    "@babel/core": "7.17.10",
+    "@babel/core": "7.18.0",
     "@types/node": "16.11.36",
     "@types/nodemailer": "6.4.4",
     "@types/prop-types": "15.7.5",
