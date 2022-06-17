@@ -21,7 +21,7 @@
     "mongodb": "4.6.0",
     "mongoose": "6.3.8",
     "next": "12.1.6",
-    "next-auth": "4.3.4",
+    "next-auth": "4.5.0",
     "next-connect": "0.12.2",
     "nodemailer": "6.7.5",
     "prop-types": "15.8.1",
