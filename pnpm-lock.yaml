@@ -21,7 +21,7 @@ specifiers:
   eslint-plugin-simple-import-sort: 7.0.0
   eslint-plugin-unused-imports: 2.0.0
   mongodb: 4.7.0
-  mongoose: 6.3.8
+  mongoose: 6.4.0
   next: 12.1.6
   next-auth: 4.5.0
   next-connect: 0.12.2
@@ -44,7 +44,7 @@ dependencies:
   '@next-auth/mongodb-adapter': 1.0.3_h3jvr4sw33dco7uklkcksh3gvi
   axios: 0.27.2
   mongodb: 4.7.0
-  mongoose: 6.3.8
+  mongoose: 6.4.0
   next: 12.1.6_bw5me6qlxrwkidqrhljke6qy5u
   next-auth: 4.5.0_omwoulzhwqsk4h4t6ewpuwhjqy
   next-connect: 0.12.2
@@ -2203,8 +2203,8 @@ packages:
       object.assign: 4.1.2
     dev: true
 
-  /kareem/2.3.5:
-    resolution: {integrity: sha512-qxCyQtp3ioawkiRNQr/v8xw9KIviMSSNmy+63Wubj7KmMn3g7noRXIZB4vPCAP+ETi2SR8eH6CvmlKZuGpoHOg==}
+  /kareem/2.4.1:
+    resolution: {integrity: sha512-aJ9opVoXroQUPfovYP5kaj2lM7Jn02Gw13bL0lg9v0V7SaUc0qavPs0Eue7d2DcC3NjqI6QAUElXNsuZSeM+EA==}
     dev: false
 
   /language-subtag-registry/0.3.21:
@@ -2299,18 +2299,6 @@ packages:
       whatwg-url: 11.0.0
     dev: false
 
-  /mongodb/4.5.0:
-    resolution: {integrity: sha512-A2l8MjEpKojnhbCM0MK3+UOGUSGvTNNSv7AkP1fsT7tkambrkkqN/5F2y+PhzsV0Nbv58u04TETpkaSEdI2zKA==}
-    engines: {node: '>=12.9.0'}
-    dependencies:
-      bson: 4.6.4
-      denque: 2.0.1
-      mongodb-connection-string-url: 2.5.2
-      socks: 2.6.2
-    optionalDependencies:
-      saslprep: 1.0.3
-    dev: false
-
   /mongodb/4.7.0:
     resolution: {integrity: sha512-HhVar6hsUeMAVlIbwQwWtV36iyjKd9qdhY+s4wcU8K6TOj4Q331iiMy+FoPuxEntDIijTYWivwFJkLv8q/ZgvA==}
     engines: {node: '>=12.9.0'}
@@ -2323,13 +2311,13 @@ packages:
       saslprep: 1.0.3
     dev: false
 
-  /mongoose/6.3.8:
-    resolution: {integrity: sha512-TPIm61/DR2Go+aDXD5HM6vwMvl4dEOFos1oTT4yPT8qJpcTugxWXf5J2Vp+0vzqDETfDMtN/gBhPCzFdFJx2bg==}
+  /mongoose/6.4.0:
+    resolution: {integrity: sha512-eBDrueap1Zx3qFrcYylTiqTFlL5iTEaYAxoDF1MSRdipwAzChQRMJve+vxHtxPhI2q5tmf9RYHfZwXfTUHPd3g==}
     engines: {node: '>=12.0.0'}
     dependencies:
       bson: 4.6.4
-      kareem: 2.3.5
-      mongodb: 4.5.0
+      kareem: 2.4.1
+      mongodb: 4.7.0
       mpath: 0.9.0
       mquery: 4.0.3
       ms: 2.1.3
