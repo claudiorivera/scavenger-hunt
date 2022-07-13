@@ -20,7 +20,7 @@ specifiers:
   eslint-config-next: 12.2.2
   eslint-plugin-simple-import-sort: 7.0.0
   eslint-plugin-unused-imports: 2.0.0
-  mongodb: 4.7.0
+  mongodb: 4.8.0
   mongoose: 6.4.4
   next: 12.2.2
   next-auth: 4.10.0
@@ -41,9 +41,9 @@ dependencies:
   '@mui/icons-material': 5.8.4_dcfjwnpd6qfmrhwwcdokxzivnu
   '@mui/material': 5.9.0_bl6qrq6463ovzmqn4cmwv7vydq
   '@mui/styles': 5.9.0_3hx2ussxxho4jajbwrd6gq34qe
-  '@next-auth/mongodb-adapter': 1.0.3_zjq3hyt74mjsftgd3q5bojffvi
+  '@next-auth/mongodb-adapter': 1.0.3_6nh2obxdjhhskrjwtihgan5ogi
   axios: 0.27.2
-  mongodb: 4.7.0
+  mongodb: 4.8.0
   mongoose: 6.4.4
   next: 12.2.2_beenoklgwfttvph5dgxj7na7aq
   next-auth: 4.10.0_mnimnj2pdeccz5uivmdmoly3tq
@@ -677,13 +677,13 @@ packages:
       react-is: 18.2.0
     dev: false
 
-  /@next-auth/mongodb-adapter/1.0.3_zjq3hyt74mjsftgd3q5bojffvi:
+  /@next-auth/mongodb-adapter/1.0.3_6nh2obxdjhhskrjwtihgan5ogi:
     resolution: {integrity: sha512-oO8OYjMhYx8s5qsdWWD+yNCqszCO7ewg6UkDhvfY0KhJRbcoOAwOgYYH5Bo4ZGJDqmIw8g6JeGipP7+xLa2Ynw==}
     peerDependencies:
       mongodb: ^4.1.1
       next-auth: ^4.0.1
     dependencies:
-      mongodb: 4.7.0
+      mongodb: 4.8.0
       next-auth: 4.10.0_mnimnj2pdeccz5uivmdmoly3tq
     dev: false
 
@@ -1132,6 +1132,13 @@ packages:
 
   /bson/4.6.4:
     resolution: {integrity: sha512-TdQ3FzguAu5HKPPlr0kYQCyrYUYh8tFM+CMTpxjNzVzxeiJY00Rtuj3LXLHSgiGvmaWlZ8PE+4KyM2thqE38pQ==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      buffer: 5.7.1
+    dev: false
+
+  /bson/4.6.5:
+    resolution: {integrity: sha512-uqrgcjyOaZsHfz7ea8zLRCLe1u+QGUSzMZmvXqO24CDW7DWoW1qiN9folSwa7hSneTSgM2ykDIzF5kcQQ8cwNw==}
     engines: {node: '>=6.9.0'}
     dependencies:
       buffer: 5.7.1
@@ -2338,7 +2345,19 @@ packages:
     resolution: {integrity: sha512-HhVar6hsUeMAVlIbwQwWtV36iyjKd9qdhY+s4wcU8K6TOj4Q331iiMy+FoPuxEntDIijTYWivwFJkLv8q/ZgvA==}
     engines: {node: '>=12.9.0'}
     dependencies:
-      bson: 4.6.4
+      bson: 4.6.5
+      denque: 2.0.1
+      mongodb-connection-string-url: 2.5.2
+      socks: 2.6.2
+    optionalDependencies:
+      saslprep: 1.0.3
+    dev: false
+
+  /mongodb/4.8.0:
+    resolution: {integrity: sha512-a0eVzm1e1kxwnzJV1wZXIS54KegM2y6wXTXOGTSAxr/E2YOUkl/zGBHNSI4z+6z+YQtVdzDqy1nJ4n5MxYJRnQ==}
+    engines: {node: '>=12.9.0'}
+    dependencies:
+      bson: 4.6.5
       denque: 2.0.1
       mongodb-connection-string-url: 2.5.2
       socks: 2.6.2
