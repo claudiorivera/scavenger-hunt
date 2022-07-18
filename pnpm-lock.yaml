@@ -21,7 +21,7 @@ specifiers:
   eslint-plugin-simple-import-sort: 7.0.0
   eslint-plugin-unused-imports: 2.0.0
   mongodb: 4.8.0
-  mongoose: 6.4.4
+  mongoose: 6.4.5
   next: 12.2.2
   next-auth: 4.10.0
   next-connect: 0.12.2
@@ -44,7 +44,7 @@ dependencies:
   '@next-auth/mongodb-adapter': 1.0.3_6nh2obxdjhhskrjwtihgan5ogi
   axios: 0.27.2
   mongodb: 4.8.0
-  mongoose: 6.4.4
+  mongoose: 6.4.5
   next: 12.2.2_qugu52izettqdqqm5qcjcltcia
   next-auth: 4.10.0_mnimnj2pdeccz5uivmdmoly3tq
   next-connect: 0.12.2
@@ -1122,13 +1122,6 @@ packages:
       escalade: 3.1.1
       node-releases: 2.0.4
       picocolors: 1.0.0
-
-  /bson/4.6.4:
-    resolution: {integrity: sha512-TdQ3FzguAu5HKPPlr0kYQCyrYUYh8tFM+CMTpxjNzVzxeiJY00Rtuj3LXLHSgiGvmaWlZ8PE+4KyM2thqE38pQ==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      buffer: 5.7.1
-    dev: false
 
   /bson/4.6.5:
     resolution: {integrity: sha512-uqrgcjyOaZsHfz7ea8zLRCLe1u+QGUSzMZmvXqO24CDW7DWoW1qiN9folSwa7hSneTSgM2ykDIzF5kcQQ8cwNw==}
@@ -2358,11 +2351,11 @@ packages:
       saslprep: 1.0.3
     dev: false
 
-  /mongoose/6.4.4:
-    resolution: {integrity: sha512-r6sp96veRNhNIWFtHHe4Lqak+ilgiExYnnMLhYTGdzjIMR90G1ayx0JKFVdHuC6dKNHGFX0ETJGbf36N8Romjg==}
+  /mongoose/6.4.5:
+    resolution: {integrity: sha512-2E56DnJ4z5pWnBH4/pFGWuDFRn1Wt/JxU31Hcu0ZZtsd8I6piHavLawC9ND6GgyBpHov/aVLPLXtzB+HPKeKQg==}
     engines: {node: '>=12.0.0'}
     dependencies:
-      bson: 4.6.4
+      bson: 4.6.5
       kareem: 2.4.1
       mongodb: 4.7.0
       mpath: 0.9.0
