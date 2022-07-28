@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.18.9",
-    "@types/node": "16.11.45",
+    "@types/node": "16.11.46",
     "@types/nodemailer": "6.4.4",
     "@types/prop-types": "15.7.5",
     "@types/react": "18.0.15",
