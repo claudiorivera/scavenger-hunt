@@ -11,7 +11,7 @@ specifiers:
   '@mui/styles': 5.9.3
   '@next-auth/mongodb-adapter': 1.0.4
   '@types/node': 16.11.47
-  '@types/nodemailer': 6.4.4
+  '@types/nodemailer': 6.4.5
   '@types/prop-types': 15.7.5
   '@types/react': 18.0.15
   '@types/react-dom': 18.0.6
@@ -58,7 +58,7 @@ dependencies:
 devDependencies:
   '@babel/core': 7.18.10
   '@types/node': 16.11.47
-  '@types/nodemailer': 6.4.4
+  '@types/nodemailer': 6.4.5
   '@types/prop-types': 15.7.5
   '@types/react': 18.0.15
   '@types/react-dom': 18.0.6
@@ -873,8 +873,8 @@ packages:
   /@types/node/16.11.47:
     resolution: {integrity: sha512-fpP+jk2zJ4VW66+wAMFoBJlx1bxmBKx4DUFf68UHgdGCOuyUTDlLWqsaNPJh7xhNDykyJ9eIzAygilP/4WoN8g==}
 
-  /@types/nodemailer/6.4.4:
-    resolution: {integrity: sha512-Ksw4t7iliXeYGvIQcSIgWQ5BLuC/mljIEbjf615svhZL10PE9t+ei8O9gDaD3FPCasUJn9KTLwz2JFJyiiyuqw==}
+  /@types/nodemailer/6.4.5:
+    resolution: {integrity: sha512-zuP3nBRQHI6M2PkXnGGy1Ww4VB+MyYHGgnfV2T+JR9KLkeWqPJuyVUgLpKXuFnA/b7pZaIDFh2sV4759B7jK1g==}
     dependencies:
       '@types/node': 16.11.47
     dev: true
