@@ -4,6 +4,7 @@ import middleware from "middleware";
 import { User } from "models";
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
 import nextConnect from "next-connect";
@@ -18,6 +19,30 @@ handler.use(middleware);
 handler.use((req: NextApiRequest, res: NextApiResponse) =>
   NextAuth(req, res, {
     providers: [
+      CredentialsProvider({
+        name: "any username and password",
+        credentials: {
+          username: {
+            label: "Username",
+            type: "text",
+            placeholder: "username",
+          },
+          password: {
+            label: "Password",
+            type: "password",
+            placeholder: "password",
+          },
+        },
+        async authorize() {
+          const user = User.findOne({
+            id: 1,
+          });
+
+          if (user) return user;
+
+          return null;
+        },
+      }),
       GitHubProvider({
         clientId: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
