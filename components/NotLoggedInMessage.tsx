@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react";
 export const NotLoggedInMessage = () => (
   <>
     <Typography variant="h5" align="center" gutterBottom>
-      You must be logged in to view this page
+      Welcome to Scavenger Hunt! Sign in to get started.
     </Typography>
     <Button
       size="large"
@@ -15,7 +15,7 @@ export const NotLoggedInMessage = () => (
         signIn();
       }}
     >
-      Login
+      Sign In
     </Button>
   </>
 );
