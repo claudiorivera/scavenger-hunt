@@ -9,9 +9,9 @@ import { appTitle } from "config";
 import Link from "next/link";
 
 import { DesktopMenu } from "./DesktopMenu";
-import MobileMenu from "./MobileMenu";
+import { MobileMenu } from "./MobileMenu";
 
-const MainAppBar = () => {
+export const MainAppBar = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -41,5 +41,3 @@ const MainAppBar = () => {
     </AppBar>
   );
 };
-
-export default MainAppBar;

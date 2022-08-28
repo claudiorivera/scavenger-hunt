@@ -1,8 +1,9 @@
 import { appTitle } from "config";
 import { EmailConfig } from "next-auth/providers";
 import nodemailer from "nodemailer";
-import renderEmailString from "./renderEmailString";
-import renderPlainTextEmailString from "./renderPlainTextEmailString";
+
+import { renderEmailString } from "./renderEmailString";
+import { renderPlainTextEmailString } from "./renderPlainTextEmailString";
 
 interface Params {
   identifier: string;

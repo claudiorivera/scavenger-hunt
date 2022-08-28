@@ -1,14 +1,15 @@
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { isNewUserAdminByDefault, primaryColor } from "config";
 import middleware from "middleware";
-import { User } from "models";
+import User from "models/User";
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
 import nextConnect from "next-connect";
-import { createRandomName, getRandomImage } from "util/index";
+import { createRandomName } from "util/createRandomName";
+import { getRandomImage } from "util/getRandomImage";
 import clientPromise from "util/mongoDb";
 import { sendVerificationRequest } from "util/sendVerificationRequest";
 

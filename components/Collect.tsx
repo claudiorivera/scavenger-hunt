@@ -13,9 +13,9 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { useContext } from "react";
 
-import NotLoggedInMessage from "./NotLoggedInMessage";
+import { NotLoggedInMessage } from "./NotLoggedInMessage";
 
-const Collect = () => {
+export const Collect = () => {
   const { data: session } = useSession();
   const router = useRouter();
   const {
@@ -174,5 +174,3 @@ const Collect = () => {
     </>
   );
 };
-
-export default Collect;

@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import createEmotionCache from "styles/createEmotionCache";
 import theme from "styles/theme";
 import { SWRConfig } from "swr";
-import { fetcher } from "util/index";
+import { fetcher } from "util/fetcher";
 
 const clientSideEmotionCache = createEmotionCache();
 

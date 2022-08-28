@@ -1,14 +1,12 @@
 import {
-  uniqueNamesGenerator,
   adjectives,
   animals,
+  uniqueNamesGenerator,
 } from "unique-names-generator";
 
-const createRandomName = (): string =>
+export const createRandomName = () =>
   `${uniqueNamesGenerator({
     dictionaries: [adjectives, animals],
     style: "capital",
     separator: " ",
   })}`;
-
-export default createRandomName;

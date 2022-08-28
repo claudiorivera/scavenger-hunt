@@ -1,4 +1,5 @@
-import { model, models, Schema, Types, Document, PopulatedDoc } from "mongoose";
+import { Document, model, models, PopulatedDoc, Schema, Types } from "mongoose";
+
 import { Item } from "./Item";
 import { User } from "./User";
 

@@ -4,7 +4,5 @@ interface Params {
   url: string;
 }
 
-const renderPlainTextEmailString = ({ url }: Params): string =>
+export const renderPlainTextEmailString = ({ url }: Params) =>
   `Sign in to ${appTitle}\n${url}\n\n`;
-
-export default renderPlainTextEmailString;

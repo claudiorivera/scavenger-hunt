@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getRandomImage = async () => {
+export const getRandomImage = async () => {
   try {
     const response = await axios.post<any>(
       `${process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL}`,
@@ -14,5 +14,3 @@ const getRandomImage = async () => {
     console.error(error);
   }
 };
-
-export default getRandomImage;

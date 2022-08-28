@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
-const MobileMenu = () => {
+export const MobileMenu = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -86,5 +86,3 @@ const MobileMenu = () => {
     </>
   );
 };
-
-export default MobileMenu;

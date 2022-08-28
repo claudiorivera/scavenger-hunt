@@ -1,11 +1,12 @@
 import useSWR from "swr";
 
-const useUncollectedItems = () => {
+export const useUncollectedItems = () => {
   const {
     data: uncollectedItems,
     error,
     mutate,
   } = useSWR("/api/items/uncollected");
+
   return {
     uncollectedItems,
     isLoading: !error && !uncollectedItems,
@@ -13,5 +14,3 @@ const useUncollectedItems = () => {
     mutate,
   };
 };
-
-export default useUncollectedItems;

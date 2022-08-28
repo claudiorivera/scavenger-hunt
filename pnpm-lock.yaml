@@ -6,6 +6,7 @@ specifiers:
   '@emotion/react': 11.10.0
   '@emotion/server': 11.10.0
   '@emotion/styled': 11.10.0
+  '@faker-js/faker': 7.4.0
   '@mui/icons-material': 5.10.2
   '@mui/material': 5.10.2
   '@mui/styles': 5.10.2
@@ -57,6 +58,7 @@ dependencies:
 
 devDependencies:
   '@babel/core': 7.18.13
+  '@faker-js/faker': 7.4.0
   '@types/node': 16.11.56
   '@types/nodemailer': 6.4.5
   '@types/prop-types': 15.7.5
@@ -432,6 +434,11 @@ packages:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@faker-js/faker/7.4.0:
+    resolution: {integrity: sha512-xDd3Tvkt2jgkx1LkuwwxpNBy/Oe+LkZBTwkgEFTiWpVSZgQ5sc/LenbHKRHbFl0dq/KFeeq/szyyPtpJRKY0fg==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
     dev: true
 
   /@humanwhocodes/config-array/0.10.4:

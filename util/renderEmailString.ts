@@ -5,7 +5,7 @@ interface Params {
   email: string;
 }
 
-const renderEmailString = ({ url, email }: Params): string => {
+export const renderEmailString = ({ url, email }: Params) => {
   // Insert invisible space into domains and email address to prevent both the
   // email address and the domain from being turned into a hyperlink by email
   // clients like Outlook and Apple mail, as this is confusing because it seems
@@ -54,5 +54,3 @@ const renderEmailString = ({ url, email }: Params): string => {
 </body>
 `;
 };
-
-export default renderEmailString;

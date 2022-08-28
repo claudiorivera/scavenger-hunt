@@ -20,7 +20,7 @@ import Error from "next/error";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import useSWR from "swr";
-import { capitalizeEachWordOfString } from "util/index";
+import { capitalizeEachWordOfString } from "util/capitalizeEachWordOfString";
 
 const AdminPage = () => {
   const { data: session } = useSession();

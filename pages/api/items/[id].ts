@@ -1,5 +1,5 @@
 import middleware from "middleware";
-import { Item } from "models";
+import Item from "models/Item";
 import { NextApiRequest, NextApiResponse } from "next";
 import nextConnect from "next-connect";
 

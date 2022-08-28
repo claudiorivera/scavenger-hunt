@@ -1,5 +1,5 @@
 import middleware from "middleware";
-import { Item } from "models";
+import Item from "models/Item";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import nextConnect from "next-connect";

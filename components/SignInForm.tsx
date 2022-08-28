@@ -10,7 +10,7 @@ interface SignInFormProps {
   }[];
 }
 
-const SignInForm = ({ providers }: SignInFormProps) => {
+export const SignInForm = ({ providers }: SignInFormProps) => {
   const { data: session } = useSession();
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -78,5 +78,3 @@ const SignInForm = ({ providers }: SignInFormProps) => {
     </>
   );
 };
-
-export default SignInForm;
