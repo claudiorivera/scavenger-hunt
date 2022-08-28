@@ -35,9 +35,7 @@ handler.use((req: NextApiRequest, res: NextApiResponse) =>
           },
         },
         async authorize() {
-          const user = User.findOne({
-            id: 1,
-          });
+          const user = User.findOne();
 
           if (user) return user;
 
