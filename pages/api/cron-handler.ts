@@ -55,8 +55,8 @@ export default async function handler(
             await CollectionItem.create({
               item: item._id,
               user: fakeUsers[userIndex]._id,
-              imageUrl: faker.image.imageUrl(),
-              thumbnailUrl: faker.image.imageUrl(100, 100),
+              imageUrl: `https://picsum.photos/seed/${item._id}-${userIndex}/400/400`,
+              thumbnailUrl: `https://picsum.photos/seed/${item._id}-${userIndex}/100/100`,
             });
 
             item.usersWhoCollected.addToSet(fakeUsers[userIndex]._id);
