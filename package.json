@@ -36,7 +36,7 @@
     "@types/node": "16.11.56",
     "@types/nodemailer": "6.4.5",
     "@types/prop-types": "15.7.5",
-    "@types/react": "18.0.17",
+    "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
     "eslint": "8.23.0",
     "eslint-config-next": "12.2.5",
