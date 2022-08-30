@@ -22,7 +22,7 @@ specifiers:
   eslint-plugin-simple-import-sort: 7.0.0
   eslint-plugin-unused-imports: 2.0.0
   mongodb: 4.9.0
-  mongoose: 6.5.3
+  mongoose: 6.5.4
   next: 12.2.5
   next-auth: 4.10.3
   next-connect: 0.13.0
@@ -45,7 +45,7 @@ dependencies:
   '@next-auth/mongodb-adapter': 1.0.4_ec42xleq4lwpy4tpdy5bdx6vbe
   axios: 0.27.2
   mongodb: 4.9.0
-  mongoose: 6.5.3
+  mongoose: 6.5.4
   next: 12.2.5_rlaikcoslzwwtqyk7brpdzej5y
   next-auth: 4.10.3_br325yun545l5vwdnneu6tztxq
   next-connect: 0.13.0
@@ -2418,8 +2418,8 @@ packages:
       saslprep: 1.0.3
     dev: false
 
-  /mongoose/6.5.3:
-    resolution: {integrity: sha512-0L2ZOPzNQ7kcIgpdfpmVXc+/SypdhzcTlaHXYa983u1lrVp7/i3ekwHpPiTXxYBvV6FwBAsFoHI7+Ovf8tp3Mg==}
+  /mongoose/6.5.4:
+    resolution: {integrity: sha512-8hKV+9baDa7fyWRADQcSN/c0/QQbnewA2D0xOqdFb7f1UGYAHk4YSMNu9Hu2bdRUfQbK/daFuqlcmI17j6/8eg==}
     engines: {node: '>=12.0.0'}
     dependencies:
       bson: 4.7.0
