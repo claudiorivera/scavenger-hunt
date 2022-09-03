@@ -3,6 +3,7 @@ import CollectionItem from "models/CollectionItem";
 import Item from "models/Item";
 import User from "models/User";
 import { NextApiRequest, NextApiResponse } from "next";
+import { capitalizeEachWordOfString } from "util/capitalizeEachWordOfString";
 import { dbConnect } from "util/dbConnect";
 
 const createFakeUsers = () => {
@@ -36,7 +37,7 @@ export default async function handler(
           const noun = faker.word.noun();
 
           await Item.create({
-            itemDescription: `${adjective} ${noun}`,
+            itemDescription: capitalizeEachWordOfString(`${adjective} ${noun}`),
             addedBy:
               fakeUsers[Math.floor(Math.random() * fakeUsers.length)]._id,
           });

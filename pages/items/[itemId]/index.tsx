@@ -1,31 +1,45 @@
 import { Visibility } from "@mui/icons-material";
 import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
-import { NotLoggedInMessage } from "components";
 import { showItemAttribution } from "config";
 import { User } from "models/User";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-import React from "react";
+import { unstable_getServerSession } from "next-auth";
+import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import useSWR from "swr";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  query,
+}) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: `/sign-in?callbackUrl=/items/${query.itemId}`,
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
-      itemId: context.query.itemId,
+      itemId: query.itemId,
+      user: session.user,
     },
   };
 };
 
 type ItemDetailsPageProps = {
   itemId: string;
+  user: User;
 };
 
-const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
-  const { data: session } = useSession();
+const ItemDetailsPage = ({ itemId, user }: ItemDetailsPageProps) => {
   const { data: item } = useSWR(`/api/items/${itemId}`);
 
-  if (!session) return <NotLoggedInMessage />;
   if (!item) return null;
 
   const userIdsWhoCollected = item.usersWhoCollected.map(
@@ -104,7 +118,7 @@ const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
           </span>
         </Typography>
       )}
-      {!userIdsWhoCollected.includes(session.user.id) && (
+      {!userIdsWhoCollected.includes(user._id) && (
         <Link href={`/collect?itemId=${item._id}`}>
           <Button fullWidth variant="contained" color="secondary">
             Found It?

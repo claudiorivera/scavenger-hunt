@@ -1,17 +1,34 @@
 import { Box, Button, Typography } from "@mui/material";
-import { NotLoggedInMessage } from "components";
+import { User } from "models/User";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth";
+import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import React from "react";
 import useSWR from "swr";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  query,
+}) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: `/sign-in?callbackUrl=/items/${query.itemId}/foundby/${query.userId}`,
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
-      userId: context.query.userId,
-      itemId: context.query.itemId,
+      userId: query.userId,
+      itemId: query.itemId,
+      user: session.user,
     },
   };
 };
@@ -19,14 +36,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 type ItemFoundByDetailsProps = {
   userId: string;
   itemId: string;
+  user: User;
 };
-const ItemFoundByDetails = ({ userId, itemId }: ItemFoundByDetailsProps) => {
-  const { data: session } = useSession();
+const ItemFoundByDetails = ({
+  userId,
+  itemId,
+  user,
+}: ItemFoundByDetailsProps) => {
   const { data: collectionItem } = useSWR(
     `/api/users/${userId}/items/${itemId}`
   );
 
-  if (!session) return <NotLoggedInMessage />;
   if (!collectionItem) return null;
 
   return (
@@ -42,7 +62,7 @@ const ItemFoundByDetails = ({ userId, itemId }: ItemFoundByDetailsProps) => {
           alt={collectionItem.item.itemDescription}
         />
       </Box>
-      {!collectionItem.item.usersWhoCollected.includes(session.user.id) && (
+      {!collectionItem.item.usersWhoCollected.includes(user._id) && (
         <Link passHref href={`/collect?itemId=${collectionItem.item._id}`}>
           <Button fullWidth variant="contained" color="secondary">
             Found It?

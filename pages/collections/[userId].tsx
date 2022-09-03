@@ -1,29 +1,44 @@
 import { Avatar, Grid, Link, Tooltip, Typography } from "@mui/material";
-import { NotLoggedInMessage } from "components";
 import { Item } from "models/Item";
+import { User } from "models/User";
 import { GetServerSideProps } from "next";
-import { useSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth";
+import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import React from "react";
 import useSWR from "swr";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  query,
+}) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: `/sign-in?callbackUrl=/collections/${query.userId}`,
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
-      userId: context.query.userId,
+      userId: query.userId,
+      user: session.user,
     },
   };
 };
 
 type CollectionsPageProps = {
   userId: string;
+  user: User;
 };
-const CollectionsPage = ({ userId }: CollectionsPageProps) => {
-  const { data: session } = useSession();
-  const { data: user } = useSWR(`/api/users/${userId}`);
+const CollectionsPage = ({ userId, user }: CollectionsPageProps) => {
   const { data: items } = useSWR(`/api/users/${userId}/collection`);
 
-  if (!session) return <NotLoggedInMessage />;
-  if (!user || !items) return null;
+  if (!items) return null;
 
   return (
     <>
