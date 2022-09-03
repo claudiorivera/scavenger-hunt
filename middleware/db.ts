@@ -14,4 +14,5 @@ const db = async (
   }
   return next();
 };
+
 export default db;
