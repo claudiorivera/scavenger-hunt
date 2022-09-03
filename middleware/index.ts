@@ -1,4 +1,5 @@
 import nextConnect from "next-connect";
+
 import db from "./db";
 
 const middleware = nextConnect();

@@ -1,11 +1,12 @@
 import { Avatar, Grid, Link, Tooltip, Typography } from "@mui/material";
 import { Item } from "models/Item";
-import { User } from "models/User";
+import UserModel, { User } from "models/User";
 import { GetServerSideProps } from "next";
 import { unstable_getServerSession } from "next-auth";
 import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import React from "react";
 import useSWR from "swr";
+import { dbConnect } from "util/dbConnect";
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -23,10 +24,14 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   }
 
+  await dbConnect();
+
+  const user = await UserModel.findById(query.userId);
+
   return {
     props: {
       userId: query.userId,
-      user: session.user,
+      user: JSON.parse(JSON.stringify(user)),
     },
   };
 };
