@@ -10,6 +10,6 @@ declare namespace NodeJS {
     NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET_ITEMS: string;
     NEXT_PUBLIC_EMAIL_FROM: string;
     NEXTAUTH_URL: string;
-    SECRET: string;
+    NEXTAUTH_SECRET: string;
   }
 }

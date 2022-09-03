@@ -14,33 +14,49 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import { NotLoggedInMessage } from "components";
-import { useCurrentUser } from "hooks";
+import UserModel, { User } from "models/User";
+import { GetServerSideProps } from "next";
 import Error from "next/error";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
-import React, { FormEvent, SyntheticEvent, useEffect, useState } from "react";
+import { unstable_getServerSession } from "next-auth";
+import { FormEvent, SyntheticEvent, useState } from "react";
+import { dbConnect } from "util/dbConnect";
 
-const ProfilePage = () => {
-  const { data: session } = useSession();
-  const { user } = useCurrentUser();
+import { nextAuthOptions } from "./api/auth/[...nextauth]";
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/sign-in?callbackUrl=/profile",
+        permanent: false,
+      },
+    };
+  }
+
+  await dbConnect();
+
+  const user = await UserModel.findById(session.user._id).lean().exec();
+
+  return {
+    props: { user: JSON.parse(JSON.stringify(user)) },
+  };
+};
+
+type Props = {
+  user: User;
+};
+
+const ProfilePage = ({ user }: Props) => {
   const router = useRouter();
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
+  const [name, setName] = useState(user.name);
+  const [image, setImage] = useState(user.image);
   const [fileInput] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
   const [isSavingChanges, setIsSavingChanges] = useState(false);
-
-  useEffect(() => {
-    if (user) {
-      setName(user.name);
-      setImage(user.image);
-    }
-  }, [user]);
-
-  if (!session) return <NotLoggedInMessage />;
-  if (!user) return null;
 
   const handleDialogOpen = () => {
     setIsDialogOpen(true);
