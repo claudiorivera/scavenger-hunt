@@ -19,6 +19,9 @@ handler.use(middleware);
 export const nextAuthOptions: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
   secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     CredentialsProvider({
       name: "any username and password",
@@ -42,18 +45,18 @@ export const nextAuthOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async session({ session, user }) {
-      const { email, name, image, itemsCollected } = user;
-
+    async session({ session }) {
       await dbConnect();
 
       const userDoc = await User.findOneAndUpdate(
-        { email },
+        { email: session.user.email },
         {
-          email,
-          name: name ?? createRandomName(),
-          image: image ?? `https://picsum.photos/seed/${email}/100/100`,
-          itemsCollected: itemsCollected ?? [],
+          email: session.user.email,
+          name: session.user.name ?? createRandomName(),
+          image:
+            session.user.image ??
+            `https://picsum.photos/seed/${session.user.email}/100/100`,
+          itemsCollected: session.user.itemsCollected ?? [],
         },
         { upsert: true, new: true }
       );
