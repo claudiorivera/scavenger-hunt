@@ -24,6 +24,7 @@ const UserSchema = new Schema<User>({
   },
   isAdmin: {
     type: Boolean,
+    default: false,
   },
   itemsCollected: [
     {

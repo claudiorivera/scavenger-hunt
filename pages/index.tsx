@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
   await dbConnect();
 
-  const user = await UserModel.findById(session.user.id).lean().exec();
+  const user = await UserModel.findById(session.user._id).lean().exec();
 
   return {
     props: { user: JSON.parse(JSON.stringify(user)) },

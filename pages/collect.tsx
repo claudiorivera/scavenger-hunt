@@ -136,7 +136,7 @@ const CollectPage = ({ session, uncollectedItems }: Props) => {
       await axios.post("/api/collectionitems", {
         imageUrl,
         thumbnailUrl,
-        user: session?.user.id,
+        user: session?.user._id,
         item: currentItem._id,
       });
       setIsUploading(false);
@@ -297,7 +297,7 @@ const CollectPage = ({ session, uncollectedItems }: Props) => {
             color="secondary"
             variant="contained"
             onClick={() => {
-              router.push(`/collections/${session.user.id}`);
+              router.push(`/collections/${session.user._id}`);
             }}
           >
             My Collection
