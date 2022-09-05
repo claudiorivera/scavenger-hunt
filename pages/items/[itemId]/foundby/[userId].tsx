@@ -52,7 +52,8 @@ const ItemFoundByDetails = ({
   return (
     <>
       <Typography variant="h5" align="center" gutterBottom>
-        {collectionItem.user.name} Found {collectionItem.item.itemDescription}!
+        {collectionItem.user.name ?? collectionItem.user.email} Found{" "}
+        {collectionItem.item.itemDescription}!
       </Typography>
       <Box sx={{ mb: 1 }}>
         <Image

@@ -49,11 +49,11 @@ const CollectionsPage = ({ userId, user }: CollectionsPageProps) => {
     <>
       <Avatar
         sx={{ width: 100, height: 100 }}
-        alt={user.name}
+        alt={user.name ?? user.email}
         src={user.image}
       />
       <Typography variant="h3" align="center">
-        {user.name}
+        {user.name ?? user.email}
       </Typography>
       <Typography variant="h5" align="center" gutterBottom>
         Found the Following Items:

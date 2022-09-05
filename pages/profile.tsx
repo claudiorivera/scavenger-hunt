@@ -51,8 +51,10 @@ type Props = {
 
 const ProfilePage = ({ user }: Props) => {
   const router = useRouter();
-  const [name, setName] = useState(user.name);
-  const [image, setImage] = useState(user.image);
+  const [name, setName] = useState(user.name ?? user.email);
+  const [image, setImage] = useState(
+    user.image ?? `https://picsum.photos/seed/${user.email}/100/100`
+  );
   const [fileInput] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);

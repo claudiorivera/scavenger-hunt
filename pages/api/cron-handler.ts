@@ -9,9 +9,10 @@ import { dbConnect } from "util/dbConnect";
 const createFakeUsers = () => {
   return Array.from({ length: 10 }, () => ({
     name: faker.name.fullName(),
+    email: faker.internet.email(),
     image: faker.image.avatar(),
     isAdmin: false,
-    email: faker.internet.email(),
+    itemsCollected: [],
   }));
 };
 

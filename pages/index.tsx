@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
   await dbConnect();
 
-  const user = await UserModel.findById(session.user._id).lean().exec();
+  const user = await UserModel.findById(session.user.id).lean().exec();
 
   return {
     props: { user: JSON.parse(JSON.stringify(user)) },
@@ -39,12 +39,12 @@ const HomePage = ({ user }: Props) => {
   return (
     <Grid container direction="column" alignItems="center" gap={2}>
       <Avatar
-        alt={user.name}
+        alt={user.name ?? user.email}
         src={user.image}
         sx={{ width: 100, height: 100 }}
       />
       <Typography variant="h5" align="center" gutterBottom>
-        {user.name}
+        {user.name ?? user.email}
       </Typography>
 
       <Button

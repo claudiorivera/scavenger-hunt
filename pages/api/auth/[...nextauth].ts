@@ -7,6 +7,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
 import nextConnect from "next-connect";
+import { createRandomName } from "util/createRandomName";
 import clientPromise from "util/mongoDb";
 import { sendVerificationRequest } from "util/sendVerificationRequest";
 
@@ -17,9 +18,6 @@ handler.use(middleware);
 export const nextAuthOptions: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
   secret: process.env.NEXTAUTH_SECRET,
-  session: {
-    strategy: "jwt",
-  },
   providers: [
     CredentialsProvider({
       name: "any username and password",
@@ -43,14 +41,24 @@ export const nextAuthOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.user = user;
+    async session({ session, user }) {
+      const { email, name, image, itemsCollected } = user;
+
+      const userDoc = await User.findOneAndUpdate(
+        { email },
+        {
+          email,
+          name: name ?? createRandomName(),
+          image: image ?? `https://picsum.photos/seed/${email}/100/100`,
+          itemsCollected: itemsCollected ?? [],
+        },
+        { upsert: true, new: true }
+      );
+
+      if (userDoc) {
+        session.user = userDoc;
       }
-      return token;
-    },
-    async session({ session, token }) {
-      session.user = token.user;
+
       return session;
     },
   },

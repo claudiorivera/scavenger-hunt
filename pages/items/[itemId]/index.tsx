@@ -69,11 +69,13 @@ const ItemDetailsPage = ({ itemId, user }: ItemDetailsPageProps) => {
               }}
             >
               <Avatar
-                alt={item.addedBy.name}
+                alt={item.addedBy.name ?? item.addedBy.email}
                 src={item.addedBy.image}
                 sx={{ width: 20, height: 20 }}
               />
-              <Typography variant="caption">{item.addedBy.name}</Typography>
+              <Typography variant="caption">
+                {item.addedBy.name ?? item.addedBy.email}
+              </Typography>
             </Box>
           </Link>
         </Grid>
@@ -93,13 +95,13 @@ const ItemDetailsPage = ({ itemId, user }: ItemDetailsPageProps) => {
               <Link color="inherit" href={`/collections/${user._id}`}>
                 <Avatar
                   sx={{ mr: 2, width: 50, height: 50 }}
-                  alt={user.name}
+                  alt={user.name ?? user.email}
                   src={user.image}
                 />
               </Link>
             </Grid>
             <Grid item sx={{ flexGrow: 1 }}>
-              {user.name}
+              {user.name ?? user.email}
             </Grid>
             <Grid item>
               <Link href={`/items/${item._id}/foundby/${user._id}`}>

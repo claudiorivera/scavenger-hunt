@@ -55,12 +55,12 @@ const LeaderboardPage = ({ users }: Props) => {
                 <Grid item>
                   <Avatar
                     sx={{ mr: 1, width: 40, height: 40 }}
-                    alt={user.name}
+                    alt={user.name ?? user.email}
                     src={user.image}
                   />
                 </Grid>
                 <Grid item sx={{ flexGrow: 1 }}>
-                  {user.name}
+                  {user.name ?? user.email}
                 </Grid>
                 <Grid item>
                   <Typography variant="body1" align="center">
