@@ -31,19 +31,26 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     };
   }
 
-  await dbConnect();
+  try {
+    await dbConnect();
 
-  const uncollectedItems = await ItemModel.where("usersWhoCollected")
-    .ne(session.user._id)
-    .select("-addedBy -__v -usersWhoCollected")
-    .lean();
+    const uncollectedItems = await ItemModel.where("usersWhoCollected")
+      .ne(session.user._id)
+      .select("-addedBy -__v -usersWhoCollected")
+      .lean();
 
-  return {
-    props: {
-      session,
-      uncollectedItems: JSON.parse(JSON.stringify(uncollectedItems)),
-    },
-  };
+    return {
+      props: {
+        session,
+        uncollectedItems: JSON.parse(JSON.stringify(uncollectedItems)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {},
+    };
+  }
 };
 
 type Props = {

@@ -10,7 +10,12 @@ const db = async (
 ) => {
   // https://mongoosejs.com/docs/api.html#connection_Connection-readyState
   if (mongoose.connections[0].readyState !== 1) {
-    await dbConnect();
+    try {
+      await dbConnect();
+    } catch (error) {
+      console.error(error);
+      return next(error);
+    }
   }
   return next();
 };

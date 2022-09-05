@@ -19,19 +19,26 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     };
   }
 
-  await dbConnect();
+  try {
+    await dbConnect();
 
-  const users = await UserModel.find()
-    .select("_id name itemsCollected image name")
-    .lean();
+    const users = await UserModel.find()
+      .select("_id name itemsCollected image name")
+      .lean();
 
-  const sortedUsers = users.sort(
-    (a, b) => b.itemsCollected.length - a.itemsCollected.length
-  );
+    const sortedUsers = users.sort(
+      (a, b) => b.itemsCollected.length - a.itemsCollected.length
+    );
 
-  return {
-    props: { users: JSON.parse(JSON.stringify(sortedUsers)) },
-  };
+    return {
+      props: { users: JSON.parse(JSON.stringify(sortedUsers)) },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {},
+    };
+  }
 };
 
 type Props = {

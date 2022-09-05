@@ -4,5 +4,10 @@ export const dbConnect = async () => {
   // https://mongoosejs.com/docs/api.html#connection_Connection-readyState
   if (mongoose.connections[0].readyState) return;
 
-  await mongoose.connect(process.env.MONGODB_URI);
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };

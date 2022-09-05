@@ -24,16 +24,23 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   }
 
-  await dbConnect();
+  try {
+    await dbConnect();
 
-  const user = await UserModel.findById(query.userId);
+    const user = await UserModel.findById(query.userId);
 
-  return {
-    props: {
-      userId: query.userId,
-      user: JSON.parse(JSON.stringify(user)),
-    },
-  };
+    return {
+      props: {
+        userId: query.userId,
+        user: JSON.parse(JSON.stringify(user)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {},
+    };
+  }
 };
 
 type CollectionsPageProps = {

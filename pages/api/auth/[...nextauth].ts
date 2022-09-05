@@ -45,24 +45,28 @@ export const nextAuthOptions: NextAuthOptions = {
   ],
   callbacks: {
     async session({ session }) {
-      const userDoc = await User.findOneAndUpdate(
-        { email: session.user.email },
-        {
-          email: session.user.email,
-          name: session.user.name ?? createRandomName(),
-          image:
-            session.user.image ??
-            `https://picsum.photos/seed/${session.user.email}/100/100`,
-          itemsCollected: session.user.itemsCollected ?? [],
-        },
-        { upsert: true, new: true }
-      );
+      try {
+        const userDoc = await User.findOneAndUpdate(
+          { email: session.user.email },
+          {
+            email: session.user.email,
+            name: session.user.name ?? createRandomName(),
+            image:
+              session.user.image ??
+              `https://picsum.photos/seed/${session.user.email}/100/100`,
+            itemsCollected: session.user.itemsCollected ?? [],
+          },
+          { upsert: true, new: true }
+        );
 
-      if (userDoc) {
-        session.user = userDoc;
+        if (userDoc) {
+          session.user = userDoc;
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        return session;
       }
-
-      return session;
     },
   },
 };
