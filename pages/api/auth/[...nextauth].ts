@@ -8,7 +8,6 @@ import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
 import nextConnect from "next-connect";
 import { createRandomName } from "util/createRandomName";
-import { dbConnect } from "util/dbConnect";
 import clientPromise from "util/mongoDb";
 import { sendVerificationRequest } from "util/sendVerificationRequest";
 
@@ -46,8 +45,6 @@ export const nextAuthOptions: NextAuthOptions = {
   ],
   callbacks: {
     async session({ session }) {
-      await dbConnect();
-
       const userDoc = await User.findOneAndUpdate(
         { email: session.user.email },
         {
