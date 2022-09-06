@@ -573,8 +573,8 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.18.9
-      '@emotion/react': 11.10.4_v3lqmnp7jnla5x5eji467wk4ae
-      '@emotion/styled': 11.10.4_qzbwge7tbhs2ordiiw7o6wknfm
+      '@emotion/react': 11.10.4_p6fq7jdyqwnykllwwkx4b6uid4
+      '@emotion/styled': 11.10.4_lxst47gwu5lqjtx2guwl7nfnjm
       '@mui/base': 5.0.0-alpha.95_63dfw6rfgd64rl77ptfma4cvt4
       '@mui/material': 5.10.3_vbxcdxy3bftsefaguotlgalomu
       '@mui/system': 5.10.3_wpm2ckkcb3o6jfqp3h4kjrjece
