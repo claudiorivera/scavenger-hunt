@@ -1,19 +1,37 @@
 import middleware from "middleware";
 import CollectionItem from "models/CollectionItem";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/react";
+import { Session, unstable_getServerSession } from "next-auth";
 import nextConnect from "next-connect";
+import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 
-const handler = nextConnect();
+const handler = nextConnect<NextApiRequest, NextApiResponse>({
+  onError: (error, _req, res) => {
+    if (error instanceof Error) {
+      console.error(error.message);
+      return res.status(500).end(error.message);
+    } else {
+      return res.status(500).end("Something went wrong");
+    }
+  },
+  onNoMatch: (req, res) => {
+    return res.status(404).end(`${req.url} not found`);
+  },
+}).use<{
+  session: Session;
+}>(async (req, res, next) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+  if (!session) return res.status(401).end("Unauthorized");
+  req.session = session;
+  next();
+});
+
 handler.use(middleware);
 
 // GET /api/users/:userId/collection
 // Returns collection items for the given user id
-handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.get(async (req, res) => {
   try {
-    const session = await getSession({ req });
-    if (!session) throw new Error("User not logged in");
-
     const collectionItems = await CollectionItem.where("user")
       .equals(req.query.userId)
       .select("thumbnailUrl item")

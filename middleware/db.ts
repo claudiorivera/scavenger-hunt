@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextHandler } from "next-connect";
-import { dbConnect } from "util/dbConnect";
+import dbConnect from "util/dbConnect";
 
 const db = async (
   _req: NextApiRequest,
@@ -10,8 +10,14 @@ const db = async (
 ) => {
   // https://mongoosejs.com/docs/api.html#connection_Connection-readyState
   if (mongoose.connections[0].readyState !== 1) {
-    await dbConnect();
+    try {
+      await dbConnect();
+    } catch (error) {
+      console.error(error);
+      return next(error);
+    }
   }
   return next();
 };
+
 export default db;

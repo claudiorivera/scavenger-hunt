@@ -1,24 +1,57 @@
 import { Avatar, Box, Grid, Typography } from "@mui/material";
-import { NotLoggedInMessage } from "components";
-import { User } from "models/User";
+import UserModel, { User } from "models/User";
+import { GetServerSideProps } from "next";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth";
 import React from "react";
-import useSWR from "swr";
+import dbConnect from "util/dbConnect";
 
-const LeaderboardPage = () => {
-  const { data: session } = useSession();
-  const { data: users } = useSWR("/api/users");
+import { nextAuthOptions } from "./api/auth/[...nextauth]";
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
 
-  if (!session) return <NotLoggedInMessage />;
-  if (!users) return null;
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/sign-in?callbackUrl=/leaderboard",
+        permanent: false,
+      },
+    };
+  }
 
+  try {
+    await dbConnect();
+
+    const users = await UserModel.find()
+      .select("_id name itemsCollected image name")
+      .lean();
+
+    const sortedUsers = users.sort(
+      (a, b) => b.itemsCollected.length - a.itemsCollected.length
+    );
+
+    return {
+      props: { users: JSON.parse(JSON.stringify(sortedUsers)) },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {},
+    };
+  }
+};
+
+type Props = {
+  users: User[];
+};
+
+const LeaderboardPage = ({ users }: Props) => {
   return (
     <>
       <Typography variant="h3" align="center" gutterBottom>
         Leaderboard
       </Typography>
-      {users.length > 0 ? (
+      {!!users.length ? (
         users.map((user: User) => (
           <Box
             key={String(user._id)}
@@ -29,12 +62,12 @@ const LeaderboardPage = () => {
                 <Grid item>
                   <Avatar
                     sx={{ mr: 1, width: 40, height: 40 }}
-                    alt={user.name}
+                    alt={user.name ?? user.email}
                     src={user.image}
                   />
                 </Grid>
                 <Grid item sx={{ flexGrow: 1 }}>
-                  {user.name}
+                  {user.name ?? user.email}
                 </Grid>
                 <Grid item>
                   <Typography variant="body1" align="center">

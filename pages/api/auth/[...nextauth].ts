@@ -1,107 +1,71 @@
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import { isNewUserAdminByDefault, primaryColor } from "config";
-import middleware from "middleware";
 import User from "models/User";
-import { NextApiRequest, NextApiResponse } from "next";
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
-import nextConnect from "next-connect";
 import { createRandomName } from "util/createRandomName";
-import { getRandomImage } from "util/getRandomImage";
+import dbConnect from "util/dbConnect";
 import clientPromise from "util/mongoDb";
 import { sendVerificationRequest } from "util/sendVerificationRequest";
 
-const handler = nextConnect();
+export const nextAuthOptions: NextAuthOptions = {
+  adapter: MongoDBAdapter(clientPromise),
+  secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt",
+  },
+  providers: [
+    CredentialsProvider({
+      name: "any username and password",
+      credentials: {},
+      async authorize() {
+        await dbConnect();
 
-handler.use(middleware);
+        const user = await User.findOne().lean().exec();
 
-handler.use((req: NextApiRequest, res: NextApiResponse) =>
-  NextAuth(req, res, {
-    providers: [
-      CredentialsProvider({
-        name: "any username and password",
-        credentials: {
-          username: {
-            label: "Username",
-            type: "text",
-            placeholder: "username",
-          },
-          password: {
-            label: "Password",
-            type: "password",
-            placeholder: "password",
-          },
-        },
-        async authorize() {
-          const user = User.findOne();
+        if (user) return user;
 
-          if (user) return user;
+        return null;
+      },
+    }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    }),
+    EmailProvider({
+      server: process.env.EMAIL_SERVER,
+      from: process.env.EMAIL_FROM,
+      sendVerificationRequest,
+    }),
+  ],
+  callbacks: {
+    async session({ session }) {
+      await dbConnect();
 
-          return null;
-        },
-      }),
-      GitHubProvider({
-        clientId: process.env.GITHUB_CLIENT_ID,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      }),
-      EmailProvider({
-        server: process.env.EMAIL_SERVER,
-        from: process.env.NEXT_PUBLIC_EMAIL_FROM,
-        sendVerificationRequest,
-      }),
-    ],
-    adapter: MongoDBAdapter(clientPromise),
-    secret: process.env.SECRET,
-    session: {
-      strategy: "jwt",
-    },
-    callbacks: {
-      jwt: async ({ token, user, isNewUser }) => {
-        if (user && isNewUser) {
-          try {
-            const randomImage = await getRandomImage();
-            const userToUpdate = await User.findByIdAndUpdate(
-              user.id,
-              {
-                name: user.name || createRandomName(),
-                image: user.image || randomImage,
-                isAdmin: isNewUserAdminByDefault,
-                itemsCollected: [],
-              },
-              { new: true }
-            ).exec();
+      try {
+        const userDoc = await User.findOne({ email: session.user.email });
 
-            await userToUpdate.save();
-          } catch (error) {
-            console.error(error);
-          }
-        }
-        if (user) {
-          token.uid = user.id;
-          try {
-            const existingUser = await User.findById(user.id);
-            token.isAdmin = existingUser.isAdmin;
-          } catch (error) {
-            console.error(error);
-          }
+        if (!userDoc?.name) {
+          userDoc.name = createRandomName();
         }
 
-        return Promise.resolve(token);
-      },
-      session: async ({ session, token }) => {
-        session.user.id = token.uid as string;
-        session.user.isAdmin = token.isAdmin as boolean;
-        return Promise.resolve(session);
-      },
-    },
-    theme: {
-      colorScheme: "auto", // "auto" | "dark" | "light"
-      brandColor: primaryColor, // Hex color value
-      logo: "/android-chrome-192x192.png", // Absolute URL to logo image
-    },
-  })
-);
+        if (!userDoc?.image) {
+          userDoc.image = `https://picsum.photos/seed/${session.user.email}/100/100`;
+        }
 
-export default handler;
+        const updatedUserDoc = await userDoc.save();
+
+        if (updatedUserDoc) {
+          session.user = updatedUserDoc;
+        }
+      } catch (error) {
+        console.error(error);
+      }
+
+      return session;
+    },
+  },
+};
+
+export default NextAuth(nextAuthOptions);

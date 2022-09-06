@@ -6,8 +6,8 @@ import { appTitle } from "config";
 import { AppProps } from "next/app";
 import Error from "next/error";
 import Head from "next/head";
+import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import PropTypes from "prop-types";
 import createEmotionCache from "styles/createEmotionCache";
 import theme from "styles/theme";
 import { SWRConfig } from "swr";
@@ -15,8 +15,15 @@ import { fetcher } from "util/fetcher";
 
 const clientSideEmotionCache = createEmotionCache();
 
-const App = (props: AppProps & { emotionCache: EmotionCache }) => {
-  const { Component, pageProps, emotionCache = clientSideEmotionCache } = props;
+const App = (
+  props: AppProps & { emotionCache: EmotionCache; session: Session }
+) => {
+  const {
+    Component,
+    pageProps,
+    emotionCache = clientSideEmotionCache,
+    session,
+  } = props;
 
   if (pageProps.error) {
     return (
@@ -57,7 +64,7 @@ const App = (props: AppProps & { emotionCache: EmotionCache }) => {
         </Head>
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={theme}>
-            <SessionProvider session={pageProps.session}>
+            <SessionProvider session={session}>
               <CssBaseline />
               <SWRConfig
                 value={{
@@ -77,12 +84,6 @@ const App = (props: AppProps & { emotionCache: EmotionCache }) => {
       </CacheProvider>
     </>
   );
-};
-
-App.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-  pageProps: PropTypes.object.isRequired,
-  emotionCache: PropTypes.object,
 };
 
 export default App;

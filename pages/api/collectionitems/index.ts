@@ -3,19 +3,42 @@ import CollectionItem from "models/CollectionItem";
 import Item from "models/Item";
 import User from "models/User";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/react";
+import { Session, unstable_getServerSession } from "next-auth";
 import nextConnect from "next-connect";
 
-const handler = nextConnect();
+import { nextAuthOptions } from "../auth/[...nextauth]";
+
+type ExtendedRequest = {
+  session: Session;
+};
+
+const handler = nextConnect<NextApiRequest, NextApiResponse>({
+  onError: (error, _req, res) => {
+    if (error instanceof Error) {
+      console.error(error.message);
+      return res.status(500).end(error.message);
+    } else {
+      return res.status(500).end("Something went wrong");
+    }
+  },
+  onNoMatch: (req, res) => {
+    return res.status(404).end(`${req.url} not found`);
+  },
+}).use<{
+  session: Session;
+}>(async (req, res, next) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+  if (!session) return res.status(401).end("Unauthorized");
+  req.session = session;
+  next();
+});
+
 handler.use(middleware);
 
 // GET api/collectionitems
 // Returns all collection items
-handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.get(async (req, res) => {
   try {
-    const session = await getSession({ req });
-    if (!session) throw new Error("User not logged in");
-
     const collectionItems = await CollectionItem.find()
       .select("_id thumbnailUrl")
       .populate("item", "itemDescription")
@@ -29,28 +52,25 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   }
 });
 
-// POST api/collectoinitems
+// POST api/collectionitems
 // Adds collection item
-handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.post<ExtendedRequest>(async (req, res) => {
   try {
-    const session = await getSession({ req });
-    if (!session) throw new Error("User not logged in");
-
     const { imageUrl, thumbnailUrl, item } = req.body;
     const collectionItem = new CollectionItem({
       imageUrl,
       thumbnailUrl,
       item,
-      user: session.user.id,
+      user: req.session.user._id,
     });
     const savedCollectionItem = await collectionItem.save();
 
-    const user = await User.findById(session.user.id);
+    const user = await User.findById(req.session.user._id);
     user.itemsCollected.addToSet(collectionItem);
     await user.save();
 
     const originalItem = await Item.findById(req.body.item);
-    originalItem.usersWhoCollected.addToSet(session.user.id);
+    originalItem.usersWhoCollected.addToSet(req.session.user._id);
     await originalItem.save();
 
     res.status(201).json(savedCollectionItem);

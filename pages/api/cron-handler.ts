@@ -3,14 +3,16 @@ import CollectionItem from "models/CollectionItem";
 import Item from "models/Item";
 import User from "models/User";
 import { NextApiRequest, NextApiResponse } from "next";
-import { dbConnect } from "util/dbConnect";
+import { capitalizeEachWordOfString } from "util/capitalizeEachWordOfString";
+import dbConnect from "util/dbConnect";
 
 const createFakeUsers = () => {
   return Array.from({ length: 10 }, () => ({
     name: faker.name.fullName(),
+    email: faker.internet.email(),
     image: faker.image.avatar(),
     isAdmin: false,
-    email: faker.internet.email(),
+    itemsCollected: [],
   }));
 };
 
@@ -36,7 +38,7 @@ export default async function handler(
           const noun = faker.word.noun();
 
           await Item.create({
-            itemDescription: `${adjective} ${noun}`,
+            itemDescription: capitalizeEachWordOfString(`${adjective} ${noun}`),
             addedBy:
               fakeUsers[Math.floor(Math.random() * fakeUsers.length)]._id,
           });
@@ -72,6 +74,7 @@ export default async function handler(
         res.status(401).json({ success: false });
       }
     } catch (err) {
+      console.error(err);
       res.status(500).json({
         statusCode: 500,
         message: (err as Error).message || "Something went wrong",

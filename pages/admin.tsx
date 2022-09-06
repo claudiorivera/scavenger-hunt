@@ -11,20 +11,52 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import { NotLoggedInMessage } from "components";
-import { useCurrentUser } from "hooks";
 import { CollectionItem } from "models/CollectionItem";
-import { User } from "models/User";
+import UserModel, { User } from "models/User";
 import { Types } from "mongoose";
+import { GetServerSideProps } from "next";
 import Error from "next/error";
-import { useSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth";
 import { useState } from "react";
 import useSWR from "swr";
 import { capitalizeEachWordOfString } from "util/capitalizeEachWordOfString";
+import dbConnect from "util/dbConnect";
 
-const AdminPage = () => {
-  const { data: session } = useSession();
-  const { user } = useCurrentUser();
+import { nextAuthOptions } from "./api/auth/[...nextauth]";
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/sign-in?callbackUrl=/admin",
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    await dbConnect();
+
+    const user = await UserModel.findById(session.user._id).lean().exec();
+
+    return {
+      props: { user: JSON.parse(JSON.stringify(user)) },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {},
+    };
+  }
+};
+
+type Props = {
+  user: User;
+};
+
+const AdminPage = ({ user }: Props) => {
   const [itemDescription, setItemDescription] = useState("");
   const { data: items, mutate: mutateCollectionItems } = useSWR(
     "/api/collectionitems"
@@ -35,12 +67,10 @@ const AdminPage = () => {
   const [isUserDeleteDialogOpen, setIsUserDeleteDialogOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState<Types.ObjectId>();
 
-  if (!session) return <NotLoggedInMessage />;
-  if (!user) return null;
   if (!user.isAdmin)
     return (
       <Typography variant="h5" align="center" gutterBottom>
-        You must be logged in as an admin to view this page.
+        You must be an admin to view this page.
       </Typography>
     );
 

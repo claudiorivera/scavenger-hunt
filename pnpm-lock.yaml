@@ -8,6 +8,7 @@ specifiers:
   '@emotion/styled': 11.10.4
   '@faker-js/faker': 7.5.0
   '@mui/icons-material': 5.10.3
+  '@mui/lab': 5.0.0-alpha.97
   '@mui/material': 5.10.3
   '@mui/styles': 5.10.3
   '@next-auth/mongodb-adapter': 1.0.4
@@ -40,6 +41,7 @@ dependencies:
   '@emotion/server': 11.10.0
   '@emotion/styled': 11.10.4_lxst47gwu5lqjtx2guwl7nfnjm
   '@mui/icons-material': 5.10.3_uvkfhlgw25w6lhmyous67zd66u
+  '@mui/lab': 5.0.0-alpha.97_csuey74pkaqs7dajvyv4snygm4
   '@mui/material': 5.10.3_vbxcdxy3bftsefaguotlgalomu
   '@mui/styles': 5.10.3_7v64pk2mkrohwh22gx7lrz5ive
   '@next-auth/mongodb-adapter': 1.0.4_hsg4ags762nlvvzvfyyp4nfcci
@@ -550,6 +552,39 @@ packages:
       '@mui/material': 5.10.3_vbxcdxy3bftsefaguotlgalomu
       '@types/react': 18.0.18
       react: 18.2.0
+    dev: false
+
+  /@mui/lab/5.0.0-alpha.97_csuey74pkaqs7dajvyv4snygm4:
+    resolution: {integrity: sha512-0qIyXcNJg2PftzUjO5nsa9D2LEiyfA+Zg7EpJMZNtkjCTGjJmqw4cp2nJIFlZDzoFb8DsjhlFl3BWAAZqRRgTw==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@emotion/react': ^11.5.0
+      '@emotion/styled': ^11.3.0
+      '@mui/material': ^5.0.0
+      '@types/react': ^17.0.0 || ^18.0.0
+      react: ^17.0.0 || ^18.0.0
+      react-dom: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@emotion/styled':
+        optional: true
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.18.9
+      '@emotion/react': 11.10.4_p6fq7jdyqwnykllwwkx4b6uid4
+      '@emotion/styled': 11.10.4_lxst47gwu5lqjtx2guwl7nfnjm
+      '@mui/base': 5.0.0-alpha.95_63dfw6rfgd64rl77ptfma4cvt4
+      '@mui/material': 5.10.3_vbxcdxy3bftsefaguotlgalomu
+      '@mui/system': 5.10.3_wpm2ckkcb3o6jfqp3h4kjrjece
+      '@mui/utils': 5.10.3_react@18.2.0
+      '@types/react': 18.0.18
+      clsx: 1.2.1
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-is: 18.2.0
     dev: false
 
   /@mui/material/5.10.3_vbxcdxy3bftsefaguotlgalomu:

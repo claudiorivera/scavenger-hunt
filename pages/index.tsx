@@ -1,27 +1,57 @@
 import { Avatar, Button, Grid, Typography } from "@mui/material";
-import { NotLoggedInMessage } from "components";
-import { useCurrentUser } from "hooks";
+import UserModel, { User } from "models/User";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth";
 import React from "react";
+import dbConnect from "util/dbConnect";
 
-const HomePage = () => {
-  const { data: session } = useSession();
-  const { user } = useCurrentUser();
+import { nextAuthOptions } from "./api/auth/[...nextauth]";
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/sign-in?callbackUrl=/",
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    await dbConnect();
+
+    const user = await UserModel.findById(session.user._id).lean().exec();
+
+    return {
+      props: { user: JSON.parse(JSON.stringify(user)) },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {},
+    };
+  }
+};
+
+type Props = {
+  user: User;
+};
+
+const HomePage = ({ user }: Props) => {
   const router = useRouter();
-
-  if (!session) return <NotLoggedInMessage />;
-  if (!user) return null;
 
   return (
     <Grid container direction="column" alignItems="center" gap={2}>
       <Avatar
-        alt={user.name}
+        alt={user.name ?? user.email}
         src={user.image}
         sx={{ width: 100, height: 100 }}
       />
       <Typography variant="h5" align="center" gutterBottom>
-        {user.name}
+        {user.name ?? user.email}
       </Typography>
 
       <Button

@@ -1,19 +1,35 @@
 import { CheckCircle, RadioButtonUnchecked } from "@mui/icons-material";
 import { Button, Grid, Typography } from "@mui/material";
-import { NotLoggedInMessage } from "components";
 import { useItems } from "hooks";
 import { Item } from "models/Item";
+import { GetServerSideProps } from "next";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth";
+import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import React from "react";
 import useSWR from "swr";
 
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/sign-in?callbackUrl=/items",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
+
 const ItemsPage = () => {
-  const { data: session } = useSession();
   const { items } = useItems();
   const { data: collectedItems } = useSWR("/api/items/collected");
 
-  if (!session) return <NotLoggedInMessage />;
   if (!items || !collectedItems) return null;
 
   const collectedItemIds = collectedItems.map((item: Item) => item._id);

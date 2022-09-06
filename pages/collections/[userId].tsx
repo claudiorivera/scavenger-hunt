@@ -1,39 +1,66 @@
 import { Avatar, Grid, Link, Tooltip, Typography } from "@mui/material";
-import { NotLoggedInMessage } from "components";
 import { Item } from "models/Item";
+import UserModel, { User } from "models/User";
 import { GetServerSideProps } from "next";
-import { useSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth";
+import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import React from "react";
 import useSWR from "swr";
+import dbConnect from "util/dbConnect";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  return {
-    props: {
-      userId: context.query.userId,
-    },
-  };
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  query,
+}) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: `/sign-in?callbackUrl=/collections/${query.userId}`,
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    await dbConnect();
+
+    const user = await UserModel.findById(query.userId);
+
+    return {
+      props: {
+        userId: query.userId,
+        user: JSON.parse(JSON.stringify(user)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {},
+    };
+  }
 };
 
 type CollectionsPageProps = {
   userId: string;
+  user: User;
 };
-const CollectionsPage = ({ userId }: CollectionsPageProps) => {
-  const { data: session } = useSession();
-  const { data: user } = useSWR(`/api/users/${userId}`);
+const CollectionsPage = ({ userId, user }: CollectionsPageProps) => {
   const { data: items } = useSWR(`/api/users/${userId}/collection`);
 
-  if (!session) return <NotLoggedInMessage />;
-  if (!user || !items) return null;
+  if (!items) return null;
 
   return (
     <>
       <Avatar
         sx={{ width: 100, height: 100 }}
-        alt={user.name}
+        alt={user.name ?? user.email}
         src={user.image}
       />
       <Typography variant="h3" align="center">
-        {user.name}
+        {user.name ?? user.email}
       </Typography>
       <Typography variant="h5" align="center" gutterBottom>
         Found the Following Items:
