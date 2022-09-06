@@ -1,8 +1,34 @@
 import { LoadingButton } from "@mui/lab";
 import { Button, TextField, Typography } from "@mui/material";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
+import { unstable_getServerSession } from "next-auth";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+
+import { nextAuthOptions } from "./api/auth/[...nextauth]";
+
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  query,
+}) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: query.callbackUrl || "/",
+        permanent: false,
+      },
+      props: {},
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
 
 export const SignInPage = () => {
   const router = useRouter();
