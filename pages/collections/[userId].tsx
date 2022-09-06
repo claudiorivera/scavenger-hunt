@@ -6,7 +6,7 @@ import { unstable_getServerSession } from "next-auth";
 import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import React from "react";
 import useSWR from "swr";
-import { dbConnect } from "util/dbConnect";
+import dbConnect from "util/dbConnect";
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,

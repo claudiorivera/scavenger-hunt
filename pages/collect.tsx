@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Session, unstable_getServerSession } from "next-auth";
 import React, { FormEvent, SyntheticEvent, useEffect, useState } from "react";
-import { dbConnect } from "util/dbConnect";
+import dbConnect from "util/dbConnect";
 
 import { nextAuthOptions } from "./api/auth/[...nextauth]";
 

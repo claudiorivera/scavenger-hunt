@@ -4,7 +4,7 @@ import Item from "models/Item";
 import User from "models/User";
 import { NextApiRequest, NextApiResponse } from "next";
 import { capitalizeEachWordOfString } from "util/capitalizeEachWordOfString";
-import { dbConnect } from "util/dbConnect";
+import dbConnect from "util/dbConnect";
 
 const createFakeUsers = () => {
   return Array.from({ length: 10 }, () => ({

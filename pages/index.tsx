@@ -4,7 +4,7 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { unstable_getServerSession } from "next-auth";
 import React from "react";
-import { dbConnect } from "util/dbConnect";
+import dbConnect from "util/dbConnect";
 
 import { nextAuthOptions } from "./api/auth/[...nextauth]";
 

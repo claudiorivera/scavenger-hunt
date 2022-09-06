@@ -20,7 +20,7 @@ import { unstable_getServerSession } from "next-auth";
 import { useState } from "react";
 import useSWR from "swr";
 import { capitalizeEachWordOfString } from "util/capitalizeEachWordOfString";
-import { dbConnect } from "util/dbConnect";
+import dbConnect from "util/dbConnect";
 
 import { nextAuthOptions } from "./api/auth/[...nextauth]";
 

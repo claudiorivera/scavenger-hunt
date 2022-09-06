@@ -20,7 +20,7 @@ import Error from "next/error";
 import { useRouter } from "next/router";
 import { unstable_getServerSession } from "next-auth";
 import { FormEvent, SyntheticEvent, useState } from "react";
-import { dbConnect } from "util/dbConnect";
+import dbConnect from "util/dbConnect";
 
 import { nextAuthOptions } from "./api/auth/[...nextauth]";
 

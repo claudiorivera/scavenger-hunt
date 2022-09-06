@@ -1,19 +1,13 @@
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import middleware from "middleware";
 import User from "models/User";
-import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
-import nextConnect from "next-connect";
 import { createRandomName } from "util/createRandomName";
+import dbConnect from "util/dbConnect";
 import clientPromise from "util/mongoDb";
 import { sendVerificationRequest } from "util/sendVerificationRequest";
-
-const handler = nextConnect();
-
-handler.use(middleware);
 
 export const nextAuthOptions: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
@@ -26,7 +20,9 @@ export const nextAuthOptions: NextAuthOptions = {
       name: "any username and password",
       credentials: {},
       async authorize() {
-        const user = User.findOne();
+        await dbConnect();
+
+        const user = await User.findOne().lean().exec();
 
         if (user) return user;
 
@@ -45,34 +41,31 @@ export const nextAuthOptions: NextAuthOptions = {
   ],
   callbacks: {
     async session({ session }) {
-      try {
-        const userDoc = await User.findOneAndUpdate(
-          { email: session.user.email },
-          {
-            email: session.user.email,
-            name: session.user.name ?? createRandomName(),
-            image:
-              session.user.image ??
-              `https://picsum.photos/seed/${session.user.email}/100/100`,
-            itemsCollected: session.user.itemsCollected ?? [],
-          },
-          { upsert: true, new: true }
-        );
+      await dbConnect();
 
-        if (userDoc) {
-          session.user = userDoc;
+      try {
+        const userDoc = await User.findOne({ email: session.user.email });
+
+        if (!userDoc?.name) {
+          userDoc.name = createRandomName();
+        }
+
+        if (!userDoc?.image) {
+          userDoc.image = `https://picsum.photos/seed/${session.user.email}/100/100`;
+        }
+
+        const updatedUserDoc = await userDoc.save();
+
+        if (updatedUserDoc) {
+          session.user = updatedUserDoc;
         }
       } catch (error) {
         console.error(error);
-      } finally {
-        return session;
       }
+
+      return session;
     },
   },
 };
 
-handler.use((req: NextApiRequest, res: NextApiResponse) =>
-  NextAuth(req, res, nextAuthOptions)
-);
-
-export default handler;
+export default NextAuth(nextAuthOptions);
