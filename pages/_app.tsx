@@ -16,7 +16,12 @@ import { fetcher } from "util/fetcher";
 const clientSideEmotionCache = createEmotionCache();
 
 const App = (
-  props: AppProps & { emotionCache: EmotionCache; session: Session }
+  props: AppProps<{
+    error: {
+      statusCode: number;
+      message: string;
+    };
+  }> & { emotionCache: EmotionCache; session: Session }
 ) => {
   const {
     Component,
