@@ -22,7 +22,7 @@ specifiers:
   eslint-config-next: 12.3.0
   eslint-plugin-simple-import-sort: 8.0.0
   eslint-plugin-unused-imports: 2.0.0
-  mongodb: 4.9.1
+  mongodb: 4.10.0
   mongoose: 6.6.1
   next: 12.3.0
   next-auth: 4.10.3
@@ -44,9 +44,9 @@ dependencies:
   '@mui/lab': 5.0.0-alpha.100_n7jfofvadb3zy6pl32kkt6ls24
   '@mui/material': 5.10.6_af5ln35zuaotaffazii6n6bke4
   '@mui/styles': 5.10.6_w5j4k42lgipnm43s3brx6h3c34
-  '@next-auth/mongodb-adapter': 1.0.4_hsg4ags762nlvvzvfyyp4nfcci
+  '@next-auth/mongodb-adapter': 1.0.4_bzforxih35ckx54u5nw5ygbuca
   axios: 0.27.2
-  mongodb: 4.9.1
+  mongodb: 4.10.0
   mongoose: 6.6.1
   next: 12.3.0_ir3quccc6i62x6qn6jjhyjjiey
   next-auth: 4.10.3_br325yun545l5vwdnneu6tztxq
@@ -755,13 +755,13 @@ packages:
       react-is: 18.2.0
     dev: false
 
-  /@next-auth/mongodb-adapter/1.0.4_hsg4ags762nlvvzvfyyp4nfcci:
+  /@next-auth/mongodb-adapter/1.0.4_bzforxih35ckx54u5nw5ygbuca:
     resolution: {integrity: sha512-vRSPo2o9Ok+S5JpOvtgVtMExPFgrg2ybz1zVs0YJwUZ+GIPHKRGYxa1NsJRmWjZ1DesrUDkvoInzGAmE1dWx6Q==}
     peerDependencies:
       mongodb: ^4.1.1
       next-auth: ^4
     dependencies:
-      mongodb: 4.9.1
+      mongodb: 4.10.0
       next-auth: 4.10.3_br325yun545l5vwdnneu6tztxq
     dev: false
 
@@ -2434,6 +2434,18 @@ packages:
     dependencies:
       '@types/whatwg-url': 8.2.1
       whatwg-url: 11.0.0
+    dev: false
+
+  /mongodb/4.10.0:
+    resolution: {integrity: sha512-My2QxLTw0Cc1O9gih0mz4mqo145Jq4rLAQx0Glk/Ha9iYBzYpt4I2QFNRIh35uNFNfe8KFQcdwY1/HKxXBkinw==}
+    engines: {node: '>=12.9.0'}
+    dependencies:
+      bson: 4.7.0
+      denque: 2.1.0
+      mongodb-connection-string-url: 2.5.3
+      socks: 2.7.0
+    optionalDependencies:
+      saslprep: 1.0.3
     dev: false
 
   /mongodb/4.9.1:
