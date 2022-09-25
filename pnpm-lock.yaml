@@ -25,7 +25,7 @@ specifiers:
   mongodb: 4.10.0
   mongoose: 6.6.1
   next: 12.3.1
-  next-auth: 4.10.3
+  next-auth: 4.12.0
   next-connect: 0.13.0
   nodemailer: 6.7.8
   prop-types: 15.8.1
@@ -44,12 +44,12 @@ dependencies:
   '@mui/lab': 5.0.0-alpha.100_pzzt3nof6h4eaeyavklkqhlzsy
   '@mui/material': 5.10.6_ikcgkdnp4bn3rgptamntbhbo7e
   '@mui/styles': 5.10.6_iapumuv4e6jcjznwuxpf4tt22e
-  '@next-auth/mongodb-adapter': 1.0.4_bzforxih35ckx54u5nw5ygbuca
+  '@next-auth/mongodb-adapter': 1.0.4_xoms3z46zso3abmzr3qexq2tgy
   axios: 0.27.2
   mongodb: 4.10.0
   mongoose: 6.6.1
   next: 12.3.1_ir3quccc6i62x6qn6jjhyjjiey
-  next-auth: 4.10.3_br325yun545l5vwdnneu6tztxq
+  next-auth: 4.12.0_dbvwomqggpr34agl77wnoezghu
   next-connect: 0.13.0
   nodemailer: 6.7.8
   prop-types: 15.8.1
@@ -242,13 +242,6 @@ packages:
       core-js-pure: 3.22.6
       regenerator-runtime: 0.13.9
     dev: true
-
-  /@babel/runtime/7.18.0:
-    resolution: {integrity: sha512-YMQvx/6nKEaucl0MY56mwIG483xk8SDNdlUwb2Ts6FUpr7fm85DxEmsY18LXBNhcTz6tO6JwZV8w1W06v8UKeg==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      regenerator-runtime: 0.13.9
-    dev: false
 
   /@babel/runtime/7.18.9:
     resolution: {integrity: sha512-lkqXDcvlFT5rvEjiu6+QYO+1GXrEHRo2LOtS7E4GtX5ESIZOgepqsZBVIj6Pv+a6zqsya9VCgiK1KAK4BvJDAw==}
@@ -755,14 +748,14 @@ packages:
       react-is: 18.2.0
     dev: false
 
-  /@next-auth/mongodb-adapter/1.0.4_bzforxih35ckx54u5nw5ygbuca:
+  /@next-auth/mongodb-adapter/1.0.4_xoms3z46zso3abmzr3qexq2tgy:
     resolution: {integrity: sha512-vRSPo2o9Ok+S5JpOvtgVtMExPFgrg2ybz1zVs0YJwUZ+GIPHKRGYxa1NsJRmWjZ1DesrUDkvoInzGAmE1dWx6Q==}
     peerDependencies:
       mongodb: ^4.1.1
       next-auth: ^4
     dependencies:
       mongodb: 4.10.0
-      next-auth: 4.10.3_br325yun545l5vwdnneu6tztxq
+      next-auth: 4.12.0_dbvwomqggpr34agl77wnoezghu
     dev: false
 
   /@next/env/12.3.1:
@@ -1296,8 +1289,8 @@ packages:
     dependencies:
       safe-buffer: 5.1.2
 
-  /cookie/0.4.2:
-    resolution: {integrity: sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==}
+  /cookie/0.5.0:
+    resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
     dev: false
 
@@ -2212,8 +2205,8 @@ packages:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
     dev: true
 
-  /jose/4.8.1:
-    resolution: {integrity: sha512-+/hpTbRcCw9YC0TOfN1W47pej4a9lRmltdOVdRLz5FP5UvUq3CenhXjQK7u/8NdMIIShMXYAh9VLPhc7TjhvFw==}
+  /jose/4.9.3:
+    resolution: {integrity: sha512-f8E/z+T3Q0kA9txzH2DKvH/ds2uggcw0m3vVPSB9HrSkrQ7mojjifvS7aR8cw+lQl2Fcmx9npwaHpM/M3GD8UQ==}
     dev: false
 
   /js-sdsl/4.1.4:
@@ -2512,10 +2505,11 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-auth/4.10.3_br325yun545l5vwdnneu6tztxq:
-    resolution: {integrity: sha512-7zc4aXYc/EEln7Pkcsn21V1IevaTZsMLJwapfbnKA4+JY0+jFzWbt5p/ljugesGIrN4VOZhpZIw50EaFZyghJQ==}
+  /next-auth/4.12.0_dbvwomqggpr34agl77wnoezghu:
+    resolution: {integrity: sha512-TqNJBsVavN60ZkZmoe/YZ13qODuMeXxGgVkpbf8ukB8S7KPKxm+zZPPY76vtTppbPFl6PqFIxzEhNodB2nDStg==}
     engines: {node: ^12.19.0 || ^14.15.0 || ^16.13.0}
     peerDependencies:
+      next: 12.2.5
       nodemailer: ^6.6.5
       react: ^17.0.2 || ^18
       react-dom: ^17.0.2 || ^18
@@ -2523,10 +2517,11 @@ packages:
       nodemailer:
         optional: true
     dependencies:
-      '@babel/runtime': 7.18.0
+      '@babel/runtime': 7.19.0
       '@panva/hkdf': 1.0.2
-      cookie: 0.4.2
-      jose: 4.8.1
+      cookie: 0.5.0
+      jose: 4.9.3
+      next: 12.3.1_ir3quccc6i62x6qn6jjhyjjiey
       nodemailer: 6.7.8
       oauth: 0.9.15
       openid-client: 5.1.6
@@ -2681,7 +2676,7 @@ packages:
     resolution: {integrity: sha512-HTFaXWdUHvLFw4GaEMgC0jXYBgpjgzQQNHW1pZsSqJorSgrXzxJ+4u/LWCGaClDEse5HLjXRV+zU5Bn3OefiZw==}
     engines: {node: ^12.19.0 || ^14.15.0 || ^16.13.0}
     dependencies:
-      jose: 4.8.1
+      jose: 4.9.3
       lru-cache: 6.0.0
       object-hash: 2.2.0
       oidc-token-hash: 5.0.1
