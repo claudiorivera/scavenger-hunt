@@ -12,7 +12,7 @@ specifiers:
   '@mui/material': 5.10.6
   '@mui/styles': 5.10.6
   '@next-auth/mongodb-adapter': 1.1.0
-  '@types/node': 16.11.60
+  '@types/node': 16.11.61
   '@types/nodemailer': 6.4.6
   '@types/prop-types': 15.7.5
   '@types/react': 18.0.21
@@ -61,7 +61,7 @@ dependencies:
 devDependencies:
   '@babel/core': 7.19.1
   '@faker-js/faker': 7.5.0
-  '@types/node': 16.11.60
+  '@types/node': 16.11.61
   '@types/nodemailer': 6.4.6
   '@types/prop-types': 15.7.5
   '@types/react': 18.0.21
@@ -928,13 +928,13 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/node/16.11.60:
-    resolution: {integrity: sha512-kYIYa1D1L+HDv5M5RXQeEu1o0FKA6yedZIoyugm/MBPROkLpX4L7HRxMrPVyo8bnvjpW/wDlqFNGzXNMb7AdRw==}
+  /@types/node/16.11.61:
+    resolution: {integrity: sha512-HSz3rzeislhVDZvmu65QZaEquYLQT52qcaDCMIX/SdOR8e+XgKbP7D8f8X36qEJBjlJvB1vURE4MGIi6Wnj5LA==}
 
   /@types/nodemailer/6.4.6:
     resolution: {integrity: sha512-pD6fL5GQtUKvD2WnPmg5bC2e8kWCAPDwMPmHe/ohQbW+Dy0EcHgZ2oCSuPlWNqk74LS5BVMig1SymQbFMPPK3w==}
     dependencies:
-      '@types/node': 16.11.60
+      '@types/node': 16.11.61
     dev: true
 
   /@types/parse-json/4.0.0:
@@ -979,7 +979,7 @@ packages:
   /@types/whatwg-url/8.2.1:
     resolution: {integrity: sha512-2YubE1sjj5ifxievI5Ge1sckb9k/Er66HyR2c+3+I6VDUUg1TLPdYYTEbQ+DjRkS4nTxMJhgWfSfMRD2sl2EYQ==}
     dependencies:
-      '@types/node': 16.11.60
+      '@types/node': 16.11.61
       '@types/webidl-conversions': 6.1.1
     dev: false
 
