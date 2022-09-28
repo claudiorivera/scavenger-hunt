@@ -25,7 +25,7 @@ specifiers:
   mongodb: 4.10.0
   mongoose: 6.6.2
   next: 12.3.1
-  next-auth: 4.12.0
+  next-auth: 4.12.2
   next-connect: 0.13.0
   nodemailer: 6.7.8
   prop-types: 15.8.1
@@ -44,12 +44,12 @@ dependencies:
   '@mui/lab': 5.0.0-alpha.101_5ezzvol5cv64qevncqydblayfu
   '@mui/material': 5.10.7_ikcgkdnp4bn3rgptamntbhbo7e
   '@mui/styles': 5.10.7_iapumuv4e6jcjznwuxpf4tt22e
-  '@next-auth/mongodb-adapter': 1.1.0_xoms3z46zso3abmzr3qexq2tgy
+  '@next-auth/mongodb-adapter': 1.1.0_qqo6gdduo35kgxxw4qtelkwkxe
   axios: 0.27.2
   mongodb: 4.10.0
   mongoose: 6.6.2
   next: 12.3.1_6tziyx3dehkoeijunclpkpolha
-  next-auth: 4.12.0_dbvwomqggpr34agl77wnoezghu
+  next-auth: 4.12.2_dbvwomqggpr34agl77wnoezghu
   next-connect: 0.13.0
   nodemailer: 6.7.8
   prop-types: 15.8.1
@@ -753,14 +753,14 @@ packages:
       react-is: 18.2.0
     dev: false
 
-  /@next-auth/mongodb-adapter/1.1.0_xoms3z46zso3abmzr3qexq2tgy:
+  /@next-auth/mongodb-adapter/1.1.0_qqo6gdduo35kgxxw4qtelkwkxe:
     resolution: {integrity: sha512-jB63vZYwgyVQFNGXwNaxZODVAsdZZCuCvN+uY8mp0lXLIstd/4/GbevWK4eHlUvoteOOKlYJxW46FbRuuh+WBw==}
     peerDependencies:
       mongodb: ^4.1.1
       next-auth: ^4
     dependencies:
       mongodb: 4.10.0
-      next-auth: 4.12.0_dbvwomqggpr34agl77wnoezghu
+      next-auth: 4.12.2_dbvwomqggpr34agl77wnoezghu
     dev: false
 
   /@next/env/12.3.1:
@@ -2514,11 +2514,11 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-auth/4.12.0_dbvwomqggpr34agl77wnoezghu:
-    resolution: {integrity: sha512-TqNJBsVavN60ZkZmoe/YZ13qODuMeXxGgVkpbf8ukB8S7KPKxm+zZPPY76vtTppbPFl6PqFIxzEhNodB2nDStg==}
+  /next-auth/4.12.2_dbvwomqggpr34agl77wnoezghu:
+    resolution: {integrity: sha512-B25iFUIKYa2pRMWRFPIQWv84WJydqIsv6EbriNuzqNSZnxnlmpsrmJrTeMMLf+9a3qf9FG8enxDmDntmwnBkDQ==}
     engines: {node: ^12.19.0 || ^14.15.0 || ^16.13.0}
     peerDependencies:
-      next: 12.2.5
+      next: ^12.2.5
       nodemailer: ^6.6.5
       react: ^17.0.2 || ^18
       react-dom: ^17.0.2 || ^18
