@@ -20,7 +20,7 @@
     "@next-auth/mongodb-adapter": "1.1.0",
     "axios": "0.27.2",
     "mongodb": "4.10.0",
-    "mongoose": "6.6.2",
+    "mongoose": "6.6.3",
     "next": "12.3.1",
     "next-auth": "4.12.2",
     "next-connect": "0.13.0",
