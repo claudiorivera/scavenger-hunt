@@ -44,7 +44,9 @@ export const nextAuthOptions: NextAuthOptions = {
       await dbConnect();
 
       try {
-        const userDoc = await User.findOne({ email: session.user.email });
+        const userDoc = await User.findOne({
+          email: session.user.email,
+        }).exec();
 
         if (!userDoc?.name) {
           userDoc.name = createRandomName();

@@ -43,6 +43,8 @@ type Props = {
 const HomePage = ({ user }: Props) => {
   const router = useRouter();
 
+  if (!user) return null;
+
   return (
     <Grid container direction="column" alignItems="center" gap={2}>
       <Avatar
