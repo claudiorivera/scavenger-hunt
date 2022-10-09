@@ -11,7 +11,7 @@ specifiers:
   '@mui/lab': 5.0.0-alpha.102
   '@mui/material': 5.10.8
   '@mui/styles': 5.10.8
-  '@next-auth/mongodb-adapter': 1.1.0
+  '@next-auth/mongodb-adapter': 1.1.1
   '@types/node': 16.11.64
   '@types/nodemailer': 6.4.6
   '@types/prop-types': 15.7.5
@@ -44,7 +44,7 @@ dependencies:
   '@mui/lab': 5.0.0-alpha.102_ej5cswvk7ic6gea53ovjkapqie
   '@mui/material': 5.10.8_ikcgkdnp4bn3rgptamntbhbo7e
   '@mui/styles': 5.10.8_iapumuv4e6jcjznwuxpf4tt22e
-  '@next-auth/mongodb-adapter': 1.1.0_aeh7mgb7q7t53gjsz6a6fjr5qu
+  '@next-auth/mongodb-adapter': 1.1.1_aeh7mgb7q7t53gjsz6a6fjr5qu
   axios: 1.0.0
   mongodb: 4.10.0
   mongoose: 6.6.5
@@ -749,8 +749,8 @@ packages:
       react-is: 18.2.0
     dev: false
 
-  /@next-auth/mongodb-adapter/1.1.0_aeh7mgb7q7t53gjsz6a6fjr5qu:
-    resolution: {integrity: sha512-jB63vZYwgyVQFNGXwNaxZODVAsdZZCuCvN+uY8mp0lXLIstd/4/GbevWK4eHlUvoteOOKlYJxW46FbRuuh+WBw==}
+  /@next-auth/mongodb-adapter/1.1.1_aeh7mgb7q7t53gjsz6a6fjr5qu:
+    resolution: {integrity: sha512-X5O4U4l2M8nyp/B3qF5GOr/JJw2ShKgWfTZRa80Y5CUzTPPmf09ggL5v5UwCmz9l2RIv2GUxO8hK4qrcaZvDRw==}
     peerDependencies:
       mongodb: ^4.1.1
       next-auth: ^4
