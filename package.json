@@ -17,7 +17,7 @@
     "@mui/lab": "5.0.0-alpha.102",
     "@mui/material": "5.10.8",
     "@mui/styles": "5.10.8",
-    "@next-auth/mongodb-adapter": "1.1.0",
+    "@next-auth/mongodb-adapter": "1.1.1",
     "axios": "1.0.0",
     "mongodb": "4.10.0",
     "mongoose": "6.6.5",
