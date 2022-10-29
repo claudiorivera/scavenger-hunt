@@ -6,9 +6,9 @@ import {
   useTheme,
 } from "@mui/material";
 import { appTitle } from "config";
-import Link from "next/link";
 
 import { DesktopMenu } from "./DesktopMenu";
+import { Link } from "./Link";
 import { MobileMenu } from "./MobileMenu";
 
 export const MainAppBar = () => {
@@ -23,14 +23,14 @@ export const MainAppBar = () => {
       position="sticky"
     >
       <Toolbar>
-        <Link href="/">
+        <Link href="/" sx={{ mr: "auto" }}>
           <Typography
-            variant="h6"
             sx={{
               flexGrow: 1,
               textDecoration: "none",
-              cursor: "pointer",
-              fontWeight: "bold",
+              color: theme.palette.primary.contrastText,
+              fontWeight: 700,
+              fontSize: "1.5rem",
             }}
           >
             {appTitle}

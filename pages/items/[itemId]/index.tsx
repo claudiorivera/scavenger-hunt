@@ -1,10 +1,11 @@
 import { Visibility } from "@mui/icons-material";
 import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
+import { Link } from "components";
 import { showItemAttribution } from "config";
 import { User } from "models/User";
 import { GetServerSideProps } from "next";
-import Link from "next/link";
 import { unstable_getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
 import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import useSWR from "swr";
 
@@ -27,17 +28,17 @@ export const getServerSideProps: GetServerSideProps = async ({
   return {
     props: {
       itemId: query.itemId,
-      user: session.user,
     },
   };
 };
 
 type ItemDetailsPageProps = {
   itemId: string;
-  user: User;
 };
 
-const ItemDetailsPage = ({ itemId, user }: ItemDetailsPageProps) => {
+const ItemDetailsPage = ({ itemId }: ItemDetailsPageProps) => {
+  const { data: session } = useSession();
+  const user = session?.user as User;
   const { data: item } = useSWR(`/api/items/${itemId}`);
 
   if (!item) return null;
@@ -59,7 +60,10 @@ const ItemDetailsPage = ({ itemId, user }: ItemDetailsPageProps) => {
           sx={{ mb: 2 }}
         >
           <Typography variant="caption">Added by:&nbsp;&nbsp;</Typography>
-          <Link href={`/collections/${item.addedBy._id}`}>
+          <Link
+            href={`/collections/${item.addedBy._id}`}
+            sx={{ textDecoration: "none" }}
+          >
             <Box
               sx={{
                 display: "flex",
@@ -92,7 +96,11 @@ const ItemDetailsPage = ({ itemId, user }: ItemDetailsPageProps) => {
             sx={{ mb: 2 }}
           >
             <Grid item sx={{ cursor: "pointer" }}>
-              <Link color="inherit" href={`/collections/${user._id}`}>
+              <Link
+                color="inherit"
+                href={`/collections/${user._id}`}
+                sx={{ textDecoration: "none" }}
+              >
                 <Avatar
                   sx={{ mr: 2, width: 50, height: 50 }}
                   alt={user.name ?? user.email}
@@ -104,7 +112,10 @@ const ItemDetailsPage = ({ itemId, user }: ItemDetailsPageProps) => {
               {user.name ?? user.email}
             </Grid>
             <Grid item>
-              <Link href={`/items/${item._id}/foundby/${user._id}`}>
+              <Link
+                href={`/items/${item._id}/foundby/${user._id}`}
+                sx={{ textDecoration: "none" }}
+              >
                 <Button variant="contained" color="secondary">
                   <Visibility />
                 </Button>
@@ -121,7 +132,10 @@ const ItemDetailsPage = ({ itemId, user }: ItemDetailsPageProps) => {
         </Typography>
       )}
       {!userIdsWhoCollected.includes(user._id) && (
-        <Link href={`/collect?itemId=${item._id}`}>
+        <Link
+          href={`/collect?itemId=${item._id}`}
+          sx={{ textDecoration: "none" }}
+        >
           <Button fullWidth variant="contained" color="secondary">
             Found It?
           </Button>
