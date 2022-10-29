@@ -1,9 +1,9 @@
 import { CheckCircle, RadioButtonUnchecked } from "@mui/icons-material";
 import { Button, Grid, Typography } from "@mui/material";
+import { Link } from "components";
 import { useItems } from "hooks";
 import { Item } from "models/Item";
 import { GetServerSideProps } from "next";
-import Link from "next/link";
 import { unstable_getServerSession } from "next-auth";
 import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import React from "react";
@@ -48,7 +48,7 @@ const ItemsPage = () => {
           alignItems="center"
         >
           <Grid item sx={{ flexGrow: 1, mb: 2 }}>
-            <Link href={`/items/${_id}`}>
+            <Link href={`/items/${_id}`} sx={{ textDecoration: "none" }}>
               <Button fullWidth variant="contained" color="secondary">
                 {itemDescription}
               </Button>

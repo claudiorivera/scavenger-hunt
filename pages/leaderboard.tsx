@@ -1,7 +1,7 @@
-import { Avatar, Box, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Grid, Typography, useTheme } from "@mui/material";
+import { Link } from "components";
 import UserModel, { User } from "models/User";
 import { GetServerSideProps } from "next";
-import Link from "next/link";
 import { unstable_getServerSession } from "next-auth";
 import React from "react";
 import dbConnect from "util/dbConnect";
@@ -46,6 +46,7 @@ type Props = {
 };
 
 const LeaderboardPage = ({ users }: Props) => {
+  const theme = useTheme();
   return (
     <>
       <Typography variant="h3" align="center" gutterBottom>
@@ -57,7 +58,14 @@ const LeaderboardPage = ({ users }: Props) => {
             key={String(user._id)}
             sx={{ cursor: "pointer", width: "100%", mb: 1 }}
           >
-            <Link href={`/collections/${user._id}`}>
+            <Link
+              href={`/collections/${user._id}`}
+              sx={{
+                textDecoration: "none",
+                color: theme.palette.text.primary,
+                ":hover": { color: theme.palette.text.secondary },
+              }}
+            >
               <Grid container alignItems="center" sx={{ mb: 1 }} gap={1}>
                 <Grid item>
                   <Avatar

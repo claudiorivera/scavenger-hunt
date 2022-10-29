@@ -11,15 +11,15 @@ export const DesktopMenu = () => {
   return (
     <>
       {userLinks.map(({ title, url }) => (
-        <Link passHref key={title} href={url}>
-          <Button color="inherit">{title}</Button>
-        </Link>
+        <Button color="inherit" key={title} href={url} LinkComponent={Link}>
+          {title}
+        </Button>
       ))}
       {session.user.isAdmin &&
         adminLinks.map(({ title, url }) => (
-          <Link passHref key={title} href={url}>
-            <Button color="inherit">{title}</Button>
-          </Link>
+          <Button color="inherit" key={title} href={url} LinkComponent={Link}>
+            {title}
+          </Button>
         ))}
       <Button
         color="inherit"

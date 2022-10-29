@@ -7,11 +7,11 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
+import { Link } from "components";
 import ItemModel, { Item } from "models/Item";
 import { GetServerSideProps } from "next";
 import Error from "next/error";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { Session, unstable_getServerSession } from "next-auth";
 import React, { FormEvent, SyntheticEvent, useEffect, useState } from "react";
@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
     return {
       props: {
-        session,
+        session: JSON.parse(JSON.stringify(session)),
         uncollectedItems: JSON.parse(JSON.stringify(uncollectedItems)),
       },
     };
@@ -220,8 +220,8 @@ const CollectPage = ({ session, uncollectedItems }: Props) => {
               <Box sx={{ mb: 1 }}>
                 <Image
                   unoptimized
-                  width="400px"
-                  height="400px"
+                  width={400}
+                  height={400}
                   src={previewSource}
                   alt="Item image"
                 />
@@ -253,7 +253,11 @@ const CollectPage = ({ session, uncollectedItems }: Props) => {
             </Button>
           )}
           {!!currentItem && (
-            <Link passHref href={`/items/${currentItem._id}`}>
+            <Link
+              passHref
+              href={`/items/${currentItem._id}`}
+              sx={{ textDecoration: "none" }}
+            >
               <Button
                 size="large"
                 fullWidth
@@ -273,8 +277,8 @@ const CollectPage = ({ session, uncollectedItems }: Props) => {
           </Typography>
           <Image
             src={collectSuccessImageUrl as string}
-            height="500px"
-            width="500px"
+            height={500}
+            width={500}
             alt="Successfully uploaded photo"
           />
           {!!uncollectedItems?.length && (

@@ -1,8 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
+import { Link } from "components";
 import { User } from "models/User";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { unstable_getServerSession } from "next-auth";
 import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import React from "react";
@@ -57,20 +57,28 @@ const ItemFoundByDetails = ({
       </Typography>
       <Box sx={{ mb: 1 }}>
         <Image
-          height="512px"
-          width="512px"
+          height={512}
+          width={512}
           src={collectionItem.imageUrl}
           alt={collectionItem.item.itemDescription}
         />
       </Box>
       {!collectionItem.item.usersWhoCollected.includes(user._id) && (
-        <Link passHref href={`/collect?itemId=${collectionItem.item._id}`}>
+        <Link
+          passHref
+          href={`/collect?itemId=${collectionItem.item._id}`}
+          sx={{ textDecoration: "none" }}
+        >
           <Button fullWidth variant="contained" color="secondary">
             Found It?
           </Button>
         </Link>
       )}
-      <Link passHref href={`/items/${collectionItem.item._id}`}>
+      <Link
+        passHref
+        href={`/items/${collectionItem.item._id}`}
+        sx={{ textDecoration: "none" }}
+      >
         <Button fullWidth variant="contained" color="secondary">
           See Who Found This
         </Button>
