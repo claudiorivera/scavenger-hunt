@@ -35,7 +35,7 @@
   "devDependencies": {
     "@babel/core": "7.19.6",
     "@faker-js/faker": "7.6.0",
-    "@types/node": "18.11.8",
+    "@types/node": "18.11.9",
     "@types/nodemailer": "6.4.6",
     "@types/prop-types": "15.7.5",
     "@types/react": "18.0.24",
