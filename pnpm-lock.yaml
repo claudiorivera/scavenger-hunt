@@ -26,7 +26,7 @@ specifiers:
   mongodb: 4.11.0
   mongoose: 6.7.1
   next: 13.0.2
-  next-auth: 4.15.0
+  next-auth: 4.15.1
   next-connect: 0.13.0
   nodemailer: 6.8.0
   prop-types: 15.8.1
@@ -45,13 +45,13 @@ dependencies:
   '@mui/lab': 5.0.0-alpha.106_tlfynpmadj7vbqapzbw2b6d6kq
   '@mui/material': 5.10.12_gs4twfomdgooimayvnfrqgiwam
   '@mui/styles': 5.10.10_bbvjflvjoibwhtpmedigb26h6y
-  '@next-auth/mongodb-adapter': 1.1.1_c2hs3f6tdo2m2hud5hzs3zngde
+  '@next-auth/mongodb-adapter': 1.1.1_4ogxjfkriolejqoxbovs2743d4
   axios: 1.1.3
   clsx: 1.2.1
   mongodb: 4.11.0
   mongoose: 6.7.1
   next: 13.0.2_qtpcxnaaarbm4ws7ughq6oxfve
-  next-auth: 4.15.0_vo2mwhatbdlbtvmnsv5k22xfpu
+  next-auth: 4.15.1_vo2mwhatbdlbtvmnsv5k22xfpu
   next-connect: 0.13.0
   nodemailer: 6.8.0
   prop-types: 15.8.1
@@ -1464,14 +1464,14 @@ packages:
       react-is: 18.2.0
     dev: false
 
-  /@next-auth/mongodb-adapter/1.1.1_c2hs3f6tdo2m2hud5hzs3zngde:
+  /@next-auth/mongodb-adapter/1.1.1_4ogxjfkriolejqoxbovs2743d4:
     resolution: {integrity: sha512-X5O4U4l2M8nyp/B3qF5GOr/JJw2ShKgWfTZRa80Y5CUzTPPmf09ggL5v5UwCmz9l2RIv2GUxO8hK4qrcaZvDRw==}
     peerDependencies:
       mongodb: ^4.1.1
       next-auth: ^4
     dependencies:
       mongodb: 4.11.0
-      next-auth: 4.15.0_vo2mwhatbdlbtvmnsv5k22xfpu
+      next-auth: 4.15.1_vo2mwhatbdlbtvmnsv5k22xfpu
     dev: false
 
   /@next/env/13.0.2:
@@ -3236,11 +3236,11 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-auth/4.15.0_vo2mwhatbdlbtvmnsv5k22xfpu:
-    resolution: {integrity: sha512-IasNzGLM2VlmyioDdZaRwBBBm8b5xo+zbbqVWHFh0bY6iQUZ3vuudrsdHNdxkXV3LSHdKNaoWEpYr4BydB7mCw==}
-    engines: {node: ^12.19.0 || ^14.15.0 || ^16.13.0}
+  /next-auth/4.15.1_vo2mwhatbdlbtvmnsv5k22xfpu:
+    resolution: {integrity: sha512-yB/cSEqslaXAsLZ3lvkJbB7bRR5JeZvfUXSw0CmWeP+TaMZWB85fG9PWdfBeFrDCLBsoyATw9FF6fzApE0SxSw==}
+    engines: {node: ^12.19.0 || ^14.15.0 || ^16.13.0 || ^18.12.0}
     peerDependencies:
-      next: ^12.2.5
+      next: ^12.2.5 || ^13
       nodemailer: ^6.6.5
       react: ^17.0.2 || ^18
       react-dom: ^17.0.2 || ^18
