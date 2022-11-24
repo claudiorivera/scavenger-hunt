@@ -13,6 +13,7 @@ function generateUserCreateInput(): Prisma.UserCreateInput {
     emailVerified: faker.date.past(),
     image: faker.image.avatar(),
     name: faker.name.fullName(),
+    isDemoUser: true,
   };
 }
 

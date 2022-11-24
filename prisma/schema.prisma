@@ -49,7 +49,8 @@ model User {
   emailVerified DateTime?
   image         String?
 
-  isAdmin Boolean @default(false)
+  isAdmin    Boolean @default(false)
+  isDemoUser Boolean @default(false)
 
   accounts Account[]
   sessions Session[]
