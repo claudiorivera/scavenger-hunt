@@ -1,22 +1,18 @@
 # Scavenger Hunt
 
-A game that challenges you to find the most random items around your house. Made for a virtual party our friends are throwing.
+It's a virtual scavenger hunt! Everyone plays simultaneously and finds specific items around their house from a list that the host has created. Set your own win conditions (most items found in 15 minutes, first to find all items, etc.) and have fun!
 
-# Technologies Used
+## Technologies Used
 
 - React
 - TypeScript
 - [Next.js](https://nextjs.org)
-- [next-connect](https://github.com/hoangvvo/next-connect)
-- MongoDB
-- [NextAuth.js](https://next-auth.js.org) for GitHub OAuth and "Magic Link" email sign-in
-- [SWR](https://swr.vercel.app)
-- Material-UI
+- [NextAuth.js](https://next-auth.js.org)
 
-# Features
+## Features
 
 - User authentication and admin roles, including protected routes
-- Log in with email or OAuth (GitHub, for now)
+- Log in with email or GitHub
 - Admins can add items to find
 - Users collect items by taking photos, which get uploaded to Cloudinary
 - Collection pages show all of a particular user's found items
@@ -27,27 +23,26 @@ A game that challenges you to find the most random items around your house. Made
 - Users can update their name and avatar on the "My Profile" page.
 - Admins can delete collection items
 - Admins can delete users
-
-# New In This Version
-
 - Daily Cron job deletes all users, items, and collections, and seeds random fake data
 
-# Future Improvements
+## New In This Version
+
+- Refactored to use Next 13 `app` directory
+
+## Future Improvements
 
 - Allow admins to delete items
 - Allow admins to flag users as admins
 - Allow users to delete their profiles
-- Toasts/confirmation for successfully adding items on admin portal
-- Collect page actions should be in a fixed position, instead of moving based on item description (or display a cropped square preview image)
 
-# Install
+## Install
 
 `pnpm i`
 
-# Config
+## Config
 
-- Add a `.env.local` file with environmental variables as shown in the example `.example.env.local` file. I reccommend adding these on Vercel first and then run `vercel pull .env.local` on your machine which creates that file for you. This saves you a step, since you'll be entering these into Vercel eventually in any case.
+- Add a `.env.local` file with environmental variables as shown in the example `.example.env.local` file.
 
-# Dev
+## Dev
 
 `pnpm dev`

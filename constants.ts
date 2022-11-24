@@ -1,4 +1,7 @@
-import { Link } from "./types";
+interface Link {
+  title: string;
+  url: string;
+}
 
 export const adminLinks: Link[] = [
   {
@@ -8,10 +11,6 @@ export const adminLinks: Link[] = [
 ];
 
 export const userLinks: Link[] = [
-  {
-    title: "Home",
-    url: "/",
-  },
   {
     title: "Collect",
     url: "/collect",

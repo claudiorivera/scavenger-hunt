@@ -6,11 +6,16 @@ import GitHubProvider from "next-auth/providers/github";
 
 import prisma from "@/util/prisma";
 
-import { sendVerificationRequest } from "../../../util/sendVerificationRequest";
+if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
+  throw new Error("Missing GitHub OAuth environment variables.");
+}
 
 export const nextAuthOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     CredentialsProvider({
       name: "any username and password",
@@ -26,7 +31,6 @@ export const nextAuthOptions: NextAuthOptions = {
     EmailProvider({
       server: process.env.EMAIL_SERVER,
       from: process.env.EMAIL_FROM,
-      sendVerificationRequest,
     }),
   ],
 };

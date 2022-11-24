@@ -11,9 +11,17 @@ export const Avatar = ({ imageSrc }: Props) => {
 
   const image = imageSrc ?? session?.user?.image;
 
-  return image ? (
-    <Image alt="" height={150} width={150} src={image} />
-  ) : (
-    <HiUserCircle className="h-10 w-10" />
+  return (
+    <>
+      <div className="avatar">
+        <div className="w-28 rounded-full">
+          {image ? (
+            <Image alt="" height={150} width={150} src={image} />
+          ) : (
+            <HiUserCircle className="h-32 w-32" />
+          )}
+        </div>
+      </div>
+    </>
   );
 };

@@ -1,5 +1,7 @@
 import "./global.css";
 
+import { MainAppBar } from "components/MainAppBar";
+
 import { Providers } from "./providers";
 
 export default function RootLayout({
@@ -11,7 +13,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <main className="container mx-auto">{children}</main>
+          <MainAppBar />
+          <main className="container max-w-md mx-auto p-8 text-center">
+            {children}
+          </main>
         </Providers>
       </body>
     </html>
