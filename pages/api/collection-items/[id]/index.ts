@@ -1,26 +1,26 @@
+import { CollectionItem } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "pages/api/auth/[...nextauth]";
 
 import { getUserBySession } from "@/util/getUserBySession";
 import prisma from "@/util/prisma";
 import { withAuthentication } from "@/util/withAuthentication";
 
-import { authOptions } from "../auth/[...nextauth]";
-
-interface SaveToDbParams {
-  description: string;
+interface DeleteCollectionItemParams {
+  id: CollectionItem["id"];
 }
 
-async function saveToDb({ description }: SaveToDbParams) {
-  return prisma.item.create({
-    data: {
-      description,
+async function deleteCollectionItem({ id }: DeleteCollectionItemParams) {
+  return prisma.collectionItem.delete({
+    where: {
+      id,
     },
   });
 }
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === "POST") {
+  if (req.method === "DELETE") {
     try {
       const session = await unstable_getServerSession(req, res, authOptions);
 
@@ -28,17 +28,19 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
       const user = await getUserBySession(session);
 
-      if (!user) return res.status(401).end();
+      if (!user || !user.isAdmin) return res.status(401).end();
 
-      if (!user.isAdmin) return res.status(401).end();
+      const { id } = req.query;
 
-      const { description } = req.body;
+      if (typeof id !== "string") {
+        throw new Error("id must be a string");
+      }
 
-      const { id } = await saveToDb({
-        description,
+      await deleteCollectionItem({
+        id,
       });
 
-      return res.status(201).json({ id });
+      return res.status(201).end();
     } catch (error) {
       return res.status(500).json({
         message:

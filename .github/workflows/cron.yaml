@@ -10,4 +10,4 @@ jobs:
         run: |
           curl --request POST \
           --url 'https://scavenger-hunt.claudiorivera.com/api/cron-handler' \
-          --header 'Authorization: Bearer ${{ secrets.API_SECRET_KEY }}'
+          --header 'Authorization: Bearer ${{ secrets.CRON_SECRET }}'

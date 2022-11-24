@@ -1,73 +1,40 @@
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import User from "models/User";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import NextAuth, { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
-import { createRandomName } from "util/createRandomName";
-import dbConnect from "util/dbConnect";
-import clientPromise from "util/mongoDb";
-import { sendVerificationRequest } from "util/sendVerificationRequest";
 
-export const nextAuthOptions: NextAuthOptions = {
-  adapter: MongoDBAdapter(clientPromise),
+import prisma from "@/util/prisma";
+
+export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
+  theme: {
+    colorScheme: "auto", // "auto" | "dark" | "light"
+    brandColor: "#BF360C", // Hex color code
+    logo: "https://scavenger-hunt.claudiorivera.com/android-chrome-512x512.png", // Absolute URL to image
+    buttonText: "", // Hex color code
+  },
   session: {
     strategy: "jwt",
   },
   providers: [
-    CredentialsProvider({
-      name: "any username and password",
-      credentials: {},
-      async authorize() {
-        await dbConnect();
-
-        const user = await User.findOne().lean().exec();
-
-        if (user) return user;
-
-        return null;
-      },
-    }),
-    GitHubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    }),
     EmailProvider({
       server: process.env.EMAIL_SERVER,
       from: process.env.EMAIL_FROM,
-      sendVerificationRequest,
     }),
   ],
-  callbacks: {
-    async session({ session }) {
-      await dbConnect();
-
-      try {
-        const userDoc = await User.findOne({
-          email: session.user.email,
-        }).exec();
-
-        if (!userDoc?.name) {
-          userDoc.name = createRandomName();
-        }
-
-        if (!userDoc?.image) {
-          userDoc.image = `https://picsum.photos/seed/${session.user.email}/100/100`;
-        }
-
-        const updatedUserDoc = await userDoc.save();
-
-        if (updatedUserDoc) {
-          session.user = updatedUserDoc;
-        }
-      } catch (error) {
-        console.error(error);
-      }
-
-      return session;
-    },
-  },
 };
 
-export default NextAuth(nextAuthOptions);
+if (process.env.VERCEL_ENV !== "preview") {
+  if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
+    throw new Error("Missing GitHub OAuth environment variables.");
+  }
+  authOptions.providers.push(
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    })
+  );
+}
+
+export default NextAuth(authOptions);
