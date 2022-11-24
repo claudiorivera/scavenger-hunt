@@ -6,12 +6,15 @@ import { unstable_getServerSession } from "next-auth";
 
 import prisma from "@/util/prisma";
 
+import { DeleteCollectionItem } from "./DeleteCollectionItem";
+
 async function getCollectionItemById(id: CollectionItem["id"]) {
   return prisma.collectionItem.findUnique({
     where: {
       id,
     },
     select: {
+      id: true,
       user: {
         select: {
           id: true,
@@ -53,6 +56,7 @@ export default async function CollectionItemPage({
           itemId: true,
         },
       },
+      isAdmin: true,
     },
   });
 
@@ -94,6 +98,7 @@ export default async function CollectionItemPage({
       >
         See who found this
       </Link>
+      {currentUser.isAdmin && <DeleteCollectionItem id={collectionItem.id} />}
     </div>
   );
 }
