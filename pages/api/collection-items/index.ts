@@ -5,6 +5,7 @@ import { unstable_getServerSession } from "next-auth";
 
 import { getUserBySession } from "@/util/getUserBySession";
 import prisma from "@/util/prisma";
+import { withAuthentication } from "@/util/withAuthentication";
 
 import { authOptions } from "../auth/[...nextauth]";
 
@@ -65,19 +66,16 @@ async function saveToDb({
   });
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     try {
       const session = await unstable_getServerSession(req, res, authOptions);
 
-      if (!session) return res.status(401);
+      if (!session) return res.status(401).end();
 
       const user = await getUserBySession(session);
 
-      if (!user) throw new Error("User not found");
+      if (!user) return res.status(401).end();
 
       const { base64, itemId } = req.body;
 
@@ -87,7 +85,7 @@ export default async function handler(
         itemId,
       });
 
-      await saveToDb({
+      const { id } = await saveToDb({
         url,
         height,
         width,
@@ -95,9 +93,9 @@ export default async function handler(
         userId: user.id,
       });
 
-      res.status(201);
+      return res.status(201).json({ id });
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         message:
           error instanceof Error
             ? error.message
@@ -105,6 +103,8 @@ export default async function handler(
       });
     }
   } else {
-    res.status(405).end();
+    return res.status(405).end();
   }
 }
+
+export default withAuthentication(handler);

@@ -54,11 +54,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
       const session = await unstable_getServerSession(req, res, authOptions);
 
-      if (!session) return res.status(401);
+      if (!session) return res.status(401).end();
 
       const user = await getUserBySession(session);
 
-      if (!user) throw new Error("User not found");
+      if (!user) return res.status(401).end();
 
       const { base64, name } = req.body;
 
@@ -70,7 +70,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         image: url,
       });
 
-      res.status(201);
+      res.status(201).end();
     } catch (error) {
       res.status(500).json({
         message: error instanceof Error ? error.message : error,
