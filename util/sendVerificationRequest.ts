@@ -1,4 +1,3 @@
-import { appTitle } from "config";
 import { EmailConfig } from "next-auth/providers";
 import nodemailer from "nodemailer";
 
@@ -22,7 +21,7 @@ export const sendVerificationRequest = ({
       {
         to: email,
         from,
-        subject: `Sign in to ${appTitle}`,
+        subject: `Sign in to Scavenger Hunt`,
         text: renderPlainTextEmailString({ url }),
         html: renderEmailString({ url, email }),
       },

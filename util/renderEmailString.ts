@@ -1,5 +1,3 @@
-import { appTitle, primaryColor } from "config";
-
 interface Params {
   url: string;
   email: string;
@@ -16,8 +14,8 @@ export const renderEmailString = ({ url, email }: Params) => {
   const backgroundColor = "#f9f9f9";
   const textColor = "#444444";
   const mainBackgroundColor = "#ffffff";
-  const buttonBackgroundColor = primaryColor;
-  const buttonBorderColor = primaryColor;
+  const buttonBackgroundColor = "#bf360c";
+  const buttonBorderColor = "#bf360c";
   const buttonTextColor = "#ffffff";
 
   // Uses tables for layout and inline CSS due to email client limitations
@@ -26,7 +24,7 @@ export const renderEmailString = ({ url, email }: Params) => {
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td align="center" style="padding: 10px 0px 20px 0px; font-size: 22px; font-family: Helvetica, Arial, sans-serif; color: ${textColor};">
-        <strong>${appTitle}</strong>
+        <strong>Scavenger Hunt</strong>
       </td>
     </tr>
   </table>
