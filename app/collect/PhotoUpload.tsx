@@ -105,15 +105,13 @@ export function PhotoUpload({ itemId, userId }: PhotoUploadProps) {
           />
           <div className="absolute right-0 bottom-0 left-0">
             <form
-              className="flex justify-center p-4 gap-4"
+              className="flex justify-center p-4 gap-8"
               onSubmit={handleSubmit((values) => {
                 uploadPhoto(values);
               })}
             >
               <button
-                className={classNames("btn btn-success btn-circle", {
-                  loading: isLoading,
-                })}
+                className={classNames("btn btn-success btn-circle")}
                 type="submit"
                 disabled={isLoading}
               >
@@ -122,6 +120,7 @@ export function PhotoUpload({ itemId, userId }: PhotoUploadProps) {
               <button
                 type="button"
                 className="btn btn-error btn-circle"
+                disabled={isLoading}
                 onClick={() => {
                   setImagePreview(undefined);
                 }}

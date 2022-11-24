@@ -63,9 +63,14 @@ export default async function ItemsPage() {
     userEmail: session?.user?.email,
   });
 
+  const totalItems = uncollectedItems.length + collectedItems.length;
+
   return (
     <div className="flex flex-col gap-4">
       <header className="text-5xl">All Items</header>
+      <div>
+        Found {collectedItems.length} out of {totalItems} items! 📷
+      </div>
       <ul className="flex flex-col gap-4">
         {uncollectedItems.map((item) => (
           <li key={item.id}>

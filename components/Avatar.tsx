@@ -18,7 +18,7 @@ export const Avatar = ({ imageSrc }: Props) => {
           {image ? (
             <Image alt="" height={150} width={150} src={image} />
           ) : (
-            <HiUserCircle className="h-32 w-32" />
+            <HiUserCircle className="h-full w-full" />
           )}
         </div>
       </div>

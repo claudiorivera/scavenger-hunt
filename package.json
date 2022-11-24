@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "vercel-build": "prisma migrate deploy && next build",
     "postinstall": "prisma generate"
   },
   "dependencies": {
@@ -18,7 +19,6 @@
     "axios": "1.2.0",
     "classnames": "2.3.2",
     "cloudinary": "1.32.0",
-    "cuid": "2.1.8",
     "next": "13.0.5",
     "next-auth": "4.17.0",
     "nodemailer": "6.8.0",

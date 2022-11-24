@@ -58,20 +58,22 @@ export default async function ItemsPage({ params }: ItemsPageParams) {
         <ul className="flex flex-col gap-4 pb-4">
           {users.map((user) => (
             <li key={user.id} className="flex items-center gap-4">
-              <div className="avatar">
-                <div className="w-14 h-14 rounded-full relative">
-                  {user.image ? (
-                    <Image
-                      src={user.image}
-                      fill
-                      alt={`${user.name}`}
-                      sizes="33vw"
-                    />
-                  ) : (
-                    <HiUserCircle className="h-16 w-16" />
-                  )}
+              <Link href={`/users/${user.id}`}>
+                <div className="avatar">
+                  <div className="w-14 h-14 rounded-full relative">
+                    {user.image ? (
+                      <Image
+                        src={user.image}
+                        fill
+                        alt={`${user.name}`}
+                        sizes="33vw"
+                      />
+                    ) : (
+                      <HiUserCircle className="h-full w-full" />
+                    )}
+                  </div>
                 </div>
-              </div>
+              </Link>
               <div className="flex-1 text-left">{user.name}</div>
               <Link
                 className="btn btn-secondary"

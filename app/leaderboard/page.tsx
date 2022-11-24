@@ -47,7 +47,7 @@ export default async function LeaderboardPage() {
                       sizes="33vw"
                     />
                   ) : (
-                    <HiUserCircle className="h-16 w-16" />
+                    <HiUserCircle className="h-full w-full" />
                   )}
                 </div>
               </div>

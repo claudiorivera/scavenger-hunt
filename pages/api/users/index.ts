@@ -1,7 +1,10 @@
 import { v2 as cloudinary } from "cloudinary";
 import { NextApiRequest, NextApiResponse } from "next";
+import { unstable_getServerSession } from "next-auth";
 
 import prisma from "@/util/prisma";
+
+import { nextAuthOptions } from "../auth/[...nextauth]";
 
 interface UploadPhotoParams {
   base64: string;
@@ -14,7 +17,7 @@ async function uploadPhoto({ base64, filename }: UploadPhotoParams) {
       base64,
       {
         public_id: `${filename}`,
-        folder: "scavenger-hunt/collection-items",
+        folder: "scavenger-hunt/profile-photos",
       }
     );
 
@@ -26,35 +29,19 @@ async function uploadPhoto({ base64, filename }: UploadPhotoParams) {
 }
 
 interface SaveToDbParams {
-  url: string;
-  height: number;
-  width: number;
-  itemId: string;
-  userId: string;
+  name: string;
+  image: string;
+  email: string;
 }
 
-async function saveToDb({
-  url,
-  height,
-  width,
-  itemId,
-  userId,
-}: SaveToDbParams) {
-  return prisma.collectionItem.create({
+async function saveToDb({ name, image, email }: SaveToDbParams) {
+  return prisma.user.update({
+    where: {
+      email,
+    },
     data: {
-      item: {
-        connect: {
-          id: itemId,
-        },
-      },
-      user: {
-        connect: {
-          id: userId,
-        },
-      },
-      url,
-      height,
-      width,
+      name,
+      image,
     },
     select: {
       id: true,
@@ -67,19 +54,25 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const { base64, filename, itemId, userId } = req.body;
+    const session = await unstable_getServerSession(req, res, nextAuthOptions);
 
-    const { url, height, width } = await uploadPhoto({ base64, filename });
+    if (!session?.user?.email) return res.status(401).end();
 
-    const { id } = await saveToDb({ url, height, width, itemId, userId });
+    const { base64, filename, name } = req.body;
+
+    const { url } = await uploadPhoto({ base64, filename });
+
+    const { id } = await saveToDb({
+      email: session.user.email,
+      name,
+      image: url,
+    });
 
     res.status(201).json({ id });
   } catch (error) {
     res.status(500).json({
       message:
-        error instanceof Error
-          ? error.message
-          : "Unable to add item to collection",
+        error instanceof Error ? error.message : "Unable to save changes",
     });
   }
 }

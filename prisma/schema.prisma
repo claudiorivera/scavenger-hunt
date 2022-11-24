@@ -44,10 +44,10 @@ model VerificationToken {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
+  name          String?   @default("Scavenger Hunt User")
   email         String?   @unique
   emailVerified DateTime?
-  image         String?
+  image         String?   @default("https://picsum.photos/100")
   accounts      Account[]
   sessions      Session[]
 

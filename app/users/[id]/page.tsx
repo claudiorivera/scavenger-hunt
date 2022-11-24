@@ -41,7 +41,7 @@ export default async function UserPage({ params }: UserPageParams) {
             {user.image ? (
               <Image src={user.image} fill alt={`${user.name}`} sizes="33vw" />
             ) : (
-              <HiUserCircle className="h-16 w-16" />
+              <HiUserCircle className="h-full w-full" />
             )}
           </div>
         </div>
