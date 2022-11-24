@@ -78,7 +78,7 @@ export function PhotoUpload({ itemId }: PhotoUploadProps) {
   if (isError) return <div>{JSON.stringify(error, null, 2)}</div>;
 
   return (
-    <div className="w-96 h-96">
+    <div className="max-w-sm aspect-square">
       {!imagePreview && (
         <div className="flex h-full w-full items-center justify-center border border-stone-400 bg-stone-100 p-4">
           <label>

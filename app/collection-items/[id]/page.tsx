@@ -71,7 +71,7 @@ export default async function CollectionItemPage({
   return (
     <div className="flex flex-col gap-4">
       <header className="text-2xl">{title}</header>
-      <div className="w-96 h-96">
+      <div className="max-w-sm aspect-square">
         <Image
           src={collectionItem.url}
           width={collectionItem.width}
