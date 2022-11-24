@@ -33,6 +33,8 @@ function generateItemDescription() {
     "Your",
     "The",
     "Our",
+    "That",
+    "Their",
   ]);
   const adjective = faker.word.adjective();
   const noun = faker.word.noun();

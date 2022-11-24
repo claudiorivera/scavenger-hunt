@@ -27,4 +27,8 @@ export const userLinks: Link[] = [
     title: "My Profile",
     url: "/profile",
   },
+  {
+    title: "Sign Out",
+    url: "/api/auth/signout",
+  },
 ];

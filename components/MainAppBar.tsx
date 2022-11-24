@@ -5,6 +5,11 @@ import Link from "next/link";
 import { userLinks } from "../constants";
 
 export function MainAppBar() {
+  function handleDropdownItemClick() {
+    document.activeElement instanceof HTMLElement &&
+      document.activeElement.blur();
+  }
+
   return (
     <div className="navbar bg-primary text-primary-content p-4">
       <div className="flex-1">
@@ -37,12 +42,11 @@ export function MainAppBar() {
             <>
               {userLinks.map((link) => (
                 <li key={link.url}>
-                  <Link href={link.url}>{link.title}</Link>
+                  <Link href={link.url} onClick={handleDropdownItemClick}>
+                    {link.title}
+                  </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/api/auth/signout">Sign out</Link>
-              </li>
             </>
           </ul>
         </div>
