@@ -1,4 +1,5 @@
 "use client";
+import { Item, User } from "@prisma/client";
 import { useMutation } from "@tanstack/react-query";
 import classNames from "classnames";
 import { CheckmarkIcon, TrashIcon } from "components";
@@ -24,8 +25,8 @@ interface ImagePreview
 export type UploadPhotoData = z.infer<typeof schema>;
 
 interface PhotoUploadProps {
-  itemId: string;
-  userId: string;
+  itemId: Item["id"];
+  userId: User["id"];
 }
 
 export function PhotoUpload({ itemId, userId }: PhotoUploadProps) {

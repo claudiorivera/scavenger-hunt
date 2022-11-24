@@ -1,14 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { unstable_getServerSession } from "next-auth";
+import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import { HiUserCircle } from "react-icons/hi";
 
 import prisma from "@/util/prisma";
 
 export default async function ProfilePage() {
-  const session = await unstable_getServerSession();
+  const session = await unstable_getServerSession(nextAuthOptions);
 
-  if (!session?.user?.email) return null;
+  if (!session?.user?.email) return notFound();
 
   const user = await prisma.user.findUnique({
     where: {
@@ -20,7 +22,7 @@ export default async function ProfilePage() {
     },
   });
 
-  if (!user) return null;
+  if (!user) return notFound();
 
   return (
     <div className="flex flex-col gap-4">

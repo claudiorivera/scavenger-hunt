@@ -1,3 +1,4 @@
+import { Item, User } from "@prisma/client";
 import { v2 as cloudinary } from "cloudinary";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -29,8 +30,8 @@ interface SaveToDbParams {
   url: string;
   height: number;
   width: number;
-  itemId: string;
-  userId: string;
+  itemId: Item["id"];
+  userId: User["id"];
 }
 
 async function saveToDb({
@@ -66,20 +67,24 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  try {
-    const { base64, filename, itemId, userId } = req.body;
+  if (req.method === "POST") {
+    try {
+      const { base64, filename, itemId, userId } = req.body;
 
-    const { url, height, width } = await uploadPhoto({ base64, filename });
+      const { url, height, width } = await uploadPhoto({ base64, filename });
 
-    const { id } = await saveToDb({ url, height, width, itemId, userId });
+      const { id } = await saveToDb({ url, height, width, itemId, userId });
 
-    res.status(201).json({ id });
-  } catch (error) {
-    res.status(500).json({
-      message:
-        error instanceof Error
-          ? error.message
-          : "Unable to add item to collection",
-    });
+      res.status(201).json({ id });
+    } catch (error) {
+      res.status(500).json({
+        message:
+          error instanceof Error
+            ? error.message
+            : "Unable to add item to collection",
+      });
+    }
+  } else {
+    res.status(405).end();
   }
 }

@@ -1,12 +1,14 @@
+import { User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { HiUserCircle } from "react-icons/hi";
 
 import prisma from "@/util/prisma";
 
 interface UserPageParams {
   params: {
-    id: string;
+    id: User["id"];
   };
 }
 export default async function UserPage({ params }: UserPageParams) {
@@ -31,7 +33,7 @@ export default async function UserPage({ params }: UserPageParams) {
     },
   });
 
-  if (!user) return null;
+  if (!user) return notFound();
 
   return (
     <div className="flex flex-col gap-4">

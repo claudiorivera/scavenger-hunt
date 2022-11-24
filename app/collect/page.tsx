@@ -1,11 +1,14 @@
+import { Item, User } from "@prisma/client";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { unstable_getServerSession } from "next-auth";
+import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 
 import prisma from "@/util/prisma";
 
 import { PhotoUpload } from "./PhotoUpload";
 
-async function getUncollectedItemsByUserId(userId: string) {
+async function getUncollectedItemsByUserId(userId: User["id"]) {
   return prisma.item.findMany({
     where: {
       collectionItems: {
@@ -23,28 +26,30 @@ async function getUncollectedItemsByUserId(userId: string) {
 }
 
 async function getNextUncollectedItemIdForUserId(
-  userId: string,
-  currentItemId?: string
+  userId: User["id"],
+  currentItemId?: Item["id"]
 ) {
-  const items = (await getUncollectedItemsByUserId(userId)).filter(
+  const uncollectedItems = await getUncollectedItemsByUserId(userId);
+
+  const itemsExcludingCurrentItem = uncollectedItems.filter(
     (item) => item.id !== currentItemId
   );
 
-  const randomItemIndex = Math.floor(Math.random() * items.length);
+  const randomItemIndex = Math.floor(
+    Math.random() * itemsExcludingCurrentItem.length
+  );
 
-  const nextUncollectedItem = items[randomItemIndex];
+  const nextUncollectedItem = itemsExcludingCurrentItem[randomItemIndex];
 
   return nextUncollectedItem.id;
 }
 
 interface CollectPageParams {
-  searchParams: {
-    itemId: string;
-  };
+  searchParams?: any; // until this gets fixed: https://github.com/vercel/next.js/issues/42557
 }
 
 export default async function CollectPage({ searchParams }: CollectPageParams) {
-  const session = await unstable_getServerSession();
+  const session = await unstable_getServerSession(nextAuthOptions);
 
   if (!session?.user?.email) return null;
 
@@ -56,8 +61,14 @@ export default async function CollectPage({ searchParams }: CollectPageParams) {
 
   if (!user) return null;
 
-  const itemId =
-    searchParams.itemId || (await getNextUncollectedItemIdForUserId(user.id));
+  const nextUncollectedItemId = await getNextUncollectedItemIdForUserId(
+    user.id
+  );
+
+  if (!(nextUncollectedItemId || searchParams.itemId))
+    return redirect("/items");
+
+  const itemId = searchParams.itemId || nextUncollectedItemId;
 
   const item = await prisma.item.findUnique({
     where: {
@@ -69,12 +80,7 @@ export default async function CollectPage({ searchParams }: CollectPageParams) {
     },
   });
 
-  if (!item) return null;
-
-  const nextUncollectedItem = await getNextUncollectedItemIdForUserId(
-    user.id,
-    item.id
-  );
+  if (!item) return redirect("/items");
 
   return (
     <div className="flex flex-col gap-4">
@@ -83,7 +89,7 @@ export default async function CollectPage({ searchParams }: CollectPageParams) {
       <PhotoUpload userId={user.id} itemId={item.id} />
       <Link
         className="btn btn-secondary"
-        href={`/collect?itemId=${nextUncollectedItem}`}
+        href={`/collect?itemId=${nextUncollectedItemId}`}
       >
         Skip It!
       </Link>

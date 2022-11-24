@@ -1,10 +1,13 @@
+import { CollectionItem } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { unstable_getServerSession } from "next-auth";
+import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 
 import prisma from "@/util/prisma";
 
-async function getCollectionItemById(id: string) {
+async function getCollectionItemById(id: CollectionItem["id"]) {
   return prisma.collectionItem.findUnique({
     where: {
       id,
@@ -30,13 +33,13 @@ async function getCollectionItemById(id: string) {
 }
 
 interface CollectionItemPageParams {
-  params: { id: string };
+  params: { id: CollectionItem["id"] };
 }
 
 export default async function CollectionItemPage({
   params,
 }: CollectionItemPageParams) {
-  const session = await unstable_getServerSession();
+  const session = await unstable_getServerSession(nextAuthOptions);
 
   if (!session?.user?.email) return null;
 
@@ -58,7 +61,7 @@ export default async function CollectionItemPage({
 
   const collectionItem = await getCollectionItemById(params.id);
 
-  if (!collectionItem?.url) return null;
+  if (!collectionItem?.url) return notFound();
 
   const title = `${collectionItem.user.name} has found ${collectionItem.item.description}!`;
 

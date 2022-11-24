@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { unstable_getServerSession } from "next-auth";
 
 import prisma from "@/util/prisma";
+import { withAuthentication } from "@/util/withAuthentication";
 
 import { nextAuthOptions } from "../auth/[...nextauth]";
 
@@ -49,30 +50,32 @@ async function saveToDb({ name, image, email }: SaveToDbParams) {
   });
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  try {
-    const session = await unstable_getServerSession(req, res, nextAuthOptions);
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
 
-    if (!session?.user?.email) return res.status(401).end();
+  if (!session?.user?.email) return res.status(401).end();
 
-    const { base64, filename, name } = req.body;
+  if (req.method === "POST") {
+    try {
+      const { base64, filename, name } = req.body;
 
-    const { url } = await uploadPhoto({ base64, filename });
+      const { url } = await uploadPhoto({ base64, filename });
 
-    const { id } = await saveToDb({
-      email: session.user.email,
-      name,
-      image: url,
-    });
+      const { id } = await saveToDb({
+        email: session.user.email,
+        name,
+        image: url,
+      });
 
-    res.status(201).json({ id });
-  } catch (error) {
-    res.status(500).json({
-      message:
-        error instanceof Error ? error.message : "Unable to save changes",
-    });
+      res.status(201).json({ id });
+    } catch (error) {
+      res.status(500).json({
+        message: error instanceof Error ? error.message : error,
+      });
+    }
+  } else {
+    res.status(405).end();
   }
 }
+
+export default withAuthentication(handler);

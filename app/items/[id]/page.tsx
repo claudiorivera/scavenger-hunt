@@ -1,19 +1,22 @@
+import { Item } from "@prisma/client";
 import { EyeIcon } from "components/EyeIcon";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { unstable_getServerSession } from "next-auth";
+import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import { HiUserCircle } from "react-icons/hi";
 
 import prisma from "@/util/prisma";
 
 interface ItemsPageParams {
   params: {
-    id: string;
+    id: Item["id"];
   };
 }
 
 export default async function ItemsPage({ params }: ItemsPageParams) {
-  const session = await unstable_getServerSession();
+  const session = await unstable_getServerSession(nextAuthOptions);
 
   const users = await prisma.user.findMany({
     where: {
@@ -43,7 +46,7 @@ export default async function ItemsPage({ params }: ItemsPageParams) {
     },
   });
 
-  if (!item) return null;
+  if (!item) return notFound();
 
   const hasCurrentUserFoundItem = users.some(
     (user) => user.email === session?.user?.email

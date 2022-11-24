@@ -1,12 +1,14 @@
+import { User } from "@prisma/client";
 import CheckCircleIcon from "components/CheckCircleIcon";
 import MinusCircleIcon from "components/MinusCircleIcon";
 import Link from "next/link";
 import { unstable_getServerSession } from "next-auth";
+import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 
 import prisma from "@/util/prisma";
 
 interface GetUncollectedItemsParams {
-  userEmail?: string | null;
+  userEmail: User["email"];
 }
 
 async function getUncollectedItems({ userEmail }: GetUncollectedItemsParams) {
@@ -30,7 +32,7 @@ async function getUncollectedItems({ userEmail }: GetUncollectedItemsParams) {
 }
 
 interface GetCollectedItemsParams {
-  userEmail?: string | null;
+  userEmail: User["email"];
 }
 
 async function getCollectedItems({ userEmail }: GetCollectedItemsParams) {
@@ -54,13 +56,13 @@ async function getCollectedItems({ userEmail }: GetCollectedItemsParams) {
 }
 
 export default async function ItemsPage() {
-  const session = await unstable_getServerSession();
+  const session = await unstable_getServerSession(nextAuthOptions);
 
   const uncollectedItems = await getUncollectedItems({
-    userEmail: session?.user?.email,
+    userEmail: session?.user?.email ?? null,
   });
   const collectedItems = await getCollectedItems({
-    userEmail: session?.user?.email,
+    userEmail: session?.user?.email ?? null,
   });
 
   const totalItems = uncollectedItems.length + collectedItems.length;

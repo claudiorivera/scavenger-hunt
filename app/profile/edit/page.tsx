@@ -1,13 +1,15 @@
+import { notFound } from "next/navigation";
 import { unstable_getServerSession } from "next-auth";
+import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 
 import prisma from "@/util/prisma";
 
 import ProfileForm from "./ProfileForm";
 
 export default async function EditProfilePage() {
-  const session = await unstable_getServerSession();
+  const session = await unstable_getServerSession(nextAuthOptions);
 
-  if (!session?.user?.email) return null;
+  if (!session?.user?.email) return notFound();
 
   const user = await prisma.user.findUnique({
     where: {
@@ -20,7 +22,7 @@ export default async function EditProfilePage() {
     },
   });
 
-  if (!user) return null;
+  if (!user) return notFound();
 
   return (
     <div className="flex flex-col gap-4">

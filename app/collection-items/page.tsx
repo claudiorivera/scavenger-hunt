@@ -3,10 +3,7 @@ import { redirect } from "next/navigation";
 import prisma from "@/util/prisma";
 
 interface CollectionItemsPageParams {
-  searchParams: {
-    itemId?: string;
-    userId?: string;
-  };
+  searchParams?: any; // until this gets fixed: https://github.com/vercel/next.js/issues/42557
 }
 
 export default async function CollectionItemsPage({

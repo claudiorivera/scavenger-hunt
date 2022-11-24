@@ -4,6 +4,8 @@ import { HiUserCircle } from "react-icons/hi";
 
 import prisma from "@/util/prisma";
 
+export const dynamic = "force-dynamic";
+
 async function getUsers() {
   return prisma.user.findMany({
     orderBy: {
