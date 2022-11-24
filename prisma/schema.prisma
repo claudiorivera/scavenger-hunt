@@ -59,14 +59,15 @@ model CollectionItem {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  url    String
+  width  Int
+  height Int
+
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
+  userId String @unique
 
-  photo   Photo  @relation(fields: [photoId], references: [id], onDelete: Cascade)
-  photoId String
-
-  item   Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
-  itemId String
+  item   Item   @relation(fields: [itemId], references: [id])
+  itemId String @unique
 }
 
 model Item {
@@ -75,18 +76,6 @@ model Item {
   updatedAt DateTime @updatedAt
 
   description String
-
-  collectionItems CollectionItem[]
-}
-
-model Photo {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  url    String
-  width  Int
-  height Int
 
   collectionItems CollectionItem[]
 }

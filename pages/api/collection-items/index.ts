@@ -9,14 +9,19 @@ interface UploadPhotoParams {
 }
 
 async function uploadPhoto({ base64, filename }: UploadPhotoParams) {
-  const { secure_url, height, width } = await cloudinary.uploader.upload(
-    base64,
-    {
-      public_id: `${filename}`,
-    }
-  );
+  try {
+    const { secure_url, height, width } = await cloudinary.uploader.upload(
+      base64,
+      {
+        public_id: `${filename}`,
+      }
+    );
 
-  return { url: secure_url, height, width };
+    return { url: secure_url, height, width };
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
 interface SaveToDbParams {
@@ -34,15 +39,12 @@ async function saveToDb({
   itemId,
   userId,
 }: SaveToDbParams) {
-  return prisma.collectionItem.create({
-    data: {
-      photo: {
-        create: {
-          url,
-          height,
-          width,
-        },
-      },
+  return prisma.collectionItem.upsert({
+    where: {
+      itemId,
+      userId,
+    },
+    create: {
       item: {
         connect: {
           id: itemId,
@@ -53,6 +55,14 @@ async function saveToDb({
           id: userId,
         },
       },
+      url,
+      height,
+      width,
+    },
+    update: {
+      url,
+      height,
+      width,
     },
     select: {
       id: true,

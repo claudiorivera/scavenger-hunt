@@ -1,4 +1,6 @@
 "use client";
+import { useMutation } from "@tanstack/react-query";
+import classNames from "classnames";
 import { CheckmarkIcon, TrashIcon } from "components";
 import { useZodForm } from "hooks/useZodForm";
 import Image from "next/image";
@@ -8,58 +10,74 @@ import { z } from "zod";
 import { getBase64 } from "@/util/getBase64";
 import { getImagePreview } from "@/util/getImagePreview";
 
+const schema = z.object({
+  base64: z.string(),
+  filename: z.string(),
+  itemId: z.string().cuid(),
+  userId: z.string().cuid(),
+});
+
 interface ImagePreview
   extends Pick<HTMLImageElement, "src" | "width" | "height"> {}
 
-interface UploadParams {
-  base64: string;
-  filename: string;
+export type UploadPhotoData = z.infer<typeof schema>;
+
+interface PhotoUploadProps {
   itemId: string;
   userId: string;
 }
-async function postPhoto({ base64, filename, itemId, userId }: UploadParams) {
-  return fetch(`/collection-items`, {
-    method: "POST",
-    body: JSON.stringify({ base64, filename, itemId, userId }),
-  }).then((res) => res.json());
-}
 
-export function PhotoUpload() {
+export function PhotoUpload({ itemId, userId }: PhotoUploadProps) {
+  const [imagePreview, setImagePreview] = useState<ImagePreview | undefined>();
+
+  const {
+    mutate: uploadPhoto,
+    isLoading,
+    isError,
+    error,
+  } = useMutation({
+    mutationFn: (data: UploadPhotoData) => {
+      return fetch(`/api/collection-items`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then((res) => res.json());
+    },
+  });
+
   const {
     handleSubmit,
     register,
-    formState: { errors, isDirty },
-    control,
     setValue,
+    getValues,
+    formState: { errors },
   } = useZodForm({
-    schema: z.object({
-      base64Image: z.string(),
-    }),
+    schema: schema,
+    defaultValues: {
+      itemId,
+      userId,
+      filename: `${itemId}-${userId}`,
+    },
   });
 
-  const [imagePreview, setImagePreview] = useState<ImagePreview | undefined>();
-
-  const onFileChange = async (event: FormEvent<HTMLInputElement>) => {
+  async function onFileChange(event: FormEvent<HTMLInputElement>) {
     const file = event.currentTarget.files?.[0];
 
     if (!!file) {
       const image = await getImagePreview(file);
-
       setImagePreview(image);
 
-      const base64Image = await getBase64(file);
+      const base64 = await getBase64(file);
 
-      setValue("base64Image", base64Image);
+      if (typeof base64 === "string") {
+        setValue("base64", base64);
+      }
     }
-  };
-
-  const handleRemove = () => {
-    setImagePreview(undefined);
-  };
-
-  async function handleSave() {
-    console.log("saving");
   }
+
+  if (isError) return <div>{JSON.stringify(error, null, 2)}</div>;
 
   return (
     <div className="w-96 h-96">
@@ -68,6 +86,7 @@ export function PhotoUpload() {
           <label>
             <div className="btn btn-secondary">Select photo</div>
             <input
+              {...register("base64")}
               hidden
               type="file"
               accept="image/*"
@@ -86,21 +105,31 @@ export function PhotoUpload() {
             alt=""
           />
           <div className="absolute right-0 bottom-0 left-0">
-            <div className="flex justify-center p-4 gap-4">
+            <form
+              className="flex justify-center p-4 gap-4"
+              onSubmit={handleSubmit((values) => {
+                uploadPhoto(values);
+              })}
+            >
               <button
-                className="btn btn-success btn-circle"
-                onClick={handleSave}
-                isDisabled={isLoading}
+                className={classNames("btn btn-success btn-circle", {
+                  loading: isLoading,
+                })}
+                type="submit"
+                disabled={isLoading}
               >
                 <CheckmarkIcon />
               </button>
               <button
+                type="button"
                 className="btn btn-error btn-circle"
-                onClick={handleRemove}
+                onClick={() => {
+                  setImagePreview(undefined);
+                }}
               >
                 <TrashIcon />
               </button>
-            </div>
+            </form>
           </div>
         </div>
       )}
