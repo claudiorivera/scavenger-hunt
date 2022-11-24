@@ -1,8 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { unstable_getServerSession } from "next-auth";
 import { HiUserCircle } from "react-icons/hi";
 
+import { getUserBySession } from "@/util/getUserBySession";
 import prisma from "@/util/prisma";
+
+import { DeleteUser } from "./DeleteUser";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +32,12 @@ async function getUsers() {
 }
 
 export default async function LeaderboardPage() {
+  const session = await unstable_getServerSession();
+
+  if (!session) return redirect("/api/auth/signin");
+
+  const currentUser = await getUserBySession(session);
+
   const users = await getUsers();
 
   return (
@@ -39,6 +50,9 @@ export default async function LeaderboardPage() {
               className="flex items-center gap-4"
               href={`/users/${user.id}`}
             >
+              {currentUser?.isAdmin && currentUser.id !== user.id && (
+                <DeleteUser id={user.id} />
+              )}
               <div className="avatar">
                 <div className="w-14 h-14 rounded-full relative">
                   {user.image ? (
