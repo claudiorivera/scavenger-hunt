@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { CheckmarkIcon, TrashIcon } from "components";
 import { useZodForm } from "hooks/useZodForm";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { z } from "zod";
 
@@ -28,6 +29,7 @@ interface PhotoUploadProps {
 }
 
 export function PhotoUpload({ itemId, userId }: PhotoUploadProps) {
+  const router = useRouter();
   const [imagePreview, setImagePreview] = useState<ImagePreview | undefined>();
 
   const {
@@ -45,20 +47,17 @@ export function PhotoUpload({ itemId, userId }: PhotoUploadProps) {
         body: JSON.stringify(data),
       }).then((res) => res.json());
     },
+    onSuccess: ({ id }) => {
+      return router.push(`/collection-items/${id}`);
+    },
   });
 
-  const {
-    handleSubmit,
-    register,
-    setValue,
-    getValues,
-    formState: { errors },
-  } = useZodForm({
+  const { handleSubmit, register, setValue } = useZodForm({
     schema: schema,
     defaultValues: {
       itemId,
       userId,
-      filename: `${itemId}-${userId}`,
+      filename: `itemId_${itemId}-userId_${userId}`,
     },
   });
 

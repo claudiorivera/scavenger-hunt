@@ -1,4 +1,4 @@
-export const TrashIcon = () => {
+export function TrashIcon() {
   return (
     <svg
       viewBox="0 0 32 32"
@@ -29,4 +29,4 @@ export const TrashIcon = () => {
       />
     </svg>
   );
-};
+}

@@ -14,6 +14,7 @@ async function uploadPhoto({ base64, filename }: UploadPhotoParams) {
       base64,
       {
         public_id: `${filename}`,
+        folder: "scavenger-hunt/collection-items",
       }
     );
 
@@ -39,12 +40,34 @@ async function saveToDb({
   itemId,
   userId,
 }: SaveToDbParams) {
-  return prisma.collectionItem.upsert({
-    where: {
-      itemId,
-      userId,
-    },
-    create: {
+  console.log(
+    JSON.stringify(
+      {
+        data: {
+          item: {
+            connect: {
+              id: itemId,
+            },
+          },
+          user: {
+            connect: {
+              id: userId,
+            },
+          },
+          url,
+          height,
+          width,
+        },
+        select: {
+          id: true,
+        },
+      },
+      null,
+      2
+    )
+  );
+  return prisma.collectionItem.create({
+    data: {
       item: {
         connect: {
           id: itemId,
@@ -55,11 +78,6 @@ async function saveToDb({
           id: userId,
         },
       },
-      url,
-      height,
-      width,
-    },
-    update: {
       url,
       height,
       width,

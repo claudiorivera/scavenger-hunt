@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { userLinks } from "../constants";
 
-export const MainAppBar = () => {
+export function MainAppBar() {
   return (
     <div className="navbar bg-primary text-primary-content p-4">
       <div className="flex-1">
@@ -49,4 +49,4 @@ export const MainAppBar = () => {
       </div>
     </div>
   );
-};
+}

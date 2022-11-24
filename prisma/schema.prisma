@@ -64,10 +64,10 @@ model CollectionItem {
   height Int
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String @unique
+  userId String
 
-  item   Item   @relation(fields: [itemId], references: [id])
-  itemId String @unique
+  item   Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  itemId String
 }
 
 model Item {

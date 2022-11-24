@@ -1,13 +1,13 @@
 import classNames from "classnames";
 
-type Props = {
+interface Props {
   isOpen: boolean;
   title: string;
   children: React.ReactNode;
   modalAction: JSX.Element;
-};
+}
 
-export const Dialog = ({ isOpen, title, children, modalAction }: Props) => {
+export function Dialog({ isOpen, title, children, modalAction }: Props) {
   return (
     <div>
       <div
@@ -23,4 +23,4 @@ export const Dialog = ({ isOpen, title, children, modalAction }: Props) => {
       </div>
     </div>
   );
-};
+}

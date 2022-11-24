@@ -5,7 +5,7 @@ import prisma from "@/util/prisma";
 
 import { PhotoUpload } from "./PhotoUpload";
 
-async function getUncollectedItemsForUserId(userId: string) {
+async function getUncollectedItemsByUserId(userId: string) {
   return prisma.item.findMany({
     where: {
       collectionItems: {
@@ -22,8 +22,13 @@ async function getUncollectedItemsForUserId(userId: string) {
   });
 }
 
-async function getNextUncollectedItemIdForUserId(userId: string) {
-  const items = await getUncollectedItemsForUserId(userId);
+async function getNextUncollectedItemIdForUserId(
+  userId: string,
+  currentItemId?: string
+) {
+  const items = (await getUncollectedItemsByUserId(userId)).filter(
+    (item) => item.id !== currentItemId
+  );
 
   const randomItemIndex = Math.floor(Math.random() * items.length);
 
@@ -66,12 +71,23 @@ export default async function CollectPage({ searchParams }: CollectPageParams) {
 
   if (!item) return null;
 
+  const nextUncollectedItem = await getNextUncollectedItemIdForUserId(
+    user.id,
+    item.id
+  );
+
   return (
     <div className="flex flex-col gap-4">
       <header className="text-2xl">Find</header>
       <div className="text-5xl">{item.description}</div>
       <PhotoUpload userId={user.id} itemId={item.id} />
-      <Link href={`/users?filterKey=itemId&filterValue=${searchParams.itemId}`}>
+      <Link
+        className="btn btn-secondary"
+        href={`/collect?itemId=${nextUncollectedItem}`}
+      >
+        Skip It!
+      </Link>
+      <Link className="btn btn-secondary" href={`/items/${item.id}`}>
         See who found this
       </Link>
     </div>
