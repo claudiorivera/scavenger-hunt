@@ -56,7 +56,7 @@ export default function AddItemForm() {
           addItem(values);
           reset();
         })}
-        className="flex flex-col gap-2"
+        className="flex flex-col gap-2 w-full"
       >
         <Input {...register("description")} placeholder="Something Awesome" />
         <button
