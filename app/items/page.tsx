@@ -2,23 +2,27 @@ import { User } from "@prisma/client";
 import CheckCircleIcon from "components/CheckCircleIcon";
 import MinusCircleIcon from "components/MinusCircleIcon";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { unstable_getServerSession } from "next-auth";
 
+import { getUserBySession } from "@/util/getUserBySession";
 import prisma from "@/util/prisma";
 
+import AddItemForm from "./AddItemForm";
+
 interface GetUncollectedItemsParams {
-  userEmail: User["email"];
+  userId: User["id"];
 }
 
-async function getUncollectedItems({ userEmail }: GetUncollectedItemsParams) {
-  if (!userEmail) return [];
+async function getUncollectedItems({ userId }: GetUncollectedItemsParams) {
+  if (!userId) return [];
 
   return await prisma.item.findMany({
     where: {
       collectionItems: {
         none: {
           user: {
-            email: userEmail,
+            id: userId,
           },
         },
       },
@@ -31,18 +35,18 @@ async function getUncollectedItems({ userEmail }: GetUncollectedItemsParams) {
 }
 
 interface GetCollectedItemsParams {
-  userEmail: User["email"];
+  userId: User["id"];
 }
 
-async function getCollectedItems({ userEmail }: GetCollectedItemsParams) {
-  if (!userEmail) return [];
+async function getCollectedItems({ userId }: GetCollectedItemsParams) {
+  if (!userId) return [];
 
   return await prisma.item.findMany({
     where: {
       collectionItems: {
         some: {
           user: {
-            email: userEmail,
+            id: userId,
           },
         },
       },
@@ -57,11 +61,17 @@ async function getCollectedItems({ userEmail }: GetCollectedItemsParams) {
 export default async function ItemsPage() {
   const session = await unstable_getServerSession();
 
+  if (!session) return redirect("/api/auth/signin");
+
+  const user = await getUserBySession(session);
+
+  if (!user) return redirect("/api/auth/signin");
+
   const uncollectedItems = await getUncollectedItems({
-    userEmail: session?.user?.email ?? null,
+    userId: user.id,
   });
   const collectedItems = await getCollectedItems({
-    userEmail: session?.user?.email ?? null,
+    userId: user.id,
   });
 
   const totalItems = uncollectedItems.length + collectedItems.length;
@@ -69,6 +79,7 @@ export default async function ItemsPage() {
   return (
     <div className="flex flex-col gap-4">
       <header className="text-5xl">All Items</header>
+      {user.isAdmin && <AddItemForm />}
       <div>
         Found {collectedItems.length} out of {totalItems} items! 📷
       </div>
