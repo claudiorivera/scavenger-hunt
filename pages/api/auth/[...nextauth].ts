@@ -12,7 +12,7 @@ export const authOptions: NextAuthOptions = {
     colorScheme: "auto", // "auto" | "dark" | "light"
     brandColor: "#BF360C", // Hex color code
     logo: "https://scavenger-hunt.claudiorivera.com/android-chrome-512x512.png", // Absolute URL to image
-    buttonText: "", // Hex color code
+    buttonText: "#FFFFFF", // Hex color code
   },
   session: {
     strategy: "jwt",
