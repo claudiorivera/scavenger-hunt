@@ -1,26 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { unstable_getServerSession } from "next-auth";
-import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import { HiUserCircle } from "react-icons/hi";
 
-import prisma from "@/util/prisma";
+import { getUserBySession } from "@/util/getUserBySession";
 
 export default async function ProfilePage() {
-  const session = await unstable_getServerSession(nextAuthOptions);
+  const session = await unstable_getServerSession();
 
-  if (!session?.user?.email) return notFound();
+  if (!session?.user?.email) return redirect("/api/auth/signin");
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email: session.user.email,
-    },
-    select: {
-      image: true,
-      name: true,
-    },
-  });
+  const user = await getUserBySession(session);
 
   if (!user) return notFound();
 

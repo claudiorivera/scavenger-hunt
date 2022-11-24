@@ -9,12 +9,11 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { z } from "zod";
 
-import { getBase64 } from "@/util/getBase64";
+import { getBase64FromFile } from "@/util/getBase64FromFile";
 
 const editProfileSchema = z.object({
   name: z.string().nullish(),
   base64: z.string().nullish(),
-  filename: z.string().nullish(),
 });
 
 type Photo = Partial<Pick<HTMLImageElement, "src" | "width" | "height">>;
@@ -30,21 +29,23 @@ export default function ProfileForm({ user }: ProfileFormProps) {
 
   const [photo, setPhoto] = useState<Photo>();
 
+  async function postUser(data: UploadPhotoParams) {
+    return fetch(`/api/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then((res) => res.json());
+  }
+
   const {
     mutate: updateProfile,
     isLoading,
     isError,
     error,
   } = useMutation({
-    mutationFn: (data: UploadPhotoParams) => {
-      return fetch(`/api/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }).then((res) => res.json());
-    },
+    mutationFn: postUser,
     onSuccess: () => {
       router.refresh();
       return router.push("/profile");
@@ -54,7 +55,6 @@ export default function ProfileForm({ user }: ProfileFormProps) {
   const { register, setValue, handleSubmit } = useZodForm({
     schema: editProfileSchema,
     defaultValues: {
-      filename: `userId_${user.id}`,
       name: user.name,
     },
   });
@@ -79,7 +79,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
         setPhoto(image);
       };
 
-      const base64string = await getBase64(file);
+      const base64string = await getBase64FromFile(file);
 
       if (typeof base64string === "string") {
         setValue("base64", base64string);

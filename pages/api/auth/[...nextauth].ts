@@ -5,7 +5,7 @@ import GitHubProvider from "next-auth/providers/github";
 
 import prisma from "@/util/prisma";
 
-export const nextAuthOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
   theme: {
@@ -29,7 +29,7 @@ if (process.env.VERCEL_ENV !== "preview") {
   if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
     throw new Error("Missing GitHub OAuth environment variables.");
   }
-  nextAuthOptions.providers.push(
+  authOptions.providers.push(
     GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
@@ -37,4 +37,4 @@ if (process.env.VERCEL_ENV !== "preview") {
   );
 }
 
-export default NextAuth(nextAuthOptions);
+export default NextAuth(authOptions);

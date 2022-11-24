@@ -1,20 +1,25 @@
 import { Item, User } from "@prisma/client";
 import { v2 as cloudinary } from "cloudinary";
 import { NextApiRequest, NextApiResponse } from "next";
+import { unstable_getServerSession } from "next-auth";
 
+import { getUserBySession } from "@/util/getUserBySession";
 import prisma from "@/util/prisma";
+
+import { authOptions } from "../auth/[...nextauth]";
 
 interface UploadPhotoParams {
   base64: string;
-  filename: string;
+  itemId: Item["id"];
+  userId: User["id"];
 }
 
-async function uploadPhoto({ base64, filename }: UploadPhotoParams) {
+async function uploadPhoto({ base64, itemId, userId }: UploadPhotoParams) {
   try {
     const { secure_url, height, width } = await cloudinary.uploader.upload(
       base64,
       {
-        public_id: `${filename}`,
+        public_id: `user_${userId}-item_${itemId}`,
         folder: "scavenger-hunt/collection-items",
       }
     );
@@ -57,9 +62,6 @@ async function saveToDb({
       height,
       width,
     },
-    select: {
-      id: true,
-    },
   });
 }
 
@@ -69,13 +71,31 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     try {
-      const { base64, filename, itemId, userId } = req.body;
+      const session = await unstable_getServerSession(req, res, authOptions);
 
-      const { url, height, width } = await uploadPhoto({ base64, filename });
+      if (!session) return res.status(401);
 
-      const { id } = await saveToDb({ url, height, width, itemId, userId });
+      const user = await getUserBySession(session);
 
-      res.status(201).json({ id });
+      if (!user) throw new Error("User not found");
+
+      const { base64, itemId } = req.body;
+
+      const { url, height, width } = await uploadPhoto({
+        base64,
+        userId: user.id,
+        itemId,
+      });
+
+      await saveToDb({
+        url,
+        height,
+        width,
+        itemId,
+        userId: user.id,
+      });
+
+      res.status(201);
     } catch (error) {
       res.status(500).json({
         message:

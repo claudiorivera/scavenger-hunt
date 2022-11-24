@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { unstable_getServerSession } from "next-auth";
-import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 import { HiUserCircle } from "react-icons/hi";
 
 import prisma from "@/util/prisma";
@@ -16,7 +15,7 @@ interface ItemsPageParams {
 }
 
 export default async function ItemsPage({ params }: ItemsPageParams) {
-  const session = await unstable_getServerSession(nextAuthOptions);
+  const session = await unstable_getServerSession();
 
   const users = await prisma.user.findMany({
     where: {

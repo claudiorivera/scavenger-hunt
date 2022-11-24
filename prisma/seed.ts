@@ -2,7 +2,7 @@ import { Prisma, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import { faker } from "@faker-js/faker";
 
-import { capitalizeEachWordOfString } from "../util/capitalizeEachWordOfString";
+import { capitalizeEveryWord } from "../util/capitalizeEveryWord";
 
 function generateUserCreateInput(): Prisma.UserCreateInput {
   return {
@@ -37,7 +37,7 @@ function generateItemDescription() {
   const adjective = faker.word.adjective();
   const noun = faker.word.noun();
 
-  return `${capitalizeEachWordOfString(`${article} ${adjective} ${noun}`)}`;
+  return `${capitalizeEveryWord(`${article} ${adjective} ${noun}`)}`;
 }
 
 export async function seed() {

@@ -1,5 +1,5 @@
 "use client";
-import { Item, User } from "@prisma/client";
+import { Item } from "@prisma/client";
 import { useMutation } from "@tanstack/react-query";
 import classNames from "classnames";
 import { CheckmarkIcon, TrashIcon } from "components";
@@ -9,14 +9,12 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { z } from "zod";
 
-import { getBase64 } from "@/util/getBase64";
-import { getImagePreview } from "@/util/getImagePreview";
+import { getBase64FromFile } from "@/util/getBase64FromFile";
+import { getHtmlImageElementFromFile } from "@/util/getHtmlImageElementFromFile";
 
 const schema = z.object({
   base64: z.string(),
-  filename: z.string(),
   itemId: z.string().cuid(),
-  userId: z.string().cuid(),
 });
 
 interface ImagePreview
@@ -26,12 +24,22 @@ export type UploadPhotoData = z.infer<typeof schema>;
 
 interface PhotoUploadProps {
   itemId: Item["id"];
-  userId: User["id"];
 }
 
-export function PhotoUpload({ itemId, userId }: PhotoUploadProps) {
+export function PhotoUpload({ itemId }: PhotoUploadProps) {
   const router = useRouter();
+
   const [imagePreview, setImagePreview] = useState<ImagePreview | undefined>();
+
+  async function postPhoto(data: UploadPhotoData) {
+    return fetch(`/api/collection-items`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then((res) => res.json());
+  }
 
   const {
     mutate: uploadPhoto,
@@ -39,15 +47,7 @@ export function PhotoUpload({ itemId, userId }: PhotoUploadProps) {
     isError,
     error,
   } = useMutation({
-    mutationFn: (data: UploadPhotoData) => {
-      return fetch(`/api/collection-items`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }).then((res) => res.json());
-    },
+    mutationFn: postPhoto,
     onSuccess: ({ id }) => {
       return router.push(`/collection-items/${id}`);
     },
@@ -57,8 +57,6 @@ export function PhotoUpload({ itemId, userId }: PhotoUploadProps) {
     schema: schema,
     defaultValues: {
       itemId,
-      userId,
-      filename: `itemId_${itemId}-userId_${userId}`,
     },
   });
 
@@ -66,10 +64,10 @@ export function PhotoUpload({ itemId, userId }: PhotoUploadProps) {
     const file = event.currentTarget.files?.[0];
 
     if (!!file) {
-      const image = await getImagePreview(file);
+      const image = await getHtmlImageElementFromFile(file);
       setImagePreview(image);
 
-      const base64 = await getBase64(file);
+      const base64 = await getBase64FromFile(file);
 
       if (typeof base64 === "string") {
         setValue("base64", base64);

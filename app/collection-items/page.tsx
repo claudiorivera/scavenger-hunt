@@ -26,5 +26,5 @@ export default async function CollectionItemsPage({
       return redirect(`/collection-items/${collectionItem.id}`);
   }
 
-  return <div>CollectionItemsPage</div>;
+  return redirect("/items");
 }

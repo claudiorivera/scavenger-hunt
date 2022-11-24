@@ -3,7 +3,6 @@ import CheckCircleIcon from "components/CheckCircleIcon";
 import MinusCircleIcon from "components/MinusCircleIcon";
 import Link from "next/link";
 import { unstable_getServerSession } from "next-auth";
-import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 
 import prisma from "@/util/prisma";
 
@@ -56,7 +55,7 @@ async function getCollectedItems({ userEmail }: GetCollectedItemsParams) {
 }
 
 export default async function ItemsPage() {
-  const session = await unstable_getServerSession(nextAuthOptions);
+  const session = await unstable_getServerSession();
 
   const uncollectedItems = await getUncollectedItems({
     userEmail: session?.user?.email ?? null,

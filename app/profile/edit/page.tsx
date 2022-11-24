@@ -1,26 +1,16 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { unstable_getServerSession } from "next-auth";
-import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 
-import prisma from "@/util/prisma";
+import { getUserBySession } from "@/util/getUserBySession";
 
 import ProfileForm from "./ProfileForm";
 
 export default async function EditProfilePage() {
-  const session = await unstable_getServerSession(nextAuthOptions);
+  const session = await unstable_getServerSession();
 
-  if (!session?.user?.email) return notFound();
+  if (!session?.user?.email) return redirect("/api/auth/signin");
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email: session.user.email,
-    },
-    select: {
-      id: true,
-      image: true,
-      name: true,
-    },
-  });
+  const user = await getUserBySession(session);
 
   if (!user) return notFound();
 

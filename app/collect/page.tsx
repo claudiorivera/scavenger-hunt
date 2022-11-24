@@ -2,8 +2,8 @@ import { Item, User } from "@prisma/client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { unstable_getServerSession } from "next-auth";
-import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 
+import { getUserBySession } from "@/util/getUserBySession";
 import prisma from "@/util/prisma";
 
 import { PhotoUpload } from "./PhotoUpload";
@@ -35,13 +35,11 @@ async function getNextUncollectedItemIdForUserId(
     (item) => item.id !== currentItemId
   );
 
-  const randomItemIndex = Math.floor(
-    Math.random() * itemsExcludingCurrentItem.length
-  );
+  const nextUncollectedItem = itemsExcludingCurrentItem.length
+    ? itemsExcludingCurrentItem[0]
+    : null;
 
-  const nextUncollectedItem = itemsExcludingCurrentItem[randomItemIndex];
-
-  return nextUncollectedItem.id;
+  return nextUncollectedItem?.id;
 }
 
 interface CollectPageParams {
@@ -49,17 +47,13 @@ interface CollectPageParams {
 }
 
 export default async function CollectPage({ searchParams }: CollectPageParams) {
-  const session = await unstable_getServerSession(nextAuthOptions);
+  const session = await unstable_getServerSession();
 
-  if (!session?.user?.email) return null;
+  if (!session) return redirect("/api/auth/signin");
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email: session.user.email,
-    },
-  });
+  const user = await getUserBySession(session);
 
-  if (!user) return null;
+  if (!user) return redirect("/api/auth/signin");
 
   const nextUncollectedItemId = await getNextUncollectedItemIdForUserId(
     user.id
@@ -86,7 +80,7 @@ export default async function CollectPage({ searchParams }: CollectPageParams) {
     <div className="flex flex-col gap-4">
       <header className="text-2xl">Find</header>
       <div className="text-5xl">{item.description}</div>
-      <PhotoUpload userId={user.id} itemId={item.id} />
+      <PhotoUpload itemId={item.id} />
       <Link
         className="btn btn-secondary"
         href={`/collect?itemId=${nextUncollectedItemId}`}

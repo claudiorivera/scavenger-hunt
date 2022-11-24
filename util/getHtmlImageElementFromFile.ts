@@ -1,4 +1,6 @@
-export const getImagePreview = (file: File): Promise<HTMLImageElement> =>
+export const getHtmlImageElementFromFile = (
+  file: File
+): Promise<HTMLImageElement> =>
   new Promise((res, rej) => {
     const image = new Image();
     image.src = URL.createObjectURL(file);

@@ -1,9 +1,8 @@
 import { CollectionItem } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { unstable_getServerSession } from "next-auth";
-import { nextAuthOptions } from "pages/api/auth/[...nextauth]";
 
 import prisma from "@/util/prisma";
 
@@ -39,9 +38,9 @@ interface CollectionItemPageParams {
 export default async function CollectionItemPage({
   params,
 }: CollectionItemPageParams) {
-  const session = await unstable_getServerSession(nextAuthOptions);
+  const session = await unstable_getServerSession();
 
-  if (!session?.user?.email) return null;
+  if (!session?.user?.email) return redirect("/api/auth/signin");
 
   const currentUser = await prisma.user.findUnique({
     where: {
@@ -57,7 +56,7 @@ export default async function CollectionItemPage({
     },
   });
 
-  if (!currentUser) return null;
+  if (!currentUser) return redirect("/api/auth/signin");
 
   const collectionItem = await getCollectionItemById(params.id);
 
