@@ -4,6 +4,9 @@ import { faker } from "@faker-js/faker";
 
 import { capitalizeEveryWord } from "../util/capitalizeEveryWord";
 
+const USERS_TO_CREATE = 2;
+const ITEMS_TO_CREATE = 4;
+
 function generateUserCreateInput(): Prisma.UserCreateInput {
   return {
     email: faker.internet.email(),
@@ -47,9 +50,9 @@ export async function seed() {
   await prisma.item.deleteMany();
   await prisma.collectionItem.deleteMany();
 
-  await createUsers(10);
+  await createUsers(USERS_TO_CREATE);
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < ITEMS_TO_CREATE; i++) {
     await prisma.item.create({
       data: {
         description: generateItemDescription(),

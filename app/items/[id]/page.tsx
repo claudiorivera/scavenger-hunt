@@ -2,11 +2,15 @@ import { Item } from "@prisma/client";
 import { EyeIcon } from "components/EyeIcon";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { notFound } from "next/navigation";
 import { unstable_getServerSession } from "next-auth";
 import { HiUserCircle } from "react-icons/hi";
 
+import { getUserBySession } from "@/util/getUserBySession";
 import prisma from "@/util/prisma";
+
+import { DeleteItem } from "./DeleteItem";
 
 interface ItemsPageParams {
   params: {
@@ -16,6 +20,10 @@ interface ItemsPageParams {
 
 export default async function ItemsPage({ params }: ItemsPageParams) {
   const session = await unstable_getServerSession();
+
+  if (!session) return redirect("/api/auth/signin");
+
+  const user = await getUserBySession(session);
 
   const users = await prisma.user.findMany({
     where: {
@@ -92,6 +100,7 @@ export default async function ItemsPage({ params }: ItemsPageParams) {
           Found It?
         </Link>
       )}
+      {user?.isAdmin && <DeleteItem id={item.id} />}
     </div>
   );
 }
