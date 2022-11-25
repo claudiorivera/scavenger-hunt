@@ -8,6 +8,8 @@ import prisma from "@/util/prisma";
 
 import { DeleteCollectionItem } from "./DeleteCollectionItem";
 
+export const dynamic = "force-dynamic";
+
 async function getCollectionItemById(id: CollectionItem["id"]) {
   return prisma.collectionItem.findUnique({
     where: {
@@ -72,6 +74,8 @@ export default async function CollectionItemPage({
     (item) => item.itemId === collectionItem.item.id
   );
 
+  const isCurrentUserCollectionItem = collectionItem.user.id === currentUser.id;
+
   return (
     <div className="flex flex-col gap-4">
       <header className="text-2xl">{title}</header>
@@ -90,6 +94,11 @@ export default async function CollectionItemPage({
           href={`/collect?itemId=${collectionItem.item.id}`}
         >
           Found It Too?
+        </Link>
+      )}
+      {isCurrentUserCollectionItem && (
+        <Link className="btn btn-secondary" href={"/collect"}>
+          Find More Stuff!
         </Link>
       )}
       <Link
