@@ -14,11 +14,9 @@ export function DeleteUser({ id }: DeleteUserProps) {
   const router = useRouter();
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: () => {
-      return axios.delete(`/api/users/${id}`);
-    },
+    mutationFn: () => axios.delete(`/api/users/${id}`),
     onSuccess: () => {
-      router.push("/leaderboard");
+      router.refresh();
     },
   });
 

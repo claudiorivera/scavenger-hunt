@@ -1,5 +1,6 @@
 "use client";
 import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import classNames from "classnames";
 import { Input } from "components";
 import { useZodForm } from "hooks/useZodForm";
@@ -15,23 +16,13 @@ type PostItemParams = z.infer<typeof addItemSchema>;
 export default function AddItemForm() {
   const router = useRouter();
 
-  async function postItem(data: PostItemParams) {
-    return fetch(`/api/items`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-  }
-
   const {
     mutate: addItem,
     isLoading,
     isError,
     error,
   } = useMutation({
-    mutationFn: postItem,
+    mutationFn: (data: PostItemParams) => axios.post("/api/items", data),
     onSuccess: () => {
       router.refresh();
     },

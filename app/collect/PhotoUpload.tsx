@@ -1,6 +1,7 @@
 "use client";
 import { Item } from "@prisma/client";
 import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import classNames from "classnames";
 import { CheckmarkIcon, TrashIcon } from "components";
 import { useZodForm } from "hooks/useZodForm";
@@ -17,8 +18,11 @@ const schema = z.object({
   itemId: z.string().cuid(),
 });
 
-interface ImagePreview
-  extends Pick<HTMLImageElement, "src" | "width" | "height"> {}
+const uploadResponseSchema = z.object({
+  id: z.string().cuid(),
+});
+
+type ImagePreview = Pick<HTMLImageElement, "src" | "width" | "height">;
 
 export type UploadPhotoData = z.infer<typeof schema>;
 
@@ -31,25 +35,22 @@ export function PhotoUpload({ itemId }: PhotoUploadProps) {
 
   const [imagePreview, setImagePreview] = useState<ImagePreview | undefined>();
 
-  async function postPhoto(data: UploadPhotoData) {
-    return fetch(`/api/collection-items`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then((res) => res.json());
-  }
-
   const {
     mutate: uploadPhoto,
     isLoading,
     isError,
     error,
   } = useMutation({
-    mutationFn: postPhoto,
+    mutationFn: async (uploadPhotoData: UploadPhotoData) => {
+      const { data } = await axios.post(
+        "/api/collection-items",
+        uploadPhotoData
+      );
+      return uploadResponseSchema.parse(data);
+    },
     onSuccess: ({ id }) => {
-      return router.push(`/collection-items/${id}`);
+      router.refresh();
+      router.push(`/collection-items/${id}`);
     },
   });
 

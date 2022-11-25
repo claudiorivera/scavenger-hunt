@@ -13,10 +13,9 @@ export function DeleteCollectionItem({ id }: DeleteCollectionItemProps) {
   const router = useRouter();
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: () => {
-      return axios.delete(`/api/collection-items/${id}`);
-    },
+    mutationFn: () => axios.delete(`/api/collection-items/${id}`),
     onSuccess: () => {
+      router.refresh();
       router.push("/leaderboard");
     },
   });

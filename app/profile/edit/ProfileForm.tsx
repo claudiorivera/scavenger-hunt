@@ -1,12 +1,13 @@
 "use client";
 import { User } from "@prisma/client";
 import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import classNames from "classnames";
 import { Input } from "components";
 import { useZodForm } from "hooks/useZodForm";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { z } from "zod";
 
 import { getBase64FromFile } from "@/util/getBase64FromFile";
@@ -18,26 +19,20 @@ const editProfileSchema = z.object({
 
 type Photo = Partial<Pick<HTMLImageElement, "src" | "width" | "height">>;
 
-type UploadPhotoParams = z.infer<typeof editProfileSchema>;
+type EditProfileParams = z.infer<typeof editProfileSchema>;
 
 interface ProfileFormProps {
-  user: Partial<User>;
+  user: User;
 }
 
 export default function ProfileForm({ user }: ProfileFormProps) {
   const router = useRouter();
 
-  const [photo, setPhoto] = useState<Photo>();
-
-  async function postUser(data: UploadPhotoParams) {
-    return fetch(`/api/users`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-  }
+  const [photo, setPhoto] = useState<Photo>({
+    src: user.image ?? undefined,
+    height: 100,
+    width: 100,
+  });
 
   const {
     mutate: updateProfile,
@@ -45,10 +40,11 @@ export default function ProfileForm({ user }: ProfileFormProps) {
     isError,
     error,
   } = useMutation({
-    mutationFn: postUser,
+    mutationFn: (data: EditProfileParams) =>
+      axios.put(`/api/users/${user.id}`, data),
     onSuccess: () => {
       router.refresh();
-      return router.push("/profile");
+      router.push("/profile");
     },
   });
 
@@ -58,16 +54,6 @@ export default function ProfileForm({ user }: ProfileFormProps) {
       name: user.name,
     },
   });
-
-  useEffect(() => {
-    if (user.image) {
-      setPhoto({
-        src: user.image,
-        width: 100,
-        height: 100,
-      });
-    }
-  }, [user]);
 
   const onFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!!event.currentTarget.files?.[0]) {
@@ -103,8 +89,8 @@ export default function ProfileForm({ user }: ProfileFormProps) {
         })}
         className="flex flex-col gap-2"
       >
-        <input hidden {...register("base64")} />
         <div className="mx-auto">
+          <input hidden {...register("base64")} />
           <div className="placeholder avatar">
             <div className="relative w-24 rounded-full bg-base-300 text-base-content ring ring-secondary">
               {!!photo?.src && (

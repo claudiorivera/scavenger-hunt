@@ -13,10 +13,9 @@ export function DeleteItem({ id }: DeleteItemProps) {
   const router = useRouter();
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: () => {
-      return axios.delete(`/api/items/${id}`);
-    },
+    mutationFn: () => axios.delete(`/api/items/${id}`),
     onSuccess: () => {
+      router.refresh();
       router.push("/items");
     },
   });
