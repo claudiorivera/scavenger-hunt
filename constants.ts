@@ -3,14 +3,11 @@ interface Link {
   url: string;
 }
 
-export const adminLinks: Link[] = [
-  {
-    title: "Admin",
-    url: "/admin",
-  },
-];
-
 export const userLinks: Link[] = [
+  {
+    title: "Home",
+    url: "/",
+  },
   {
     title: "Collect",
     url: "/collect",

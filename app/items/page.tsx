@@ -101,14 +101,14 @@ export default async function ItemsPage() {
         ))}
         {collectedItems.map((item) => (
           <li key={item.id}>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 relative">
               <Link
                 className="btn btn-secondary flex-1"
                 href={`/items/${item.id}`}
               >
                 {item.description}
               </Link>
-              <div className="text-success">
+              <div className="text-success absolute -right-8">
                 <CheckCircleIcon />
               </div>
             </div>
