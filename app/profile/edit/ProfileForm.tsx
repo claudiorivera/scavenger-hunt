@@ -22,7 +22,7 @@ type Photo = Partial<Pick<HTMLImageElement, "src" | "width" | "height">>;
 type EditProfileParams = z.infer<typeof editProfileSchema>;
 
 interface ProfileFormProps {
-  user: User;
+  user: Partial<User>;
 }
 
 export default function ProfileForm({ user }: ProfileFormProps) {
