@@ -5,7 +5,7 @@ specifiers:
   '@hookform/resolvers': 2.9.10
   '@next-auth/prisma-adapter': 1.0.5
   '@prisma/client': 4.7.0
-  '@tanstack/react-query': 4.18.0
+  '@tanstack/react-query': 4.19.0
   '@types/node': 18.11.10
   '@types/nodemailer': 6.4.6
   '@types/react': 18.0.25
@@ -39,7 +39,7 @@ dependencies:
   '@hookform/resolvers': 2.9.10_react-hook-form@7.40.0
   '@next-auth/prisma-adapter': 1.0.5_shvya3vkjwvqcakop4qe7lit3y
   '@prisma/client': 4.7.0_prisma@4.7.0
-  '@tanstack/react-query': 4.18.0_biqbaboplfbrettd7655fr4n2y
+  '@tanstack/react-query': 4.19.0_biqbaboplfbrettd7655fr4n2y
   '@vercel/analytics': 0.1.5_react@18.2.0
   axios: 1.2.0
   classnames: 2.3.2
@@ -358,12 +358,12 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@tanstack/query-core/4.18.0:
-    resolution: {integrity: sha512-PP4mG8MD08sq64RZCqMfXMYfaj7+Oulwg7xZ/fJoEOdTZNcPIgaOkHajZvUBsNLbi/0ViMvJB4cFkL2Jg2WPbw==}
+  /@tanstack/query-core/4.19.0:
+    resolution: {integrity: sha512-q+4GvS05nG2UXDE4ng0NU5SQNhT+VqhRTLNVtgVw1tIKJfG3CyYQpP/JwAdzMB7NEqC8L5oo9NAaORxEQN53dg==}
     dev: false
 
-  /@tanstack/react-query/4.18.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-s1kdbGMdVcfUIllzsHUqVUdktBT5uuIRgnvrqFNLjl9TSOXEoBSDrhjsGjao0INQZv8cMpQlgOh3YH9YtN6cKw==}
+  /@tanstack/react-query/4.19.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-gP4kmfQ3BvCYxTxA/3Xf0P24iNgW539Thk89KzP7X+i+EvFiWhEUMl1NtuI87bFrVEBHs+1ColFNimDidBh/Ww==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -374,7 +374,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@tanstack/query-core': 4.18.0
+      '@tanstack/query-core': 4.19.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
