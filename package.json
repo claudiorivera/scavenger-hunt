@@ -20,7 +20,7 @@
     "axios": "1.2.1",
     "classnames": "2.3.2",
     "cloudinary": "1.32.0",
-    "daisyui": "2.42.1",
+    "daisyui": "2.43.0",
     "next": "13.0.6",
     "next-auth": "4.18.4",
     "nodemailer": "6.8.0",
