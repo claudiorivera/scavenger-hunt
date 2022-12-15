@@ -14,7 +14,7 @@ specifiers:
   autoprefixer: 10.4.13
   axios: 1.2.1
   classnames: 2.3.2
-  cloudinary: 1.32.0
+  cloudinary: 1.33.0
   daisyui: 2.43.2
   eslint: 8.29.0
   eslint-config-next: 13.0.7
@@ -43,7 +43,7 @@ dependencies:
   '@vercel/analytics': 0.1.6_react@18.2.0
   axios: 1.2.1
   classnames: 2.3.2
-  cloudinary: 1.32.0
+  cloudinary: 1.33.0
   daisyui: 2.43.2_63gb4bqnxhe4g6pce5lz6sagrm
   next: 13.0.7_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.18.6_gxrb4puqhmlxj5cjmftw47fgty
@@ -772,8 +772,8 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /cloudinary/1.32.0:
-    resolution: {integrity: sha512-hbc5/ilOkwD49+Lucqze3z+2Tejc3YdH4tkI+y1Ciabi9Qh9MYcy4M3rYeDAYiMS/jIz5FfHOzx+JjVnPJxNAQ==}
+  /cloudinary/1.33.0:
+    resolution: {integrity: sha512-pdqOgd2QAMCFWujdYw1yhZ+lHPTzc6YIfg4WIvbRyoojIbSd/YgnHT8OSnk/OM4Q1WPFD5FM9EEom+4ehG80IA==}
     engines: {node: '>=0.6'}
     dependencies:
       cloudinary-core: 2.13.0_lodash@4.17.21
