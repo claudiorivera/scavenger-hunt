@@ -15,7 +15,7 @@ specifiers:
   axios: 1.2.1
   classnames: 2.3.2
   cloudinary: 1.33.0
-  daisyui: 2.45.0
+  daisyui: 2.46.0
   eslint: 8.30.0
   eslint-config-next: 13.0.7
   eslint-plugin-simple-import-sort: 8.0.0
@@ -44,7 +44,7 @@ dependencies:
   axios: 1.2.1
   classnames: 2.3.2
   cloudinary: 1.33.0
-  daisyui: 2.45.0_63gb4bqnxhe4g6pce5lz6sagrm
+  daisyui: 2.46.0_63gb4bqnxhe4g6pce5lz6sagrm
   next: 13.0.7_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.18.6_gxrb4puqhmlxj5cjmftw47fgty
   nodemailer: 6.8.0
@@ -870,8 +870,8 @@ packages:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
     dev: true
 
-  /daisyui/2.45.0_63gb4bqnxhe4g6pce5lz6sagrm:
-    resolution: {integrity: sha512-hAWs7vQLxsWXCd3KMLAMBrZPO6OdU0gIDfOKGmZlyM0ro/pW3J2eGEaBs90Dy8w8L6wD/w1s8Ujd7zG8TYtD3g==}
+  /daisyui/2.46.0_63gb4bqnxhe4g6pce5lz6sagrm:
+    resolution: {integrity: sha512-7L+KMCADsAmZkJUIabgDSpqEF9+uVPvyJSkSieOpY2WKeDd2pvcELZMs/AKaKkB5gcrb9cPP9vFdLXeDFJj90g==}
     peerDependencies:
       autoprefixer: ^10.0.2
       postcss: ^8.1.6
