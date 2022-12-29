@@ -17,7 +17,7 @@
     "@prisma/client": "4.8.0",
     "@tanstack/react-query": "4.20.4",
     "@vercel/analytics": "0.1.6",
-    "axios": "1.2.1",
+    "axios": "1.2.2",
     "classnames": "2.3.2",
     "cloudinary": "1.33.0",
     "daisyui": "2.46.0",
