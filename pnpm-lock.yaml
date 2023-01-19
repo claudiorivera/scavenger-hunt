@@ -18,7 +18,7 @@ specifiers:
   daisyui: 2.46.1
   eslint: 8.32.0
   eslint-config-next: 13.1.2
-  eslint-plugin-simple-import-sort: 8.0.0
+  eslint-plugin-simple-import-sort: 9.0.0
   eslint-plugin-unused-imports: 2.0.0
   next: 13.1.2
   next-auth: 4.18.8
@@ -62,7 +62,7 @@ devDependencies:
   autoprefixer: 10.4.13_postcss@8.4.21
   eslint: 8.32.0
   eslint-config-next: 13.1.2_7uibuqfxkfaozanbtbziikiqje
-  eslint-plugin-simple-import-sort: 8.0.0_eslint@8.32.0
+  eslint-plugin-simple-import-sort: 9.0.0_eslint@8.32.0
   eslint-plugin-unused-imports: 2.0.0_eslint@8.32.0
   postcss: 8.4.21
   prisma: 4.8.1
@@ -1254,8 +1254,8 @@ packages:
       string.prototype.matchall: 4.0.7
     dev: true
 
-  /eslint-plugin-simple-import-sort/8.0.0_eslint@8.32.0:
-    resolution: {integrity: sha512-bXgJQ+lqhtQBCuWY/FUWdB27j4+lqcvXv5rUARkzbeWLwea+S5eBZEQrhnO+WgX3ZoJHVj0cn943iyXwByHHQw==}
+  /eslint-plugin-simple-import-sort/9.0.0_eslint@8.32.0:
+    resolution: {integrity: sha512-PtrLjyXP8kjRneWT1n0b99y/2Fyup37we7FVoWsI61/O7x4ztLohzhep/pxI/cYlECr/cQ2j6utckdvWpVwXNA==}
     peerDependencies:
       eslint: '>=5.0.0'
     dependencies:
