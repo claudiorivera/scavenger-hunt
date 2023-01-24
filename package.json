@@ -22,7 +22,7 @@
     "cloudinary": "1.33.0",
     "daisyui": "2.47.0",
     "next": "13.1.5",
-    "next-auth": "4.18.9",
+    "next-auth": "4.18.10",
     "nodemailer": "6.9.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
