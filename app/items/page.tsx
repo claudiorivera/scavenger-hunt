@@ -3,7 +3,7 @@ import CheckCircleIcon from "components/CheckCircleIcon";
 import MinusCircleIcon from "components/MinusCircleIcon";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 
 import { getUserBySession } from "@/util/getUserBySession";
 import prisma from "@/util/prisma";
@@ -59,7 +59,7 @@ async function getCollectedItems({ userId }: GetCollectedItemsParams) {
 }
 
 export default async function ItemsPage() {
-  const session = await unstable_getServerSession();
+  const session = await getServerSession();
 
   if (!session) return redirect("/api/auth/signin");
 

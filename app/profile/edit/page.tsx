@@ -1,12 +1,12 @@
 import { notFound, redirect } from "next/navigation";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 
 import { getUserBySession } from "@/util/getUserBySession";
 
 import ProfileForm from "./ProfileForm";
 
 export default async function EditProfilePage() {
-  const session = await unstable_getServerSession();
+  const session = await getServerSession();
 
   if (!session?.user?.email) return redirect("/api/auth/signin");
 

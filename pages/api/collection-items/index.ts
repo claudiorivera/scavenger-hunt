@@ -1,7 +1,7 @@
 import { Item, User } from "@prisma/client";
 import { v2 as cloudinary } from "cloudinary";
 import { NextApiRequest, NextApiResponse } from "next";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 
 import { getUserBySession } from "@/util/getUserBySession";
 import prisma from "@/util/prisma";
@@ -69,7 +69,7 @@ async function saveToDb({
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     try {
-      const session = await unstable_getServerSession(req, res, authOptions);
+      const session = await getServerSession(req, res, authOptions);
 
       if (!session) return res.status(401).end();
 

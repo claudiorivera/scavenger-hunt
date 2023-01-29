@@ -2,7 +2,7 @@ import { CollectionItem } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 
 import prisma from "@/util/prisma";
 
@@ -43,7 +43,7 @@ interface CollectionItemPageParams {
 export default async function CollectionItemPage({
   params,
 }: CollectionItemPageParams) {
-  const session = await unstable_getServerSession();
+  const session = await getServerSession();
 
   if (!session?.user?.email) return redirect("/api/auth/signin");
 

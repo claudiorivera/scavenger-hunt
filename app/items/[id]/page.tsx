@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { notFound } from "next/navigation";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { HiUserCircle } from "react-icons/hi";
 
 import { getUserBySession } from "@/util/getUserBySession";
@@ -19,7 +19,7 @@ interface ItemsPageParams {
 }
 
 export default async function ItemsPage({ params }: ItemsPageParams) {
-  const session = await unstable_getServerSession();
+  const session = await getServerSession();
 
   if (!session) return redirect("/api/auth/signin");
 

@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { HiUserCircle } from "react-icons/hi";
 
 import { getUserBySession } from "@/util/getUserBySession";
 
 export default async function HomePage() {
-  const session = await unstable_getServerSession();
+  const session = await getServerSession();
 
   if (!session?.user?.email) return redirect("/api/auth/signin");
 

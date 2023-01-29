@@ -1,6 +1,6 @@
 import { Item } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 
 import { getUserBySession } from "@/util/getUserBySession";
@@ -22,7 +22,7 @@ async function deleteItem({ id }: DeleteItemParams) {
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "DELETE") {
     try {
-      const session = await unstable_getServerSession(req, res, authOptions);
+      const session = await getServerSession(req, res, authOptions);
 
       if (!session) return res.status(401).end();
 
