@@ -1,7 +1,7 @@
 import { Item, User } from "@prisma/client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 
 import { getUserBySession } from "@/util/getUserBySession";
 import prisma from "@/util/prisma";
@@ -47,7 +47,7 @@ interface CollectPageParams {
 }
 
 export default async function CollectPage({ searchParams }: CollectPageParams) {
-  const session = await unstable_getServerSession();
+  const session = await getServerSession();
 
   if (!session) return redirect("/api/auth/signin");
 

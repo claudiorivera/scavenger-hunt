@@ -1,7 +1,7 @@
 import { User } from "@prisma/client";
 import { v2 as cloudinary } from "cloudinary";
 import { NextApiRequest, NextApiResponse } from "next";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 
 import { getUserBySession } from "@/util/getUserBySession";
@@ -68,7 +68,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    const session = await unstable_getServerSession(req, res, authOptions);
+    const session = await getServerSession(req, res, authOptions);
 
     if (!session) return res.status(401).end();
 
