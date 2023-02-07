@@ -6,7 +6,7 @@ specifiers:
   '@next-auth/prisma-adapter': 1.0.5
   '@prisma/client': 4.9.0
   '@tanstack/react-query': 4.24.4
-  '@types/node': 18.11.19
+  '@types/node': 18.13.0
   '@types/nodemailer': 6.4.7
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
@@ -55,7 +55,7 @@ dependencies:
   zod: 3.20.2
 
 devDependencies:
-  '@types/node': 18.11.19
+  '@types/node': 18.13.0
   '@types/nodemailer': 6.4.7
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
@@ -67,7 +67,7 @@ devDependencies:
   postcss: 8.4.21
   prisma: 4.9.0
   tailwindcss: 3.2.4_aesdjsunmf4wiehhujt67my7tu
-  ts-node: 10.9.1_qqdszkrtcshgbphghj7vnvrrby
+  ts-node: 10.9.1_4bewfcp2iebiwuold25d6rgcsy
   typescript: 4.9.5
 
 packages:
@@ -402,13 +402,13 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/node/18.11.19:
-    resolution: {integrity: sha512-YUgMWAQBWLObABqrvx8qKO1enAvBUdjZOAWQ5grBAkp5LQv45jBvYKZ3oFS9iKRCQyFjqw6iuEa1vmFqtxYLZw==}
+  /@types/node/18.13.0:
+    resolution: {integrity: sha512-gC3TazRzGoOnoKAhUx+Q0t8S9Tzs74z7m0ipwGpSqQrleP14hKxP4/JUeEQcD3W1/aIpnWl8pHowI7WokuZpXg==}
 
   /@types/nodemailer/6.4.7:
     resolution: {integrity: sha512-f5qCBGAn/f0qtRcd4SEn88c8Fp3Swct1731X4ryPKqS61/A3LmmzN8zaEz7hneJvpjFbUUgY7lru/B/7ODTazg==}
     dependencies:
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
     dev: true
 
   /@types/prop-types/15.7.5:
@@ -2447,7 +2447,7 @@ packages:
     dependencies:
       lilconfig: 2.0.6
       postcss: 8.4.21
-      ts-node: 10.9.1_qqdszkrtcshgbphghj7vnvrrby
+      ts-node: 10.9.1_4bewfcp2iebiwuold25d6rgcsy
       yaml: 1.10.2
 
   /postcss-nested/6.0.0_postcss@8.4.21:
@@ -2949,7 +2949,7 @@ packages:
     dev: false
     optional: true
 
-  /ts-node/10.9.1_qqdszkrtcshgbphghj7vnvrrby:
+  /ts-node/10.9.1_4bewfcp2iebiwuold25d6rgcsy:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -2968,7 +2968,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.11.19
+      '@types/node': 18.13.0
       acorn: 8.8.0
       acorn-walk: 8.2.0
       arg: 4.1.3
