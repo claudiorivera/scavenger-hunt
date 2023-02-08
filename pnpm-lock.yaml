@@ -29,7 +29,7 @@ specifiers:
   react-dom: 18.2.0
   react-hook-form: 7.43.1
   react-icons: 4.7.1
-  tailwindcss: 3.2.4
+  tailwindcss: 3.2.6
   ts-node: 10.9.1
   typescript: 4.9.5
   zod: 3.20.3
@@ -66,7 +66,7 @@ devDependencies:
   eslint-plugin-unused-imports: 2.0.0_eslint@8.33.0
   postcss: 8.4.21
   prisma: 4.9.0
-  tailwindcss: 3.2.4_aesdjsunmf4wiehhujt67my7tu
+  tailwindcss: 3.2.6_aesdjsunmf4wiehhujt67my7tu
   ts-node: 10.9.1_4bewfcp2iebiwuold25d6rgcsy
   typescript: 4.9.5
 
@@ -881,7 +881,7 @@ packages:
       css-selector-tokenizer: 0.8.0
       postcss: 8.4.21
       postcss-js: 4.0.0_postcss@8.4.21
-      tailwindcss: 3.2.4_aesdjsunmf4wiehhujt67my7tu
+      tailwindcss: 3.2.6_aesdjsunmf4wiehhujt67my7tu
     transitivePeerDependencies:
       - ts-node
     dev: false
@@ -2457,10 +2457,10 @@ packages:
       postcss: ^8.2.14
     dependencies:
       postcss: 8.4.21
-      postcss-selector-parser: 6.0.10
+      postcss-selector-parser: 6.0.11
 
-  /postcss-selector-parser/6.0.10:
-    resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
+  /postcss-selector-parser/6.0.11:
+    resolution: {integrity: sha512-zbARubNdogI9j7WY4nQJBiNqQf3sLS3wCP4WfOidu+p28LofJqDH1tcXypGrcmMHhDk2t9wGhCsYe/+szLTy1g==}
     engines: {node: '>=4'}
     dependencies:
       cssesc: 3.0.0
@@ -2888,8 +2888,8 @@ packages:
       tslib: 2.4.0
     dev: true
 
-  /tailwindcss/3.2.4_aesdjsunmf4wiehhujt67my7tu:
-    resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
+  /tailwindcss/3.2.6_aesdjsunmf4wiehhujt67my7tu:
+    resolution: {integrity: sha512-BfgQWZrtqowOQMC2bwaSNe7xcIjdDEgixWGYOd6AL0CbKHJlvhfdbINeAW76l1sO+1ov/MJ93ODJ9yluRituIw==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     peerDependencies:
@@ -2914,7 +2914,7 @@ packages:
       postcss-js: 4.0.0_postcss@8.4.21
       postcss-load-config: 3.1.4_aesdjsunmf4wiehhujt67my7tu
       postcss-nested: 6.0.0_postcss@8.4.21
-      postcss-selector-parser: 6.0.10
+      postcss-selector-parser: 6.0.11
       postcss-value-parser: 4.2.0
       quick-lru: 5.1.1
       resolve: 1.22.1
