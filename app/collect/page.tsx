@@ -43,7 +43,9 @@ async function getNextUncollectedItemIdForUserId(
 }
 
 interface CollectPageParams {
-  searchParams?: any; // until this gets fixed: https://github.com/vercel/next.js/issues/42557
+  searchParams: {
+    itemId: Item["id"];
+  };
 }
 
 export default async function CollectPage({ searchParams }: CollectPageParams) {
