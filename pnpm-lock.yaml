@@ -26,8 +26,8 @@ dependencies:
     specifier: 2.3.2
     version: 2.3.2
   cloudinary:
-    specifier: 1.36.1
-    version: 1.36.1
+    specifier: 1.36.2
+    version: 1.36.2
   daisyui:
     specifier: 2.51.5
     version: 2.51.5(autoprefixer@10.4.14)(postcss@8.4.23)(ts-node@10.9.1)
@@ -778,12 +778,12 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /cloudinary@1.36.1:
-    resolution: {integrity: sha512-5W9gsA2qazJygT430rmetD+Sat9R9xwGjD9NMhGPz9RmfZQ/Xk6KeqRl/FVlejWavt7hOBS79S16TCqNQSwCsQ==}
+  /cloudinary@1.36.2:
+    resolution: {integrity: sha512-GTC6FkfYUvQ47Pox1ucTIXhbhvc04wPI8MPuRpoTX7IojyGVEjgHFBqgYn4FLX4nQEDsQIgvWYo/n8iBDyaX2g==}
     engines: {node: '>=0.6'}
     dependencies:
       cloudinary-core: 2.13.0(lodash@4.17.21)
-      core-js: 3.26.1
+      core-js: 3.30.1
       lodash: 4.17.21
       q: 1.5.1
     optionalDependencies:
@@ -841,8 +841,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /core-js@3.26.1:
-    resolution: {integrity: sha512-21491RRQVzUn0GGM9Z1Jrpr6PNPxPi+Za8OM9q4tksTSnlbXXGKK1nXNg/QvwFYettXvSX6zWKCtHHfjN4puyA==}
+  /core-js@3.30.1:
+    resolution: {integrity: sha512-ZNS5nbiSwDTq4hFosEDqm65izl2CWmLz0hARJMyNQBgkUZMIF51cQiMvIQKA6hvuaeWxQDP3hEedM1JZIgTldQ==}
     requiresBuild: true
     dev: false
 
