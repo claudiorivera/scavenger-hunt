@@ -58,8 +58,8 @@ dependencies:
 
 devDependencies:
   '@types/node':
-    specifier: 18.16.13
-    version: 18.16.13
+    specifier: 18.16.14
+    version: 18.16.14
   '@types/nodemailer':
     specifier: 6.4.8
     version: 6.4.8
@@ -95,7 +95,7 @@ devDependencies:
     version: 3.3.2(ts-node@10.9.1)
   ts-node:
     specifier: 10.9.1
-    version: 10.9.1(@types/node@18.16.13)(typescript@5.0.4)
+    version: 10.9.1(@types/node@18.16.14)(typescript@5.0.4)
   typescript:
     specifier: 5.0.4
     version: 5.0.4
@@ -432,13 +432,13 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/node@18.16.13:
-    resolution: {integrity: sha512-uZRomboV1vBL61EBXneL4j9/hEn+1Yqa4LQdpGrKmXFyJmVfWc9JV9+yb2AlnOnuaDnb2PDO3hC6/LKmzJxP1A==}
+  /@types/node@18.16.14:
+    resolution: {integrity: sha512-+ImzUB3mw2c5ISJUq0punjDilUQ5GnUim0ZRvchHIWJmOC0G+p0kzhXBqj6cDjK0QdPFwzrHWgrJp3RPvCG5qg==}
 
   /@types/nodemailer@6.4.8:
     resolution: {integrity: sha512-oVsJSCkqViCn8/pEu2hfjwVO+Gb3e+eTWjg3PcjeFKRItfKpKwHphQqbYmPQrlMk+op7pNNWPbsJIEthpFN/OQ==}
     dependencies:
-      '@types/node': 18.16.13
+      '@types/node': 18.16.14
     dev: true
 
   /@types/prop-types@15.7.5:
@@ -2473,7 +2473,7 @@ packages:
     dependencies:
       lilconfig: 2.1.0
       postcss: 8.4.23
-      ts-node: 10.9.1(@types/node@18.16.13)(typescript@5.0.4)
+      ts-node: 10.9.1(@types/node@18.16.14)(typescript@5.0.4)
       yaml: 2.2.2
 
   /postcss-nested@6.0.1(postcss@8.4.23):
@@ -2996,7 +2996,7 @@ packages:
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  /ts-node@10.9.1(@types/node@18.16.13)(typescript@5.0.4):
+  /ts-node@10.9.1(@types/node@18.16.14)(typescript@5.0.4):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -3015,7 +3015,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.16.13
+      '@types/node': 18.16.14
       acorn: 8.8.0
       acorn-walk: 8.2.0
       arg: 4.1.3
