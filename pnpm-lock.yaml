@@ -30,8 +30,8 @@ dependencies:
     specifier: 2.3.2
     version: 2.3.2
   cloudinary:
-    specifier: 1.36.4
-    version: 1.36.4
+    specifier: 1.37.0
+    version: 1.37.0
   daisyui:
     specifier: 2.51.6
     version: 2.51.6(autoprefixer@10.4.14)(postcss@8.4.24)(ts-node@10.9.1)
@@ -794,8 +794,8 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /cloudinary@1.36.4:
-    resolution: {integrity: sha512-F/90SVQdUbbEipCS4jTRvUt1lzJ7tcbu7n5zPTtXq83Qj7y9AazLZmU5BdWTQLjPJ82Cq/nr67GCnWDxWATWxg==}
+  /cloudinary@1.37.0:
+    resolution: {integrity: sha512-hCAb3kU2nqjaHxDHxh+bi691A6LEuF68A2jHvYR5wDhDxx5qNRJLYqABbmxP6TQJriJd0Tq309fZvzBXkTW6sw==}
     engines: {node: '>=0.6'}
     dependencies:
       cloudinary-core: 2.13.0(lodash@4.17.21)
