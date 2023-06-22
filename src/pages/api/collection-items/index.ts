@@ -106,4 +106,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "20mb",
+    },
+  },
+};
+
 export default withAuthentication(handler);
