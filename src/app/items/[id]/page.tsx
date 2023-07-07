@@ -1,12 +1,11 @@
 import { Item } from "@prisma/client";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { notFound } from "next/navigation";
-import { getServerSession } from "next-auth";
+import { notFound, redirect } from "next/navigation";
 import { HiUserCircle } from "react-icons/hi";
 
-import { DeleteItem } from "~/app/items/[id]/DeleteItem";
+import { DeleteItem } from "~/components";
 import { EyeIcon } from "~/components/EyeIcon";
 import { getUserBySession } from "~/lib/getUserBySession";
 import prisma from "~/lib/prisma";

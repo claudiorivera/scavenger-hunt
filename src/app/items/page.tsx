@@ -1,11 +1,9 @@
 import { User } from "@prisma/client";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
 
-import AddItemForm from "~/app/items/AddItemForm";
-import CheckCircleIcon from "~/components/CheckCircleIcon";
-import MinusCircleIcon from "~/components/MinusCircleIcon";
+import { AddItemForm, CheckCircleIcon, MinusCircleIcon } from "~/components";
 import { getUserBySession } from "~/lib/getUserBySession";
 import prisma from "~/lib/prisma";
 

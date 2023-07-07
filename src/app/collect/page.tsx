@@ -1,9 +1,9 @@
 import { Item, User } from "@prisma/client";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
 
-import { PhotoUpload } from "~/app/collect/PhotoUpload";
+import { PhotoUpload } from "~/components";
 import { getUserBySession } from "~/lib/getUserBySession";
 import prisma from "~/lib/prisma";
 

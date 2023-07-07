@@ -1,7 +1,7 @@
-import { notFound, redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
+import { notFound, redirect } from "next/navigation";
 
-import ProfileForm from "~/app/profile/edit/ProfileForm";
+import { ProfileForm } from "~/components";
 import { getUserBySession } from "~/lib/getUserBySession";
 
 export default async function EditProfilePage() {

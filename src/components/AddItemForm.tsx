@@ -14,7 +14,7 @@ const addItemSchema = z.object({
 
 type PostItemParams = z.infer<typeof addItemSchema>;
 
-export default function AddItemForm() {
+export function AddItemForm() {
   const router = useRouter();
 
   const {

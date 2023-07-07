@@ -1,10 +1,10 @@
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
 import { HiUserCircle } from "react-icons/hi";
 
-import { DeleteUser } from "~/app/leaderboard/DeleteUser";
+import { DeleteUser } from "~/components";
 import { getUserBySession } from "~/lib/getUserBySession";
 import prisma from "~/lib/prisma";
 

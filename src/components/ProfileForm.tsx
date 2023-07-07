@@ -25,7 +25,7 @@ type Props = {
   user: Partial<User>;
 };
 
-export default function ProfileForm({ user }: Props) {
+export function ProfileForm({ user }: Props) {
   const router = useRouter();
 
   const [photo, setPhoto] = useState<Photo>({
