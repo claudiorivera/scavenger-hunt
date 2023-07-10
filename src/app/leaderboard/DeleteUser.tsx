@@ -23,7 +23,7 @@ export function DeleteUser({ id }: Props) {
 
   return (
     <button
-      className={classNames("btn btn-error", {
+      className={classNames("btn btn-error w-12", {
         loading: isLoading,
       })}
       onClick={() => {

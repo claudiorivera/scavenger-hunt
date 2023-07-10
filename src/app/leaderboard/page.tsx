@@ -44,16 +44,16 @@ export default async function LeaderboardPage() {
       <header className="text-5xl">Leaderboard</header>
       <ul className="flex flex-col gap-4">
         {users.map((user) => (
-          <li key={user.id}>
+          <li key={user.id} className="flex items-center gap-4">
+            {currentUser?.isAdmin && currentUser.id !== user.id && (
+              <DeleteUser id={user.id} />
+            )}
             <Link
-              className="flex items-center gap-4"
               href={`/users/${user.id}`}
+              className="flex items-center gap-4 w-full"
             >
-              {currentUser?.isAdmin && currentUser.id !== user.id && (
-                <DeleteUser id={user.id} />
-              )}
               <div className="avatar">
-                <div className="w-14 h-14 rounded-full relative">
+                <div className="w-14 h-14 rounded-full relative bg-green-300">
                   {user.image ? (
                     <Image
                       src={user.image}
@@ -67,7 +67,7 @@ export default async function LeaderboardPage() {
                 </div>
               </div>
               <div className="flex-1 text-left">{user.name}</div>
-              <div>{user._count.collectionItems} items</div>
+              <div className="ml-auto">{user._count.collectionItems} items</div>
             </Link>
           </li>
         ))}
