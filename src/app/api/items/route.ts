@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth/next";
 import { NextResponse } from "next/server";
+import { authOptions } from "~/app/api/auth/[...nextauth]/auth-options";
 import { getUserBySession } from "~/lib/getUserBySession";
 import prisma from "~/lib/prisma";
-import { authOptions } from "~/pages/api/auth/[...nextauth]";
 
 async function saveToDb({ description }: { description: string }) {
   return prisma.item.create({

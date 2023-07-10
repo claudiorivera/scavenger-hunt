@@ -2,10 +2,10 @@ import { User } from "@prisma/client";
 import { v2 as cloudinary } from "cloudinary";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { authOptions } from "~/app/api/auth/[...nextauth]/auth-options";
 
 import { getUserBySession } from "~/lib/getUserBySession";
 import prisma from "~/lib/prisma";
-import { authOptions } from "~/pages/api/auth/[...nextauth]";
 
 async function uploadPhoto({
   base64,
