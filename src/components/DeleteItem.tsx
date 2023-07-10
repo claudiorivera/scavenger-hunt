@@ -1,22 +1,21 @@
 "use client";
-import { User } from "@prisma/client";
+import { Item } from "@prisma/client";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import classNames from "classnames";
 import { useRouter } from "next/navigation";
 
-import { TrashIcon } from "~/components";
-
 type Props = {
-  id: User["id"];
+  id: Item["id"];
 };
 
-export function DeleteUser({ id }: Props) {
+export function DeleteItem({ id }: Props) {
   const router = useRouter();
 
-  const { mutate: deleteUser, isLoading } = useMutation({
-    mutationFn: () => axios.delete(`/api/users/${id}`),
+  const { mutate: deleteItem, isLoading } = useMutation({
+    mutationFn: () => axios.delete(`/api/items/${id}`),
     onSuccess: () => {
+      router.push("/items");
       router.refresh();
     },
   });
@@ -27,11 +26,11 @@ export function DeleteUser({ id }: Props) {
         loading: isLoading,
       })}
       onClick={() => {
-        deleteUser();
+        deleteItem();
       }}
       disabled={isLoading}
     >
-      <TrashIcon />
+      Delete this Item
     </button>
   );
 }

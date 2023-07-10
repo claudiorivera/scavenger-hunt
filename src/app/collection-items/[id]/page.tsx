@@ -1,10 +1,10 @@
 import { CollectionItem } from "@prisma/client";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
 
-import { DeleteCollectionItem } from "~/app/collection-items/[id]/DeleteCollectionItem";
+import { DeleteCollectionItem } from "~/components";
 import prisma from "~/lib/prisma";
 
 export const dynamic = "force-dynamic";

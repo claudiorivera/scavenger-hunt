@@ -25,7 +25,7 @@ type Props = {
   user: Partial<User>;
 };
 
-export default function ProfileForm({ user }: Props) {
+export function ProfileForm({ user }: Props) {
   const router = useRouter();
 
   const [photo, setPhoto] = useState<Photo>({
@@ -43,7 +43,6 @@ export default function ProfileForm({ user }: Props) {
     mutationFn: (data: EditProfileParams) =>
       axios.put(`/api/users/${user.id}`, data),
     onSuccess: () => {
-      router.refresh();
       router.push("/profile");
     },
   });

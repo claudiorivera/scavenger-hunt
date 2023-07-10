@@ -1,7 +1,7 @@
 import "~/app/global.css";
 
 import { Providers } from "~/app/providers";
-import { MainAppBar } from "~/components/MainAppBar";
+import { MainAppBar } from "~/components";
 
 export default function RootLayout({
   children,

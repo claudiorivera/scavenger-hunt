@@ -1,6 +1,6 @@
+import { faker } from "@faker-js/faker";
 import { Prisma, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-import { faker } from "@faker-js/faker";
 
 import { capitalizeEveryWord } from "../lib/capitalizeEveryWord";
 
@@ -12,7 +12,7 @@ function generateUserCreateInput(): Prisma.UserCreateInput {
     email: faker.internet.email(),
     emailVerified: faker.date.past(),
     image: faker.image.avatar(),
-    name: faker.name.fullName(),
+    name: faker.person.fullName(),
     isDemoUser: true,
   };
 }
@@ -65,7 +65,7 @@ export async function seed() {
   const items = await prisma.item.findMany();
 
   for (const item of items) {
-    const numberOfUsersToConnect = faker.datatype.number({
+    const numberOfUsersToConnect = faker.number.int({
       min: 0,
       max: users.length,
     });
@@ -87,7 +87,11 @@ export async function seed() {
               id: user.id,
             },
           },
-          url: faker.image.animals(320, 320, true),
+          url: faker.image.urlLoremFlickr({
+            category: "animals",
+            height: 320,
+            width: 320,
+          }),
           height: 320,
           width: 320,
         },

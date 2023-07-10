@@ -1,12 +1,11 @@
 import { Item, User } from "@prisma/client";
 import { v2 as cloudinary } from "cloudinary";
-import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
+import { authOptions } from "~/app/api/auth/[...nextauth]/auth-options";
 
 import { getUserBySession } from "~/lib/getUserBySession";
 import prisma from "~/lib/prisma";
-import { withAuthentication } from "~/lib/withAuthentication";
-import { authOptions } from "~/pages/api/auth/[...nextauth]";
 
 type UploadPhotoParams = {
   base64: string;
@@ -65,53 +64,51 @@ async function saveToDb({
   });
 }
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === "POST") {
-    try {
-      const session = await getServerSession(req, res, authOptions);
+export async function POST(req: Request) {
+  try {
+    const session = await getServerSession(authOptions);
 
-      if (!session) return res.status(401).end();
+    if (!session)
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        {
+          status: 401,
+        }
+      );
 
-      const user = await getUserBySession(session);
+    const user = await getUserBySession(session);
 
-      if (!user) return res.status(401).end();
+    if (!user)
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
-      const { base64, itemId } = req.body;
+    const { base64, itemId } = await req.json();
 
-      const { url, height, width } = await uploadPhoto({
-        base64,
-        userId: user.id,
-        itemId,
-      });
+    const { url, height, width } = await uploadPhoto({
+      base64,
+      userId: user.id,
+      itemId,
+    });
 
-      const { id } = await saveToDb({
-        url,
-        height,
-        width,
-        itemId,
-        userId: user.id,
-      });
+    const collectionItem = await saveToDb({
+      url,
+      height,
+      width,
+      itemId,
+      userId: user.id,
+    });
 
-      return res.status(201).json({ id });
-    } catch (error) {
-      return res.status(500).json({
+    return NextResponse.json(collectionItem, { status: 201 });
+  } catch (error) {
+    return NextResponse.json(
+      {
         message:
           error instanceof Error
             ? error.message
             : "Unable to add item to collection",
-      });
-    }
-  } else {
-    return res.status(405).end();
+      },
+      {
+        status: 500,
+      }
+    );
   }
 }
-
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "20mb",
-    },
-  },
-};
-
-export default withAuthentication(handler);

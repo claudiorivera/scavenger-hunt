@@ -1,9 +1,4 @@
-type Link = {
-  title: string;
-  url: string;
-};
-
-export const userLinks: Link[] = [
+export const userLinks = [
   {
     title: "Home",
     url: "/",
