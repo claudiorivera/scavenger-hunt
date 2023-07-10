@@ -43,7 +43,6 @@ export function ProfileForm({ user }: Props) {
     mutationFn: (data: EditProfileParams) =>
       axios.put(`/api/users/${user.id}`, data),
     onSuccess: () => {
-      router.refresh();
       router.push("/profile");
     },
   });
