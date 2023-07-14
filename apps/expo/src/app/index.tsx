@@ -6,9 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { api, type RouterOutputs } from "~/utils/api";
 
-function ItemCard(props: {
-	item: RouterOutputs["item"]["all"][number];
-}) {
+function ItemCard(props: { item: RouterOutputs["item"]["all"][number] }) {
 	const router = useRouter();
 
 	return (
@@ -25,12 +23,10 @@ function ItemCard(props: {
 	);
 }
 
-
 const Index = () => {
 	const utils = api.useContext();
 
 	const itemQuery = api.item.all.useQuery();
-
 
 	return (
 		<SafeAreaView className="bg-[#1F104A]">
@@ -57,13 +53,8 @@ const Index = () => {
 					data={itemQuery.data}
 					estimatedItemSize={20}
 					ItemSeparatorComponent={() => <View className="h-2" />}
-					renderItem={(p) => (
-						<ItemCard
-							item={p.item}
-						/>
-					)}
+					renderItem={(p) => <ItemCard item={p.item} />}
 				/>
-
 			</View>
 		</SafeAreaView>
 	);

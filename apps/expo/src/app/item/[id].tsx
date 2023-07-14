@@ -14,7 +14,9 @@ function Item() {
 		<SafeAreaView className="bg-[#1F104A]">
 			<Stack.Screen options={{ title: data.description }} />
 			<View className="h-full w-full p-4">
-				<Text className="py-2 text-3xl font-bold text-white">{data.description}</Text>
+				<Text className="py-2 text-3xl font-bold text-white">
+					{data.description}
+				</Text>
 			</View>
 		</SafeAreaView>
 	);

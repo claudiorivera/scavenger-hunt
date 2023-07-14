@@ -7,6 +7,5 @@ export const itemRouter = createTRPCRouter({
 	}),
 	byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
 		return ctx.prisma.item.findUnique({ where: { id: input } });
-	}
-	),
+	}),
 });

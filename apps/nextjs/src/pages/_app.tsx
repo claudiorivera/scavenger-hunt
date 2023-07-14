@@ -1,8 +1,9 @@
 import "../styles/globals.css";
 
-import type { AppType } from "next/app";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
+import type { AppType } from "next/app";
+import { MainAppBar } from "~/components";
 
 import { api } from "~/utils/api";
 
@@ -12,7 +13,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
 	return (
 		<SessionProvider session={session}>
-			<Component {...pageProps} />
+			<MainAppBar />
+			<main className="container mx-auto max-w-md p-8 text-center">
+				<Component {...pageProps} />
+			</main>
 		</SessionProvider>
 	);
 };
