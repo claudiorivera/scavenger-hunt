@@ -8,7 +8,7 @@ importers:
 
   .:
     dependencies:
-      '@acme/eslint-config':
+      '@claudiorivera/eslint-config':
         specifier: ^0.1.0
         version: link:packages/config/eslint
       '@ianvs/prettier-plugin-sort-imports':
@@ -96,15 +96,6 @@ importers:
         specifier: 1.9.1
         version: 1.9.1
     devDependencies:
-      '@acme/api':
-        specifier: ^0.1.0
-        version: link:../../packages/api
-      '@acme/eslint-config':
-        specifier: ^0.1.0
-        version: link:../../packages/config/eslint
-      '@acme/tailwind-config':
-        specifier: ^0.1.0
-        version: link:../../packages/config/tailwind
       '@babel/core':
         specifier: ^7.21.8
         version: 7.21.8
@@ -114,6 +105,15 @@ importers:
       '@babel/runtime':
         specifier: ^7.21.5
         version: 7.21.5
+      '@claudiorivera/api':
+        specifier: ^0.1.0
+        version: link:../../packages/api
+      '@claudiorivera/eslint-config':
+        specifier: ^0.1.0
+        version: link:../../packages/config/eslint
+      '@claudiorivera/tailwind-config':
+        specifier: ^0.1.0
+        version: link:../../packages/config/tailwind
       '@expo/config-plugins':
         specifier: ^6.0.2
         version: 6.0.2
@@ -144,13 +144,13 @@ importers:
 
   apps/nextjs:
     dependencies:
-      '@acme/api':
+      '@claudiorivera/api':
         specifier: ^0.1.0
         version: link:../../packages/api
-      '@acme/auth':
+      '@claudiorivera/auth':
         specifier: ^0.1.0
         version: link:../../packages/auth
-      '@acme/db':
+      '@claudiorivera/db':
         specifier: ^0.1.0
         version: link:../../packages/db
       '@t3-oss/env-nextjs':
@@ -190,10 +190,10 @@ importers:
         specifier: ^3.21.4
         version: 3.21.4
     devDependencies:
-      '@acme/eslint-config':
+      '@claudiorivera/eslint-config':
         specifier: ^0.1.0
         version: link:../../packages/config/eslint
-      '@acme/tailwind-config':
+      '@claudiorivera/tailwind-config':
         specifier: ^0.1.0
         version: link:../../packages/config/tailwind
       '@types/node':
@@ -226,10 +226,10 @@ importers:
 
   packages/api:
     dependencies:
-      '@acme/auth':
+      '@claudiorivera/auth':
         specifier: ^0.1.0
         version: link:../auth
-      '@acme/db':
+      '@claudiorivera/db':
         specifier: ^0.1.0
         version: link:../db
       '@trpc/client':
@@ -245,7 +245,7 @@ importers:
         specifier: ^3.21.4
         version: 3.21.4
     devDependencies:
-      '@acme/eslint-config':
+      '@claudiorivera/eslint-config':
         specifier: ^0.1.0
         version: link:../config/eslint
       eslint:
@@ -257,7 +257,7 @@ importers:
 
   packages/auth:
     dependencies:
-      '@acme/db':
+      '@claudiorivera/db':
         specifier: ^0.1.0
         version: link:../db
       '@next-auth/prisma-adapter':
@@ -282,7 +282,7 @@ importers:
         specifier: ^3.21.4
         version: 3.21.4
     devDependencies:
-      '@acme/eslint-config':
+      '@claudiorivera/eslint-config':
         specifier: ^0.1.0
         version: link:../config/eslint
       eslint:
@@ -4206,6 +4206,7 @@ packages:
   /autoprefixer@10.4.14(postcss@8.4.24):
     resolution: {integrity: sha512-FQzyfOsTlwVzjHxKEqRIAdJx9niO6VCBCoEwax/VLSoQF29ggECcPuBqUMZ+u8jCZOPSy8b8/8KnuFbp0SaFZQ==}
     engines: {node: ^10 || ^12 || >=14}
+    hasBin: true
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
@@ -5635,6 +5636,7 @@ packages:
 
   /eslint-config-prettier@8.8.0(eslint@8.42.0):
     resolution: {integrity: sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA==}
+    hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
     dependencies:
@@ -7499,6 +7501,7 @@ packages:
 
   /jscodeshift@0.13.1(@babel/preset-env@7.21.5):
     resolution: {integrity: sha512-lGyiEbGOvmMRKgWk4vf+lUrCWO/8YR8sUR3FKF1Cq5fovjZDlIcw3Hu5ppLHAnEXshVffvaM0eyuY/AbOeYpnQ==}
+    hasBin: true
     peerDependencies:
       '@babel/preset-env': ^7.1.6
     dependencies:
@@ -8688,6 +8691,7 @@ packages:
   /next@13.4.9(@babel/core@7.22.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-vtefFm/BWIi/eWOqf1GsmKG3cjKw1k3LjuefKRcL3iiLl3zWzFdPG3as6xtxrGO6gwTzzaO1ktL4oiHt/uvTjA==}
     engines: {node: '>=16.8.0'}
+    hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.1.0
       fibers: '>= 3.1.0'
@@ -9770,6 +9774,7 @@ packages:
   /react-native@0.71.8(@babel/core@7.21.8)(@babel/preset-env@7.21.5)(react@18.2.0):
     resolution: {integrity: sha512-ftMAuhpgTkbHU9brrqsEyxcNrpYvXKeATY+if22Nfhhg1zW+6wn95w9otwTnA3xHkljPCbng8mUhmmERjGEl7g==}
     engines: {node: '>=14'}
+    hasBin: true
     peerDependencies:
       react: 18.2.0
     dependencies:
@@ -11204,6 +11209,7 @@ packages:
 
   /update-browserslist-db@1.0.11(browserslist@4.21.5):
     resolution: {integrity: sha512-dCwEFf0/oT85M1fHBg4F0jtLwJrutGoHSQXCh7u4o2t1drG+c0a9Flnqww6XUKSfQMPpJBRjU8d4RXB09qtvaA==}
+    hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
     dependencies:
@@ -11214,6 +11220,7 @@ packages:
 
   /update-browserslist-db@1.0.11(browserslist@4.21.7):
     resolution: {integrity: sha512-dCwEFf0/oT85M1fHBg4F0jtLwJrutGoHSQXCh7u4o2t1drG+c0a9Flnqww6XUKSfQMPpJBRjU8d4RXB09qtvaA==}
+    hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
     dependencies:
