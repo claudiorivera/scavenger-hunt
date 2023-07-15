@@ -1,13 +1,23 @@
 import type { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { HiUserCircle } from "react-icons/hi";
 
-import { api } from "~/utils/api";
-
 const Home: NextPage = () => {
-	const { data: user } = api.user.me.useQuery();
+	const router = useRouter();
+	const { data: session, status } = useSession();
+
+	useEffect(() => {
+		if (!(session || status === "loading")) {
+			void router.push("/api/auth/signin");
+		}
+	}, [session, status, router]);
+
+	const user = session?.user;
 
 	return (
 		<>
