@@ -1,7 +1,5 @@
 "use client";
 import { type Item } from "@claudiorivera/db";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import classNames from "classnames";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -11,19 +9,14 @@ import { z } from "zod";
 import { CheckmarkIcon, TrashIcon } from "~/components";
 import { useZodForm } from "~/hooks/useZodForm";
 import { base64FromFile, htmlImageElementFromFile } from "~/lib/fileHelpers";
+import { api } from "~/utils/api";
 
 const schema = z.object({
 	base64: z.string(),
 	itemId: z.string().cuid(),
 });
 
-const uploadResponseSchema = z.object({
-	id: z.string().cuid(),
-});
-
 type ImagePreview = Pick<HTMLImageElement, "src" | "width" | "height">;
-
-export type UploadPhotoData = z.infer<typeof schema>;
 
 type Props = {
 	itemId: Item["id"];
@@ -39,16 +32,8 @@ export function PhotoUpload({ itemId }: Props) {
 		isLoading,
 		isError,
 		error,
-	} = useMutation({
-		mutationFn: async (uploadPhotoData: UploadPhotoData) => {
-			const { data } = await axios.post(
-				"/api/collection-items",
-				uploadPhotoData,
-			);
-			return uploadResponseSchema.parse(data);
-		},
+	} = api.collectionItem.create.useMutation({
 		onSuccess: ({ id }) => {
-			router.refresh();
 			router.push(`/collection-items/${id}`);
 		},
 	});
@@ -116,7 +101,9 @@ export function PhotoUpload({ itemId }: Props) {
 						})}
 					>
 						<button
-							className={classNames("btn btn-success btn-circle")}
+							className={classNames("btn btn-success btn-circle", {
+								"btn-loading": isLoading,
+							})}
 							type="submit"
 							disabled={isLoading}
 						>

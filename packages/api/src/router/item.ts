@@ -1,3 +1,4 @@
+import { type Prisma } from "@claudiorivera/db";
 import * as z from "zod";
 import {
 	adminProcedure,
@@ -51,6 +52,39 @@ export const itemRouter = createTRPCRouter({
 			},
 		});
 	}),
+	next: protectedProcedure
+		.input(
+			z
+				.object({
+					skipItemIds: z.array(z.string()),
+				})
+				.optional(),
+		)
+		.query(({ ctx, input }) => {
+			const where: Prisma.ItemWhereInput = {
+				collectionItems: {
+					none: {
+						user: {
+							id: ctx.session.user.id,
+						},
+					},
+				},
+			};
+
+			if (input?.skipItemIds) {
+				where.id = {
+					notIn: input.skipItemIds,
+				};
+			}
+
+			return ctx.prisma.item.findFirst({
+				where,
+				select: {
+					id: true,
+					description: true,
+				},
+			});
+		}),
 	add: adminProcedure.input(addItemSchema).mutation(({ ctx, input }) => {
 		return ctx.prisma.item.create({ data: input });
 	}),
