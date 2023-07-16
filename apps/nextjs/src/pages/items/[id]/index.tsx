@@ -61,32 +61,40 @@ const UsersList = ({
 	itemId: string;
 }) => (
 	<ul className="flex flex-col gap-4 pb-4">
-		{users.map((user) => (
-			<li key={user.id} className="flex items-center gap-4">
-				<Link href={`/users/${user.id}`}>
-					<div className="avatar">
-						<div className="relative h-14 w-14 rounded-full">
-							{user.image ? (
-								<Image
-									src={user.image}
-									fill
-									alt={`${user.name}`}
-									sizes="33vw"
-								/>
-							) : (
-								<HiUserCircle className="h-full w-full" />
-							)}
+		{users.map((user) => {
+			const collectionItem = user.collectionItems.find(
+				(item) => item.itemId === itemId,
+			);
+
+			return (
+				<li key={user.id} className="flex items-center gap-4">
+					<Link href={`/users/${user.id}`}>
+						<div className="avatar">
+							<div className="relative h-14 w-14 rounded-full">
+								{user.image ? (
+									<Image
+										src={user.image}
+										fill
+										alt={`${user.name}`}
+										sizes="33vw"
+									/>
+								) : (
+									<HiUserCircle className="h-full w-full" />
+								)}
+							</div>
 						</div>
-					</div>
-				</Link>
-				<div className="flex-1 text-left">{user.name}</div>
-				<Link
-					className="btn btn-secondary"
-					href={`/collection-items?userId=${user.id}&itemId=${itemId}`}
-				>
-					<EyeIcon />
-				</Link>
-			</li>
-		))}
+					</Link>
+					<div className="flex-1 text-left">{user.name}</div>
+					{!!collectionItem?.id && (
+						<Link
+							className="btn btn-secondary"
+							href={`/collection-items/${collectionItem.id}`}
+						>
+							<EyeIcon />
+						</Link>
+					)}
+				</li>
+			);
+		})}
 	</ul>
 );

@@ -109,7 +109,12 @@ export const userRouter = createTRPCRouter({
 				},
 				select: {
 					...defaultUserSelect,
-					email: true,
+					collectionItems: {
+						select: {
+							id: true,
+							itemId: true,
+						},
+					},
 				},
 			});
 		}),
