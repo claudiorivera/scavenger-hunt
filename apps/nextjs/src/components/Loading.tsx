@@ -9,7 +9,7 @@ export function Loading() {
 					stroke="currentColor"
 				>
 					<g fill="none" fillRule="evenodd">
-						<g transform="translate(1 1)" stroke-width="2">
+						<g transform="translate(1 1)" strokeWidth="2">
 							<circle cx="5" cy="50" r="5">
 								<animate
 									attributeName="cy"

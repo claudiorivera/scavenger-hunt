@@ -43,6 +43,15 @@ export const userRouter = createTRPCRouter({
 			where: {
 				id: ctx.session.user.id,
 			},
+			select: {
+				...defaultUserSelect,
+				collectionItems: {
+					select: {
+						itemId: true,
+					},
+				},
+				isAdmin: true,
+			},
 		});
 	}),
 	all: protectedProcedure.query(({ ctx }) => {

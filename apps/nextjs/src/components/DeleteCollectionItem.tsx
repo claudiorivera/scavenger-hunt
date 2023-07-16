@@ -1,9 +1,8 @@
 "use client";
-import { CollectionItem } from "@prisma/client";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import { type CollectionItem } from "@claudiorivera/db";
 import classNames from "classnames";
 import { useRouter } from "next/navigation";
+import { api } from "~/utils/api";
 
 type Props = {
 	id: CollectionItem["id"];
@@ -12,19 +11,19 @@ type Props = {
 export function DeleteCollectionItem({ id }: Props) {
 	const router = useRouter();
 
-	const { mutate: deleteCollectionItem, isLoading } = useMutation({
-		mutationFn: () => axios.delete(`/api/collection-items/${id}`),
-		onSuccess: () => {
-			router.push("/leaderboard");
-		},
-	});
+	const { mutate: deleteCollectionItem, isLoading } =
+		api.collectionItem.delete.useMutation();
 
 	return (
 		<button
 			className={classNames("btn btn-error", {
 				loading: isLoading,
 			})}
-			onClick={() => deleteCollectionItem()}
+			onClick={() =>
+				deleteCollectionItem(id, {
+					onSuccess: () => router.push("/leaderboard"),
+				})
+			}
 			disabled={isLoading}
 		>
 			Delete this Collection Item
