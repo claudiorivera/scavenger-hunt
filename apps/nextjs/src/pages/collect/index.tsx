@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { Loading, PhotoUpload } from "~/components";
 import { api } from "~/utils/api";
 
@@ -18,9 +19,18 @@ export default function CollectPage() {
 				skipItemIds: skippedItemIds,
 		  });
 
+	useEffect(() => {
+		if (!isLoading && !item && !!skippedItemIds.length) {
+			toast.loading("You skipped everything 😅\nTry again!", {
+				duration: 4000,
+			});
+			setSkippedItemIds([]);
+		}
+	}, [item, skippedItemIds, isLoading]);
+
 	if (isLoading) return <Loading />;
 
-	if (!item) return <div>Item not found</div>;
+	if (!item) return <AllItemsFound />;
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -39,6 +49,26 @@ export default function CollectPage() {
 			<Link className="btn btn-secondary" href={`/items/${item.id}`}>
 				See who found this
 			</Link>
+		</div>
+	);
+}
+
+function AllItemsFound() {
+	const { data: me } = api.user.me.useQuery();
+
+	return (
+		<div className="flex flex-col gap-4">
+			<h3>
+				You Found All The Items!&nbsp;
+				<span role="img" aria-label="celebrate emoji">
+					🎉
+				</span>
+			</h3>
+			{!!me?.id && (
+				<Link href={`/users/${me.id}`} className="btn btn-secondary">
+					My Collection
+				</Link>
+			)}
 		</div>
 	);
 }
