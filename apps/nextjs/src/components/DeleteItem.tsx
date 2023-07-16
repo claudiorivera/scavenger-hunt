@@ -1,9 +1,8 @@
 "use client";
 import { type Item } from "@claudiorivera/db";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import classNames from "classnames";
 import { useRouter } from "next/navigation";
+import { api } from "~/utils/api";
 
 type Props = {
 	id: Item["id"];
@@ -12,13 +11,7 @@ type Props = {
 export function DeleteItem({ id }: Props) {
 	const router = useRouter();
 
-	const { mutate: deleteItem, isLoading } = useMutation({
-		mutationFn: () => axios.delete(`/api/items/${id}`),
-		onSuccess: () => {
-			router.push("/items");
-			router.refresh();
-		},
-	});
+	const { mutate: deleteItem, isLoading } = api.item.delete.useMutation();
 
 	return (
 		<button
@@ -26,7 +19,9 @@ export function DeleteItem({ id }: Props) {
 				loading: isLoading,
 			})}
 			onClick={() => {
-				deleteItem();
+				deleteItem(id, {
+					onSuccess: () => router.push("/items"),
+				});
 			}}
 			disabled={isLoading}
 		>

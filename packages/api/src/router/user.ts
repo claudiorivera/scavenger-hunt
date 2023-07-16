@@ -94,6 +94,25 @@ export const userRouter = createTRPCRouter({
 			},
 		});
 	}),
+	withItemIdInCollection: protectedProcedure
+		.input(z.string())
+		.query(({ ctx, input }) => {
+			return ctx.prisma.user.findMany({
+				where: {
+					collectionItems: {
+						some: {
+							itemId: {
+								equals: input,
+							},
+						},
+					},
+				},
+				select: {
+					...defaultUserSelect,
+					email: true,
+				},
+			});
+		}),
 	deleteById: protectedProcedure
 		.input(z.string())
 		.mutation(({ ctx, input }) => {

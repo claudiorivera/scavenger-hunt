@@ -54,4 +54,7 @@ export const itemRouter = createTRPCRouter({
 	add: adminProcedure.input(addItemSchema).mutation(({ ctx, input }) => {
 		return ctx.prisma.item.create({ data: input });
 	}),
+	delete: adminProcedure.input(z.string()).mutation(({ ctx, input }) => {
+		return ctx.prisma.item.delete({ where: { id: input } });
+	}),
 });
