@@ -1,3 +1,4 @@
+import { type Prisma } from "@claudiorivera/db";
 import { v2 as cloudinary } from "cloudinary";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
@@ -6,6 +7,12 @@ const updateProfileSchema = z.object({
 	base64: z.string().optional(),
 	name: z.string().optional(),
 });
+
+const defaultUserSelect: Prisma.UserSelect = {
+	id: true,
+	name: true,
+	image: true,
+};
 
 async function uploadPhoto({
 	base64,
@@ -54,6 +61,27 @@ export const userRouter = createTRPCRouter({
 				id: true,
 				image: true,
 				name: true,
+			},
+		});
+	}),
+	byId: protectedProcedure.input(z.string()).query(async ({ ctx, input }) => {
+		return ctx.prisma.user.findUnique({
+			where: {
+				id: input,
+			},
+			select: {
+				...defaultUserSelect,
+				collectionItems: {
+					select: {
+						id: true,
+						url: true,
+						item: {
+							select: {
+								description: true,
+							},
+						},
+					},
+				},
 			},
 		});
 	}),
