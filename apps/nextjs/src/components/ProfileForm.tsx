@@ -83,9 +83,7 @@ export function ProfileForm({ user }: Props) {
 		<div className="flex flex-col items-center gap-4">
 			<form
 				id="update-contact"
-				onSubmit={handleSubmit((values) => {
-					updateProfile(values);
-				})}
+				onSubmit={handleSubmit((values) => updateProfile(values))}
 				className="flex flex-col gap-2"
 			>
 				<div className="mx-auto">

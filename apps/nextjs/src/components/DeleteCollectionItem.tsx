@@ -12,18 +12,16 @@ export function DeleteCollectionItem({ id }: Props) {
 	const router = useRouter();
 
 	const { mutate: deleteCollectionItem, isLoading } =
-		api.collectionItem.delete.useMutation();
+		api.collectionItem.delete.useMutation({
+			onSuccess: () => router.push("/leaderboard"),
+		});
 
 	return (
 		<button
 			className={classNames("btn btn-error", {
 				loading: isLoading,
 			})}
-			onClick={() =>
-				deleteCollectionItem(id, {
-					onSuccess: () => router.push("/leaderboard"),
-				})
-			}
+			onClick={() => deleteCollectionItem(id)}
 			disabled={isLoading}
 		>
 			Delete this Collection Item

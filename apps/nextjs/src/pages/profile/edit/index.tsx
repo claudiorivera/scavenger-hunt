@@ -17,7 +17,6 @@ const editProfileSchema = z.object({
 
 export default function EditProfilePage() {
 	const router = useRouter();
-	const utils = api.useContext();
 	const { data: user } = api.user.me.useQuery();
 
 	const [photo, setPhoto] = useState<Photo>({
@@ -26,7 +25,9 @@ export default function EditProfilePage() {
 		width: 100,
 	});
 
-	const { mutate: updateProfile, isLoading } = api.user.update.useMutation();
+	const { mutate: updateProfile, isLoading } = api.user.update.useMutation({
+		onSuccess: () => router.push("/profile"),
+	});
 
 	const { register, setValue, handleSubmit } = useZodForm({
 		schema: editProfileSchema,
@@ -59,14 +60,7 @@ export default function EditProfilePage() {
 				<div className="flex flex-col items-center gap-4">
 					<form
 						id="update-contact"
-						onSubmit={handleSubmit((values) => {
-							updateProfile(values, {
-								onSuccess: () => {
-									void utils.user.me.invalidate();
-									router.push("/profile");
-								},
-							});
-						})}
+						onSubmit={handleSubmit((values) => updateProfile(values))}
 						className="flex flex-col gap-2"
 					>
 						<div className="mx-auto">

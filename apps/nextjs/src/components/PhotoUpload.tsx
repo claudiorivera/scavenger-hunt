@@ -33,9 +33,7 @@ export function PhotoUpload({ itemId }: Props) {
 		isError,
 		error,
 	} = api.collectionItem.create.useMutation({
-		onSuccess: ({ id }) => {
-			router.push(`/collection-items/${id}`);
-		},
+		onSuccess: ({ id }) => router.push(`/collection-items/${id}`),
 	});
 
 	const { handleSubmit, register, setValue } = useZodForm({
@@ -96,9 +94,7 @@ export function PhotoUpload({ itemId }: Props) {
 				<div className="absolute bottom-0 left-0 right-0">
 					<form
 						className="flex justify-center gap-8 p-4"
-						onSubmit={handleSubmit((values) => {
-							uploadPhoto(values);
-						})}
+						onSubmit={handleSubmit((values) => uploadPhoto(values))}
 					>
 						<button
 							className={classNames("btn btn-success btn-circle", {
