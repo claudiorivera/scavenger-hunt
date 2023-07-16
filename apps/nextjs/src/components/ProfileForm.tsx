@@ -1,11 +1,11 @@
 "use client";
-import { User } from "@prisma/client";
+import { type User } from "@claudiorivera/db";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import classNames from "classnames";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import { z } from "zod";
 
 import { Input } from "~/components";

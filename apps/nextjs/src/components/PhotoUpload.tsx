@@ -1,11 +1,11 @@
 "use client";
-import { Item } from "@prisma/client";
+import { type Item } from "@claudiorivera/db";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import classNames from "classnames";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { useState, type FormEvent } from "react";
 import { z } from "zod";
 
 import { CheckmarkIcon, TrashIcon } from "~/components";

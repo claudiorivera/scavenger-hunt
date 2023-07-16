@@ -1,5 +1,5 @@
 "use client";
-import { type User } from "@prisma/client";
+import { type User } from "@claudiorivera/db";
 import classNames from "classnames";
 
 import { TrashIcon } from "~/components";

@@ -1,5 +1,5 @@
 "use client";
-import { Item } from "@prisma/client";
+import { type Item } from "@claudiorivera/db";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import classNames from "classnames";
