@@ -6,7 +6,6 @@ import { DeleteUser } from "~/components";
 import { api } from "~/utils/api";
 
 export default function LeaderboardPage() {
-	const utils = api.useContext();
 	const { data: users } = api.user.all.useQuery();
 	const { data: currentUser } = api.user.me.useQuery();
 

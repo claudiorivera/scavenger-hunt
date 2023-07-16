@@ -1,22 +1,12 @@
-import { getServerSession } from "@claudiorivera/auth";
-import type { GetServerSideProps, NextPage } from "next";
-import { useSession } from "next-auth/react";
+import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { HiUserCircle } from "react-icons/hi";
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	const session = await getServerSession(ctx);
-	return {
-		props: { session },
-	};
-};
+import { api } from "~/utils/api";
 
 const Home: NextPage = () => {
-	const { data: session } = useSession();
-
-	const user = session?.user;
+	const { data: user } = api.user.me.useQuery();
 
 	return (
 		<>

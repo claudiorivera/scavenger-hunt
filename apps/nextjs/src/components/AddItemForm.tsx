@@ -1,35 +1,25 @@
 "use client";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import classNames from "classnames";
-import { useRouter } from "next/navigation";
 import { z } from "zod";
 
 import { Input } from "~/components";
 import { useZodForm } from "~/hooks/useZodForm";
+import { api } from "~/utils/api";
 
 const addItemSchema = z.object({
-	description: z.string(),
+	description: z.string().min(1),
 });
 
-type PostItemParams = z.infer<typeof addItemSchema>;
-
 export function AddItemForm() {
-	const router = useRouter();
-
+	const utils = api.useContext();
 	const {
 		mutate: addItem,
 		isLoading,
 		isError,
 		error,
-	} = useMutation({
-		mutationFn: (data: PostItemParams) => axios.post("/api/items", data),
-		onSuccess: () => {
-			router.refresh();
-		},
-	});
+	} = api.item.add.useMutation();
 
-	const { register, handleSubmit, reset } = useZodForm({
+	const { register, handleSubmit, reset, formState } = useZodForm({
 		schema: addItemSchema,
 	});
 
@@ -45,12 +35,19 @@ export function AddItemForm() {
 			<form
 				id="add-item"
 				onSubmit={handleSubmit((values) => {
-					addItem(values);
+					addItem(values, {
+						onSuccess: () => void utils.item.uncollected.invalidate(),
+					});
 					reset();
 				})}
 				className="flex w-full flex-col gap-2"
 			>
-				<Input {...register("description")} placeholder="Something Awesome" />
+				<Input
+					{...register("description")}
+					placeholder="Something Awesome"
+					error={formState.errors.description?.message}
+				/>
+
 				<button
 					type="submit"
 					className={classNames("btn btn-secondary", {
