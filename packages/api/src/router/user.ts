@@ -50,7 +50,7 @@ export const userRouter = createTRPCRouter({
 						itemId: true,
 					},
 				},
-				isAdmin: true,
+				role: true,
 			},
 		});
 	}),

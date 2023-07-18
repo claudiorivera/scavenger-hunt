@@ -48,7 +48,7 @@ function Item({ id }: { id: string }) {
 					Found It?
 				</Link>
 			)}
-			{currentUser?.isAdmin && <DeleteItem id={item.id} />}
+			{currentUser?.role === "ADMIN" && <DeleteItem id={item.id} />}
 		</div>
 	);
 }

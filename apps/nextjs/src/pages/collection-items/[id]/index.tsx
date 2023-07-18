@@ -64,7 +64,9 @@ function CollectionItem({ id }: { id: string }) {
 			>
 				See who found this
 			</Link>
-			{currentUser?.isAdmin && <DeleteCollectionItem id={collectionItem.id} />}
+			{currentUser?.role === "ADMIN" && (
+				<DeleteCollectionItem id={collectionItem.id} />
+			)}
 		</div>
 	);
 }

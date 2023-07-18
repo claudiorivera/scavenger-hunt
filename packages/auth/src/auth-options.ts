@@ -1,9 +1,11 @@
-import { prisma } from "@claudiorivera/db";
+import { prisma, type User } from "@claudiorivera/db";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { type DefaultSession, type NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 
 import { env } from "../env.mjs";
+
+type UserRole = User["role"];
 
 /**
  * Module augmentation for `next-auth` types
@@ -16,12 +18,12 @@ declare module "next-auth" {
 		user: {
 			id: string;
 			// ...other properties
-			isAdmin: boolean;
+			role: UserRole;
 		} & DefaultSession["user"];
 	}
 
 	interface User {
-		isAdmin: boolean;
+		role: UserRole;
 	}
 }
 
@@ -37,7 +39,6 @@ export const authOptions: NextAuthOptions = {
 			user: {
 				...session.user,
 				id: user.id,
-				isAdmin: user.isAdmin ?? false,
 			},
 		}),
 	},

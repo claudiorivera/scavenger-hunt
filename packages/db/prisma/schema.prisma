@@ -40,12 +40,17 @@ model User {
     emailVerified DateTime?
     image         String?
 
-    isAdmin    Boolean @default(false)
+    role       Role    @default(USER)
     isDemoUser Boolean @default(false)
 
     accounts        Account[]
     sessions        Session[]
     collectionItems CollectionItem[]
+}
+
+enum Role {
+    USER
+    ADMIN
 }
 
 model VerificationToken {

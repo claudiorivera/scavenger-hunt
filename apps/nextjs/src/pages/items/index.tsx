@@ -13,7 +13,7 @@ export default function ItemsPage() {
 	return (
 		<div className="flex flex-col gap-4">
 			<header className="text-5xl">All Items</header>
-			{currentUser?.isAdmin && <AddItemForm />}
+			{currentUser?.role === "ADMIN" && <AddItemForm />}
 			<div>
 				Found {collectedItems.length} out of {totalItems} items! 📷
 			</div>

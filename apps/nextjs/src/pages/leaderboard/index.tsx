@@ -15,7 +15,7 @@ export default function LeaderboardPage() {
 			<ul className="flex flex-col gap-4">
 				{users?.map((user) => (
 					<li key={user.id} className="flex items-center gap-4">
-						{currentUser?.isAdmin && currentUser.id !== user.id && (
+						{currentUser?.role === "ADMIN" && currentUser.id !== user.id && (
 							<DeleteUser id={user.id} />
 						)}
 						<Link
