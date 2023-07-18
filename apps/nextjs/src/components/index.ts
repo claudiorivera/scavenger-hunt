@@ -13,4 +13,5 @@ export * from "./MainAppBar";
 export * from "./MinusCircleIcon";
 export * from "./PhotoUpload";
 export * from "./ProfileForm";
+export * from "./SignIn";
 export * from "./TrashIcon";

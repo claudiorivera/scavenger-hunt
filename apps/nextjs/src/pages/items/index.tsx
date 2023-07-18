@@ -1,9 +1,21 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
-import { AddItemForm, CheckCircleIcon, MinusCircleIcon } from "~/components";
+import {
+	AddItemForm,
+	CheckCircleIcon,
+	MinusCircleIcon,
+	SignIn,
+} from "~/components";
 import { api } from "~/utils/api";
 
 export default function ItemsPage() {
+	const { status } = useSession();
+
+	return status === "authenticated" ? <Items /> : <SignIn />;
+}
+
+const Items = () => {
 	const { data: currentUser } = api.user.me.useQuery();
 	const { data: uncollectedItems = [] } = api.item.uncollected.useQuery();
 	const { data: collectedItems = [] } = api.item.collected.useQuery();
@@ -51,4 +63,4 @@ export default function ItemsPage() {
 			</ul>
 		</div>
 	);
-}
+};

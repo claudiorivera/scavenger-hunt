@@ -1,9 +1,17 @@
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { HiUserCircle } from "react-icons/hi";
+import { SignIn } from "~/components";
 import { api } from "~/utils/api";
 
 export default function ProfilePage() {
+	const { status } = useSession();
+
+	return status === "authenticated" ? <Profile /> : <SignIn />;
+}
+
+const Profile = () => {
 	const { data: user } = api.user.me.useQuery();
 
 	return (
@@ -25,4 +33,4 @@ export default function ProfilePage() {
 			</div>
 		</div>
 	);
-}
+};

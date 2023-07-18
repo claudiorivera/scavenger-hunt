@@ -1,12 +1,19 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Loading, PhotoUpload } from "~/components";
+import { Loading, PhotoUpload, SignIn } from "~/components";
 import { api } from "~/utils/api";
 
 export default function CollectPage() {
+	const { status } = useSession();
+
+	return status === "authenticated" ? <Collect /> : <SignIn />;
+}
+
+const Collect = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const itemId = searchParams.get("itemId");
@@ -51,9 +58,9 @@ export default function CollectPage() {
 			</Link>
 		</div>
 	);
-}
+};
 
-function AllItemsFound() {
+const AllItemsFound = () => {
 	const { data: me } = api.user.me.useQuery();
 
 	return (
@@ -71,4 +78,4 @@ function AllItemsFound() {
 			)}
 		</div>
 	);
-}
+};

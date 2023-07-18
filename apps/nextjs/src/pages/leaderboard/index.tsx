@@ -1,11 +1,18 @@
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { HiUserCircle } from "react-icons/hi";
-import { DeleteUser } from "~/components";
+import { DeleteUser, SignIn } from "~/components";
 
 import { api } from "~/utils/api";
 
 export default function LeaderboardPage() {
+	const { status } = useSession();
+
+	return status === "authenticated" ? <LeaderBoard /> : <SignIn />;
+}
+
+const LeaderBoard = () => {
 	const { data: users } = api.user.all.useQuery();
 	const { data: currentUser } = api.user.me.useQuery();
 
@@ -44,4 +51,4 @@ export default function LeaderboardPage() {
 			</ul>
 		</div>
 	);
-}
+};

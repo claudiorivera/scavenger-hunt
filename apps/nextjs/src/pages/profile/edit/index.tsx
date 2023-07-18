@@ -1,9 +1,10 @@
 import classNames from "classnames";
+import { useSession } from "next-auth/react";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, type ChangeEvent } from "react";
 import { z } from "zod";
-import { Input } from "~/components";
+import { Input, SignIn } from "~/components";
 import { useZodForm } from "~/hooks/useZodForm";
 import { base64FromFile } from "~/lib/fileHelpers";
 import { api } from "~/utils/api";
@@ -16,6 +17,12 @@ const editProfileSchema = z.object({
 });
 
 export default function EditProfilePage() {
+	const { status } = useSession();
+
+	return status === "authenticated" ? <EditProfile /> : <SignIn />;
+}
+
+const EditProfile = () => {
 	const router = useRouter();
 	const { data: user } = api.user.me.useQuery();
 
@@ -113,4 +120,4 @@ export default function EditProfilePage() {
 			</div>
 		</div>
 	);
-}
+};
