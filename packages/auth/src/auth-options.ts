@@ -19,6 +19,10 @@ declare module "next-auth" {
 			isAdmin: boolean;
 		} & DefaultSession["user"];
 	}
+
+	interface User {
+		isAdmin: boolean;
+	}
 }
 
 /**
@@ -27,21 +31,15 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  **/
 export const authOptions: NextAuthOptions = {
-	session: {
-		strategy: "jwt",
-	},
 	callbacks: {
-		async session({ session, token }) {
-			if (session.user && token.sub) {
-				session.user.id = token.sub;
-				// get isAdmin from db
-				const user = await prisma.user.findUnique({
-					where: { id: session.user.id },
-				});
-				session.user.isAdmin = user?.isAdmin || false;
-			}
-			return session;
-		},
+		session: ({ session, user }) => ({
+			...session,
+			user: {
+				...session.user,
+				id: user.id,
+				isAdmin: user.isAdmin ?? false,
+			},
+		}),
 	},
 	adapter: PrismaAdapter(prisma),
 	providers: [],
