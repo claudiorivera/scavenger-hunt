@@ -1,0 +1,13 @@
+name: daily-cron
+on:
+  schedule:
+    - cron: "0 1 * * *"
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Seed Database
+        run: |
+          curl --request POST \
+          --url 'https://scavenger-hunt.claudiorivera.com/api/cron-handler' \
+          --header 'Authorization: Bearer ${{ secrets.CRON_SECRET }}'

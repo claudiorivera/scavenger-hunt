@@ -1,9 +1,5 @@
-import { withAuth } from "next-auth/middleware";
+export { default } from "next-auth/middleware";
 
-export default withAuth({
-	callbacks: {
-		authorized({ token }) {
-			return !!token;
-		},
-	},
-});
+export const config = {
+	matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+};

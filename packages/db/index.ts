@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 export * from "@prisma/client";
+export * from "./seed";
 
 const globalForPrisma = globalThis as { prisma?: PrismaClient };
 

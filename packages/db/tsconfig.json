@@ -1,4 +1,13 @@
 {
 	"extends": "../../tsconfig.json",
-	"include": ["index.ts"]
+	"include": ["index.ts", "seed.ts"],
+	"ts-node": {
+		"files": true,
+		"require": ["tsconfig-paths/register"],
+		"experimentalResolverFeatures": true,
+		"compilerOptions": {
+			"module": "CommonJS",
+			"types": ["node"]
+		}
+	}
 }

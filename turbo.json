@@ -10,6 +10,10 @@
 			"inputs": ["prisma/schema.prisma"],
 			"cache": false
 		},
+		"@claudiorivera/db#db:seed": {
+			"cache": false
+		},
+		"db:seed": {},
 		"dev": {
 			"persistent": true,
 			"cache": false
@@ -33,6 +37,7 @@
 	},
 	"globalEnv": [
 		"CI",
+		"CRON_SECRET",
 		"DATABASE_URL",
 		"GITHUB_CLIENT_ID",
 		"GITHUB_CLIENT_SECRET",
