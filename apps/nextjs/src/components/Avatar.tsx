@@ -9,16 +9,14 @@ export function Avatar({ imageSrc }: { imageSrc?: string }) {
 	const image = imageSrc ?? session?.user?.image;
 
 	return (
-		<>
-			<div className="avatar">
-				<div className="w-28 rounded-full">
-					{image ? (
-						<Image alt="" height={150} width={150} src={image} />
-					) : (
-						<HiUserCircle className="h-full w-full" />
-					)}
-				</div>
+		<div className="avatar">
+			<div className="w-28 rounded-full">
+				{image ? (
+					<Image alt="" height={150} width={150} src={image} />
+				) : (
+					<HiUserCircle className="h-full w-full" />
+				)}
 			</div>
-		</>
+		</div>
 	);
 }
