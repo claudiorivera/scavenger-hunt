@@ -1,6 +1,9 @@
 {
 	"extends": "../../tsconfig.json",
 	"include": ["index.ts", "seed.ts"],
+	"compilerOptions": {
+		"baseUrl": "."
+	},
 	"ts-node": {
 		"files": true,
 		"require": ["tsconfig-paths/register"],
