@@ -20,7 +20,7 @@ export function useCollectionItemDetails({
 			!!collectionItem?.item?.id && item.itemId === collectionItem.item.id,
 	);
 
-	const isCurrentUserCollectionItemOwner =
+	const isCurrentUserOwner =
 		!!collectionItem?.user &&
 		!!currentUser?.id &&
 		collectionItem.user.id === currentUser.id;
@@ -29,7 +29,7 @@ export function useCollectionItemDetails({
 		collectionItem,
 		title,
 		isUncollectedByCurrentUser,
-		isCurrentUserCollectionItemOwner,
+		isCurrentUserOwner,
 		isLoading,
 	};
 }

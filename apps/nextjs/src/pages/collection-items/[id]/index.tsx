@@ -24,7 +24,7 @@ function CollectionItem({ id }: { id: string }) {
 		collectionItem,
 		title,
 		isUncollectedByCurrentUser,
-		isCurrentUserCollectionItemOwner,
+		isCurrentUserOwner,
 		isLoading,
 	} = useCollectionItemDetails({ id, currentUser });
 
@@ -53,7 +53,7 @@ function CollectionItem({ id }: { id: string }) {
 					Found It Too?
 				</Link>
 			)}
-			{isCurrentUserCollectionItemOwner && (
+			{isCurrentUserOwner && (
 				<Link className="btn btn-secondary" href={"/collect"}>
 					Find More Stuff!
 				</Link>
