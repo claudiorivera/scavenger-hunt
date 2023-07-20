@@ -1,7 +1,10 @@
 import { seed } from "@claudiorivera/db";
 import { type NextApiRequest, type NextApiResponse } from "next";
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+	req: NextApiRequest,
+	res: NextApiResponse,
+) {
 	const { method } = req;
 
 	const { authorization } = req.headers;
@@ -20,5 +23,3 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
 	return res.status(401).end("Unauthorized");
 }
-
-export default handler;
