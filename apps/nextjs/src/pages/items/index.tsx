@@ -18,7 +18,7 @@ export default function ItemsPage() {
 function Items() {
 	const { data: currentUser } = api.users.me.useQuery();
 	const { data: uncollectedItems = [] } = api.items.uncollected.useQuery();
-	const { data: collectedItems = [] } = api.items.uncollected.useQuery();
+	const { data: collectedItems = [] } = api.items.collected.useQuery();
 
 	const totalItems = uncollectedItems.length + collectedItems.length;
 
