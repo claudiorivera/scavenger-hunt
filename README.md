@@ -8,6 +8,7 @@ It's a virtual scavenger hunt! Everyone plays simultaneously and finds specific 
 - TypeScript
 - [Next.js](https://nextjs.org)
 - [NextAuth.js](https://next-auth.js.org)
+- [Create T3 Turbo](https://github.com/t3-oss/create-t3-turbo)
 
 ## Features
 
@@ -27,10 +28,11 @@ It's a virtual scavenger hunt! Everyone plays simultaneously and finds specific 
 
 ## New In This Version
 
-- Refactored to use Next 13 `app` directory
+- Migrated to a monorepo
 
 ## Future Improvements
 
+- Mobile app using React Native
 - Allow admins to delete items
 - Allow admins to flag users as admins
 - Allow users to delete their profiles
