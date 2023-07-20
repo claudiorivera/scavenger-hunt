@@ -1,4 +1,3 @@
-"use client";
 import { type CollectionItem } from "@claudiorivera/db";
 import classNames from "classnames";
 import { useRouter } from "next/navigation";

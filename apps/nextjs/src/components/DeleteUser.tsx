@@ -1,4 +1,3 @@
-"use client";
 import { type User } from "@claudiorivera/db";
 import classNames from "classnames";
 
