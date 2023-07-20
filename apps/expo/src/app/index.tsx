@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { api, type RouterOutputs } from "~/utils/api";
 
-function ItemCard(props: { item: RouterOutputs["item"]["all"][number] }) {
+function ItemCard(props: { item: RouterOutputs["items"]["all"][number] }) {
 	const router = useRouter();
 
 	return (
@@ -26,7 +26,7 @@ function ItemCard(props: { item: RouterOutputs["item"]["all"][number] }) {
 const Index = () => {
 	const utils = api.useContext();
 
-	const itemQuery = api.item.all.useQuery();
+	const itemQuery = api.items.all.useQuery();
 
 	return (
 		<SafeAreaView className="bg-[#1F104A]">
@@ -38,7 +38,7 @@ const Index = () => {
 				</Text>
 
 				<Button
-					onPress={() => void utils.item.all.invalidate()}
+					onPress={() => void utils.items.all.invalidate()}
 					title="Refresh items"
 					color={"#f472b6"}
 				/>

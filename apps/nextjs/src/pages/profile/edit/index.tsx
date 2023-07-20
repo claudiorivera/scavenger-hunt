@@ -24,7 +24,7 @@ export default function EditProfilePage() {
 
 const EditProfile = () => {
 	const router = useRouter();
-	const { data: user } = api.user.me.useQuery();
+	const { data: user } = api.users.me.useQuery();
 
 	const [photo, setPhoto] = useState<Photo>({
 		src: user?.image ?? undefined,
@@ -32,7 +32,7 @@ const EditProfile = () => {
 		width: 100,
 	});
 
-	const { mutate: updateProfile, isLoading } = api.user.update.useMutation({
+	const { mutate: updateProfile, isLoading } = api.users.update.useMutation({
 		onSuccess: () => router.push("/profile"),
 	});
 

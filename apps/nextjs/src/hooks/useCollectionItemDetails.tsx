@@ -5,10 +5,10 @@ export const useCollectionItemDetails = ({
 	currentUser,
 }: {
 	id: string;
-	currentUser?: RouterOutputs["user"]["me"];
+	currentUser?: RouterOutputs["users"]["me"];
 }) => {
 	const { data: collectionItem, isLoading } =
-		api.collectionItem.byId.useQuery(id);
+		api.collectionItems.byId.useQuery(id);
 
 	const title =
 		!!collectionItem?.user?.name && !!collectionItem.item?.description

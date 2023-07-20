@@ -11,7 +11,7 @@ type Props = {
 export function DeleteItem({ id }: Props) {
 	const router = useRouter();
 
-	const { mutate: deleteItem, isLoading } = api.item.delete.useMutation({
+	const { mutate: deleteItem, isLoading } = api.items.delete.useMutation({
 		onSuccess: () => router.push("/items"),
 	});
 

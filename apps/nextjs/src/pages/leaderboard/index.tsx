@@ -13,8 +13,8 @@ export default function LeaderboardPage() {
 }
 
 const LeaderBoard = () => {
-	const { data: users } = api.user.all.useQuery();
-	const { data: currentUser } = api.user.me.useQuery();
+	const { data: users } = api.users.all.useQuery();
+	const { data: currentUser } = api.users.me.useQuery();
 
 	return (
 		<div className="flex flex-col gap-4">

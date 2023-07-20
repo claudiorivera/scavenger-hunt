@@ -21,7 +21,7 @@ export default function ItemPage() {
 }
 
 function Item({ id }: { id: string }) {
-	const { data: currentUser } = api.user.me.useQuery();
+	const { data: currentUser } = api.users.me.useQuery();
 
 	const { users, item, isUncollectedByCurrentUser, isLoading } = useItemDetails(
 		{
@@ -57,7 +57,7 @@ const UsersList = ({
 	users,
 	itemId,
 }: {
-	users: RouterOutputs["user"]["withItemIdInCollection"];
+	users: RouterOutputs["users"]["withItemIdInCollection"];
 	itemId: string;
 }) => (
 	<ul className="flex flex-col gap-4 pb-4">

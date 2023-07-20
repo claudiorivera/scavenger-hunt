@@ -9,7 +9,7 @@ export default function UserPage() {
 	const { id } = router.query;
 	if (typeof id !== "string") return null;
 
-	const { data: user } = api.user.byId.useQuery(id);
+	const { data: user } = api.users.byId.useQuery(id);
 
 	return (
 		<div className="flex flex-col gap-4">

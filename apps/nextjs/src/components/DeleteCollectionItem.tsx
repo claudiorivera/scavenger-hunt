@@ -12,7 +12,7 @@ export function DeleteCollectionItem({ id }: Props) {
 	const router = useRouter();
 
 	const { mutate: deleteCollectionItem, isLoading } =
-		api.collectionItem.delete.useMutation({
+		api.collectionItems.delete.useMutation({
 			onSuccess: () => router.push("/leaderboard"),
 		});
 

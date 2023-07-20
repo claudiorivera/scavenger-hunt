@@ -18,7 +18,7 @@ export default function CollectionItemPage() {
 }
 
 function CollectionItem({ id }: { id: string }) {
-	const { data: currentUser } = api.user.me.useQuery();
+	const { data: currentUser } = api.users.me.useQuery();
 
 	const {
 		collectionItem,

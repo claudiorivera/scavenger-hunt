@@ -11,7 +11,7 @@ type Props = {
 
 export function DeleteUser({ id }: Props) {
 	const utils = api.useContext();
-	const { mutate: deleteUser, isLoading } = api.user.deleteById.useMutation();
+	const { mutate: deleteUser, isLoading } = api.users.deleteById.useMutation();
 
 	return (
 		<button
@@ -21,7 +21,7 @@ export function DeleteUser({ id }: Props) {
 			onClick={() => {
 				deleteUser(id, {
 					onSuccess: () => {
-						void utils.user.all.invalidate();
+						void utils.users.all.invalidate();
 					},
 				});
 			}}

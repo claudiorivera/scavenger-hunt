@@ -17,7 +17,7 @@ export function AddItemForm() {
 		isLoading,
 		isError,
 		error,
-	} = api.item.add.useMutation();
+	} = api.items.add.useMutation();
 
 	const { register, handleSubmit, reset, formState } = useZodForm({
 		schema: addItemSchema,
@@ -36,7 +36,7 @@ export function AddItemForm() {
 				id="add-item"
 				onSubmit={handleSubmit((values) => {
 					addItem(values, {
-						onSuccess: () => void utils.item.uncollected.invalidate(),
+						onSuccess: () => void utils.items.uncollected.invalidate(),
 					});
 					reset();
 				})}

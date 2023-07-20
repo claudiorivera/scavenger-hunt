@@ -6,7 +6,7 @@ import { api } from "~/utils/api";
 function Item() {
 	const { id } = useSearchParams();
 	if (!id || typeof id !== "string") throw new Error("unreachable");
-	const { data } = api.item.byId.useQuery(id);
+	const { data } = api.items.byId.useQuery(id);
 
 	if (!data) return <SplashScreen />;
 

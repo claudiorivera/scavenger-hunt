@@ -12,7 +12,7 @@ export default function ProfilePage() {
 }
 
 const Profile = () => {
-	const { data: user } = api.user.me.useQuery();
+	const { data: user } = api.users.me.useQuery();
 
 	return (
 		<div className="flex flex-col gap-4">

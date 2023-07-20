@@ -21,8 +21,8 @@ const Collect = () => {
 	const [skippedItemIds, setSkippedItemIds] = useState<Array<string>>([]);
 
 	const { data: item, isLoading } = itemId
-		? api.item.byId.useQuery(itemId)
-		: api.item.next.useQuery({
+		? api.items.byId.useQuery(itemId)
+		: api.items.next.useQuery({
 				skipItemIds: skippedItemIds,
 		  });
 
@@ -61,7 +61,7 @@ const Collect = () => {
 };
 
 const AllItemsFound = () => {
-	const { data: me } = api.user.me.useQuery();
+	const { data: me } = api.users.me.useQuery();
 
 	return (
 		<div className="flex flex-col gap-4">
