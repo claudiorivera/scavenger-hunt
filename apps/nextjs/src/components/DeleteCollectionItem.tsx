@@ -3,11 +3,7 @@ import classNames from "classnames";
 import { useRouter } from "next/navigation";
 import { api } from "~/utils/api";
 
-type Props = {
-	id: CollectionItem["id"];
-};
-
-export function DeleteCollectionItem({ id }: Props) {
+export function DeleteCollectionItem({ id }: { id: CollectionItem["id"] }) {
 	const router = useRouter();
 
 	const { mutate: deleteCollectionItem, isLoading } =

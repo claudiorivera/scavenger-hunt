@@ -5,15 +5,13 @@ import {
 	type InputHTMLAttributes,
 } from "react";
 
-type InputProps = DetailedHTMLProps<
-	InputHTMLAttributes<HTMLInputElement>,
-	HTMLInputElement
-> & {
-	label?: string;
-	error?: string;
-};
-
-export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const Input = forwardRef<
+	HTMLInputElement,
+	DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
+		label?: string;
+		error?: string;
+	}
+>((props, ref) => {
 	const { label, type, error, ...inputProps } = props;
 
 	return (

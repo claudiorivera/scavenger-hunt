@@ -4,11 +4,7 @@ import classNames from "classnames";
 import { TrashIcon } from "~/components";
 import { api } from "~/utils/api";
 
-type Props = {
-	id: User["id"];
-};
-
-export function DeleteUser({ id }: Props) {
+export function DeleteUser({ id }: { id: User["id"] }) {
 	const utils = api.useContext();
 	const { mutate: deleteUser, isLoading } = api.users.deleteById.useMutation();
 

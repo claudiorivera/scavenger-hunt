@@ -3,11 +3,7 @@ import classNames from "classnames";
 import { useRouter } from "next/navigation";
 import { api } from "~/utils/api";
 
-type Props = {
-	id: Item["id"];
-};
-
-export function DeleteItem({ id }: Props) {
+export function DeleteItem({ id }: { id: Item["id"] }) {
 	const router = useRouter();
 
 	const { mutate: deleteItem, isLoading } = api.items.delete.useMutation({
