@@ -1,12 +1,12 @@
 import { api, type RouterOutputs } from "~/utils/api";
 
-export const useItemDetails = ({
+export function useItemDetails({
 	id,
 	currentUser,
 }: {
 	id: string;
 	currentUser?: RouterOutputs["users"]["me"];
-}) => {
+}) {
 	const { data: users, isLoading: isLoadingUsers } =
 		api.users.withItemIdInCollection.useQuery(id);
 	const { data: item, isLoading: isLoadingItem } = api.items.byId.useQuery(id);
@@ -23,4 +23,4 @@ export const useItemDetails = ({
 		isUncollectedByCurrentUser,
 		isLoading,
 	};
-};
+}

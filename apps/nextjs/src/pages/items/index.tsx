@@ -15,7 +15,7 @@ export default function ItemsPage() {
 	return status === "authenticated" ? <Items /> : <SignIn />;
 }
 
-const Items = () => {
+function Items() {
 	const { data: currentUser } = api.users.me.useQuery();
 	const { data: uncollectedItems = [] } = api.items.uncollected.useQuery();
 	const { data: collectedItems = [] } = api.items.uncollected.useQuery();
@@ -63,4 +63,4 @@ const Items = () => {
 			</ul>
 		</div>
 	);
-};
+}

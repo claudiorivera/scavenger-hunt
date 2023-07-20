@@ -13,6 +13,7 @@ type GetServerSessionContext =
 			res: GetServerSidePropsContext["res"];
 	  }
 	| { req: NextApiRequest; res: NextApiResponse };
-export const getServerSession = (ctx: GetServerSessionContext) => {
+
+export function getServerSession(ctx: GetServerSessionContext) {
 	return $getServerSession(ctx.req, ctx.res, authOptions);
-};
+}

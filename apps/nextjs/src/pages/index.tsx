@@ -42,7 +42,7 @@ export default function HomePage() {
 	);
 }
 
-const Home = () => {
+function Home() {
 	const { data: user } = api.users.me.useQuery();
 
 	return (
@@ -75,4 +75,4 @@ const Home = () => {
 			</div>
 		</div>
 	);
-};
+}

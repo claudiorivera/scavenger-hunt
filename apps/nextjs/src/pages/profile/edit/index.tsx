@@ -22,7 +22,7 @@ export default function EditProfilePage() {
 	return status === "authenticated" ? <EditProfile /> : <SignIn />;
 }
 
-const EditProfile = () => {
+function EditProfile() {
 	const router = useRouter();
 	const { data: user } = api.users.me.useQuery();
 
@@ -120,4 +120,4 @@ const EditProfile = () => {
 			</div>
 		</div>
 	);
-};
+}

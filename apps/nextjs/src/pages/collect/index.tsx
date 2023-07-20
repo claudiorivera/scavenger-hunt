@@ -13,7 +13,7 @@ export default function CollectPage() {
 	return status === "authenticated" ? <Collect /> : <SignIn />;
 }
 
-const Collect = () => {
+function Collect() {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const itemId = searchParams.get("itemId");
@@ -58,9 +58,9 @@ const Collect = () => {
 			</Link>
 		</div>
 	);
-};
+}
 
-const AllItemsFound = () => {
+function AllItemsFound() {
 	const { data: me } = api.users.me.useQuery();
 
 	return (
@@ -78,4 +78,4 @@ const AllItemsFound = () => {
 			)}
 		</div>
 	);
-};
+}

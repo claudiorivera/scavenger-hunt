@@ -11,7 +11,7 @@ export default function ProfilePage() {
 	return status === "authenticated" ? <Profile /> : <SignIn />;
 }
 
-const Profile = () => {
+function Profile() {
 	const { data: user } = api.users.me.useQuery();
 
 	return (
@@ -33,4 +33,4 @@ const Profile = () => {
 			</div>
 		</div>
 	);
-};
+}

@@ -1,12 +1,12 @@
 import { api, type RouterOutputs } from "~/utils/api";
 
-export const useCollectionItemDetails = ({
+export function useCollectionItemDetails({
 	id,
 	currentUser,
 }: {
 	id: string;
 	currentUser?: RouterOutputs["users"]["me"];
-}) => {
+}) {
 	const { data: collectionItem, isLoading } =
 		api.collectionItems.byId.useQuery(id);
 
@@ -32,4 +32,4 @@ export const useCollectionItemDetails = ({
 		isCurrentUserCollectionItemOwner,
 		isLoading,
 	};
-};
+}

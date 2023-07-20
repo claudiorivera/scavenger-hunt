@@ -12,7 +12,7 @@ export default function LeaderboardPage() {
 	return status === "authenticated" ? <LeaderBoard /> : <SignIn />;
 }
 
-const LeaderBoard = () => {
+function LeaderBoard() {
 	const { data: users } = api.users.all.useQuery();
 	const { data: currentUser } = api.users.me.useQuery();
 
@@ -51,4 +51,4 @@ const LeaderBoard = () => {
 			</ul>
 		</div>
 	);
-};
+}

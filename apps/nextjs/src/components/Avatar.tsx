@@ -3,11 +3,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { HiUserCircle } from "react-icons/hi";
 
-type Props = {
-	imageSrc?: string;
-};
-
-export const Avatar = ({ imageSrc }: Props) => {
+export function Avatar({ imageSrc }: { imageSrc?: string }) {
 	const { data: session } = useSession();
 
 	const image = imageSrc ?? session?.user?.image;
@@ -25,4 +21,4 @@ export const Avatar = ({ imageSrc }: Props) => {
 			</div>
 		</>
 	);
-};
+}
