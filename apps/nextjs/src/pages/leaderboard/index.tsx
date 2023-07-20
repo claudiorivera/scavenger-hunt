@@ -13,14 +13,14 @@ export default function LeaderboardPage() {
 }
 
 function LeaderBoard() {
-	const { data: users } = api.users.all.useQuery();
+	const { data: users = [] } = api.users.all.useQuery();
 	const { data: currentUser } = api.users.me.useQuery();
 
 	return (
 		<div className="flex flex-col gap-4">
 			<header className="text-5xl">Leaderboard</header>
 			<ul className="flex flex-col gap-4">
-				{users?.map((user) => (
+				{users.map((user) => (
 					<li key={user.id} className="flex items-center gap-4">
 						{currentUser?.role === "ADMIN" && currentUser.id !== user.id && (
 							<DeleteUser id={user.id} />

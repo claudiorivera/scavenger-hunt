@@ -32,7 +32,7 @@ function Item({ id }: { id: string }) {
 
 	if (isLoading) return <Loading />;
 
-	if (!(item?.id && item.description && !!users)) return notFound();
+	if (!(item?.id && item.description)) return notFound();
 
 	return (
 		<div className="flex flex-col gap-4">

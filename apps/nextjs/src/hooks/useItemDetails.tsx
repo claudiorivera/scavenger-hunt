@@ -7,11 +7,11 @@ export function useItemDetails({
 	id: string;
 	currentUser?: RouterOutputs["users"]["me"];
 }) {
-	const { data: users, isLoading: isLoadingUsers } =
+	const { data: users = [], isLoading: isLoadingUsers } =
 		api.users.withItemIdInCollection.useQuery(id);
 	const { data: item, isLoading: isLoadingItem } = api.items.byId.useQuery(id);
 
-	const isUncollectedByCurrentUser = !(users ?? []).some(
+	const isUncollectedByCurrentUser = !users.some(
 		(user) => !!currentUser?.email && user.email === currentUser.email,
 	);
 
