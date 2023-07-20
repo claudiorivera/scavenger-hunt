@@ -6,10 +6,8 @@ import { useState, type ChangeEvent } from "react";
 import { z } from "zod";
 import { Input, SignIn } from "~/components";
 import { useZodForm } from "~/hooks/useZodForm";
-import { base64FromFile } from "~/lib/fileHelpers";
 import { api } from "~/utils/api";
-
-type Photo = Partial<Pick<HTMLImageElement, "src" | "width" | "height">>;
+import { base64FromFile } from "~/utils/fileHelpers";
 
 const editProfileSchema = z.object({
 	name: z.string().optional(),
@@ -26,7 +24,9 @@ function EditProfile() {
 	const router = useRouter();
 	const { data: user } = api.users.me.useQuery();
 
-	const [photo, setPhoto] = useState<Photo>({
+	const [image, setImage] = useState<
+		Partial<Pick<HTMLImageElement, "src" | "width" | "height">>
+	>({
 		src: user?.image ?? undefined,
 		height: 100,
 		width: 100,
@@ -50,7 +50,7 @@ function EditProfile() {
 			const image = new Image();
 			image.src = URL.createObjectURL(file);
 			image.onload = () => {
-				setPhoto(image);
+				setImage(image);
 			};
 
 			const base64string = await base64FromFile(file);
@@ -74,12 +74,12 @@ function EditProfile() {
 							<input hidden {...register("base64")} />
 							<div className="placeholder avatar">
 								<div className="bg-base-300 text-base-content ring-secondary relative w-24 rounded-full ring">
-									{!!photo?.src && (
+									{!!image?.src && (
 										<NextImage
-											src={photo.src}
+											src={image.src}
 											alt="avatar"
-											height={photo.height}
-											width={photo.width}
+											height={image.height}
+											width={image.width}
 										/>
 									)}
 									<div className="absolute bottom-0 left-0 right-0 top-0">

@@ -14,7 +14,7 @@ const defaultUserSelect: Prisma.UserSelect = {
 	image: true,
 };
 
-async function uploadPhoto({
+async function uploadImage({
 	base64,
 	userId,
 }: {
@@ -26,7 +26,7 @@ async function uploadPhoto({
 			base64,
 			{
 				public_id: `${userId}`,
-				folder: "scavenger-hunt/profile-photos",
+				folder: "scavenger-hunt/profile-images",
 			},
 		);
 
@@ -132,7 +132,7 @@ export const userRouter = createTRPCRouter({
 		.mutation(async ({ ctx, input }) => {
 			let imageUrl;
 			if (input.base64) {
-				const { url } = await uploadPhoto({
+				const { url } = await uploadImage({
 					base64: input.base64,
 					userId: ctx.session.user.id,
 				});

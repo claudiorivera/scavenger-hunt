@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Loading, PhotoUpload, SignIn } from "~/components";
+import { ImageUpload, Loading, SignIn } from "~/components";
 import { api } from "~/utils/api";
 
 export default function CollectPage() {
@@ -43,7 +43,7 @@ function Collect() {
 		<div className="flex flex-col gap-4">
 			<header className="text-2xl">Find</header>
 			<div className="text-5xl">{item.description}</div>
-			<PhotoUpload itemId={item.id} />
+			<ImageUpload itemId={item.id} />
 			<button
 				className="btn btn-secondary"
 				onClick={() => {
