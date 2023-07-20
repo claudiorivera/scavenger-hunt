@@ -1,12 +1,8 @@
 import { type Prisma } from "@claudiorivera/db";
+import { updateProfileSchema } from "@claudiorivera/shared";
 import { v2 as cloudinary } from "cloudinary";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-
-const updateProfileSchema = z.object({
-	base64: z.string().optional(),
-	name: z.string().optional(),
-});
 
 const defaultUserSelect: Prisma.UserSelect = {
 	id: true,

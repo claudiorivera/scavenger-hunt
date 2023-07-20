@@ -1,4 +1,5 @@
 import { type Prisma } from "@claudiorivera/db";
+import { createItemSchema } from "@claudiorivera/shared";
 import * as z from "zod";
 import {
 	adminProcedure,
@@ -6,10 +7,6 @@ import {
 	protectedProcedure,
 	publicProcedure,
 } from "../trpc";
-
-const addItemSchema = z.object({
-	description: z.string().min(1),
-});
 
 export const itemRouter = createTRPCRouter({
 	all: publicProcedure.query(({ ctx }) => {
@@ -85,7 +82,7 @@ export const itemRouter = createTRPCRouter({
 				},
 			});
 		}),
-	add: adminProcedure.input(addItemSchema).mutation(({ ctx, input }) => {
+	add: adminProcedure.input(createItemSchema).mutation(({ ctx, input }) => {
 		return ctx.prisma.item.create({ data: input });
 	}),
 	delete: adminProcedure.input(z.string()).mutation(({ ctx, input }) => {

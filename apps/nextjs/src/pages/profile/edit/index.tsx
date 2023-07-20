@@ -1,18 +1,13 @@
+import { updateProfileSchema } from "@claudiorivera/shared";
 import classNames from "classnames";
 import { useSession } from "next-auth/react";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, type ChangeEvent } from "react";
-import { z } from "zod";
 import { Input, SignIn } from "~/components";
 import { useZodForm } from "~/hooks/useZodForm";
 import { api } from "~/utils/api";
 import { base64FromFile } from "~/utils/fileHelpers";
-
-const editProfileSchema = z.object({
-	name: z.string().optional(),
-	base64: z.string().optional(),
-});
 
 export default function EditProfilePage() {
 	const { status } = useSession();
@@ -37,7 +32,7 @@ function EditProfile() {
 	});
 
 	const { register, setValue, handleSubmit } = useZodForm({
-		schema: editProfileSchema,
+		schema: updateProfileSchema,
 		defaultValues: {
 			name: user?.name ?? undefined,
 		},

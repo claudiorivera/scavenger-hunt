@@ -1,13 +1,7 @@
+import { capitalizeEveryWord } from "@claudiorivera/shared";
 import { faker } from "@faker-js/faker";
 import { PrismaClient, type Prisma } from "@prisma/client";
 const prisma = new PrismaClient();
-
-// TODO: Move to utils package
-export const capitalizeEveryWord = (string: string) =>
-	string
-		.split(" ")
-		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-		.join(" ");
 
 const USERS_TO_CREATE = 10;
 const ITEMS_TO_CREATE = 20;

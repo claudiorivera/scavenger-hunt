@@ -1,14 +1,9 @@
-"use client";
+import { createItemSchema } from "@claudiorivera/shared";
 import classNames from "classnames";
-import { z } from "zod";
 
 import { Input } from "~/components";
 import { useZodForm } from "~/hooks/useZodForm";
 import { api } from "~/utils/api";
-
-const addItemSchema = z.object({
-	description: z.string().min(1),
-});
 
 export function AddItemForm() {
 	const utils = api.useContext();
@@ -20,7 +15,7 @@ export function AddItemForm() {
 	} = api.items.add.useMutation();
 
 	const { register, handleSubmit, reset, formState } = useZodForm({
-		schema: addItemSchema,
+		schema: createItemSchema,
 	});
 
 	if (isError)

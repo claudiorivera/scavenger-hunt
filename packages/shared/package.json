@@ -1,5 +1,5 @@
 {
-	"name": "@claudiorivera/api",
+	"name": "@claudiorivera/shared",
 	"version": "0.1.0",
 	"main": "./index.ts",
 	"types": "./index.ts",
@@ -11,13 +11,6 @@
 		"type-check": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@claudiorivera/auth": "^0.1.0",
-		"@claudiorivera/db": "^0.1.0",
-		"@claudiorivera/shared": "^0.1.0",
-		"@trpc/client": "^10.32.0",
-		"@trpc/server": "^10.32.0",
-		"cloudinary": "^1.37.3",
-		"superjson": "1.9.1",
 		"zod": "^3.21.4"
 	},
 	"devDependencies": {
