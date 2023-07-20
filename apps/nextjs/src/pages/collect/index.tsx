@@ -28,7 +28,7 @@ function Collect() {
 
 	useEffect(() => {
 		if (!isLoading && !item && !!skippedItemIds.length) {
-			toast.loading("You skipped everything 😅\nTry again!", {
+			toast("You skipped everything 😅\nTry again!", {
 				duration: 4000,
 			});
 			setSkippedItemIds([]);
