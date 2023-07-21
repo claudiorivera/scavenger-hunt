@@ -1,6 +1,7 @@
 import { prisma, type User } from "@claudiorivera/db";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { type DefaultSession, type NextAuthOptions } from "next-auth";
+import EmailProvider from "next-auth/providers/email";
 import GithubProvider from "next-auth/providers/github";
 
 import { env } from "../env.mjs";
@@ -43,7 +44,12 @@ export const authOptions: NextAuthOptions = {
 		}),
 	},
 	adapter: PrismaAdapter(prisma),
-	providers: [],
+	providers: [
+		EmailProvider({
+			server: env.EMAIL_SERVER,
+			from: env.EMAIL_FROM,
+		}),
+	],
 };
 
 if (env.VERCEL_ENV !== "preview") {

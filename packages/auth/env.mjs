@@ -17,6 +17,8 @@ export const env = createEnv({
 			process.env.VERCEL ? z.string() : z.string().url(),
 		),
 		VERCEL_ENV: z.enum(["production", "preview", "development"]),
+		EMAIL_SERVER: z.string().url(),
+		EMAIL_FROM: z.string().email(),
 	},
 	client: {},
 	runtimeEnv: {
@@ -25,6 +27,8 @@ export const env = createEnv({
 		GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
 		GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
 		VERCEL_ENV: process.env.VERCEL_ENV,
+		EMAIL_SERVER: process.env.EMAIL_SERVER,
+		EMAIL_FROM: process.env.EMAIL_FROM,
 	},
 	skipValidation: !!process.env.CI || !!process.env.SKIP_ENV_VALIDATION,
 });
