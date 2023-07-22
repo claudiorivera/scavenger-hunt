@@ -1,55 +1,55 @@
 {
-	"$schema": "https://turborepo.org/schema.json",
-	"globalDependencies": ["**/.env", "tsconfig.json"],
-	"pipeline": {
-		"db:generate": {
-			"inputs": ["prisma/schema.prisma"],
-			"cache": false
-		},
-		"db:push": {
-			"inputs": ["prisma/schema.prisma"],
-			"cache": false
-		},
-		"@claudiorivera/db#db:seed": {
-			"cache": false
-		},
-		"db:seed": {},
-		"dev": {
-			"persistent": true,
-			"cache": false
-		},
-		"build": {
-			"dependsOn": ["^build", "^db:generate"],
-			"outputs": [".next/**", ".expo/**"]
-		},
-		"lint": {},
-		"lint:fix": {},
-		"clean": {
-			"cache": false
-		},
-		"//#clean": {
-			"cache": false
-		},
-		"type-check": {
-			"dependsOn": ["^db:generate"],
-			"cache": false
-		}
-	},
-	"globalEnv": [
-		"CI",
-		"CRON_SECRET",
-		"DATABASE_URL",
-		"EMAIL_FROM",
-		"EMAIL_SERVER",
-		"GITHUB_CLIENT_ID",
-		"GITHUB_CLIENT_SECRET",
-		"EXPO_ROUTER_APP_ROOT",
-		"NEXTAUTH_SECRET",
-		"NEXTAUTH_URL",
-		"NODE_ENV",
-		"SKIP_ENV_VALIDATION",
-		"VERCEL",
-		"VERCEL_ENV",
-		"VERCEL_URL"
-	]
+  "$schema": "https://turborepo.org/schema.json",
+  "globalDependencies": ["**/.env", "tsconfig.json"],
+  "pipeline": {
+    "db:generate": {
+      "inputs": ["prisma/schema.prisma"],
+      "cache": false
+    },
+    "db:push": {
+      "inputs": ["prisma/schema.prisma"],
+      "cache": false
+    },
+    "@claudiorivera/db#db:seed": {
+      "cache": false
+    },
+    "db:seed": {},
+    "dev": {
+      "persistent": true,
+      "cache": false
+    },
+    "build": {
+      "dependsOn": ["^build", "^db:generate"],
+      "outputs": [".next/**", ".expo/**"]
+    },
+    "lint": {},
+    "lint:fix": {},
+    "clean": {
+      "cache": false
+    },
+    "//#clean": {
+      "cache": false
+    },
+    "type-check": {
+      "dependsOn": ["^db:generate"],
+      "cache": false
+    }
+  },
+  "globalEnv": [
+    "CI",
+    "CRON_SECRET",
+    "DATABASE_URL",
+    "EMAIL_FROM",
+    "EMAIL_SERVER",
+    "GITHUB_CLIENT_ID",
+    "GITHUB_CLIENT_SECRET",
+    "EXPO_ROUTER_APP_ROOT",
+    "NEXTAUTH_SECRET",
+    "NEXTAUTH_URL",
+    "NODE_ENV",
+    "SKIP_ENV_VALIDATION",
+    "VERCEL",
+    "VERCEL_ENV",
+    "VERCEL_URL"
+  ]
 }

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", ":rebaseStalePrs"],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["^@claudiorivera/"],
+      "enabled": false
+    }
+  ],
+  "updateInternalDeps": true,
+  "rangeStrategy": "bump",
+  "automerge": true,
+  "commitMessagePrefix": "🤖"
+}

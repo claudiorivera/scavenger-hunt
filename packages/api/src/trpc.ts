@@ -6,10 +6,10 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
-import { getServerSession, type Session } from "@claudiorivera/auth";
+import type { Session } from "@claudiorivera/auth";
+import { auth } from "@claudiorivera/auth";
 import { prisma } from "@claudiorivera/db";
 import { initTRPC, TRPCError } from "@trpc/server";
-import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
@@ -22,9 +22,9 @@ import { ZodError } from "zod";
  * processing a request
  *
  */
-type CreateContextOptions = {
-	session: Session | null;
-};
+interface CreateContextOptions {
+  session: Session | null;
+}
 
 /**
  * This helper generates the "internals" for a tRPC context. If you need to use
@@ -36,10 +36,10 @@ type CreateContextOptions = {
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
-	return {
-		session: opts.session,
-		prisma,
-	};
+  return {
+    session: opts.session,
+    prisma,
+  };
 };
 
 /**
@@ -47,15 +47,13 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
  * process every request that goes through your tRPC endpoint
  * @link https://trpc.io/docs/context
  */
-export const createTRPCContext = async (opts: CreateNextContextOptions) => {
-	const { req, res } = opts;
+export const createTRPCContext = async () => {
+  // Get the session from the server using the unstable_getServerSession wrapper function
+  const session = await auth();
 
-	// Get the session from the server using the unstable_getServerSession wrapper function
-	const session = await getServerSession({ req, res });
-
-	return createInnerTRPCContext({
-		session,
-	});
+  return createInnerTRPCContext({
+    session,
+  });
 };
 
 /**
@@ -65,17 +63,17 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
  * transformer
  */
 const t = initTRPC.context<typeof createTRPCContext>().create({
-	transformer: superjson,
-	errorFormatter({ shape, error }) {
-		return {
-			...shape,
-			data: {
-				...shape.data,
-				zodError:
-					error.cause instanceof ZodError ? error.cause.flatten() : null,
-			},
-		};
-	},
+  transformer: superjson,
+  errorFormatter({ shape, error }) {
+    return {
+      ...shape,
+      data: {
+        ...shape.data,
+        zodError:
+          error.cause instanceof ZodError ? error.cause.flatten() : null,
+      },
+    };
+  },
 });
 
 /**
@@ -105,26 +103,26 @@ export const publicProcedure = t.procedure;
  * procedure
  */
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
-	if (!ctx.session?.user) {
-		throw new TRPCError({ code: "UNAUTHORIZED" });
-	}
-	return next({
-		ctx: {
-			// infers the `session` as non-nullable
-			session: { ...ctx.session, user: ctx.session.user },
-		},
-	});
+  if (!ctx.session?.user) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+  return next({
+    ctx: {
+      // infers the `session` as non-nullable
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  });
 });
 
 const enforceUserIsAdmin = t.middleware(({ ctx, next }) => {
-	if (!(ctx.session?.user.role === "ADMIN")) {
-		throw new TRPCError({ code: "UNAUTHORIZED" });
-	}
-	return next({
-		ctx: {
-			session: { ...ctx.session, user: ctx.session.user },
-		},
-	});
+  if (!(ctx.session?.user.role === "ADMIN")) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+  return next({
+    ctx: {
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  });
 });
 
 /**
