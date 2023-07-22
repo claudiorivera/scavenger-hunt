@@ -5,10 +5,10 @@ import { userRouter } from "./router/user";
 import { createTRPCRouter } from "./trpc";
 
 export const appRouter = createTRPCRouter({
-  auth: authRouter,
-  items: itemRouter,
-  users: userRouter,
-  collectionItems: collectionItemRouter,
+	auth: authRouter,
+	items: itemRouter,
+	users: userRouter,
+	collectionItems: collectionItemRouter,
 });
 
 // export type definition of API

@@ -5,13 +5,13 @@ import { auth } from "@claudiorivera/auth";
 import { CollectionItem } from "~/app/collection-items/[id]/collection-item";
 
 export default async function CollectionItemPage({
-  params,
+	params,
 }: {
-  params: { id: string };
+	params: { id: string };
 }) {
-  const session = await auth();
+	const session = await auth();
 
-  if (!session) return redirect("/api/auth/signin");
+	if (!session) return redirect("/api/auth/signin");
 
-  return <CollectionItem id={params.id} />;
+	return <CollectionItem id={params.id} />;
 }
