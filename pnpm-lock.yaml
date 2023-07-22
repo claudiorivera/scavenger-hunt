@@ -144,9 +144,6 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.1.1
         version: 3.1.1(react-hook-form@7.45.2)
-      '@t3-oss/env-nextjs':
-        specifier: ^0.6.0
-        version: 0.6.0(typescript@5.1.6)(zod@3.21.4)
       '@tanstack/react-query':
         specifier: ^4.29.23
         version: 4.29.23(react-dom@18.2.0)(react-native@0.72.3)(react@18.2.0)
