@@ -1,6 +1,8 @@
+import EmailProvider from "@auth/core/providers/email";
 import GitHubProvider from "@auth/core/providers/github";
 import type { DefaultSession } from "@auth/core/types";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import type { NextAuthConfig } from "next-auth";
 import NextAuth from "next-auth";
 
 import type { User } from "@claudiorivera/db";
@@ -21,13 +23,15 @@ declare module "next-auth" {
 	}
 }
 
-export const {
-	handlers: { GET, POST },
-	auth,
-	CSRF_experimental,
-} = NextAuth({
+const config = {
 	adapter: PrismaAdapter(prisma),
 	providers: [
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-expect-error
+		EmailProvider({
+			server: env.EMAIL_SERVER,
+			from: env.EMAIL_FROM,
+		}),
 		GitHubProvider({
 			clientId: env.GITHUB_CLIENT_ID,
 			clientSecret: env.GITHUB_CLIENT_SECRET,
@@ -48,4 +52,10 @@ export const {
 		logo: "https://scavenger-hunt.claudiorivera.com/android-chrome-512x512.png", // Absolute URL to image
 		buttonText: "#FFFFFF", // Hex color code
 	},
-});
+} satisfies NextAuthConfig;
+
+export const {
+	handlers: { GET, POST },
+	auth,
+	CSRF_experimental,
+} = NextAuth(config);
