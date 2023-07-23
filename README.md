@@ -16,8 +16,14 @@ It's a virtual scavenger hunt! Everyone plays simultaneously and finds specific 
 
 ## Config
 
-- Add a `.env.local` file with environmental variables as shown in the example `.example.env.local` file.
+- `cp .env.example .env` and update values
+- `pnpm db:migrate`
 
 ## Dev
 
 `pnpm dev`
+
+## TODO
+
+- [ ] Establish better Next.js App Router patterns
+- [ ] Implement React Native app

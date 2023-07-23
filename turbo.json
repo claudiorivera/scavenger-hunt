@@ -17,6 +17,10 @@
 			"cache": false,
 			"inputs": ["prisma/migrations/**/*.sql"]
 		},
+		"db:migrate": {
+			"cache": false,
+			"inputs": ["prisma/migrations/**/*.sql"]
+		},
 		"dev": {
 			"persistent": true,
 			"cache": false
