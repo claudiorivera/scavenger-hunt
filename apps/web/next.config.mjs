@@ -10,6 +10,7 @@ const config = {
 		"@claudiorivera/api",
 		"@claudiorivera/auth",
 		"@claudiorivera/db",
+		"@claudiorivera/shared",
 	],
 	/** We already do linting and typechecking as separate tasks in CI */
 	eslint: { ignoreDuringBuilds: true },
