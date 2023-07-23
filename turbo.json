@@ -10,16 +10,19 @@
 			"inputs": ["prisma/schema.prisma"],
 			"cache": false
 		},
-		"@claudiorivera/db#db:seed": {
+		"db:seed": {
 			"cache": false
 		},
-		"db:seed": {},
+		"db:deploy": {
+			"cache": false,
+			"inputs": ["prisma/migrations/**/*.sql"]
+		},
 		"dev": {
 			"persistent": true,
 			"cache": false
 		},
 		"build": {
-			"dependsOn": ["^build", "^db:generate"],
+			"dependsOn": ["^build", "^db:generate", "^db:deploy"],
 			"outputs": [".next/**", ".expo/**"]
 		},
 		"lint": {},
