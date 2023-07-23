@@ -1,5 +1,6 @@
 {
-	"name": "create-t3-turbo",
+	"name": "scavenger-hunt",
+	"version": "3.0.0",
 	"private": true,
 	"engines": {
 		"node": ">=v18.17.0"
