@@ -31,10 +31,7 @@ const getBaseUrl = () => {
 	const localhost = debuggerHost?.split(":")[0];
 
 	if (!localhost) {
-		// return "https://your-production-url.com";
-		throw new Error(
-			"Failed to get localhost. Please point to your production server.",
-		);
+		return "https://scavenger-hunt.claudiorivera.com";
 	}
 	return `http://${localhost}:3000`;
 };
