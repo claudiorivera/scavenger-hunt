@@ -11,7 +11,7 @@ export default async function HomePage() {
 	if (!session) return redirect("/api/auth/signin");
 
 	return (
-		<div className="flex flex-col items-center gap-4 p-4">
+		<div className="flex flex-col items-center gap-4">
 			<HomePageHeader />
 			<div className="flex w-full flex-col gap-2">
 				<Link href={"/collect"} className="btn-secondary btn">
