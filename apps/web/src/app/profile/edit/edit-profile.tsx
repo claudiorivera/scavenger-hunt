@@ -16,6 +16,7 @@ import { useZodForm } from "~/hooks/useZodForm";
 export function EditProfile() {
 	const router = useRouter();
 	const { data: user } = api.users.me.useQuery();
+	const utils = api.useContext();
 
 	const [image, setImage] = useState<
 		Partial<Pick<HTMLImageElement, "src" | "width" | "height">>
@@ -25,12 +26,13 @@ export function EditProfile() {
 		width: 100,
 	});
 
-	const { mutate: updateProfile, isLoading } = api.users.update.useMutation({
-		onSuccess: () => {
-			router.refresh();
-			router.push("/profile");
-		},
-	});
+	const { mutateAsync: updateProfile, isLoading } =
+		api.users.update.useMutation({
+			onSuccess: async () => {
+				await utils.users.me.invalidate();
+				router.push("/profile");
+			},
+		});
 
 	const { register, setValue, handleSubmit } = useZodForm({
 		schema: updateProfileSchema,
@@ -63,7 +65,9 @@ export function EditProfile() {
 				<div className="flex flex-col items-center gap-4">
 					<form
 						id="update-contact"
-						onSubmit={handleSubmit((values) => updateProfile(values))}
+						onSubmit={handleSubmit(
+							async (values) => await updateProfile(values),
+						)}
 						className="flex flex-col gap-2"
 					>
 						<div className="mx-auto">
