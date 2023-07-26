@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import Image from "next/image";
 import { HiUserCircle } from "react-icons/hi";
 
@@ -9,7 +10,7 @@ export const HomePageHeader = () => {
 	const { data: user } = api.users.me.useQuery();
 
 	return (
-		<>
+		<Fragment>
 			<div className="avatar">
 				<div className="relative h-24 w-24 rounded-full">
 					{user?.image ? (
@@ -20,6 +21,6 @@ export const HomePageHeader = () => {
 				</div>
 			</div>
 			<header className="text-2xl">{user?.name ?? "Anonymous User"}</header>
-		</>
+		</Fragment>
 	);
 };
