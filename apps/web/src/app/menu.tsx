@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { userLinks } from "~/constants";
 
-export const Menu = () => {
+export function Menu() {
 	return (
 		<div className="dropdown-end dropdown">
 			{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
@@ -52,4 +52,4 @@ export const Menu = () => {
 			</ul>
 		</div>
 	);
-};
+}
