@@ -1,19 +1,31 @@
-"use client";
-
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import classNames from "classnames";
 import { HiUserCircle } from "react-icons/hi";
 
-export function Avatar({ imageSrc }: { imageSrc?: string }) {
-	const { data: session } = useSession();
+type ImageSize = "sm" | "md" | "lg";
 
-	const image = imageSrc ?? session?.user?.image;
+const smallSizeClasses = "h-14 w-14";
+const mediumSizeClasses = "h-24 w-24";
+const largeSizeClasses = "h-28 w-28";
 
+export function Avatar({
+	imageSrc,
+	size = "md",
+}: {
+	imageSrc?: string | null;
+	size?: ImageSize;
+}) {
 	return (
 		<div className="avatar">
-			<div className="w-28 rounded-full">
-				{image ? (
-					<Image alt="" height={150} width={150} src={image} />
+			<div
+				className={classNames("relative rounded-full", {
+					[smallSizeClasses]: size === "sm",
+					[mediumSizeClasses]: size === "md",
+					[largeSizeClasses]: size === "lg",
+				})}
+			>
+				{imageSrc ? (
+					<Image alt="" fill src={imageSrc} />
 				) : (
 					<HiUserCircle className="h-full w-full" />
 				)}

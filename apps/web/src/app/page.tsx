@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@claudiorivera/auth";
 
-import { HomePageHeader } from "~/app/home-page-header";
+import { Avatar } from "~/components/Avatar";
 
 export default async function HomePage() {
 	const session = await auth();
@@ -12,7 +12,11 @@ export default async function HomePage() {
 
 	return (
 		<div className="flex flex-col items-center gap-4">
-			<HomePageHeader />
+			<Avatar imageSrc={session.user?.image} />
+			<header className="text-2xl">
+				{session.user?.name ?? "Anonymous User"}
+			</header>
+
 			<div className="flex w-full flex-col gap-2">
 				<Link href={"/collect"} className="btn-secondary btn">
 					Collect Items

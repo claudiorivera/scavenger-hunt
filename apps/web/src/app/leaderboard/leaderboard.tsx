@@ -1,10 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { HiUserCircle } from "react-icons/hi";
 
 import { api } from "~/utils/api";
+import { Avatar } from "~/components/Avatar";
 import { DeleteUser } from "~/components/DeleteUser";
 
 export function LeaderBoard() {
@@ -24,20 +23,7 @@ export function LeaderBoard() {
 							href={`/users/${user.id}`}
 							className="flex w-full items-center gap-4"
 						>
-							<div className="avatar">
-								<div className="relative h-14 w-14 rounded-full">
-									{user.image ? (
-										<Image
-											src={user.image}
-											fill
-											alt={`${user.name}`}
-											sizes="33vw"
-										/>
-									) : (
-										<HiUserCircle className="h-full w-full" />
-									)}
-								</div>
-							</div>
+							<Avatar imageSrc={user.image} size="sm" />
 							<div className="flex-1 text-left">{user.name}</div>
 							<div className="ml-auto">{user._count.collectionItems} items</div>
 						</Link>

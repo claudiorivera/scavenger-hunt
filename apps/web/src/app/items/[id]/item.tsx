@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { HiUserCircle } from "react-icons/hi";
 
 import type { RouterOutputs } from "~/utils/api";
 import { api } from "~/utils/api";
+import { Avatar } from "~/components/Avatar";
 import { DeleteItem } from "~/components/DeleteItem";
 import { EyeIcon } from "~/components/EyeIcon";
 import { Loading } from "~/components/Loading";
@@ -62,20 +61,7 @@ function UsersList({
 				return (
 					<li key={user.id} className="flex items-center gap-4">
 						<Link href={`/users/${user.id}`}>
-							<div className="avatar">
-								<div className="relative h-14 w-14 rounded-full">
-									{user.image ? (
-										<Image
-											src={user.image}
-											fill
-											alt={`${user.name}`}
-											sizes="33vw"
-										/>
-									) : (
-										<HiUserCircle className="h-full w-full" />
-									)}
-								</div>
-							</div>
+							<Avatar imageSrc={user.image} size="sm" />
 						</Link>
 						<div className="flex-1 text-left">{user.name}</div>
 						{!!collectionItem?.id && (
