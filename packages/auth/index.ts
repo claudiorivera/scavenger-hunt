@@ -23,7 +23,7 @@ declare module "next-auth" {
 	}
 }
 
-const config = {
+const config: NextAuthConfig = {
 	adapter: PrismaAdapter(prisma),
 	providers: [
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -52,7 +52,7 @@ const config = {
 		logo: "https://scavenger-hunt.claudiorivera.com/android-chrome-512x512.png", // Absolute URL to image
 		buttonText: "#FFFFFF", // Hex color code
 	},
-} satisfies NextAuthConfig;
+};
 
 export const {
 	handlers: { GET, POST },
