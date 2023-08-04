@@ -1,5 +1,5 @@
 import EmailProvider from "@auth/core/providers/email";
-import GitHubProvider from "@auth/core/providers/github";
+import GitHub from "@auth/core/providers/github";
 import type { DefaultSession } from "@auth/core/types";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import type { NextAuthConfig } from "next-auth";
@@ -13,6 +13,10 @@ import { env } from "./env.mjs";
 type UserRole = User["role"];
 
 export type { Session } from "next-auth";
+
+// Update this whenever adding new providers so that the client can
+export const providers = ["github", "email"] as const;
+export type OAuthProviders = (typeof providers)[number];
 
 declare module "next-auth" {
 	interface Session {
@@ -32,7 +36,7 @@ const config: NextAuthConfig = {
 			server: env.EMAIL_SERVER,
 			from: env.EMAIL_FROM,
 		}),
-		GitHubProvider({
+		GitHub({
 			clientId: env.GITHUB_CLIENT_ID,
 			clientSecret: env.GITHUB_CLIENT_SECRET,
 		}),
