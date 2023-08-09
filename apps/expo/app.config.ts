@@ -1,9 +1,11 @@
 import type { ExpoConfig } from "@expo/config";
 
+const projectId = process.env.EAS_PROJECT_ID;
+
 const defineConfig = (): ExpoConfig => ({
-	name: "expo",
-	slug: "expo",
-	scheme: "expo",
+	name: "scavenger-hunt",
+	slug: "scavenger-hunt",
+	scheme: "scavenger-hunt",
 	version: "1.0.0",
 	orientation: "portrait",
 	icon: "./assets/icon.png",
@@ -19,7 +21,7 @@ const defineConfig = (): ExpoConfig => ({
 	assetBundlePatterns: ["**/*"],
 	ios: {
 		supportsTablet: true,
-		bundleIdentifier: "your.bundle.identifier",
+		bundleIdentifier: "com.claudiorivera.scavenger-hunt",
 	},
 	android: {
 		adaptiveIcon: {
@@ -29,7 +31,7 @@ const defineConfig = (): ExpoConfig => ({
 	},
 	extra: {
 		eas: {
-			// projectId: "your-project-id",
+			projectId,
 		},
 	},
 	experiments: {

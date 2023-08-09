@@ -7,7 +7,9 @@ import { ClerkProvider } from "@clerk/clerk-expo";
 
 import { TRPCProvider } from "~/utils/api";
 
-const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
+if (!publishableKey) throw new Error("Missing Clerk publishable key");
 
 const tokenCache = {
 	async getToken(key: string) {
@@ -40,8 +42,9 @@ const RootLayout = () => {
 					<Stack
 						screenOptions={{
 							headerStyle: {
-								backgroundColor: "#f472b6",
+								backgroundColor: "#BF360C",
 							},
+							headerTintColor: "#fff",
 						}}
 					/>
 					<StatusBar />

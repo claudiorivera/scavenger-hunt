@@ -61,8 +61,21 @@ export const collectionItemRouter = createTRPCRouter({
 					url: secure_url,
 					height,
 					width,
-					itemId: input.itemId,
-					userId: ctx.auth.userId,
+					item: {
+						connect: {
+							id: input.itemId,
+						},
+					},
+					user: {
+						connectOrCreate: {
+							where: {
+								id: ctx.auth.userId,
+							},
+							create: {
+								id: ctx.auth.userId,
+							},
+						},
+					},
 				},
 			});
 		}),
