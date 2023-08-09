@@ -42,11 +42,6 @@ export function TRPCReactProvider(props: {
 				}),
 				unstable_httpBatchStreamLink({
 					url: `${getBaseUrl()}/api/trpc`,
-					headers() {
-						const headers = new Map(props.headers);
-						headers.set("x-trpc-source", "nextjs-react");
-						return Object.fromEntries(headers);
-					},
 				}),
 			],
 		}),

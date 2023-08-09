@@ -5,8 +5,8 @@ import { createItemSchema } from "@claudiorivera/shared";
 
 import {
 	adminProcedure,
+	authedProcedure,
 	createTRPCRouter,
-	protectedProcedure,
 	publicProcedure,
 } from "../trpc";
 
@@ -17,13 +17,13 @@ export const itemRouter = createTRPCRouter({
 	byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
 		return ctx.prisma.item.findUnique({ where: { id: input } });
 	}),
-	collected: protectedProcedure.query(({ ctx }) => {
+	collected: authedProcedure.query(({ ctx }) => {
 		return ctx.prisma.item.findMany({
 			where: {
 				collectionItems: {
 					some: {
 						user: {
-							id: ctx.session.user.id,
+							id: ctx.auth.userId,
 						},
 					},
 				},
@@ -34,13 +34,13 @@ export const itemRouter = createTRPCRouter({
 			},
 		});
 	}),
-	uncollected: protectedProcedure.query(({ ctx }) => {
+	uncollected: authedProcedure.query(({ ctx }) => {
 		return ctx.prisma.item.findMany({
 			where: {
 				collectionItems: {
 					none: {
 						user: {
-							id: ctx.session.user.id,
+							id: ctx.auth.userId,
 						},
 					},
 				},
@@ -51,7 +51,7 @@ export const itemRouter = createTRPCRouter({
 			},
 		});
 	}),
-	next: protectedProcedure
+	next: authedProcedure
 		.input(
 			z
 				.object({
@@ -64,7 +64,7 @@ export const itemRouter = createTRPCRouter({
 				collectionItems: {
 					none: {
 						user: {
-							id: ctx.session.user.id,
+							id: ctx.auth.userId,
 						},
 					},
 				},

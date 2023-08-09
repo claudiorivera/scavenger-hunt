@@ -7,7 +7,7 @@ It's a virtual scavenger hunt! Everyone plays simultaneously and finds specific 
 - React
 - TypeScript
 - [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
+- [Clerk](https://clerk.com)
 - [Create T3 Turbo](https://github.com/t3-oss/create-t3-turbo)
 
 ## Install

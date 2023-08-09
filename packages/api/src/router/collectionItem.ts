@@ -5,8 +5,8 @@ import type { Prisma } from "@claudiorivera/db";
 
 import {
 	adminProcedure,
+	authedProcedure,
 	createTRPCRouter,
-	protectedProcedure,
 	publicProcedure,
 } from "../trpc";
 
@@ -14,7 +14,7 @@ const defaultCollectionItemSelect: Prisma.CollectionItemSelect = {
 	id: true,
 	user: {
 		select: {
-			name: true,
+			id: true,
 		},
 	},
 	item: {
@@ -40,7 +40,7 @@ export const collectionItemRouter = createTRPCRouter({
 			where: { id: input },
 		});
 	}),
-	create: protectedProcedure
+	create: authedProcedure
 		.input(
 			z.object({
 				base64: z.string(),
@@ -51,7 +51,7 @@ export const collectionItemRouter = createTRPCRouter({
 			const { secure_url, height, width } = await cloudinary.uploader.upload(
 				input.base64,
 				{
-					public_id: `user_${ctx.session.user.id}-item_${input.itemId}`,
+					public_id: `user_${ctx.auth.userId}-item_${input.itemId}`,
 					folder: "scavenger-hunt/collection-items",
 				},
 			);
@@ -62,7 +62,7 @@ export const collectionItemRouter = createTRPCRouter({
 					height,
 					width,
 					itemId: input.itemId,
-					userId: ctx.session.user.id,
+					userId: ctx.auth.userId,
 				},
 			});
 		}),

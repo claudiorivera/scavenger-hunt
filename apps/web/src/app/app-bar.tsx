@@ -1,14 +1,13 @@
+"use client";
+
 import { Fragment } from "react";
 import Link from "next/link";
+import { SignedIn } from "@clerk/nextjs";
 import { Toaster } from "react-hot-toast";
-
-import { auth } from "@claudiorivera/auth";
 
 import { Menu } from "~/app/menu";
 
-export async function AppBar() {
-	const session = await auth();
-
+export function AppBar() {
 	return (
 		<Fragment>
 			<div className="navbar bg-primary p-4 text-primary-content">
@@ -20,7 +19,9 @@ export async function AppBar() {
 						Scavenger Hunt
 					</Link>
 				</div>
-				{!!session && <Menu />}
+				<SignedIn>
+					<Menu />
+				</SignedIn>
 			</div>
 			<Toaster />
 		</Fragment>

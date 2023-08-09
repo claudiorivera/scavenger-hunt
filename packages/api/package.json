@@ -11,7 +11,6 @@
 		"type-check": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@claudiorivera/auth": "^0.1.0",
 		"@claudiorivera/db": "^0.1.0",
 		"@claudiorivera/shared": "^0.1.0",
 		"@trpc/client": "^10.38.1",
