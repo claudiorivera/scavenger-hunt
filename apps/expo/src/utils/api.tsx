@@ -46,8 +46,8 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
 	const { getToken } = useAuth();
 
 	const [queryClient] = React.useState(() => new QueryClient());
-	const [trpcClient] = React.useState(() => {
-		return api.createClient({
+	const [trpcClient] = React.useState(() =>
+		api.createClient({
 			transformer: superjson,
 			links: [
 				httpBatchLink({
@@ -60,8 +60,8 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
 					},
 				}),
 			],
-		});
-	});
+		}),
+	);
 
 	return (
 		<api.Provider client={trpcClient} queryClient={queryClient}>

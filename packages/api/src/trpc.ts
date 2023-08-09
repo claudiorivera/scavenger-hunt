@@ -109,7 +109,7 @@ const isAuthed = t.middleware(({ next, ctx }) => {
 	});
 });
 
-export const authedProcedure = publicProcedure.use(isAuthed);
+export const protectedProcedure = publicProcedure.use(isAuthed);
 
 const isAdmin = t.middleware(({ next, ctx }) => {
 	if (ctx.auth.orgRole !== "admin") {
@@ -123,4 +123,4 @@ const isAdmin = t.middleware(({ next, ctx }) => {
 	});
 });
 
-export const adminProcedure = authedProcedure.use(isAdmin);
+export const adminProcedure = protectedProcedure.use(isAdmin);

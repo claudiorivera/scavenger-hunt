@@ -5,8 +5,8 @@ import type { Prisma } from "@claudiorivera/db";
 
 import {
 	adminProcedure,
-	authedProcedure,
 	createTRPCRouter,
+	protectedProcedure,
 	publicProcedure,
 } from "../trpc";
 
@@ -40,7 +40,7 @@ export const collectionItemRouter = createTRPCRouter({
 			where: { id: input },
 		});
 	}),
-	create: authedProcedure
+	create: protectedProcedure
 		.input(
 			z.object({
 				base64: z.string(),

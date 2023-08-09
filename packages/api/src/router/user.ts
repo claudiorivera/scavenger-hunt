@@ -2,14 +2,14 @@ import { z } from "zod";
 
 import type { Prisma } from "@claudiorivera/db";
 
-import { authedProcedure, createTRPCRouter } from "../trpc";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 const defaultUserSelect: Prisma.UserSelect = {
 	id: true,
 };
 
 export const userRouter = createTRPCRouter({
-	me: authedProcedure.query(({ ctx }) => {
+	me: protectedProcedure.query(({ ctx }) => {
 		return ctx.prisma.user.findUnique({
 			where: {
 				id: ctx.auth.userId,
@@ -24,7 +24,7 @@ export const userRouter = createTRPCRouter({
 			},
 		});
 	}),
-	all: authedProcedure.query(({ ctx }) => {
+	all: protectedProcedure.query(({ ctx }) => {
 		return ctx.prisma.user.findMany({
 			orderBy: {
 				collectionItems: {
@@ -41,7 +41,7 @@ export const userRouter = createTRPCRouter({
 			},
 		});
 	}),
-	byId: authedProcedure.input(z.string()).query(async ({ ctx, input }) => {
+	byId: protectedProcedure.input(z.string()).query(async ({ ctx, input }) => {
 		return ctx.prisma.user.findUnique({
 			where: {
 				id: input,
@@ -62,7 +62,7 @@ export const userRouter = createTRPCRouter({
 			},
 		});
 	}),
-	withItemIdInCollection: authedProcedure
+	withItemIdInCollection: protectedProcedure
 		.input(z.string())
 		.query(({ ctx, input }) => {
 			return ctx.prisma.user.findMany({
@@ -86,11 +86,13 @@ export const userRouter = createTRPCRouter({
 				},
 			});
 		}),
-	deleteById: authedProcedure.input(z.string()).mutation(({ ctx, input }) => {
-		return ctx.prisma.user.delete({
-			where: {
-				id: input,
-			},
-		});
-	}),
+	deleteById: protectedProcedure
+		.input(z.string())
+		.mutation(({ ctx, input }) => {
+			return ctx.prisma.user.delete({
+				where: {
+					id: input,
+				},
+			});
+		}),
 });

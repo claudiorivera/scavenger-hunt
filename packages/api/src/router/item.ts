@@ -5,8 +5,8 @@ import { createItemSchema } from "@claudiorivera/shared";
 
 import {
 	adminProcedure,
-	authedProcedure,
 	createTRPCRouter,
+	protectedProcedure,
 	publicProcedure,
 } from "../trpc";
 
@@ -17,7 +17,7 @@ export const itemRouter = createTRPCRouter({
 	byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
 		return ctx.prisma.item.findUnique({ where: { id: input } });
 	}),
-	collected: authedProcedure.query(({ ctx }) => {
+	collected: protectedProcedure.query(({ ctx }) => {
 		return ctx.prisma.item.findMany({
 			where: {
 				collectionItems: {
@@ -34,7 +34,7 @@ export const itemRouter = createTRPCRouter({
 			},
 		});
 	}),
-	uncollected: authedProcedure.query(({ ctx }) => {
+	uncollected: protectedProcedure.query(({ ctx }) => {
 		return ctx.prisma.item.findMany({
 			where: {
 				collectionItems: {
@@ -51,7 +51,7 @@ export const itemRouter = createTRPCRouter({
 			},
 		});
 	}),
-	next: authedProcedure
+	next: protectedProcedure
 		.input(
 			z
 				.object({
