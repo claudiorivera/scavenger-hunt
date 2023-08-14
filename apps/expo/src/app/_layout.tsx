@@ -1,32 +1,16 @@
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Stack } from "expo-router";
-import * as SecureStore from "expo-secure-store";
+import { Stack, Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { ClerkProvider } from "@clerk/clerk-expo";
+import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
+import { Ionicons } from "@expo/vector-icons";
 
 import { TRPCProvider } from "~/utils/api";
+import { tokenCache } from "~/utils/cache";
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 if (!publishableKey) throw new Error("Missing Clerk publishable key");
-
-const tokenCache = {
-	async getToken(key: string) {
-		try {
-			return SecureStore.getItemAsync(key);
-		} catch (err) {
-			return null;
-		}
-	},
-	async saveToken(key: string, value: string) {
-		try {
-			return SecureStore.setItemAsync(key, value);
-		} catch (err) {
-			return;
-		}
-	},
-};
 
 // This is the main layout of the app
 // It wraps your pages with the providers they need
@@ -35,18 +19,88 @@ const RootLayout = () => {
 		<ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
 			<TRPCProvider>
 				<SafeAreaProvider>
-					{/*
-          The Stack component displays the current page.
-          It also allows you to configure your screens 
-        */}
-					<Stack
-						screenOptions={{
-							headerStyle: {
-								backgroundColor: "#BF360C",
-							},
-							headerTintColor: "#fff",
-						}}
-					/>
+					<SignedOut>
+						<Stack
+							screenOptions={{
+								headerStyle: {
+									backgroundColor: "#BF360C",
+								},
+								headerTintColor: "#fff",
+							}}
+						>
+							<Stack.Screen
+								name="index"
+								options={{
+									title: "Scavenger Hunt",
+								}}
+							/>
+						</Stack>
+					</SignedOut>
+					<SignedIn>
+						<Tabs
+							screenOptions={{
+								headerStyle: {
+									backgroundColor: "#BF360C",
+								},
+								headerTintColor: "#fff",
+							}}
+						>
+							<Tabs.Screen
+								name="index"
+								options={{
+									href: null,
+								}}
+							/>
+							<Tabs.Screen
+								name="collect/index"
+								options={{
+									title: "Collect",
+									href: {
+										pathname: "/collect",
+									},
+									tabBarIcon: ({ color, size }) => (
+										<Ionicons name="camera" size={size} color={color} />
+									),
+								}}
+							/>
+							<Tabs.Screen
+								name="leaderboard/index"
+								options={{
+									title: "Leaderboard",
+									href: {
+										pathname: "/leaderboard",
+									},
+									tabBarIcon: ({ color, size }) => (
+										<Ionicons name="list" size={size} color={color} />
+									),
+								}}
+							/>
+							<Tabs.Screen
+								name="items/index"
+								options={{
+									title: "View Items",
+									href: {
+										pathname: "/items",
+									},
+									tabBarIcon: ({ color, size }) => (
+										<Ionicons name="ios-newspaper" size={size} color={color} />
+									),
+								}}
+							/>
+							<Tabs.Screen
+								name="account/index"
+								options={{
+									title: "Account",
+									href: {
+										pathname: "/account",
+									},
+									tabBarIcon: ({ color, size }) => (
+										<Ionicons name="person" size={size} color={color} />
+									),
+								}}
+							/>
+						</Tabs>
+					</SignedIn>
 					<StatusBar />
 				</SafeAreaProvider>
 			</TRPCProvider>
