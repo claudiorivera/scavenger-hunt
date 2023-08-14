@@ -88,11 +88,11 @@ const RootLayout = () => {
 								}}
 							/>
 							<Tabs.Screen
-								name="account/index"
+								name="profile/index"
 								options={{
-									title: "Account",
+									title: "My Profile",
 									href: {
-										pathname: "/account",
+										pathname: "/profile",
 									},
 									tabBarIcon: ({ color, size }) => (
 										<Ionicons name="person" size={size} color={color} />

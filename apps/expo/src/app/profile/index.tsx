@@ -6,7 +6,7 @@ import { useAuth, useUser } from "@clerk/clerk-expo";
 
 WebBrowser.maybeCompleteAuthSession();
 
-export default function Account() {
+export default function Profile() {
 	const { signOut } = useAuth();
 	const { user } = useUser();
 
