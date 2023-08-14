@@ -279,8 +279,8 @@ importers:
   packages/auth:
     dependencies:
       '@auth/core':
-        specifier: ^0.11.1
-        version: 0.11.1(nodemailer@6.9.4)
+        specifier: ^0.12.0
+        version: 0.12.0(nodemailer@6.9.4)
       '@auth/prisma-adapter':
         specifier: ^1.0.1
         version: 1.0.1(@prisma/client@5.1.1)(nodemailer@6.9.4)
@@ -449,8 +449,8 @@ packages:
       preact-render-to-string: 5.2.3(preact@10.11.3)
     dev: false
 
-  /@auth/core@0.11.1(nodemailer@6.9.4):
-    resolution: {integrity: sha512-PzvebszgJ4NpQNz8Fsjn39oEY8MzULKppr7Um7DX/HLrS3zthgLY0yAnwkA+2/kxwAb36dIkX+C72q6TziiTaA==}
+  /@auth/core@0.12.0(nodemailer@6.9.4):
+    resolution: {integrity: sha512-XYipdAc/nKu014VOgpcPyLlj1ghWlnwyloaB1UjQd9ElZRZQ9YpSizzXGLON23t/a0FyabOBBl0/awD2tW58Rg==}
     peerDependencies:
       nodemailer: ^6.8.0
     peerDependenciesMeta:
