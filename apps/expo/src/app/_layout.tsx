@@ -44,6 +44,7 @@ const RootLayout = () => {
 								},
 								headerTintColor: "#fff",
 							}}
+							initialRouteName="collect/index"
 						>
 							<Tabs.Screen
 								name="index"
@@ -78,7 +79,7 @@ const RootLayout = () => {
 							<Tabs.Screen
 								name="items/index"
 								options={{
-									title: "View Items",
+									title: "All Items",
 									href: {
 										pathname: "/items",
 									},
