@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { Redirect, useRootNavigationState } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
 import { useOAuth, useUser } from "@clerk/clerk-expo";
@@ -45,5 +45,13 @@ const SignIn = () => {
 		}
 	}, [startOAuthFlow]);
 
-	return <Button onPress={onPress} title="Sign in with GitHub" />;
+	return (
+		<View className="m-4 rounded-md bg-yellow-500 p-4">
+			<TouchableOpacity onPress={onPress}>
+				<Text className="text-center font-semibold uppercase text-black">
+					Sign in with GitHub
+				</Text>
+			</TouchableOpacity>
+		</View>
+	);
 };
