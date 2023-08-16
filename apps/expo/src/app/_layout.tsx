@@ -56,9 +56,6 @@ const RootLayout = () => {
 								name="collect/index"
 								options={{
 									title: "Collect",
-									href: {
-										pathname: "/collect",
-									},
 									tabBarIcon: ({ color, size }) => (
 										<Ionicons name="camera" size={size} color={color} />
 									),
@@ -68,9 +65,6 @@ const RootLayout = () => {
 								name="leaderboard/index"
 								options={{
 									title: "Leaderboard",
-									href: {
-										pathname: "/leaderboard",
-									},
 									tabBarIcon: ({ color, size }) => (
 										<Ionicons name="list" size={size} color={color} />
 									),
@@ -80,21 +74,21 @@ const RootLayout = () => {
 								name="items/index"
 								options={{
 									title: "All Items",
-									href: {
-										pathname: "/items",
-									},
 									tabBarIcon: ({ color, size }) => (
 										<Ionicons name="ios-newspaper" size={size} color={color} />
 									),
 								}}
 							/>
 							<Tabs.Screen
+								name="items/[id]/index"
+								options={{
+									href: null,
+								}}
+							/>
+							<Tabs.Screen
 								name="profile/index"
 								options={{
 									title: "My Profile",
-									href: {
-										pathname: "/profile",
-									},
 									tabBarIcon: ({ color, size }) => (
 										<Ionicons name="person" size={size} color={color} />
 									),

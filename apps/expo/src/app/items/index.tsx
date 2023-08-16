@@ -13,7 +13,7 @@ export default function Items() {
 	const totalItems = uncollectedItems.length + collectedItems.length;
 
 	return (
-		<View className="h-full w-full p-4">
+		<View className="h-full w-full px-4 pt-4">
 			<FlashList
 				ListHeaderComponent={() => (
 					<View className="mx-auto mb-4">
