@@ -1,22 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-import { api } from "~/utils/api";
 import { ImageUpload } from "~/components/ImageUpload";
 import { Loading } from "~/components/Loading";
+import { api } from "~/utils/api";
 
 export default function CollectPage() {
 	const router = useRouter();
 	const searchParams = useSearchParams();
-	const itemId =
-		searchParams?.get("itemId") ??
-		(() => {
-			throw new Error("No itemId");
-		})();
+	const itemId = searchParams?.get("itemId")
 
 	const [skippedItemIds, setSkippedItemIds] = useState<string[]>([]);
 

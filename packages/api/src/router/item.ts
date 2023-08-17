@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-import type { Prisma } from "@claudiorivera/db";
+import { Prisma } from "@claudiorivera/db";
 import { createItemSchema } from "@claudiorivera/shared";
 
 import {
@@ -10,12 +10,17 @@ import {
 	publicProcedure,
 } from "../trpc";
 
+const defaultItemSelect = Prisma.validator<Prisma.ItemSelect>()({
+	id: true,
+	description: true,
+})
+
 export const itemRouter = createTRPCRouter({
 	all: publicProcedure.query(({ ctx }) => {
 		return ctx.prisma.item.findMany({ orderBy: { id: "desc" } });
 	}),
 	byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
-		return ctx.prisma.item.findUnique({ where: { id: input } });
+		return ctx.prisma.item.findUnique({ where: { id: input }, select: defaultItemSelect });
 	}),
 	collected: protectedProcedure.query(({ ctx }) => {
 		return ctx.prisma.item.findMany({
@@ -28,10 +33,7 @@ export const itemRouter = createTRPCRouter({
 					},
 				},
 			},
-			select: {
-				id: true,
-				description: true,
-			},
+			select: defaultItemSelect,
 		});
 	}),
 	uncollected: protectedProcedure.query(({ ctx }) => {
@@ -45,10 +47,7 @@ export const itemRouter = createTRPCRouter({
 					},
 				},
 			},
-			select: {
-				id: true,
-				description: true,
-			},
+			select: defaultItemSelect,
 		});
 	}),
 	next: protectedProcedure
@@ -78,10 +77,7 @@ export const itemRouter = createTRPCRouter({
 
 			return ctx.prisma.item.findFirst({
 				where,
-				select: {
-					id: true,
-					description: true,
-				},
+				select: defaultItemSelect,
 			});
 		}),
 	add: adminProcedure.input(createItemSchema).mutation(({ ctx, input }) => {

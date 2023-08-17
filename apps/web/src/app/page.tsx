@@ -1,10 +1,10 @@
+import { currentUser, redirectToSignIn } from "@clerk/nextjs";
 import Link from "next/link";
-import { redirectToSignIn, useUser } from "@clerk/nextjs";
 
 import { Avatar } from "~/components/Avatar";
 
-export default function HomePage() {
-	const { user } = useUser();
+export default async function HomePage() {
+  const user = await currentUser();
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 	if (!user) return redirectToSignIn();
