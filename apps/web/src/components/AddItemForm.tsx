@@ -15,7 +15,7 @@ export function AddItemForm() {
 		isLoading,
 		isError,
 		error,
-	} = api.items.add.useMutation();
+	} = api.item.add.useMutation();
 
 	const { register, handleSubmit, reset, formState } = useZodForm({
 		schema: createItemSchema,

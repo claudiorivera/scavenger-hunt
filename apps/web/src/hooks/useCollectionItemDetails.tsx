@@ -4,35 +4,35 @@ import type { RouterOutputs } from "~/utils/api";
 import { api } from "~/utils/api";
 
 export function useCollectionItemDetails({
-  id,
-  currentUser,
+	id,
+	currentUser,
 }: {
-  id: string;
-  currentUser?: RouterOutputs["users"]["me"];
+	id: string;
+	currentUser?: RouterOutputs["users"]["me"];
 }) {
-  const { data: collectionItem, isLoading } =
-    api.collectionItems.byId.useQuery(id);
+	const { data: collectionItem, isLoading } =
+		api.collectionItem.byId.useQuery(id);
 
-  const title =
-    !!collectionItem?.user?.name && !!collectionItem.item?.description
-      ? `${collectionItem.user.name} has found ${collectionItem.item.description}!`
-      : "Loading...";
+	const title =
+		!!collectionItem?.user?.name && !!collectionItem.item?.description
+			? `${collectionItem.user.name} has found ${collectionItem.item.description}!`
+			: "Loading...";
 
-  const isUncollectedByCurrentUser = !(currentUser?.collectionItems ?? []).some(
-    (item) =>
-      !!collectionItem?.item?.id && item.itemId === collectionItem.item.id,
-  );
+	const isUncollectedByCurrentUser = !(currentUser?.collectionItems ?? []).some(
+		(item) =>
+			!!collectionItem?.item?.id && item.itemId === collectionItem.item.id,
+	);
 
-  const isCurrentUserOwner =
-    !!collectionItem?.user &&
-    !!currentUser?.id &&
-    collectionItem.user.id === currentUser.id;
+	const isCurrentUserOwner =
+		!!collectionItem?.user &&
+		!!currentUser?.id &&
+		collectionItem.user.id === currentUser.id;
 
-  return {
-    collectionItem,
-    title,
-    isUncollectedByCurrentUser,
-    isCurrentUserOwner,
-    isLoading,
-  };
+	return {
+		collectionItem,
+		title,
+		isUncollectedByCurrentUser,
+		isCurrentUserOwner,
+		isLoading,
+	};
 }

@@ -7,8 +7,8 @@ import colors from "tailwindcss/colors";
 import { api } from "~/utils/api";
 
 export default function Items() {
-	const { data: uncollectedItems = [] } = api.items.uncollected.useQuery();
-	const { data: collectedItems = [] } = api.items.collected.useQuery();
+	const { data: uncollectedItems = [] } = api.item.uncollected.useQuery();
+	const { data: collectedItems = [] } = api.item.collected.useQuery();
 
 	const totalItems = uncollectedItems.length + collectedItems.length;
 

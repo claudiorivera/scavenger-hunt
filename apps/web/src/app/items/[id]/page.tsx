@@ -11,7 +11,7 @@ import { Loading } from "~/components/Loading";
 import { useItemDetails } from "~/hooks/useItemDetails";
 
 export default function ItemPage({ params }: { params: { id: string } }) {
-	const { data: currentUser } = api.users.me.useQuery();
+	const { data: currentUser } = api.user.me.useQuery();
 
 	const { users, item, isUncollectedByCurrentUser, isLoading } = useItemDetails(
 		{

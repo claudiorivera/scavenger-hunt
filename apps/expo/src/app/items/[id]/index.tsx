@@ -8,7 +8,7 @@ export default function ItemPage() {
 		id: string;
 	}>();
 
-	const { data: item } = api.items.byId.useQuery(id!, {
+	const { data: item } = api.item.byId.useQuery(id!, {
 		enabled: !!id,
 	});
 

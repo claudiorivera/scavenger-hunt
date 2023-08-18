@@ -27,7 +27,7 @@ export function ImageUpload({ itemId }: { itemId: Item["id"] }) {
 		isLoading,
 		isError,
 		error,
-	} = api.collectionItems.create.useMutation({
+	} = api.collectionItem.create.useMutation({
 		onSuccess: ({ id }) => router.push(`/collection-items/${id}`),
 	});
 

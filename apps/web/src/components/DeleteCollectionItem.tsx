@@ -11,7 +11,7 @@ export function DeleteCollectionItem({ id }: { id: CollectionItem["id"] }) {
 	const router = useRouter();
 
 	const { mutate: deleteCollectionItem, isLoading } =
-		api.collectionItems.delete.useMutation({
+		api.collectionItem.delete.useMutation({
 			onSuccess: () => {
 				router.refresh();
 				router.push("/leaderboard");

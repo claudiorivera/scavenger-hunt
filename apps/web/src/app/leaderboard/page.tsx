@@ -6,7 +6,7 @@ import { api } from "~/utils/api";
 import { Avatar } from "~/components/Avatar";
 
 export default function LeaderBoardPage() {
-	const { data: users = [] } = api.users.all.useQuery();
+	const { data: users = [] } = api.user.all.useQuery();
 
 	return (
 		<div className="flex flex-col gap-4">

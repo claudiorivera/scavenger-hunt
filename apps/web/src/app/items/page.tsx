@@ -7,8 +7,8 @@ import { CheckCircleIcon } from "~/components/CheckCircleIcon";
 import { MinusCircleIcon } from "~/components/MinusCircleIcon";
 
 export default function ItemsPage() {
-	const { data: uncollectedItems = [] } = api.items.uncollected.useQuery();
-	const { data: collectedItems = [] } = api.items.collected.useQuery();
+	const { data: uncollectedItems = [] } = api.item.uncollected.useQuery();
+	const { data: collectedItems = [] } = api.item.collected.useQuery();
 
 	const totalItems = uncollectedItems.length + collectedItems.length;
 
@@ -28,7 +28,7 @@ export default function ItemsPage() {
 							>
 								{item.description}
 							</Link>
-							<div className="absolute -right-8 text-warning">
+							<div className="text-warning absolute -right-8">
 								<MinusCircleIcon />
 							</div>
 						</div>
@@ -43,7 +43,7 @@ export default function ItemsPage() {
 							>
 								{item.description}
 							</Link>
-							<div className="absolute -right-8 text-success">
+							<div className="text-success absolute -right-8">
 								<CheckCircleIcon />
 							</div>
 						</div>

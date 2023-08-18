@@ -253,6 +253,9 @@ importers:
       '@claudiorivera/shared':
         specifier: ^0.1.0
         version: link:../shared
+      '@clerk/clerk-sdk-node':
+        specifier: ^4.12.2
+        version: 4.12.2
       '@trpc/client':
         specifier: ^10.38.1
         version: 10.38.1(@trpc/server@10.38.1)

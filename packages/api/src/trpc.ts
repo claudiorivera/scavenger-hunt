@@ -6,6 +6,7 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
+import clerk from "@clerk/clerk-sdk-node";
 import type {
 	SignedInAuthObject,
 	SignedOutAuthObject,
@@ -44,6 +45,7 @@ const createInnerTRPCContext = ({ auth }: CreateContextOptions) => {
 	return {
 		auth,
 		prisma,
+		clerk,
 	};
 };
 

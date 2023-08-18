@@ -7,7 +7,7 @@ import { api } from "~/utils/api";
 import { Avatar } from "~/components/Avatar";
 
 export const User = ({ id }: { id: string }) => {
-	const { data: user } = api.users.byId.useQuery(id);
+	const { data: user } = api.user.byId.useQuery(id);
 
 	return (
 		<div className="flex flex-col gap-4">

@@ -13,6 +13,7 @@
 	"dependencies": {
 		"@claudiorivera/db": "^0.1.0",
 		"@claudiorivera/shared": "^0.1.0",
+		"@clerk/clerk-sdk-node": "^4.12.2",
 		"@trpc/client": "^10.38.1",
 		"@trpc/server": "^10.38.1",
 		"cloudinary": "^1.40.0",

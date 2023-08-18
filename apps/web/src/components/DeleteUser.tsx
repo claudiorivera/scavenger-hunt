@@ -9,7 +9,7 @@ import { TrashIcon } from "~/components/TrashIcon";
 
 export function DeleteUser({ id }: { id: User["id"] }) {
 	const utils = api.useContext();
-	const { mutate: deleteUser, isLoading } = api.users.deleteById.useMutation();
+	const { mutate: deleteUser, isLoading } = api.user.deleteById.useMutation();
 
 	return (
 		<button
