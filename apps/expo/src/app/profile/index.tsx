@@ -12,7 +12,9 @@ export default function Profile() {
 
 	return (
 		<View className="flex h-full flex-col items-center justify-center">
-			<Text>{user?.username}</Text>
+			<Text>
+				{user?.firstName} {user?.lastName}
+			</Text>
 			<TouchableOpacity onPress={() => signOut()}>
 				<Text>Sign Out</Text>
 			</TouchableOpacity>

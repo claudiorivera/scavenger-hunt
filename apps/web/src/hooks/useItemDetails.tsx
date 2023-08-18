@@ -8,14 +8,14 @@ export function useItemDetails({
 	currentUser,
 }: {
 	id: string;
-	currentUser?: RouterOutputs["users"]["me"];
+	currentUser?: RouterOutputs["user"]["me"];
 }) {
 	const { data: users = [], isLoading: isLoadingUsers } =
 		api.user.withItemIdInCollection.useQuery(id);
 	const { data: item, isLoading: isLoadingItem } = api.item.byId.useQuery(id);
 
 	const isUncollectedByCurrentUser = !users.some(
-		(user) => !!currentUser?.email && user.email === currentUser.email,
+		(user) => !!currentUser?.id && user.id === currentUser.id,
 	);
 
 	const isLoading = isLoadingUsers || isLoadingItem;

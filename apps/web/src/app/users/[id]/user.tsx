@@ -12,8 +12,10 @@ export const User = ({ id }: { id: string }) => {
 	return (
 		<div className="flex flex-col gap-4">
 			<div className="flex flex-col items-center gap-2">
-				<Avatar imageSrc={user?.image} size="lg" />
-				<header className="text-5xl">{user?.name}</header>
+				<Avatar imageSrc={user?.imageUrl} size="lg" />
+				<header className="text-5xl">
+					{user?.firstName} {user?.lastName}
+				</header>
 				<div className="text-2xl">Found the Following Items:</div>
 			</div>
 			<ul className="flex flex-wrap justify-center gap-2">
@@ -30,7 +32,7 @@ export const User = ({ id }: { id: string }) => {
 								<Image
 									src={collectionItem.url}
 									fill
-									alt={`${user.name}`}
+									alt={`${user?.firstName} ${user?.lastName}'s profile image`}
 									sizes="33vw"
 								/>
 							</div>

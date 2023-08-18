@@ -19,7 +19,7 @@ export function DeleteUser({ id }: { id: User["id"] }) {
 			onClick={() => {
 				deleteUser(id, {
 					onSuccess: () => {
-						void utils.users.all.invalidate();
+						void utils.user.all.invalidate();
 					},
 				});
 			}}

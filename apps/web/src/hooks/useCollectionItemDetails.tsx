@@ -8,14 +8,16 @@ export function useCollectionItemDetails({
 	currentUser,
 }: {
 	id: string;
-	currentUser?: RouterOutputs["users"]["me"];
+	currentUser?: RouterOutputs["user"]["me"];
 }) {
 	const { data: collectionItem, isLoading } =
 		api.collectionItem.byId.useQuery(id);
 
 	const title =
-		!!collectionItem?.user?.name && !!collectionItem.item?.description
-			? `${collectionItem.user.name} has found ${collectionItem.item.description}!`
+		!!collectionItem?.user?.firstName &&
+		!!collectionItem?.user.lastName &&
+		!!collectionItem?.item?.description
+			? `${collectionItem.user.firstName} ${collectionItem.user.lastName} has found ${collectionItem.item.description}!`
 			: "Loading...";
 
 	const isUncollectedByCurrentUser = !(currentUser?.collectionItems ?? []).some(

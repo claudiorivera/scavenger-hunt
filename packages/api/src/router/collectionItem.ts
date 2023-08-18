@@ -1,7 +1,8 @@
+import { TRPCError } from "@trpc/server";
 import { v2 as cloudinary } from "cloudinary";
 import * as z from "zod";
 
-import type { Prisma } from "@claudiorivera/db";
+import { Prisma } from "@claudiorivera/db";
 
 import {
 	adminProcedure,
@@ -10,30 +11,47 @@ import {
 	publicProcedure,
 } from "../trpc";
 
-const defaultCollectionItemSelect: Prisma.CollectionItemSelect = {
-	id: true,
-	user: {
-		select: {
-			id: true,
+const defaultCollectionItemSelect =
+	Prisma.validator<Prisma.CollectionItemSelect>()({
+		id: true,
+		user: {
+			select: {
+				id: true,
+			},
 		},
-	},
-	item: {
-		select: {
-			id: true,
-			description: true,
+		item: {
+			select: {
+				id: true,
+				description: true,
+			},
 		},
-	},
-	url: true,
-	width: true,
-	height: true,
-};
+		url: true,
+		width: true,
+		height: true,
+	});
 
 export const collectionItemRouter = createTRPCRouter({
-	byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
-		return ctx.prisma.collectionItem.findUnique({
+	byId: publicProcedure.input(z.string()).query(async ({ ctx, input }) => {
+		const collectionItem = await ctx.prisma.collectionItem.findUnique({
 			where: { id: input },
 			select: defaultCollectionItemSelect,
 		});
+
+		if (!collectionItem) throw new TRPCError({ code: "NOT_FOUND" });
+
+		const { firstName, lastName, imageUrl } = await ctx.clerk.users.getUser(
+			collectionItem.user.id,
+		);
+
+		return {
+			...collectionItem,
+			user: {
+				id: collectionItem.user.id,
+				firstName,
+				lastName,
+				imageUrl,
+			},
+		};
 	}),
 	delete: adminProcedure.input(z.string()).mutation(({ ctx, input }) => {
 		return ctx.prisma.collectionItem.delete({

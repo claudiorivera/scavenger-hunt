@@ -34,7 +34,7 @@ export function AddItemForm() {
 				id="add-item"
 				onSubmit={handleSubmit((values) => {
 					addItem(values, {
-						onSuccess: () => void utils.items.uncollected.invalidate(),
+						onSuccess: () => void utils.item.uncollected.invalidate(),
 					});
 					reset();
 				})}

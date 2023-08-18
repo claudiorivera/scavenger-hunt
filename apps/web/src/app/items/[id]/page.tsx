@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import type { RouterOutputs } from "~/utils/api";
 import { api } from "~/utils/api";
 import { Avatar } from "~/components/Avatar";
 import { EyeIcon } from "~/components/EyeIcon";
@@ -29,7 +28,32 @@ export default function ItemPage({ params }: { params: { id: string } }) {
 			<header className="text-5xl">{item.description}</header>
 			<div className="text-2xl">Collected By:</div>
 			{users.length ? (
-				<UsersList users={users} itemId={item.id} />
+				<ul className="flex flex-col gap-4 pb-4">
+					{users.map((user) => {
+						const collectionItem = user.collectionItems.find(
+							(collectionItem) => collectionItem.itemId === item.id,
+						);
+
+						return (
+							<li key={user.id} className="flex items-center gap-4">
+								<Link href={`/users/${user.id}`}>
+									<Avatar imageSrc={user?.imageUrl} size="sm" />
+								</Link>
+								<div className="flex-1 text-left">
+									{user?.firstName} {user?.lastName}
+								</div>
+								{!!collectionItem?.id && (
+									<Link
+										className="btn btn-secondary"
+										href={`/collection-items/${collectionItem.id}`}
+									>
+										<EyeIcon />
+									</Link>
+								)}
+							</li>
+						);
+					})}
+				</ul>
 			) : (
 				<div className="text-2xl">Nobody, yet 😢</div>
 			)}
@@ -39,40 +63,5 @@ export default function ItemPage({ params }: { params: { id: string } }) {
 				</Link>
 			)}
 		</div>
-	);
-}
-
-function UsersList({
-	users,
-	itemId,
-}: {
-	users: RouterOutputs["users"]["withItemIdInCollection"];
-	itemId: string;
-}) {
-	return (
-		<ul className="flex flex-col gap-4 pb-4">
-			{users.map((user) => {
-				const collectionItem = user.collectionItems.find(
-					(item) => item.itemId === itemId,
-				);
-
-				return (
-					<li key={user.id} className="flex items-center gap-4">
-						<Link href={`/users/${user.id}`}>
-							<Avatar imageSrc={user.image} size="sm" />
-						</Link>
-						<div className="flex-1 text-left">{user.name}</div>
-						{!!collectionItem?.id && (
-							<Link
-								className="btn btn-secondary"
-								href={`/collection-items/${collectionItem.id}`}
-							>
-								<EyeIcon />
-							</Link>
-						)}
-					</li>
-				);
-			})}
-		</ul>
 	);
 }

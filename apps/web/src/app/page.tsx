@@ -1,10 +1,10 @@
-import { currentUser, redirectToSignIn } from "@clerk/nextjs";
 import Link from "next/link";
+import { currentUser, redirectToSignIn } from "@clerk/nextjs";
 
 import { Avatar } from "~/components/Avatar";
 
 export default async function HomePage() {
-  const user = await currentUser();
+	const user = await currentUser();
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 	if (!user) return redirectToSignIn();
@@ -12,7 +12,9 @@ export default async function HomePage() {
 	return (
 		<div className="flex flex-col items-center gap-4">
 			<Avatar imageSrc={user.imageUrl} />
-			<header className="text-2xl">{user.username ?? "Anonymous User"}</header>
+			<header className="text-2xl">
+				{`${user.firstName} ${user.lastName}` ?? "Anonymous User"}
+			</header>
 
 			<div className="flex w-full flex-col gap-2">
 				<Link href={"/collect"} className="btn btn-secondary">

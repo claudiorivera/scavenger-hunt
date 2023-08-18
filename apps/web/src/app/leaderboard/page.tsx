@@ -18,8 +18,10 @@ export default function LeaderBoardPage() {
 							href={`/users/${user.id}`}
 							className="flex w-full items-center gap-4"
 						>
-							<Avatar imageSrc={user.image} size="sm" />
-							<div className="flex-1 text-left">{user.name}</div>
+							<Avatar imageSrc={user?.imageUrl} size="sm" />
+							<div className="flex-1 text-left">
+								{user?.firstName} {user?.lastName}
+							</div>
 							<div className="ml-auto">{user._count.collectionItems} items</div>
 						</Link>
 					</li>
