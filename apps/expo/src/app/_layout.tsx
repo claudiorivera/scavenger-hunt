@@ -1,101 +1,25 @@
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Stack, Tabs } from "expo-router";
+import { Slot } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
-import { Ionicons } from "@expo/vector-icons";
+import { ClerkProvider } from "@clerk/clerk-expo";
 
 import { TRPCProvider } from "~/utils/api";
 import { tokenCache } from "~/utils/cache";
+import { useProtectedRoute } from "~/hooks/useProtectedRoute";
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 if (!publishableKey) throw new Error("Missing Clerk publishable key");
 
-// This is the main layout of the app
-// It wraps your pages with the providers they need
 const RootLayout = () => {
+	console.log("_layout.tsx RootLayout");
+
 	return (
 		<ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
 			<TRPCProvider>
 				<SafeAreaProvider>
-					<SignedOut>
-						<Stack
-							screenOptions={{
-								headerStyle: {
-									backgroundColor: "#BF360C",
-								},
-								headerTintColor: "#fff",
-							}}
-						>
-							<Stack.Screen
-								name="index"
-								options={{
-									title: "Scavenger Hunt",
-								}}
-							/>
-						</Stack>
-					</SignedOut>
-					<SignedIn>
-						<Tabs
-							screenOptions={{
-								headerStyle: {
-									backgroundColor: "#BF360C",
-								},
-								headerTintColor: "#fff",
-							}}
-							initialRouteName="collect/index"
-						>
-							<Tabs.Screen
-								name="index"
-								options={{
-									href: null,
-								}}
-							/>
-							<Tabs.Screen
-								name="collect/index"
-								options={{
-									title: "Collect",
-									tabBarIcon: ({ color, size }) => (
-										<Ionicons name="camera" size={size} color={color} />
-									),
-								}}
-							/>
-							<Tabs.Screen
-								name="leaderboard/index"
-								options={{
-									title: "Leaderboard",
-									tabBarIcon: ({ color, size }) => (
-										<Ionicons name="list" size={size} color={color} />
-									),
-								}}
-							/>
-							<Tabs.Screen
-								name="items/index"
-								options={{
-									title: "All Items",
-									tabBarIcon: ({ color, size }) => (
-										<Ionicons name="ios-newspaper" size={size} color={color} />
-									),
-								}}
-							/>
-							<Tabs.Screen
-								name="items/[id]/index"
-								options={{
-									href: null,
-								}}
-							/>
-							<Tabs.Screen
-								name="profile/index"
-								options={{
-									title: "My Profile",
-									tabBarIcon: ({ color, size }) => (
-										<Ionicons name="person" size={size} color={color} />
-									),
-								}}
-							/>
-						</Tabs>
-					</SignedIn>
+					<Layout />
 					<StatusBar />
 				</SafeAreaProvider>
 			</TRPCProvider>
@@ -104,3 +28,11 @@ const RootLayout = () => {
 };
 
 export default RootLayout;
+
+function Layout() {
+	console.log("_layout.tsx Layout");
+
+	useProtectedRoute();
+
+	return <Slot />;
+}
