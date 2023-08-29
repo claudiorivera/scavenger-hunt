@@ -4,8 +4,6 @@ import { useAuth } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function TabsLayout() {
-	console.log("(protected)/(tabs)/_layout.tsx TabsLayout");
-
 	const { isSignedIn } = useAuth();
 
 	return (

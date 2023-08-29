@@ -13,8 +13,6 @@ const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 if (!publishableKey) throw new Error("Missing Clerk publishable key");
 
 const RootLayout = () => {
-	console.log("_layout.tsx RootLayout");
-
 	return (
 		<ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
 			<TRPCProvider>
@@ -30,8 +28,6 @@ const RootLayout = () => {
 export default RootLayout;
 
 function Layout() {
-	console.log("_layout.tsx Layout");
-
 	useProtectedRoute();
 
 	return <Slot />;
