@@ -1,6 +1,6 @@
 import type { ExpoConfig } from "@expo/config";
 
-const projectId = process.env.EAS_PROJECT_ID;
+const projectId = process.env.EXPO_PUBLIC_EAS_PROJECT_ID;
 
 const defineConfig = (): ExpoConfig => ({
 	name: "scavenger-hunt",
