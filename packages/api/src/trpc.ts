@@ -112,17 +112,3 @@ const isAuthed = t.middleware(({ next, ctx }) => {
 });
 
 export const protectedProcedure = publicProcedure.use(isAuthed);
-
-const isAdmin = t.middleware(({ next, ctx }) => {
-	if (ctx.auth.orgRole !== "admin") {
-		throw new TRPCError({ code: "UNAUTHORIZED", message: "Not authorized" });
-	}
-
-	return next({
-		ctx: {
-			auth: ctx.auth,
-		},
-	});
-});
-
-export const adminProcedure = protectedProcedure.use(isAdmin);

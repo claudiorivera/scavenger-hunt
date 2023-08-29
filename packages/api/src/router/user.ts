@@ -7,6 +7,7 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 const defaultUserSelect: Prisma.UserSelect = {
 	id: true,
+	isAdmin: true,
 };
 
 export const userRouter = createTRPCRouter({

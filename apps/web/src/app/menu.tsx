@@ -1,8 +1,6 @@
-"use client";
-
-import Link from "next/link";
 import { Fragment } from "react";
 
+import MenuItem from "~/app/menu-item";
 import { userLinks } from "~/constants";
 
 export function Menu() {
@@ -32,21 +30,11 @@ export function Menu() {
 			<ul
 				// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 				tabIndex={0}
-				className="dropdown-content z-10 menu rounded-box w-52 bg-base-100 p-2 text-base-content shadow"
+				className="dropdown-content menu rounded-box bg-base-100 text-base-content z-10 w-52 p-2 shadow"
 			>
 				<Fragment>
 					{userLinks.map((link) => (
-						<li key={link.url}>
-							<Link
-								href={link.url}
-								onClick={() =>
-									document.activeElement instanceof HTMLElement &&
-									document.activeElement.blur()
-								}
-							>
-								{link.title}
-							</Link>
-						</li>
+						<MenuItem key={link.url} link={link} />
 					))}
 				</Fragment>
 			</ul>

@@ -3,18 +3,22 @@
 import Link from "next/link";
 
 import { api } from "~/utils/api";
+import { AddItemForm } from "~/components/AddItemForm";
 import { CheckCircleIcon } from "~/components/CheckCircleIcon";
 import { MinusCircleIcon } from "~/components/MinusCircleIcon";
 
 export default function ItemsPage() {
 	const { data: uncollectedItems = [] } = api.item.uncollected.useQuery();
 	const { data: collectedItems = [] } = api.item.collected.useQuery();
+	const { data: user } = api.user.me.useQuery();
 
+	console.log({ user });
 	const totalItems = uncollectedItems.length + collectedItems.length;
 
 	return (
 		<div className="flex flex-col gap-4">
 			<header className="text-5xl">All Items</header>
+			{user?.isAdmin && <AddItemForm />}
 			<div>
 				Found {collectedItems.length} out of {totalItems} items! 📷
 			</div>

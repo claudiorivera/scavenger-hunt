@@ -4,12 +4,7 @@ import * as z from "zod";
 
 import { Prisma } from "@claudiorivera/db";
 
-import {
-	adminProcedure,
-	createTRPCRouter,
-	protectedProcedure,
-	publicProcedure,
-} from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 const defaultCollectionItemSelect =
 	Prisma.validator<Prisma.CollectionItemSelect>()({
@@ -53,7 +48,7 @@ export const collectionItemRouter = createTRPCRouter({
 			},
 		};
 	}),
-	delete: adminProcedure.input(z.string()).mutation(({ ctx, input }) => {
+	delete: protectedProcedure.input(z.string()).mutation(({ ctx, input }) => {
 		return ctx.prisma.collectionItem.delete({
 			where: { id: input },
 		});
