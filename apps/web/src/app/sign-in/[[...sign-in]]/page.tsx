@@ -1,5 +1,11 @@
 import { SignIn } from "@clerk/nextjs";
 
+import Container from "~/components/Container";
+
 export default function SignInPage() {
-	return <SignIn />;
+	return (
+		<Container>
+			<SignIn />
+		</Container>
+	);
 }

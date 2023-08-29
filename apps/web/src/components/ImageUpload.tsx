@@ -56,7 +56,7 @@ export function ImageUpload({ itemId }: { itemId: Item["id"] }) {
 	if (isError) return <div>{JSON.stringify(error, null, 2)}</div>;
 
 	return (
-		<div className="aspect-square max-w-sm">
+		<div className="aspect-square">
 			{image ? (
 				<ImagePreview
 					image={image}

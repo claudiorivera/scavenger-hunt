@@ -36,9 +36,7 @@ export default function Layout(props: { children: React.ReactNode }) {
 				<body className={["font-sans", fontSans.variable].join(" ")}>
 					<TRPCReactProvider>
 						<AppBar />
-						<main className="container mx-auto max-w-md p-8 text-center">
-							{props.children}
-						</main>
+						<main className="p-8">{props.children}</main>
 					</TRPCReactProvider>
 				</body>
 			</html>

@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
 
 import { api } from "~/utils/api";
+import Container from "~/components/Container";
 import { ImageUpload } from "~/components/ImageUpload";
 import { Loading } from "~/components/Loading";
 
@@ -36,23 +37,25 @@ export default function CollectPage() {
 	if (!item) return <AllItemsFound />;
 
 	return (
-		<div className="flex flex-col gap-4">
-			<header className="text-2xl">Find</header>
-			<div className="text-5xl">{item.description}</div>
-			<ImageUpload itemId={item.id} />
-			<button
-				className="btn btn-secondary"
-				onClick={() => {
-					setSkippedItemIds([...skippedItemIds, item.id]);
-					void router.push("/collect");
-				}}
-			>
-				Skip It!
-			</button>
-			<Link className="btn btn-secondary" href={`/items/${item.id}`}>
-				See who found this
-			</Link>
-		</div>
+		<Container>
+			<div className="flex flex-col gap-4">
+				<header className="text-2xl">Find</header>
+				<div className="text-5xl">{item.description}</div>
+				<ImageUpload itemId={item.id} />
+				<button
+					className="btn btn-secondary"
+					onClick={() => {
+						setSkippedItemIds([...skippedItemIds, item.id]);
+						void router.push("/collect");
+					}}
+				>
+					Skip It!
+				</button>
+				<Link className="btn btn-secondary" href={`/items/${item.id}`}>
+					See who found this
+				</Link>
+			</div>
+		</Container>
 	);
 }
 

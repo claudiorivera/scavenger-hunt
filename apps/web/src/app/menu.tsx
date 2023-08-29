@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { SignOutButton } from "@clerk/nextjs";
 
 import MenuItem from "~/app/menu-item";
 import { userLinks } from "~/constants";
@@ -32,11 +32,12 @@ export function Menu() {
 				tabIndex={0}
 				className="dropdown-content menu rounded-box bg-base-100 text-base-content z-10 w-52 p-2 shadow"
 			>
-				<Fragment>
-					{userLinks.map((link) => (
-						<MenuItem key={link.url} link={link} />
-					))}
-				</Fragment>
+				{userLinks.map((link) => (
+					<MenuItem key={link.url} link={link} />
+				))}
+				<li>
+					<SignOutButton>Sign Out</SignOutButton>
+				</li>
 			</ul>
 		</div>
 	);
