@@ -54,8 +54,9 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
 					url: `${getBaseUrl()}/api/trpc`,
 					async headers() {
 						const headers = new Map<string, string>();
+						headers.set("x-trpc-source", "expo");
 						const authToken = await getToken();
-						headers.set("Authorization", authToken ?? "");
+						if (authToken) headers.set("Authorization", authToken);
 						return Object.fromEntries(headers);
 					},
 				}),
