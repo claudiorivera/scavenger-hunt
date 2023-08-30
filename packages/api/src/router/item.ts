@@ -18,32 +18,52 @@ export const itemRouter = createTRPCRouter({
 		});
 	}),
 	collected: protectedProcedure.query(({ ctx }) => {
-		return ctx.prisma.item.findMany({
-			where: {
-				collectionItems: {
-					some: {
-						user: {
-							id: ctx.auth.userId,
+		return ctx.prisma
+			.$extends({
+				result: {
+					item: {
+						isCollected: {
+							compute: () => true,
 						},
 					},
 				},
-			},
-			select: defaultItemSelect,
-		});
+			})
+			.item.findMany({
+				where: {
+					collectionItems: {
+						some: {
+							user: {
+								id: ctx.auth.userId,
+							},
+						},
+					},
+				},
+				select: { ...defaultItemSelect, isCollected: true },
+			});
 	}),
 	uncollected: protectedProcedure.query(({ ctx }) => {
-		return ctx.prisma.item.findMany({
-			where: {
-				collectionItems: {
-					none: {
-						user: {
-							id: ctx.auth.userId,
+		return ctx.prisma
+			.$extends({
+				result: {
+					item: {
+						isCollected: {
+							compute: () => false,
 						},
 					},
 				},
-			},
-			select: defaultItemSelect,
-		});
+			})
+			.item.findMany({
+				where: {
+					collectionItems: {
+						none: {
+							user: {
+								id: ctx.auth.userId,
+							},
+						},
+					},
+				},
+				select: { ...defaultItemSelect, isCollected: true },
+			});
 	}),
 	next: protectedProcedure
 		.input(

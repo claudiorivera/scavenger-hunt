@@ -22,7 +22,7 @@ export default function Items() {
 						</Text>
 					</View>
 				)}
-				data={uncollectedItems}
+				data={uncollectedItems.concat(collectedItems)}
 				renderItem={({ item }) => (
 					<View className="flex flex-row items-center gap-2">
 						<View className="flex-1 rounded-md bg-yellow-500 p-4">
@@ -34,11 +34,19 @@ export default function Items() {
 							</Link>
 						</View>
 						<View>
-							<MaterialCommunityIcons
-								name="minus-circle-outline"
-								size={24}
-								color={colors.yellow[500]}
-							/>
+							{item.isCollected ? (
+								<MaterialCommunityIcons
+									name="check-circle-outline"
+									size={24}
+									color={colors.green[500]}
+								/>
+							) : (
+								<MaterialCommunityIcons
+									name="minus-circle-outline"
+									size={24}
+									color={colors.yellow[500]}
+								/>
+							)}
 						</View>
 					</View>
 				)}
