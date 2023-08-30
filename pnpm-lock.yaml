@@ -133,7 +133,7 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
 
-  apps/web:
+  apps/nextjs:
     dependencies:
       '@claudiorivera/api':
         specifier: ^0.1.0
