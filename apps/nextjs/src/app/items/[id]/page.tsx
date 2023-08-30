@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { api } from "~/utils/api";
 import { Avatar } from "~/components/Avatar";
 import Container from "~/components/Container";
 import { EyeIcon } from "~/components/EyeIcon";
 import { Loading } from "~/components/Loading";
 import { useItemDetails } from "~/hooks/useItemDetails";
+import { api } from "~/utils/api";
 
 export default function ItemPage({ params }: { params: { id: string } }) {
 	const { data: currentUser } = api.user.me.useQuery();

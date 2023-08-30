@@ -4,9 +4,9 @@ import { Slot } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { ClerkProvider } from "@clerk/clerk-expo";
 
+import { useProtectedRoute } from "~/hooks/useProtectedRoute";
 import { TRPCProvider } from "~/utils/api";
 import { tokenCache } from "~/utils/cache";
-import { useProtectedRoute } from "~/hooks/useProtectedRoute";
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 

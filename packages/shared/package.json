@@ -7,15 +7,18 @@
 	"scripts": {
 		"clean": "rm -rf .turbo node_modules",
 		"lint": "eslint .",
-		"lint:fix": "pnpm lint --fix",
-		"type-check": "tsc --noEmit"
+		"format": "prettier --check \"**/*.{mjs,ts,md,json}\"",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"zod": "^3.22.2"
 	},
 	"devDependencies": {
 		"@claudiorivera/eslint-config": "^0.2.0",
+		"@claudiorivera/prettier-config": "^0.1.0",
+		"@claudiorivera/tsconfig": "^0.1.0",
 		"eslint": "^8.48.0",
+		"prettier": "^3.0.3",
 		"typescript": "^5.2.2"
 	},
 	"eslintConfig": {
@@ -23,5 +26,6 @@
 		"extends": [
 			"@claudiorivera/eslint-config/base"
 		]
-	}
+	},
+	"prettier": "@claudiorivera/prettier-config"
 }

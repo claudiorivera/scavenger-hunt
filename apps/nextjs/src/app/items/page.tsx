@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 
-import { api } from "~/utils/api";
 import { AddItemForm } from "~/components/AddItemForm";
 import { CheckCircleIcon } from "~/components/CheckCircleIcon";
 import Container from "~/components/Container";
 import { MinusCircleIcon } from "~/components/MinusCircleIcon";
+import { api } from "~/utils/api";
 
 export default function ItemsPage() {
 	const { data: uncollectedItems = [] } = api.item.uncollected.useQuery();

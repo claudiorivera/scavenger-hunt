@@ -7,9 +7,9 @@
 		"clean": "git clean -xdf .next .turbo node_modules",
 		"dev": "pnpm with-env next dev",
 		"lint": "dotenv -v SKIP_ENV_VALIDATION=1 next lint",
-		"lint:fix": "pnpm lint --fix",
+		"format": "prettier --check \"**/*.{js,cjs,mjs,ts,tsx,md,json}\"",
 		"start": "pnpm with-env next start",
-		"type-check": "tsc --noEmit",
+		"typecheck": "tsc --noEmit",
 		"with-env": "dotenv -e ../../.env --"
 	},
 	"dependencies": {
@@ -41,7 +41,9 @@
 	},
 	"devDependencies": {
 		"@claudiorivera/eslint-config": "^0.2.0",
+		"@claudiorivera/prettier-config": "^0.1.0",
 		"@claudiorivera/tailwind-config": "^0.1.0",
+		"@claudiorivera/tsconfig": "^0.1.0",
 		"@types/node": "^18.17.14",
 		"@types/react": "^18.2.21",
 		"@types/react-dom": "^18.2.7",
@@ -49,6 +51,7 @@
 		"dotenv-cli": "^7.3.0",
 		"eslint": "^8.48.0",
 		"postcss": "^8.4.29",
+		"prettier": "^3.0.3",
 		"tailwindcss": "3.3.2",
 		"typescript": "^5.2.2"
 	},
@@ -59,5 +62,6 @@
 			"@claudiorivera/eslint-config/nextjs",
 			"@claudiorivera/eslint-config/react"
 		]
-	}
+	},
+	"prettier": "@claudiorivera/prettier-config"
 }

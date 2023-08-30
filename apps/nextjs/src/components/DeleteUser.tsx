@@ -4,8 +4,8 @@ import classNames from "classnames";
 
 import type { User } from "@claudiorivera/db";
 
-import { api } from "~/utils/api";
 import { TrashIcon } from "~/components/TrashIcon";
+import { api } from "~/utils/api";
 
 export function DeleteUser({ id }: { id: User["id"] }) {
 	const utils = api.useContext();

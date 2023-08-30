@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 
-import { api } from "~/utils/api";
 import { Avatar } from "~/components/Avatar";
 import Container from "~/components/Container";
+import { api } from "~/utils/api";
 
 export default function LeaderBoardPage() {
 	const { data: users = [] } = api.user.all.useQuery();

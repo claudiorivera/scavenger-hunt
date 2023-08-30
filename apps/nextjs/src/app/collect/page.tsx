@@ -5,10 +5,10 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
 
-import { api } from "~/utils/api";
 import Container from "~/components/Container";
 import { ImageUpload } from "~/components/ImageUpload";
 import { Loading } from "~/components/Loading";
+import { api } from "~/utils/api";
 
 export default function CollectPage() {
 	const router = useRouter();

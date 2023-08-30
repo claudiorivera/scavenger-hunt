@@ -3,10 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { api } from "~/utils/api";
 import Container from "~/components/Container";
 import { Loading } from "~/components/Loading";
 import { useCollectionItemDetails } from "~/hooks/useCollectionItemDetails";
+import { api } from "~/utils/api";
 
 export default function CollectionItemPage({
 	params,
