@@ -35,7 +35,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.22.11",
-		"@babel/preset-env": "^7.22.10",
+		"@babel/preset-env": "^7.22.14",
 		"@babel/runtime": "^7.22.11",
 		"@claudiorivera/api": "^0.1.0",
 		"@claudiorivera/eslint-config": "^0.2.0",
