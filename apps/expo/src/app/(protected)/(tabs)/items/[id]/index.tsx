@@ -1,27 +1,125 @@
 import { Text, View } from "react-native";
-import { Tabs, useLocalSearchParams } from "expo-router";
+import { Image } from "expo-image";
+import { Link, Tabs, useLocalSearchParams } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { FlashList } from "@shopify/flash-list";
 
+import { LoadingSpinner } from "~/components/LoadingSpinner";
+import { useItemDetails } from "~/hooks/useItemDetails";
+import type { RouterOutputs } from "~/utils/api";
 import { api } from "~/utils/api";
 
 export default function ItemPage() {
 	const { id } = useLocalSearchParams<{
 		id: string;
 	}>();
+	const { data: currentUser } = api.user.me.useQuery();
 
-	const { data: item } = api.item.byId.useQuery(id!, {
-		enabled: !!id,
-	});
+	const { users, item, isUncollectedByCurrentUser, isLoading } = useItemDetails(
+		{
+			id,
+			currentUser,
+		},
+	);
+
+	if (isLoading) return <LoadingSpinner />;
+
+	if (!(item?.id && item.description)) return <NotFound />;
 
 	return (
 		<>
 			<Tabs.Screen
 				options={{
 					title: item?.description ?? "",
+					headerLeft: () => (
+						<Link href="/items" className="px-4 text-white">
+							Back
+						</Link>
+					),
 				}}
 			/>
-			<View>
-				<Text>ItemPage</Text>
+			<View className="flex h-full w-full items-center px-4 pt-4">
+				<View className="flex w-full flex-col items-center">
+					<Text className="w-full text-center text-xl">Collected By:</Text>
+					{users.length ? (
+						<UsersList users={users} item={item} />
+					) : (
+						<Text className="text-2xl">Nobody, yet 😢</Text>
+					)}
+					{isUncollectedByCurrentUser && (
+						<Link
+							className="btn btn-secondary"
+							href={`/collect?itemId=${item.id}`}
+						>
+							Found It?
+						</Link>
+					)}
+				</View>
 			</View>
 		</>
+	);
+}
+
+function UsersList({
+	users,
+	item,
+}: {
+	users: RouterOutputs["user"]["withItemIdInCollection"];
+	item: NonNullable<RouterOutputs["item"]["byId"]>;
+}) {
+	return (
+		<View className="h-full w-full">
+			<FlashList
+				data={users}
+				estimatedItemSize={120}
+				keyExtractor={(user) => user.id}
+				renderItem={({ item: user }) => {
+					const collectionItem = user.collectionItems.find(
+						(collectionItem) => collectionItem.itemId === item.id,
+					);
+
+					return (
+						<View
+							key={user.id}
+							className="flex h-20 flex-row items-center space-x-4"
+						>
+							<Link href={`/users/${user.id}`}>
+								<Avatar imageSrc={user.imageUrl} />
+							</Link>
+							<View className="flex-1 text-left">
+								<Text className="text-xl">
+									{user?.firstName} {user?.lastName}
+								</Text>
+							</View>
+							{!!collectionItem?.id && (
+								<Link
+									className="btn btn-secondary"
+									href={`/collection-items/${collectionItem.id}`}
+								>
+									<Ionicons name="eye" size={24} />
+								</Link>
+							)}
+						</View>
+					);
+				}}
+				ItemSeparatorComponent={() => <View className="h-4" />}
+			/>
+		</View>
+	);
+}
+
+function Avatar({ imageSrc }: { imageSrc: string }) {
+	return (
+		<View className="h-16 w-16 overflow-hidden rounded-full">
+			<Image source={imageSrc} className="h-16 w-16" />
+		</View>
+	);
+}
+
+function NotFound() {
+	return (
+		<View className="h-full w-full px-4 pt-4">
+			<Text>Not Found</Text>
+		</View>
 	);
 }
