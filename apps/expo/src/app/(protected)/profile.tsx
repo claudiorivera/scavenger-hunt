@@ -11,13 +11,15 @@ export default function Profile() {
 	const { user } = useUser();
 
 	return (
-		<View className="flex h-full flex-col items-center justify-center">
-			<Text>
-				{user?.firstName} {user?.lastName}
-			</Text>
-			<TouchableOpacity onPress={() => signOut()}>
-				<Text>Sign Out</Text>
-			</TouchableOpacity>
+		<View className="h-full w-full px-4">
+			<View className="items-center py-4">
+				<Text>
+					{user?.firstName} {user?.lastName}
+				</Text>
+				<TouchableOpacity onPress={() => signOut()}>
+					<Text>Sign Out</Text>
+				</TouchableOpacity>
+			</View>
 		</View>
 	);
 }

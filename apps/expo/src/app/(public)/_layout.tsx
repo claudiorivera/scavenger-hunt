@@ -3,17 +3,13 @@ import { Stack } from "expo-router";
 
 export default function PublicLayout() {
 	return (
-		<Stack>
-			<Stack.Screen
-				name="sign-in"
-				options={{
-					title: "Scavenger Hunt",
-					headerStyle: {
-						backgroundColor: "#BF360C",
-					},
-					headerTintColor: "#fff",
-				}}
-			/>
-		</Stack>
+		<Stack
+			screenOptions={{
+				headerStyle: {
+					backgroundColor: "#BF360C",
+				},
+				headerTintColor: "#fff",
+			}}
+		/>
 	);
 }

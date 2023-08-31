@@ -28,8 +28,8 @@ export function GitHubSignInButton() {
 
 	return (
 		<TouchableOpacity onPress={onPress}>
-			<View className="m-4 rounded-md bg-yellow-500 p-4">
-				<Text className="text-center font-semibold uppercase text-black">
+			<View className="rounded-md bg-yellow-500 p-4">
+				<Text className="mx-auto font-semibold uppercase text-black">
 					Sign in with GitHub
 				</Text>
 			</View>

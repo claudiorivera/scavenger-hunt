@@ -27,7 +27,7 @@ export default function ItemPage() {
 	if (!(item?.id && item.description)) return <NotFound />;
 
 	return (
-		<>
+		<View className="h-full w-full px-4">
 			<Tabs.Screen
 				options={{
 					title: item?.description ?? "",
@@ -38,25 +38,18 @@ export default function ItemPage() {
 					),
 				}}
 			/>
-			<View className="flex h-full w-full items-center px-4 pt-4">
-				<View className="flex w-full flex-col items-center">
-					<Text className="w-full text-center text-xl">Collected By:</Text>
-					{users.length ? (
-						<UsersList users={users} item={item} />
-					) : (
-						<Text className="text-2xl">Nobody, yet 😢</Text>
-					)}
-					{isUncollectedByCurrentUser && (
-						<Link
-							className="btn btn-secondary"
-							href={`/collect?itemId=${item.id}`}
-						>
-							Found It?
-						</Link>
-					)}
-				</View>
-			</View>
-		</>
+			<Text className="mx-auto py-4 text-xl">Collected By:</Text>
+			{users.length ? (
+				<UsersList users={users} item={item} />
+			) : (
+				<Text className="text-2xl">Nobody, yet 😢</Text>
+			)}
+			{isUncollectedByCurrentUser && (
+				<Link className="btn btn-secondary" href={`/collect?itemId=${item.id}`}>
+					Found It?
+				</Link>
+			)}
+		</View>
 	);
 }
 

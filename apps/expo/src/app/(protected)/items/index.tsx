@@ -13,21 +13,21 @@ export default function Items() {
 	const totalItems = uncollectedItems.length + collectedItems.length;
 
 	return (
-		<View className="h-full w-full px-4 pt-4">
+		<View className="h-full w-full px-4">
 			<FlashList
 				ListHeaderComponent={() => (
-					<View className="mx-auto mb-4">
-						<Text>
+					<View className="my-4">
+						<Text className="mx-auto">
 							Found {collectedItems.length} out of {totalItems} items! 📷
 						</Text>
 					</View>
 				)}
 				data={uncollectedItems.concat(collectedItems)}
 				renderItem={({ item }) => (
-					<View className="flex flex-row items-center gap-2">
+					<View className="flex flex-row items-center space-x-2">
 						<View className="flex-1 rounded-md bg-yellow-500 p-4">
 							<Link
-								className="text-center font-semibold uppercase text-black"
+								className="mx-auto font-semibold uppercase text-black"
 								href={`/items/${item.id}`}
 							>
 								{item.description}
