@@ -23,15 +23,6 @@ export default function ProtectedLayout() {
 			/>
 			<Tabs.Screen name="items/[id]/index" options={{ href: null }} />
 			<Tabs.Screen
-				name="leaderboard"
-				options={{
-					title: "Leaderboard",
-					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="list" size={size} color={color} />
-					),
-				}}
-			/>
-			<Tabs.Screen
 				name="items/index"
 				options={{
 					title: "All Items",
