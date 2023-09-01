@@ -6,10 +6,7 @@ export default function ProtectedLayout() {
 	return (
 		<Tabs
 			screenOptions={{
-				headerStyle: {
-					backgroundColor: "#BF360C",
-				},
-				headerTintColor: "#fff",
+				headerShown: false,
 			}}
 		>
 			<Tabs.Screen
@@ -21,22 +18,21 @@ export default function ProtectedLayout() {
 					),
 				}}
 			/>
-			<Tabs.Screen name="items/[id]/index" options={{ href: null }} />
 			<Tabs.Screen
-				name="items/index"
+				name="profile"
 				options={{
-					title: "All Items",
+					title: "Profile",
 					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="ios-newspaper" size={size} color={color} />
+						<Ionicons name="person" size={size} color={color} />
 					),
 				}}
 			/>
 			<Tabs.Screen
-				name="profile"
+				name="items"
 				options={{
-					title: "My Profile",
+					title: "Items",
 					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="person" size={size} color={color} />
+						<Ionicons name="ios-newspaper" size={size} color={color} />
 					),
 				}}
 			/>

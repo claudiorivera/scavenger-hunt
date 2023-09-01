@@ -1,7 +1,6 @@
 import { Text, View } from "react-native";
 import { Image } from "expo-image";
-import { Link, Tabs, useLocalSearchParams } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+import { Link, Stack, useLocalSearchParams } from "expo-router";
 import { FlashList } from "@shopify/flash-list";
 
 import { LoadingSpinner } from "~/components/LoadingSpinner";
@@ -28,14 +27,9 @@ export default function ItemPage() {
 
 	return (
 		<View className="h-full w-full px-4">
-			<Tabs.Screen
+			<Stack.Screen
 				options={{
 					title: item?.description ?? "",
-					headerLeft: () => (
-						<Link href="/items" className="px-4 text-white">
-							Back
-						</Link>
-					),
 				}}
 			/>
 			<Text className="mx-auto py-4 text-xl">Collected By:</Text>
@@ -76,22 +70,12 @@ function UsersList({
 							key={user.id}
 							className="flex h-20 flex-row items-center space-x-4"
 						>
-							<Link href={`/users/${user.id}`}>
-								<Avatar imageSrc={user.imageUrl} />
-							</Link>
+							<Avatar imageSrc={user.imageUrl} />
 							<View className="flex-1 text-left">
 								<Text className="text-xl">
 									{user?.firstName} {user?.lastName}
 								</Text>
 							</View>
-							{!!collectionItem?.id && (
-								<Link
-									className="btn btn-secondary"
-									href={`/collection-items/${collectionItem.id}`}
-								>
-									<Ionicons name="eye" size={24} />
-								</Link>
-							)}
 						</View>
 					);
 				}}

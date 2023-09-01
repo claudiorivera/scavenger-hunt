@@ -16,7 +16,7 @@ export const userLinks = [
 		url: "/items",
 	},
 	{
-		title: "My Profile",
+		title: "Profile",
 		url: "/profile",
 	},
 ];

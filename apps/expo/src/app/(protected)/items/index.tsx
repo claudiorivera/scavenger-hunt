@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { Link } from "expo-router";
+import { Link, Stack } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FlashList } from "@shopify/flash-list";
 import colors from "tailwindcss/colors";
@@ -14,6 +14,11 @@ export default function Items() {
 
 	return (
 		<View className="h-full w-full px-4">
+			<Stack.Screen
+				options={{
+					title: "Items",
+				}}
+			/>
 			<FlashList
 				ListHeaderComponent={() => (
 					<View className="my-4">

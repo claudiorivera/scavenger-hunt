@@ -28,7 +28,7 @@ export default async function HomePage() {
 						View Items
 					</Link>
 					<Link href={"/profile"} className="btn btn-secondary">
-						My Profile
+						Profile
 					</Link>
 				</div>
 			</div>
