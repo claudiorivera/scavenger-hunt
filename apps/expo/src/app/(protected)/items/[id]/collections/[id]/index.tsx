@@ -19,7 +19,7 @@ export default function CollectionItem() {
 		isCurrentUserOwner,
 		isLoading,
 	} = useCollectionItemDetails({
-		id: id,
+		id,
 		currentUser,
 	});
 

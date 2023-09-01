@@ -5,11 +5,15 @@ export function useCollectionItemDetails({
 	id,
 	currentUser,
 }: {
-	id: string;
+	id?: string;
 	currentUser?: RouterOutputs["user"]["me"];
 }) {
-	const { data: collectionItem, isLoading } =
-		api.collectionItem.byId.useQuery(id);
+	const { data: collectionItem, isLoading } = api.collectionItem.byId.useQuery(
+		id!,
+		{
+			enabled: !!id,
+		},
+	);
 
 	const title =
 		!!collectionItem?.user?.firstName &&
