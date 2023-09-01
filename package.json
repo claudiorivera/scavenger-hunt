@@ -1,35 +1,36 @@
 {
-  "name": "scavenger-hunt",
-  "version": "3.0.0",
-  "private": true,
-  "engines": {
-    "node": ">=v18.17.1"
-  },
-  "packageManager": "pnpm@8.7.1",
-  "scripts": {
-    "build": "turbo build",
-    "clean": "git clean -xdf node_modules",
-    "clean:workspaces": "turbo clean",
-    "db:deploy": "pnpm -F db deploy",
-    "db:migrate": "pnpm -F db migrate",
-    "db:push": "pnpm -F db push",
-    "db:generate": "pnpm -F db generate",
-    "db:seed": "pnpm -F db seed",
-    "db:studio": "pnpm -F db dev",
-    "dev": "turbo dev --parallel --filter='!@claudiorivera/expo'",
-    "format": "turbo format --continue -- --cache --cache-location='node_modules/.cache/.prettiercache'",
-    "format:fix": "turbo format --continue -- --write --cache --cache-location='node_modules/.cache/.prettiercache'",
-    "lint": "turbo lint --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg check",
-    "lint:fix": "turbo lint --continue -- --fix --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg fix",
-    "typecheck": "turbo typecheck"
-  },
-  "dependencies": {
-    "@claudiorivera/prettier-config": "^0.1.0",
-    "@manypkg/cli": "^0.21.0",
-    "prettier": "^3.0.3",
-    "prettier-plugin-tailwindcss": "^0.5.4",
-    "turbo": "^1.10.13",
-    "typescript": "^5.2.2"
-  },
-  "prettier": "@claudiorivera/prettier-config"
+	"name": "scavenger-hunt",
+	"version": "3.0.0",
+	"private": true,
+	"engines": {
+		"node": ">=v18.17.1"
+	},
+	"packageManager": "pnpm@8.7.1",
+	"scripts": {
+		"build": "turbo build",
+		"clean": "git clean -xdf node_modules",
+		"clean:workspaces": "turbo clean",
+		"db:deploy": "pnpm -F db deploy",
+		"db:migrate": "pnpm -F db migrate",
+		"db:push": "pnpm -F db push",
+		"db:generate": "pnpm -F db generate",
+		"db:seed": "pnpm -F db seed",
+		"db:studio": "pnpm -F db dev",
+		"dev": "turbo dev --parallel --filter='!@claudiorivera/expo'",
+		"dev:expo": "pnpm -F expo dev",
+		"format": "turbo format --continue -- --cache --cache-location='node_modules/.cache/.prettiercache'",
+		"format:fix": "turbo format --continue -- --write --cache --cache-location='node_modules/.cache/.prettiercache'",
+		"lint": "turbo lint --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg check",
+		"lint:fix": "turbo lint --continue -- --fix --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg fix",
+		"typecheck": "turbo typecheck"
+	},
+	"dependencies": {
+		"@claudiorivera/prettier-config": "^0.1.0",
+		"@manypkg/cli": "^0.21.0",
+		"prettier": "^3.0.3",
+		"prettier-plugin-tailwindcss": "^0.5.4",
+		"turbo": "^1.10.13",
+		"typescript": "^5.2.2"
+	},
+	"prettier": "@claudiorivera/prettier-config"
 }
