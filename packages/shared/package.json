@@ -1,8 +1,17 @@
 {
 	"name": "@claudiorivera/shared",
+	"private": true,
 	"version": "0.1.0",
-	"main": "./index.ts",
-	"types": "./index.ts",
+	"exports": {
+		".": "./index.ts"
+	},
+	"typesVersions": {
+		"*": {
+			"*": [
+				"src/*"
+			]
+		}
+	},
 	"license": "MIT",
 	"scripts": {
 		"clean": "rm -rf .turbo node_modules",
@@ -14,15 +23,13 @@
 		"zod": "^3.22.2"
 	},
 	"devDependencies": {
-		"@claudiorivera/eslint-config": "^0.2.0",
+		"@claudiorivera/eslint-config": "0.2.0",
 		"@claudiorivera/prettier-config": "^0.1.0",
 		"@claudiorivera/tsconfig": "^0.1.0",
 		"eslint": "^8.48.0",
-		"prettier": "^3.0.3",
 		"typescript": "^5.2.2"
 	},
 	"eslintConfig": {
-		"root": true,
 		"extends": [
 			"@claudiorivera/eslint-config/base"
 		]

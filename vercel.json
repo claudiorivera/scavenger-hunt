@@ -2,5 +2,5 @@
 	"github": {
 		"silent": true
 	},
-	"buildCommand": "turbo run db:deploy && turbo run build"
+	"buildCommand": "pnpm db:deploy && pnpm build"
 }
