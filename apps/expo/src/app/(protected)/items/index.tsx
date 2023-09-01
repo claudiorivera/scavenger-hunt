@@ -1,9 +1,10 @@
 import { Text, View } from "react-native";
-import { Link, Stack } from "expo-router";
+import { Stack } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FlashList } from "@shopify/flash-list";
 import colors from "tailwindcss/colors";
 
+import { LinkButton } from "~/components/LinkButton";
 import { api } from "~/utils/api";
 
 export default function Items() {
@@ -30,13 +31,10 @@ export default function Items() {
 				data={uncollectedItems.concat(collectedItems)}
 				renderItem={({ item }) => (
 					<View className="flex flex-row items-center space-x-2">
-						<View className="flex-1 rounded-md bg-yellow-500 p-4">
-							<Link
-								className="mx-auto font-semibold uppercase text-black"
-								href={`/items/${item.id}`}
-							>
+						<View className="flex-1">
+							<LinkButton href={`/items/${item.id}`}>
 								{item.description}
-							</Link>
+							</LinkButton>
 						</View>
 						<View>
 							{item.isCollected ? (

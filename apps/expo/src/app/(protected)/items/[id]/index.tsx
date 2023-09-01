@@ -1,9 +1,10 @@
 import { Text, View } from "react-native";
 import { Image } from "expo-image";
-import { Link, Stack, useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { FlashList } from "@shopify/flash-list";
 
+import { LinkButton } from "~/components/LinkButton";
 import { LoadingSpinner } from "~/components/LoadingSpinner";
 import { useItemDetails } from "~/hooks/useItemDetails";
 import type { RouterOutputs } from "~/utils/api";
@@ -34,15 +35,17 @@ export default function ItemPage() {
 				}}
 			/>
 			<Text className="mx-auto py-4 text-xl">Collected By:</Text>
-			{users.length ? (
-				<UsersList users={users} item={item} />
-			) : (
-				<Text className="text-2xl">Nobody, yet 😢</Text>
-			)}
+			<View className="mb-4">
+				{users.length ? (
+					<UsersList users={users} item={item} />
+				) : (
+					<View className="mx-auto">
+						<Text className="text-2xl">Nobody, yet 😢</Text>
+					</View>
+				)}
+			</View>
 			{isUncollectedByCurrentUser && (
-				<Link className="btn btn-secondary" href={`/collect?itemId=${item.id}`}>
-					Found It?
-				</Link>
+				<LinkButton href={`/collect?itemId=${item.id}`}>Found It?</LinkButton>
 			)}
 		</View>
 	);
@@ -69,21 +72,20 @@ function UsersList({
 					return (
 						<View
 							key={user.id}
-							className="flex h-20 flex-row items-center space-x-4"
+							className="flex flex-row items-center space-x-2"
 						>
 							<Avatar imageSrc={user.imageUrl} />
-							<View className="flex-1 text-left">
+							<View className="flex-1 overflow-hidden">
 								<Text className="text-xl">
 									{user?.firstName} {user?.lastName}
 								</Text>
 							</View>
 							{!!collectionItem?.id && (
-								<Link
-									className="btn btn-secondary"
+								<LinkButton
 									href={`/items/${item.id}/collections/${collectionItem.id}`}
 								>
 									<Ionicons name="eye" size={24} />
-								</Link>
+								</LinkButton>
 							)}
 						</View>
 					);
