@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
-import { Image } from "expo-image";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { FlashList } from "@shopify/flash-list";
 
+import { Avatar } from "~/components/Avatar";
 import { LinkButton } from "~/components/LinkButton";
 import { LoadingSpinner } from "~/components/LoadingSpinner";
 import { useItemDetails } from "~/hooks/useItemDetails";
@@ -92,14 +92,6 @@ function UsersList({
 				}}
 				ItemSeparatorComponent={() => <View className="h-4" />}
 			/>
-		</View>
-	);
-}
-
-function Avatar({ imageSrc }: { imageSrc: string }) {
-	return (
-		<View className="h-16 w-16 overflow-hidden rounded-full">
-			<Image source={imageSrc} className="h-16 w-16" />
 		</View>
 	);
 }

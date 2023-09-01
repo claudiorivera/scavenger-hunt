@@ -1,9 +1,11 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { Stack } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
 import { useAuth, useUser } from "@clerk/clerk-expo";
+
+import { Avatar } from "~/components/Avatar";
+import { TouchableButton } from "~/components/TouchableButton";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -18,13 +20,16 @@ export default function Profile() {
 					title: "Profile",
 				}}
 			/>
-			<View className="items-center py-4">
-				<Text>
+			<View className="items-center">
+				{!!user?.imageUrl && (
+					<View className="pt-4">
+						<Avatar imageSrc={user.imageUrl} />
+					</View>
+				)}
+				<Text className="py-4">
 					{user?.firstName} {user?.lastName}
 				</Text>
-				<TouchableOpacity onPress={() => signOut()}>
-					<Text>Sign Out</Text>
-				</TouchableOpacity>
+				<TouchableButton onPress={() => signOut()}>Sign Out</TouchableButton>
 			</View>
 		</View>
 	);
