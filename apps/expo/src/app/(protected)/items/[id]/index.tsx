@@ -1,6 +1,7 @@
 import { Text, View } from "react-native";
 import { Image } from "expo-image";
 import { Link, Stack, useLocalSearchParams } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import { FlashList } from "@shopify/flash-list";
 
 import { LoadingSpinner } from "~/components/LoadingSpinner";
@@ -76,6 +77,14 @@ function UsersList({
 									{user?.firstName} {user?.lastName}
 								</Text>
 							</View>
+							{!!collectionItem?.id && (
+								<Link
+									className="btn btn-secondary"
+									href={`/items/${item.id}/collections/${collectionItem.id}`}
+								>
+									<Ionicons name="eye" size={24} />
+								</Link>
+							)}
 						</View>
 					);
 				}}
