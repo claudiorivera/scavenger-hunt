@@ -1,6 +1,9 @@
 const path = require("path");
 const loadConfig = require("tailwindcss/loadConfig");
 
+/**
+ * @type {import("tailwindcss").Config | null}
+ */
 let _tailwindConfig = null;
 /**
  * Transpiles tailwind.config.ts for babel
