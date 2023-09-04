@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { api } from "~/utils/api";
 import { Avatar } from "~/components/Avatar";
+import { api } from "~/utils/api";
 
 export const User = ({ id }: { id: string }) => {
 	const { data: user } = api.users.byId.useQuery(id);

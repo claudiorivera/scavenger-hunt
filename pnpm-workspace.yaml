@@ -1,7 +1,4 @@
 packages:
-  - apps/web
-  - packages/api
-  - packages/auth
-  - packages/db
-  - packages/config/*
-  - packages/shared
+  - apps/*
+  - packages/*
+  - tooling/*

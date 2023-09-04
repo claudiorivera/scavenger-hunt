@@ -32,7 +32,7 @@ export function Menu() {
 			<ul
 				// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 				tabIndex={0}
-				className="dropdown-content menu rounded-box w-52 bg-base-100 p-2 text-base-content shadow"
+				className="dropdown-content menu rounded-box bg-base-100 text-base-content w-52 p-2 shadow"
 			>
 				<Fragment>
 					{userLinks.map((link) => (

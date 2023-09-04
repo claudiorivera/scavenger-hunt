@@ -3,10 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { api } from "~/utils/api";
 import { DeleteCollectionItem } from "~/components/DeleteCollectionItem";
 import { Loading } from "~/components/Loading";
 import { useCollectionItemDetails } from "~/hooks/useCollectionItemDetails";
+import { api } from "~/utils/api";
 
 export const CollectionItem = ({ id }: { id: string }) => {
 	const { data: currentUser } = api.users.me.useQuery();
