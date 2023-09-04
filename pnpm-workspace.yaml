@@ -1,5 +1,4 @@
 packages:
-  - apps/expo
   - apps/web
   - packages/api
   - packages/auth
