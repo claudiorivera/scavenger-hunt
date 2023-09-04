@@ -1,16 +1,17 @@
 {
-  "extends": "../../tsconfig.json",
-  "include": ["index.ts", "run-seed.ts"],
-  "compilerOptions": {
-    "baseUrl": "."
-  },
-  "ts-node": {
-    "files": true,
-    "require": ["tsconfig-paths/register"],
-    "experimentalResolverFeatures": true,
-    "compilerOptions": {
-      "module": "CommonJS",
-      "types": ["node"]
-    }
-  }
+	"extends": "@claudiorivera/tsconfig/base.json",
+	"compilerOptions": {
+		"tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
+	},
+	"include": ["."],
+	"exclude": ["node_modules"],
+	"ts-node": {
+		"files": true,
+		"require": ["tsconfig-paths/register"],
+		"experimentalResolverFeatures": true,
+		"compilerOptions": {
+			"module": "CommonJS",
+			"types": ["node"]
+		}
+	}
 }

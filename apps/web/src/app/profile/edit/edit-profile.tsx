@@ -8,10 +8,10 @@ import classNames from "classnames";
 
 import { updateProfileSchema } from "@claudiorivera/shared";
 
-import { api } from "~/utils/api";
-import { base64FromFile } from "~/utils/fileHelpers";
 import { Input } from "~/components/Input";
 import { useZodForm } from "~/hooks/useZodForm";
+import { api } from "~/utils/api";
+import { base64FromFile } from "~/utils/fileHelpers";
 
 export function EditProfile() {
 	const router = useRouter();
@@ -73,7 +73,7 @@ export function EditProfile() {
 						<div className="mx-auto">
 							<input hidden {...register("base64")} />
 							<div className="placeholder avatar">
-								<div className="relative w-24 rounded-full bg-base-300 text-base-content ring ring-secondary">
+								<div className="bg-base-300 text-base-content ring-secondary relative w-24 rounded-full ring">
 									{!!image?.src && (
 										<NextImage
 											src={image.src}
@@ -84,8 +84,8 @@ export function EditProfile() {
 									)}
 									<div className="absolute bottom-0 left-0 right-0 top-0">
 										<div className="flex h-full flex-col justify-end">
-											<label className="cursor-pointer text-center hover:bg-base-100/90">
-												<div className="text-transparent hover:text-secondary">
+											<label className="hover:bg-base-100/90 cursor-pointer text-center">
+												<div className="hover:text-secondary text-transparent">
 													Edit
 												</div>
 												<input

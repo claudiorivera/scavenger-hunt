@@ -1,10 +1,13 @@
 {
-	"name": "@claudiorivera/shared",
+	"name": "@claudiorivera/tailwind-config",
 	"version": "0.1.0",
 	"private": true,
-	"main": "./index.ts",
-	"types": "./index.ts",
+	"main": "index.ts",
 	"license": "MIT",
+	"files": [
+		"index.ts",
+		"postcss.js"
+	],
 	"scripts": {
 		"clean": "rm -rf .turbo node_modules",
 		"lint": "eslint .",
@@ -12,7 +15,9 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"zod": "^3.22.2"
+		"autoprefixer": "^10.4.15",
+		"postcss": "8.4.29",
+		"tailwindcss": "3.3.2"
 	},
 	"devDependencies": {
 		"@claudiorivera/eslint-config": "^0.2.0",

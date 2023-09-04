@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 
-import { api } from "~/utils/api";
 import { AddItemForm } from "~/components/AddItemForm";
 import { CheckCircleIcon } from "~/components/CheckCircleIcon";
 import { MinusCircleIcon } from "~/components/MinusCircleIcon";
+import { api } from "~/utils/api";
 
 export function Items() {
 	const { data: currentUser } = api.users.me.useQuery();
@@ -31,7 +31,7 @@ export function Items() {
 							>
 								{item.description}
 							</Link>
-							<div className="absolute -right-8 text-warning">
+							<div className="text-warning absolute -right-8">
 								<MinusCircleIcon />
 							</div>
 						</div>
@@ -46,7 +46,7 @@ export function Items() {
 							>
 								{item.description}
 							</Link>
-							<div className="absolute -right-8 text-success">
+							<div className="text-success absolute -right-8">
 								<CheckCircleIcon />
 							</div>
 						</div>

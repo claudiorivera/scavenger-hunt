@@ -11,11 +11,11 @@ export async function AppBar() {
 
 	return (
 		<Fragment>
-			<div className="navbar bg-primary p-4 text-primary-content">
+			<div className="navbar bg-primary text-primary-content p-4">
 				<div className="flex-1">
 					<Link
 						href="/"
-						className="text-2xl font-bold hover:text-primary-focus"
+						className="hover:text-primary-focus text-2xl font-bold"
 					>
 						Scavenger Hunt
 					</Link>

@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import type { RouterOutputs } from "~/utils/api";
-import { api } from "~/utils/api";
 import { Avatar } from "~/components/Avatar";
 import { DeleteItem } from "~/components/DeleteItem";
 import { EyeIcon } from "~/components/EyeIcon";
 import { Loading } from "~/components/Loading";
 import { useItemDetails } from "~/hooks/useItemDetails";
+import type { RouterOutputs } from "~/utils/api";
+import { api } from "~/utils/api";
 
 export function Item({ id }: { id: string }) {
 	const { data: currentUser } = api.users.me.useQuery();
