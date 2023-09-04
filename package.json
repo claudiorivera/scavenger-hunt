@@ -16,7 +16,7 @@
 		"db:seed": "turbo db:seed",
 		"db:migrate": "turbo db:migrate",
 		"db:deploy": "turbo db:deploy",
-		"dev": "turbo dev --parallel --filter='!@claudiorivera/expo'",
+		"dev": "turbo dev --parallel",
 		"format": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,md,json}\" --ignore-path .gitignore",
 		"lint": "turbo lint && manypkg check",
 		"lint:fix": "turbo lint:fix && manypkg fix",
