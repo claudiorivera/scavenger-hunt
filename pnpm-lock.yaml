@@ -192,10 +192,10 @@ importers:
     dependencies:
       '@auth/core':
         specifier: ^0.13.0
-        version: 0.13.0(nodemailer@6.9.4)
+        version: 0.13.0(nodemailer@6.9.5)
       '@auth/prisma-adapter':
         specifier: ^1.0.2
-        version: 1.0.2(@prisma/client@5.2.0)(nodemailer@6.9.4)
+        version: 1.0.2(@prisma/client@5.2.0)(nodemailer@6.9.5)
       '@claudiorivera/db':
         specifier: ^0.1.0
         version: link:../db
@@ -207,10 +207,10 @@ importers:
         version: 13.4.19(react-dom@18.2.0)(react@18.2.0)
       next-auth:
         specifier: ^0.0.0-manual.83c4ebd1
-        version: 0.0.0-manual.b53ca00b(next@13.4.19)(nodemailer@6.9.4)(react-dom@18.2.0)(react@18.2.0)
+        version: 0.0.0-manual.b53ca00b(next@13.4.19)(nodemailer@6.9.5)(react-dom@18.2.0)(react@18.2.0)
       nodemailer:
-        specifier: ^6.9.4
-        version: 6.9.4
+        specifier: ^6.9.5
+        version: 6.9.5
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -421,7 +421,7 @@ packages:
       '@jridgewell/trace-mapping': 0.3.18
     dev: false
 
-  /@auth/core@0.0.0-manual.59d8da33(nodemailer@6.9.4):
+  /@auth/core@0.0.0-manual.59d8da33(nodemailer@6.9.5):
     resolution: {integrity: sha512-ZTaUedTobGEvQPhEeJLmnsdGbztG10T0rK8TA4wH87Eb8oBHInI//3zRngX6T9hEcZ+/OJnIANw0JrGDqUDREA==}
     peerDependencies:
       nodemailer: ^6.8.0
@@ -432,13 +432,13 @@ packages:
       '@panva/hkdf': 1.1.1
       cookie: 0.5.0
       jose: 4.14.4
-      nodemailer: 6.9.4
+      nodemailer: 6.9.5
       oauth4webapi: 2.3.0
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
     dev: false
 
-  /@auth/core@0.13.0(nodemailer@6.9.4):
+  /@auth/core@0.13.0(nodemailer@6.9.5):
     resolution: {integrity: sha512-StjrzUenaKfMr68kmvhiqfY0xvxRvg8wllmem9JAULpPAAAt3uwRUDXICWOP/PfWB4OZ2wQT7rgfm0n42b+Mjg==}
     peerDependencies:
       nodemailer: ^6.8.0
@@ -449,31 +449,31 @@ packages:
       '@panva/hkdf': 1.1.1
       cookie: 0.5.0
       jose: 4.14.4
-      nodemailer: 6.9.4
+      nodemailer: 6.9.5
       oauth4webapi: 2.3.0
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
     dev: false
 
-  /@auth/nextjs@0.0.0-manual.179c08d4(next@13.4.19)(nodemailer@6.9.4)(react@18.2.0):
+  /@auth/nextjs@0.0.0-manual.179c08d4(next@13.4.19)(nodemailer@6.9.5)(react@18.2.0):
     resolution: {integrity: sha512-HVuDgb6xlYLV5mHTGc0Pycg8BlwtcvjvS+54QXEbOBpA5tulzKxAH8QlCoKj5R9XHW9hP9DiCnvXyVV9x2N+jA==}
     peerDependencies:
       next: ^13.4.6
       react: ^18.2.0
     dependencies:
-      '@auth/core': 0.0.0-manual.59d8da33(nodemailer@6.9.4)
+      '@auth/core': 0.0.0-manual.59d8da33(nodemailer@6.9.5)
       next: 13.4.19(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
       - nodemailer
     dev: false
 
-  /@auth/prisma-adapter@1.0.2(@prisma/client@5.2.0)(nodemailer@6.9.4):
+  /@auth/prisma-adapter@1.0.2(@prisma/client@5.2.0)(nodemailer@6.9.5):
     resolution: {integrity: sha512-ZD6ezxpt0eFFWq6rHloeCplBBDTUDczlgXfopeVxniQ8c1KKsgWBRJuA0mrQAIn3/TFDKI7AxN1bYwc8DzDgCg==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3 || >=4 || >=5'
     dependencies:
-      '@auth/core': 0.13.0(nodemailer@6.9.4)
+      '@auth/core': 0.13.0(nodemailer@6.9.5)
       '@prisma/client': 5.2.0(prisma@5.2.0)
     transitivePeerDependencies:
       - nodemailer
@@ -3723,7 +3723,7 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: false
 
-  /next-auth@0.0.0-manual.b53ca00b(next@13.4.19)(nodemailer@6.9.4)(react-dom@18.2.0)(react@18.2.0):
+  /next-auth@0.0.0-manual.b53ca00b(next@13.4.19)(nodemailer@6.9.5)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-hV/FhWoNGwpLe/+eaBVCDx4SBiauNuwA4fIT5DacSY0KrobcC6rvWQkL89WQZZKh3EpYqOefFkiXRkHNz90miw==}
     peerDependencies:
       next: ^13.4.5
@@ -3734,10 +3734,10 @@ packages:
       nodemailer:
         optional: true
     dependencies:
-      '@auth/core': 0.0.0-manual.59d8da33(nodemailer@6.9.4)
-      '@auth/nextjs': 0.0.0-manual.179c08d4(next@13.4.19)(nodemailer@6.9.4)(react@18.2.0)
+      '@auth/core': 0.0.0-manual.59d8da33(nodemailer@6.9.5)
+      '@auth/nextjs': 0.0.0-manual.179c08d4(next@13.4.19)(nodemailer@6.9.5)(react@18.2.0)
       next: 13.4.19(react-dom@18.2.0)(react@18.2.0)
-      nodemailer: 6.9.4
+      nodemailer: 6.9.5
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -3820,8 +3820,8 @@ packages:
     resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==}
     dev: false
 
-  /nodemailer@6.9.4:
-    resolution: {integrity: sha512-CXjQvrQZV4+6X5wP6ZIgdehJamI63MFoYFGGPtHudWym9qaEHDNdPzaj5bfMCvxG1vhAileSWW90q7nL0N36mA==}
+  /nodemailer@6.9.5:
+    resolution: {integrity: sha512-/dmdWo62XjumuLc5+AYQZeiRj+PRR8y8qKtFCOyuOl1k/hckZd8durUUHs/ucKx6/8kN+wFxqKJlQ/LK/qR5FA==}
     engines: {node: '>=6.0.0'}
     dev: false
 
