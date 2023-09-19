@@ -19,7 +19,7 @@
 	},
 	"dependencies": {
 		"@claudiorivera/shared": "^0.1.0",
-		"@faker-js/faker": "^8.0.2",
+		"@faker-js/faker": "^8.1.0",
 		"@prisma/client": "^5.3.1"
 	},
 	"devDependencies": {
