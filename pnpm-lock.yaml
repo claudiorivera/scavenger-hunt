@@ -195,7 +195,7 @@ importers:
         version: 0.16.1(nodemailer@6.9.5)
       '@auth/prisma-adapter':
         specifier: ^1.0.3
-        version: 1.0.3(@prisma/client@5.4.0)(nodemailer@6.9.5)
+        version: 1.0.3(@prisma/client@5.4.1)(nodemailer@6.9.5)
       '@claudiorivera/db':
         specifier: ^0.1.0
         version: link:../db
@@ -249,8 +249,8 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0
       '@prisma/client':
-        specifier: ^5.4.0
-        version: 5.4.0(prisma@5.4.0)
+        specifier: ^5.4.1
+        version: 5.4.1(prisma@5.4.1)
     devDependencies:
       '@claudiorivera/eslint-config':
         specifier: ^0.2.0
@@ -271,8 +271,8 @@ importers:
         specifier: ^3.0.3
         version: 3.0.3
       prisma:
-        specifier: ^5.4.0
-        version: 5.4.0
+        specifier: ^5.4.1
+        version: 5.4.1
       ts-node:
         specifier: ^10.9.1
         version: 10.9.1(@types/node@18.18.3)(typescript@5.2.2)
@@ -468,13 +468,13 @@ packages:
       - nodemailer
     dev: false
 
-  /@auth/prisma-adapter@1.0.3(@prisma/client@5.4.0)(nodemailer@6.9.5):
+  /@auth/prisma-adapter@1.0.3(@prisma/client@5.4.1)(nodemailer@6.9.5):
     resolution: {integrity: sha512-AMwQbO7OiBYRCA6VNfv9CpcpiRh0BP4EKhPdtO+pom9Uhuor2ioE4IqvhUfJyBkSjAP2Gt9WbKqr9kzL9LrtIg==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3 || >=4 || >=5'
     dependencies:
       '@auth/core': 0.16.1(nodemailer@6.9.5)
-      '@prisma/client': 5.4.0(prisma@5.4.0)
+      '@prisma/client': 5.4.1(prisma@5.4.1)
     transitivePeerDependencies:
       - nodemailer
     dev: false
@@ -967,8 +967,8 @@ packages:
     resolution: {integrity: sha512-dhPeilub1NuIG0X5Kvhh9lH4iW3ZsHlnzwgwbOlgwQ2wG1IqFzsgHqmKPk3WzsdWAeaxKJxgM0+W433RmN45GA==}
     dev: false
 
-  /@prisma/client@5.4.0(prisma@5.4.0):
-    resolution: {integrity: sha512-JEo7J24OgEyNJg6hWRecIj6NJcB0chBCXFhWoO5exDVReMxiaY801lLLd6KStVFJHCWVEWoMLPUqhOvQA5MUuw==}
+  /@prisma/client@5.4.1(prisma@5.4.1):
+    resolution: {integrity: sha512-xyD0DJ3gRNfLbPsC+YfMBBuLJtZKQfy1OD2qU/PZg+HKrr7SO+09174LMeTlWP0YF2wca9LxtVd4HnAiB5ketQ==}
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
@@ -977,16 +977,16 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 5.4.0-47.a5596b96668f0f4b397761ce0956db54e17e48c4
-      prisma: 5.4.0
+      '@prisma/engines-version': 5.4.1-1.2f302df92bd8945e20ad4595a73def5b96afa54f
+      prisma: 5.4.1
     dev: false
 
-  /@prisma/engines-version@5.4.0-47.a5596b96668f0f4b397761ce0956db54e17e48c4:
-    resolution: {integrity: sha512-liWWFhIL5hMhVt4f9HWqMSnBgVicVFGKsEzO5gBfLr9aG1JgjjMDYNmqqLji0Hp0VpD8ffTQTOVZDJRUVBD4dw==}
+  /@prisma/engines-version@5.4.1-1.2f302df92bd8945e20ad4595a73def5b96afa54f:
+    resolution: {integrity: sha512-+nUQM/y8C+1GG5Ioeqcu6itFslCfxvQSAUVSMC9XM2G2Fcq0F4Afnp6m0pXF6X6iUBWen7jZBPmM9Qlq4Nr3/A==}
     dev: false
 
-  /@prisma/engines@5.4.0:
-    resolution: {integrity: sha512-tnPa5Z1D70iPahvy9xG0bH5GD6Pb25Q+rH76+N1JKwQFe6vA3LyKyVzQrG4CQCI6N5PCJHJxlahJeCgcTJfLsg==}
+  /@prisma/engines@5.4.1:
+    resolution: {integrity: sha512-vJTdY4la/5V3N7SFvWRmSMUh4mIQnyb/MNoDjzVbh9iLmEC+uEykj/1GPviVsorvfz7DbYSQC4RiwmlEpTEvGA==}
     requiresBuild: true
 
   /@sindresorhus/is@0.14.0:
@@ -4326,13 +4326,13 @@ packages:
     resolution: {integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==}
     dev: false
 
-  /prisma@5.4.0:
-    resolution: {integrity: sha512-69rlao0RJ4JcLnJ6VwUS89qhRAdMawby7u10OOkpxZC9RZkDdLIpMj+7zafH2NqEk9roplbmfiAR5FseR7H8fg==}
+  /prisma@5.4.1:
+    resolution: {integrity: sha512-op9PmU8Bcw5dNAas82wBYTG0yHnpq9/O3bhxbDBrNzwZTwBqsVCxxYRLf6wHNh9HVaDGhgjjHlu1+BcW8qdnBg==}
     engines: {node: '>=16.13'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 5.4.0
+      '@prisma/engines': 5.4.1
 
   /prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
