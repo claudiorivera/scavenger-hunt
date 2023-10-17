@@ -194,8 +194,8 @@ importers:
         specifier: ^0.16.1
         version: 0.16.1(nodemailer@6.9.6)
       '@auth/prisma-adapter':
-        specifier: ^1.0.3
-        version: 1.0.3(@prisma/client@5.4.2)(nodemailer@6.9.6)
+        specifier: ^1.0.4
+        version: 1.0.4(@prisma/client@5.4.2)(nodemailer@6.9.6)
       '@claudiorivera/db':
         specifier: ^0.1.0
         version: link:../db
@@ -455,6 +455,23 @@ packages:
       preact-render-to-string: 5.2.3(preact@10.11.3)
     dev: false
 
+  /@auth/core@0.17.0(nodemailer@6.9.6):
+    resolution: {integrity: sha512-YkbWuXny6sv0gF/sYm7KD3GxnnGxJomoQJzibzhJuwVOYjPUjjYBv/JMTkYcfpBuPHoHZwTVR3y1J+/W18oRxA==}
+    peerDependencies:
+      nodemailer: ^6.8.0
+    peerDependenciesMeta:
+      nodemailer:
+        optional: true
+    dependencies:
+      '@panva/hkdf': 1.1.1
+      cookie: 0.5.0
+      jose: 4.14.4
+      nodemailer: 6.9.6
+      oauth4webapi: 2.3.0
+      preact: 10.11.3
+      preact-render-to-string: 5.2.3(preact@10.11.3)
+    dev: false
+
   /@auth/nextjs@0.0.0-manual.179c08d4(next@13.5.5)(nodemailer@6.9.6)(react@18.2.0):
     resolution: {integrity: sha512-HVuDgb6xlYLV5mHTGc0Pycg8BlwtcvjvS+54QXEbOBpA5tulzKxAH8QlCoKj5R9XHW9hP9DiCnvXyVV9x2N+jA==}
     peerDependencies:
@@ -468,12 +485,12 @@ packages:
       - nodemailer
     dev: false
 
-  /@auth/prisma-adapter@1.0.3(@prisma/client@5.4.2)(nodemailer@6.9.6):
-    resolution: {integrity: sha512-AMwQbO7OiBYRCA6VNfv9CpcpiRh0BP4EKhPdtO+pom9Uhuor2ioE4IqvhUfJyBkSjAP2Gt9WbKqr9kzL9LrtIg==}
+  /@auth/prisma-adapter@1.0.4(@prisma/client@5.4.2)(nodemailer@6.9.6):
+    resolution: {integrity: sha512-3Zj8mvU1sIIMZScduvLUWZk1apd7rWsNznONnwh0BJe5zdlW1al5OMpE/k7e/slRG7Hr20n6wt2z5Npdydwybw==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3 || >=4 || >=5'
     dependencies:
-      '@auth/core': 0.16.1(nodemailer@6.9.6)
+      '@auth/core': 0.17.0(nodemailer@6.9.6)
       '@prisma/client': 5.4.2(prisma@5.4.2)
     transitivePeerDependencies:
       - nodemailer
