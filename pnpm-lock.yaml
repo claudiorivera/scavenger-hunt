@@ -75,8 +75,8 @@ importers:
         specifier: ^2.3.2
         version: 2.3.2
       daisyui:
-        specifier: ^4.0.4
-        version: 4.0.4(postcss@8.4.31)
+        specifier: ^4.0.5
+        version: 4.0.5(postcss@8.4.31)
       next:
         specifier: ^14.0.2
         version: 14.0.2(react-dom@18.2.0)(react@18.2.0)
@@ -2057,8 +2057,8 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: false
 
-  /daisyui@4.0.4(postcss@8.4.31):
-    resolution: {integrity: sha512-y7gVzrIs8GjTAMygX9TG7ezqi7N7O8s6MZwDSJX29+nj46+tELTGgFLCUu+7Hzu+H8+6aVT+OLWVxTkyYsukSA==}
+  /daisyui@4.0.5(postcss@8.4.31):
+    resolution: {integrity: sha512-UNHgz5puB9YHlTM6/BsjHmc1G08i0YP/5Qth9zoeP3pdFrIJ5WOkHeDBx8jmmz29rqoG4Q1PCRbsGo4WyiVlKg==}
     engines: {node: '>=16.9.0'}
     dependencies:
       css-selector-tokenizer: 0.8.0
