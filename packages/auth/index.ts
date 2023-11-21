@@ -27,15 +27,15 @@ declare module "next-auth" {
 	}
 }
 
-const config: NextAuthConfig = {
+const config = {
 	adapter: PrismaAdapter(prisma),
 	providers: [
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-expect-error
+		//@ts-expect-error issue https://github.com/nextauthjs/next-auth/issues/6174
 		EmailProvider({
 			server: env.EMAIL_SERVER,
 			from: env.EMAIL_FROM,
 		}),
+		//@ts-expect-error issue https://github.com/nextauthjs/next-auth/issues/6174
 		GitHub({
 			clientId: env.GITHUB_CLIENT_ID,
 			clientSecret: env.GITHUB_CLIENT_SECRET,
@@ -56,10 +56,11 @@ const config: NextAuthConfig = {
 		logo: "https://scavenger-hunt.claudiorivera.com/android-chrome-512x512.png", // Absolute URL to image
 		buttonText: "#FFFFFF", // Hex color code
 	},
-};
+} satisfies NextAuthConfig;
 
 export const {
 	handlers: { GET, POST },
 	auth,
 	CSRF_experimental,
+	//@ts-expect-error issue https://github.com/nextauthjs/next-auth/issues/6174
 } = NextAuth(config);
