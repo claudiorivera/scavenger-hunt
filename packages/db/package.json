@@ -20,7 +20,7 @@
 	"dependencies": {
 		"@claudiorivera/shared": "^0.1.0",
 		"@faker-js/faker": "^8.3.1",
-		"@prisma/client": "^5.7.0"
+		"@prisma/client": "^5.7.1"
 	},
 	"devDependencies": {
 		"@claudiorivera/eslint-config": "^0.2.0",
@@ -29,7 +29,7 @@
 		"dotenv-cli": "^7.3.0",
 		"eslint": "^8.56.0",
 		"prettier": "^3.1.1",
-		"prisma": "^5.7.0",
+		"prisma": "^5.7.1",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.3.3"
 	},
