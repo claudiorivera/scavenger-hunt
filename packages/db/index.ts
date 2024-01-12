@@ -8,7 +8,7 @@ export * from "@prisma/client";
 
 const globalForPrisma = globalThis as { prisma?: PrismaClient };
 
-export const prisma =
+export const db =
 	globalForPrisma.prisma ??
 	new PrismaClient({
 		log:
@@ -17,7 +17,7 @@ export const prisma =
 				: ["error"],
 	});
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db;
 
 function generateUserCreateInput(): Prisma.UserCreateInput {
 	return {
@@ -34,7 +34,7 @@ function generateManyUserCreateInputs(numOfUsers: number) {
 }
 
 async function createUsers(numOfUsersToCreate: number) {
-	const { count } = await prisma.user.createMany({
+	const { count } = await db.user.createMany({
 		data: generateManyUserCreateInputs(numOfUsersToCreate),
 		skipDuplicates: true,
 	});
@@ -62,22 +62,22 @@ export async function seed() {
 	const USERS_TO_CREATE = 8;
 	const ITEMS_TO_CREATE = 20;
 
-	await prisma.user.deleteMany();
-	await prisma.item.deleteMany();
-	await prisma.collectionItem.deleteMany();
+	await db.user.deleteMany();
+	await db.item.deleteMany();
+	await db.collectionItem.deleteMany();
 
 	await createUsers(USERS_TO_CREATE);
 
 	for (let i = 0; i < ITEMS_TO_CREATE; i++) {
-		await prisma.item.create({
+		await db.item.create({
 			data: {
 				description: generateItemDescription(),
 			},
 		});
 	}
 
-	const users = await prisma.user.findMany();
-	const items = await prisma.item.findMany();
+	const users = await db.user.findMany();
+	const items = await db.item.findMany();
 
 	for (const item of items) {
 		const numberOfUsersToConnect = faker.number.int({
@@ -112,7 +112,7 @@ export async function seed() {
 				},
 			};
 
-			await prisma.collectionItem.create(collectionItemCreateParams);
+			await db.collectionItem.create(collectionItemCreateParams);
 		}
 	}
 }
