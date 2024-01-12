@@ -12,13 +12,13 @@ import {
 
 export const itemRouter = createTRPCRouter({
 	all: publicProcedure.query(({ ctx }) => {
-		return ctx.prisma.item.findMany({ orderBy: { id: "desc" } });
+		return ctx.db.item.findMany({ orderBy: { id: "desc" } });
 	}),
 	byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
-		return ctx.prisma.item.findUnique({ where: { id: input } });
+		return ctx.db.item.findUnique({ where: { id: input } });
 	}),
 	collected: protectedProcedure.query(({ ctx }) => {
-		return ctx.prisma.item.findMany({
+		return ctx.db.item.findMany({
 			where: {
 				collectionItems: {
 					some: {
@@ -35,7 +35,7 @@ export const itemRouter = createTRPCRouter({
 		});
 	}),
 	uncollected: protectedProcedure.query(({ ctx }) => {
-		return ctx.prisma.item.findMany({
+		return ctx.db.item.findMany({
 			where: {
 				collectionItems: {
 					none: {
@@ -76,7 +76,7 @@ export const itemRouter = createTRPCRouter({
 				};
 			}
 
-			return ctx.prisma.item.findFirst({
+			return ctx.db.item.findFirst({
 				where,
 				select: {
 					id: true,
@@ -85,9 +85,9 @@ export const itemRouter = createTRPCRouter({
 			});
 		}),
 	add: adminProcedure.input(createItemSchema).mutation(({ ctx, input }) => {
-		return ctx.prisma.item.create({ data: input });
+		return ctx.db.item.create({ data: input });
 	}),
 	delete: adminProcedure.input(z.string()).mutation(({ ctx, input }) => {
-		return ctx.prisma.item.delete({ where: { id: input } });
+		return ctx.db.item.delete({ where: { id: input } });
 	}),
 });

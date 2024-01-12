@@ -3,14 +3,14 @@ import { z } from "zod";
 
 export const env = createEnv({
 	server: {
-		GITHUB_CLIENT_ID: z.string().optional(),
-		GITHUB_CLIENT_SECRET: z.string().optional(),
-		NEXTAUTH_SECRET:
+		AUTH_GITHUB_ID: z.string().optional(),
+		AUTH_GITHUB_SECRET: z.string().optional(),
+		AUTH_SECRET:
 			process.env.NODE_ENV === "production"
-				? z.string().min(1)
-				: z.string().min(1).optional(),
-		NEXTAUTH_URL: z.preprocess(
-			// This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
+				? z.string()
+				: z.string().optional(),
+		AUTH_URL: z.preprocess(
+			// This makes Vercel deployments not fail if you don't set AUTH_URL
 			// Since NextAuth.js automatically uses the VERCEL_URL if present.
 			(str) => process.env.VERCEL_URL ?? str,
 			// VERCEL_URL doesn't include `https` so it cant be validated as a URL
@@ -22,13 +22,14 @@ export const env = createEnv({
 	},
 	client: {},
 	runtimeEnv: {
-		NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-		NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-		GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
-		GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
+		AUTH_SECRET: process.env.AUTH_SECRET,
+		AUTH_URL: process.env.AUTH_URL,
+		AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,
+		AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
 		VERCEL_ENV: process.env.VERCEL_ENV,
 		EMAIL_SERVER: process.env.EMAIL_SERVER,
 		EMAIL_FROM: process.env.EMAIL_FROM,
 	},
+	emptyStringAsUndefined: true,
 	skipValidation: !!process.env.CI || !!process.env.SKIP_ENV_VALIDATION,
 });

@@ -1,11 +1,11 @@
-import { prisma, seed } from ".";
+import { db, seed } from ".";
 
 seed()
 	.then(async () => {
-		await prisma.$disconnect();
+		await db.$disconnect();
 	})
 	.catch(async (e) => {
 		console.error(e);
-		await prisma.$disconnect();
+		await db.$disconnect();
 		process.exit(1);
 	});

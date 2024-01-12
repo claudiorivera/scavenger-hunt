@@ -1,22 +1,22 @@
-import EmailProvider from "@auth/core/providers/email";
-import GitHub from "@auth/core/providers/github";
-import type { DefaultSession } from "@auth/core/types";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import type { NextAuthConfig } from "next-auth";
+import type { DefaultSession, NextAuthConfig } from "next-auth";
 import NextAuth from "next-auth";
+import DiscordProvider from "next-auth/providers/discord";
+import EmailProvider from "next-auth/providers/email";
+import GitHubProvider from "next-auth/providers/github";
 
 import type { User } from "@claudiorivera/db";
-import { prisma } from "@claudiorivera/db";
+import { db } from "@claudiorivera/db";
 
 import { env } from "./env.mjs";
-
-type UserRole = User["role"];
 
 export type { Session } from "next-auth";
 
 // Update this whenever adding new providers so that the client can
-export const providers = ["github", "email"] as const;
+export const providers = ["github", "email", "discord"] as const;
 export type OAuthProviders = (typeof providers)[number];
+
+type UserRole = User["role"];
 
 declare module "next-auth" {
 	interface Session {
@@ -28,18 +28,14 @@ declare module "next-auth" {
 }
 
 const config = {
-	adapter: PrismaAdapter(prisma),
+	adapter: PrismaAdapter(db),
 	providers: [
-		//@ts-expect-error issue https://github.com/nextauthjs/next-auth/issues/6174
 		EmailProvider({
 			server: env.EMAIL_SERVER,
 			from: env.EMAIL_FROM,
 		}),
-		//@ts-expect-error issue https://github.com/nextauthjs/next-auth/issues/6174
-		GitHub({
-			clientId: env.GITHUB_CLIENT_ID,
-			clientSecret: env.GITHUB_CLIENT_SECRET,
-		}),
+		GitHubProvider,
+		DiscordProvider,
 	],
 	callbacks: {
 		session: ({ session, user }) => ({
@@ -61,6 +57,4 @@ const config = {
 export const {
 	handlers: { GET, POST },
 	auth,
-	CSRF_experimental,
-	//@ts-expect-error issue https://github.com/nextauthjs/next-auth/issues/6174
 } = NextAuth(config);

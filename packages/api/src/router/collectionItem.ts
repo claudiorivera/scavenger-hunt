@@ -30,13 +30,13 @@ const defaultCollectionItemSelect: Prisma.CollectionItemSelect = {
 
 export const collectionItemRouter = createTRPCRouter({
 	byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
-		return ctx.prisma.collectionItem.findUnique({
+		return ctx.db.collectionItem.findUnique({
 			where: { id: input },
 			select: defaultCollectionItemSelect,
 		});
 	}),
 	delete: adminProcedure.input(z.string()).mutation(({ ctx, input }) => {
-		return ctx.prisma.collectionItem.delete({
+		return ctx.db.collectionItem.delete({
 			where: { id: input },
 		});
 	}),
@@ -56,7 +56,7 @@ export const collectionItemRouter = createTRPCRouter({
 				},
 			);
 
-			return ctx.prisma.collectionItem.create({
+			return ctx.db.collectionItem.create({
 				data: {
 					url: secure_url,
 					height,

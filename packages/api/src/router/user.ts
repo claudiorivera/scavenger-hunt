@@ -37,7 +37,7 @@ async function uploadImage({
 
 export const userRouter = createTRPCRouter({
 	me: protectedProcedure.query(({ ctx }) => {
-		return ctx.prisma.user.findUnique({
+		return ctx.db.user.findUnique({
 			where: {
 				id: ctx.session.user.id,
 			},
@@ -53,7 +53,7 @@ export const userRouter = createTRPCRouter({
 		});
 	}),
 	all: protectedProcedure.query(({ ctx }) => {
-		return ctx.prisma.user.findMany({
+		return ctx.db.user.findMany({
 			orderBy: {
 				collectionItems: {
 					_count: "desc",
@@ -72,7 +72,7 @@ export const userRouter = createTRPCRouter({
 		});
 	}),
 	byId: protectedProcedure.input(z.string()).query(async ({ ctx, input }) => {
-		return ctx.prisma.user.findUnique({
+		return ctx.db.user.findUnique({
 			where: {
 				id: input,
 			},
@@ -95,7 +95,7 @@ export const userRouter = createTRPCRouter({
 	withItemIdInCollection: protectedProcedure
 		.input(z.string())
 		.query(({ ctx, input }) => {
-			return ctx.prisma.user.findMany({
+			return ctx.db.user.findMany({
 				where: {
 					collectionItems: {
 						some: {
@@ -119,7 +119,7 @@ export const userRouter = createTRPCRouter({
 	deleteById: protectedProcedure
 		.input(z.string())
 		.mutation(({ ctx, input }) => {
-			return ctx.prisma.user.delete({
+			return ctx.db.user.delete({
 				where: {
 					id: input,
 				},
@@ -137,7 +137,7 @@ export const userRouter = createTRPCRouter({
 				imageUrl = url;
 			}
 
-			return ctx.prisma.user.update({
+			return ctx.db.user.update({
 				where: {
 					id: ctx.session.user.id,
 				},
