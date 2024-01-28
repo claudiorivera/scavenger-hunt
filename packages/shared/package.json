@@ -10,10 +10,10 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"zod": "^3.22.4"
+		"zod": "3.22.4"
 	},
 	"devDependencies": {
-		"@claudiorivera/tsconfig": "^0.1.0",
-		"typescript": "^5.3.3"
+		"@claudiorivera/tsconfig": "0.1.0",
+		"typescript": "5.3.3"
 	}
 }

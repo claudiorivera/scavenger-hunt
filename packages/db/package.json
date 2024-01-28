@@ -16,18 +16,17 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@claudiorivera/shared": "^0.1.0",
-		"@faker-js/faker": "^8.4.0",
-		"@prisma/client": "^5.8.1"
+		"@claudiorivera/shared": "0.1.0",
+		"@faker-js/faker": "8.4.0",
+		"@prisma/client": "5.8.1"
 	},
 	"devDependencies": {
-		"@claudiorivera/tsconfig": "^0.1.0",
-		"dotenv-cli": "^7.3.0",
-		"prisma": "^5.8.1",
-		"ts-node": "^10.9.2",
-		"typescript": "^5.3.3"
+		"@claudiorivera/tsconfig": "0.1.0",
+		"dotenv-cli": "7.3.0",
+		"prisma": "5.8.1",
+		"typescript": "5.3.3"
 	},
 	"prisma": {
-		"seed": "ts-node --transpile-only ./run-seed.ts"
+		"seed": "bun run ./run-seed.ts"
 	}
 }

@@ -12,7 +12,7 @@
 		"clean:workspaces": "turbo clean",
 		"db:generate": "turbo db:generate",
 		"db:push": "turbo db:push db:generate",
-		"db:studio": "bun -F db dev",
+		"db:studio": "bun --workspace=db dev",
 		"db:seed": "turbo db:seed",
 		"db:migrate": "turbo db:migrate",
 		"db:deploy": "turbo db:deploy",
@@ -20,9 +20,12 @@
 		"typecheck": "turbo typecheck"
 	},
 	"dependencies": {
-		"@manypkg/cli": "^0.21.2",
-		"@turbo/gen": "^1.11.3",
-		"turbo": "^1.11.3",
-		"typescript": "^5.3.3"
+		"@manypkg/cli": "0.21.2",
+		"@turbo/gen": "1.11.3",
+		"turbo": "1.11.3",
+		"typescript": "5.3.3"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.5.3"
 	}
 }

@@ -13,12 +13,12 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"autoprefixer": "^10.4.17",
+		"autoprefixer": "10.4.17",
 		"postcss": "8.4.33",
 		"tailwindcss": "3.4.1"
 	},
 	"devDependencies": {
-		"@claudiorivera/tsconfig": "^0.1.0",
-		"typescript": "^5.3.3"
+		"@claudiorivera/tsconfig": "0.1.0",
+		"typescript": "5.3.3"
 	}
 }

@@ -10,19 +10,19 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@auth/core": "^0.24.0",
-		"@auth/prisma-adapter": "^1.1.0",
-		"@claudiorivera/db": "^0.1.0",
-		"@t3-oss/env-nextjs": "^0.8.0",
-		"next": "^14.1.0",
-		"next-auth": "5.0.0-beta.4",
-		"nodemailer": "^6.9.8",
+		"@auth/core": "0.24.0",
+		"@auth/prisma-adapter": "1.1.0",
+		"@claudiorivera/db": "0.1.0",
+		"@t3-oss/env-nextjs": "0.8.0",
+		"next": "14.1.0",
+		"next-auth": "5.0.0-beta.5",
+		"nodemailer": "6.9.8",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
-		"zod": "^3.22.4"
+		"zod": "3.22.4"
 	},
 	"devDependencies": {
-		"@claudiorivera/tsconfig": "^0.1.0",
-		"typescript": "^5.3.3"
+		"@claudiorivera/tsconfig": "0.1.0",
+		"typescript": "5.3.3"
 	}
 }

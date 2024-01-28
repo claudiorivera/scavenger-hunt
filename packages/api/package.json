@@ -9,17 +9,17 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@claudiorivera/auth": "^0.1.0",
-		"@claudiorivera/db": "^0.1.0",
-		"@claudiorivera/shared": "^0.1.0",
-		"@trpc/client": "^10.45.0",
-		"@trpc/server": "^10.45.0",
-		"cloudinary": "^1.41.3",
+		"@claudiorivera/auth": "0.1.0",
+		"@claudiorivera/db": "0.1.0",
+		"@claudiorivera/shared": "0.1.0",
+		"@trpc/client": "10.45.0",
+		"@trpc/server": "10.45.0",
+		"cloudinary": "1.41.3",
 		"superjson": "2.2.1",
-		"zod": "^3.22.4"
+		"zod": "3.22.4"
 	},
 	"devDependencies": {
-		"@claudiorivera/tsconfig": "^0.1.0",
-		"typescript": "^5.3.3"
+		"@claudiorivera/tsconfig": "0.1.0",
+		"typescript": "5.3.3"
 	}
 }
