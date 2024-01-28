@@ -1,11 +1,7 @@
-name: CI
+name: 🚨 Check Quality and Types
 
 on:
-  pull_request:
-    branches: ["*"]
   push:
-    branches: ["main"]
-  merge_group:
 
 # You can leverage Vercel Remote Caching with Turbo to speed up your builds
 # @link https://turborepo.org/docs/core-concepts/remote-caching#remote-caching-on-vercel-builds
@@ -14,7 +10,7 @@ env:
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
 jobs:
-  build-lint:
+  ci:
     env:
       DATABASE_URL: file:./db.sqlite
     runs-on: ubuntu-latest
