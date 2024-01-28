@@ -1,10 +1,6 @@
 { "name": "@claudiorivera/{{name}}", "private": true, "version": "0.1.0",
 "exports": { ".": "./index.ts" }, "typesVersions": { "*": { "*": [ "src/*" ] }
-}, "license": "MIT", "scripts": { "clean": "rm -rf .turbo node_modules", "lint":
-"eslint .", "format": "prettier --check \"**/*.{mjs,ts,md,json}\"", "typecheck":
+}, "license": "MIT", "scripts": { "clean": "rm -rf .turbo node_modules", "typecheck":
 "tsc --noEmit" }, "dependencies": { }, "devDependencies": {
-"@claudiorivera/eslint-config": "0.2.0", "@claudiorivera/prettier-config":
-"^0.1.0", "@claudiorivera/tsconfig": "^0.1.0", "eslint": "^8.47.0",
-"typescript": "^5.1.6" }, "eslintConfig": { "extends": [
-"@claudiorivera/eslint-config/base" ] }, "prettier":
-"@claudiorivera/prettier-config" }
+"@claudiorivera/tsconfig": "^0.1.0",
+"typescript": "^5.1.6" } }

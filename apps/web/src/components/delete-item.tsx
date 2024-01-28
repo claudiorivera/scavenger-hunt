@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import classNames from "classnames";
+import { useRouter } from "next/navigation";
 
 import type { Item } from "@claudiorivera/db";
 
@@ -19,6 +19,7 @@ export function DeleteItem({ id }: { id: Item["id"] }) {
 
 	return (
 		<button
+			type="button"
 			className={classNames("btn-error btn", {
 				loading: isLoading,
 			})}

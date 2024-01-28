@@ -72,12 +72,9 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
 				 * Install deps and format everything
 				 */
 				if ("name" in answers && typeof answers.name === "string") {
-					execSync("pnpm manypkg fix", {
+					execSync("bun manypkg fix", {
 						stdio: "inherit",
 					});
-					execSync(
-						`pnpm prettier --write packages/${answers.name}/** --list-different`,
-					);
 					return "Package scaffolded";
 				}
 				return "Package not scaffolded";

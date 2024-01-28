@@ -1,12 +1,11 @@
 "use server";
 
-import { headers } from "next/headers";
 import { httpBatchLink, loggerLink } from "@trpc/client";
 import { experimental_createTRPCNextAppDirServer as createTRPCNextAppDirServer } from "@trpc/next/app-dir/server";
+import { headers } from "next/headers";
 
 import type { AppRouter } from "@claudiorivera/api";
-
-import { getUrl, transformer } from "./shared";
+import { getUrl, transformer } from "~/app/trpc/shared";
 
 export const api = createTRPCNextAppDirServer<AppRouter>({
 	config() {

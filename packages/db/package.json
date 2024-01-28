@@ -6,41 +6,28 @@
 	"license": "MIT",
 	"scripts": {
 		"clean": "rm -rf .turbo node_modules",
-		"lint": "eslint .",
-		"format": "prettier --check \"**/*.{mjs,ts,md,json}\"",
-		"db:generate": "pnpm with-env prisma generate",
-		"db:deploy": "pnpm with-env prisma migrate deploy",
-		"db:migrate": "pnpm with-env prisma migrate dev",
-		"db:push": "pnpm with-env prisma db push --skip-generate",
-		"db:seed": "pnpm with-env prisma db seed",
-		"dev": "pnpm with-env prisma studio --port 5556",
+		"db:generate": "bun with-env prisma generate",
+		"db:deploy": "bun with-env prisma migrate deploy",
+		"db:migrate": "bun with-env prisma migrate dev",
+		"db:push": "bun with-env prisma db push --skip-generate",
+		"db:seed": "bun with-env prisma db seed",
+		"dev": "bun with-env prisma studio --port 5556",
 		"with-env": "dotenv -e ../../.env --",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"check": "bunx @biomejs/biome check --apply ."
 	},
 	"dependencies": {
-		"@claudiorivera/shared": "^0.1.0",
-		"@faker-js/faker": "^8.4.0",
-		"@prisma/client": "^5.8.1"
+		"@claudiorivera/shared": "0.1.0",
+		"@faker-js/faker": "8.4.0",
+		"@prisma/client": "5.8.1"
 	},
 	"devDependencies": {
-		"@claudiorivera/eslint-config": "^0.2.0",
-		"@claudiorivera/prettier-config": "^0.1.0",
-		"@claudiorivera/tsconfig": "^0.1.0",
-		"dotenv-cli": "^7.3.0",
-		"eslint": "^8.56.0",
-		"prettier": "^3.2.4",
-		"prisma": "^5.8.1",
-		"ts-node": "^10.9.2",
-		"typescript": "^5.3.3"
+		"@claudiorivera/tsconfig": "0.1.0",
+		"dotenv-cli": "7.3.0",
+		"prisma": "5.8.1",
+		"typescript": "5.3.3"
 	},
-	"eslintConfig": {
-		"root": true,
-		"extends": [
-			"@claudiorivera/eslint-config/base"
-		]
-	},
-	"prettier": "@claudiorivera/prettier-config",
 	"prisma": {
-		"seed": "ts-node --transpile-only ./run-seed.ts"
+		"seed": "bun run ./run-seed.ts"
 	}
 }

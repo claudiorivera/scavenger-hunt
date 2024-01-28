@@ -1,8 +1,8 @@
 "use client";
 
+import classNames from "classnames";
 import type { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import { forwardRef } from "react";
-import classNames from "classnames";
 
 export const Input = forwardRef<
 	HTMLInputElement,

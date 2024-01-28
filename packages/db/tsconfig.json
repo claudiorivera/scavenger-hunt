@@ -4,14 +4,5 @@
 		"tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
 	},
 	"include": ["."],
-	"exclude": ["node_modules"],
-	"ts-node": {
-		"files": true,
-		"require": ["tsconfig-paths/register"],
-		"experimentalResolverFeatures": true,
-		"compilerOptions": {
-			"module": "CommonJS",
-			"types": ["node"]
-		}
-	}
+	"exclude": ["node_modules"]
 }

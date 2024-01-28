@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 
-import { Avatar } from "~/components/Avatar";
-import { DeleteUser } from "~/components/DeleteUser";
+import { Avatar } from "~/components/avatar";
+import { DeleteUser } from "~/components/delete-user";
 import { api } from "~/utils/api";
 
 export function LeaderBoard() {

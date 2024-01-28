@@ -4,8 +4,7 @@ import { httpBatchLink, loggerLink } from "@trpc/client";
 import { createTRPCNext } from "@trpc/next";
 
 import type { AppRouter } from "@claudiorivera/api";
-
-import { getBaseUrl, transformer } from "./shared";
+import { getBaseUrl, transformer } from "~/app/trpc/shared";
 
 export const api = createTRPCNext<AppRouter>({
 	config() {

@@ -1,35 +1,30 @@
 {
-  "name": "scavenger-hunt",
-  "version": "3.0.0",
-  "private": true,
-  "engines": {
-    "node": ">=20.11.0"
-  },
-  "packageManager": "pnpm@8.15.0",
-  "scripts": {
-    "build": "turbo build",
-    "clean": "git clean -xdf node_modules",
-    "clean:workspaces": "turbo clean",
-    "db:generate": "turbo db:generate",
-    "db:push": "turbo db:push db:generate",
-    "db:studio": "pnpm -F db dev",
-    "db:seed": "turbo db:seed",
-    "db:migrate": "turbo db:migrate",
-    "db:deploy": "turbo db:deploy",
-    "dev": "turbo dev --parallel",
-    "format": "turbo format --continue -- --cache --cache-location='node_modules/.cache/.prettiercache'",
-    "format:fix": "turbo format --continue -- --write --cache --cache-location='node_modules/.cache/.prettiercache'",
-    "lint": "turbo lint --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg check",
-    "lint:fix": "turbo lint --continue -- --fix --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg fix",
-    "typecheck": "turbo typecheck"
-  },
-  "dependencies": {
-    "@claudiorivera/prettier-config": "^0.1.0",
-    "@manypkg/cli": "^0.21.2",
-    "@turbo/gen": "^1.11.3",
-    "prettier": "^3.2.4",
-    "turbo": "^1.11.3",
-    "typescript": "^5.3.3"
-  },
-  "prettier": "@claudiorivera/prettier-config"
+	"name": "scavenger-hunt",
+	"version": "3.0.0",
+	"private": true,
+	"engines": {
+		"node": ">=20.11.0"
+	},
+	"workspaces": ["apps/*", "packages/*", "tooling/*"],
+	"scripts": {
+		"build": "turbo build",
+		"clean": "git clean -xdf node_modules",
+		"clean:workspaces": "turbo clean",
+		"db:generate": "turbo db:generate",
+		"db:push": "turbo db:push db:generate",
+		"db:studio": "bun --workspace=db dev",
+		"db:seed": "turbo db:seed",
+		"db:migrate": "turbo db:migrate",
+		"db:deploy": "turbo db:deploy",
+		"dev": "turbo dev --parallel",
+		"typecheck": "turbo typecheck",
+		"check": "turbo check"
+	},
+	"dependencies": {
+		"@biomejs/biome": "1.5.3",
+		"@manypkg/cli": "0.21.2",
+		"@turbo/gen": "1.11.3",
+		"turbo": "1.11.3",
+		"typescript": "5.3.3"
+	}
 }

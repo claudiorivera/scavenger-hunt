@@ -7,7 +7,6 @@ import GitHubProvider from "next-auth/providers/github";
 
 import type { User } from "@claudiorivera/db";
 import { db } from "@claudiorivera/db";
-
 import { env } from "./env.mjs";
 
 export type { Session } from "next-auth";
@@ -38,6 +37,7 @@ const config = {
 		DiscordProvider,
 	],
 	callbacks: {
+		// @ts-expect-error NextAuth type is wrong here
 		session: ({ session, user }) => ({
 			...session,
 			user: {

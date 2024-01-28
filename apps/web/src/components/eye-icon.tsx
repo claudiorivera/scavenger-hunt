@@ -6,6 +6,7 @@ export function EyeIcon() {
 			fill="currentColor"
 			className="h-6 w-6"
 		>
+			<title>Eye Icon</title>
 			<path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
 			<path
 				fillRule="evenodd"

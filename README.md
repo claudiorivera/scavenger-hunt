@@ -12,16 +12,16 @@ It's a virtual scavenger hunt! Everyone plays simultaneously and finds specific 
 
 ## Install
 
-`pnpm i`
+`bun i`
 
 ## Config
 
 - `cp .env.example .env` and update values
-- `pnpm db:migrate`
+- `bun db:migrate`
 
 ## Dev
 
-`pnpm dev`
+`bun dev`
 
 ## TODO
 

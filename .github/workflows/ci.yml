@@ -1,11 +1,7 @@
-name: CI
+name: 🚨 Check Quality and Types
 
 on:
-  pull_request:
-    branches: ["*"]
   push:
-    branches: ["main"]
-  merge_group:
 
 # You can leverage Vercel Remote Caching with Turbo to speed up your builds
 # @link https://turborepo.org/docs/core-concepts/remote-caching#remote-caching-on-vercel-builds
@@ -14,46 +10,32 @@ env:
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 
 jobs:
-  build-lint:
+  ci:
     env:
       DATABASE_URL: file:./db.sqlite
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.4.0
-
-      - name: Setup Node 18
-        uses: actions/setup-node@v4
+      - name: 🛒 Checkout
+        uses: actions/checkout@v4
+      - name: 🏗️ Setup Biome
+        uses: biomejs/setup-biome@v2
         with:
-          node-version: 18
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install deps (with cache)
-        run: pnpm install
+          version: latest
+      - name: 🎨 Run Biome
+        run: biome ci .
+      - name: 🏗️ Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: 📦 Install Dependencies
+        run: bun install
 
       # Normally, this would be done as part of the turbo pipeline - however since the Expo app doesn't depend on `@claudiorivera/db` it doesn't care.
       # TODO: Free for all to find a better solution here.
-      - name: Generate Prisma Client
-        run: pnpm turbo db:generate
+      - name: 🗃️ Generate Prisma Client
+        run: bun turbo db:generate
 
-      - name: Build, lint and type-check
-        run: pnpm turbo build lint typecheck
+      - name: 🎨 Build and type-check
+        run: bun turbo build typecheck
 
-      - name: Check workspaces
-        run: pnpm manypkg check
+      - name: ✅ Check workspaces
+        run: bun manypkg check

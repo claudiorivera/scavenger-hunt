@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-import { ImageUpload } from "~/components/ImageUpload";
-import { Loading } from "~/components/Loading";
+import { ImageUpload } from "~/components/image-upload";
+import { Loading } from "~/components/loading";
 import { api } from "~/utils/api";
 
 export function Collect() {
@@ -20,7 +20,7 @@ export function Collect() {
 		? api.items.byId.useQuery(itemId)
 		: api.items.next.useQuery({
 				skipItemIds: skippedItemIds,
-			});
+		  });
 
 	useEffect(() => {
 		if (!isLoading && !item && !!skippedItemIds.length) {
@@ -41,6 +41,7 @@ export function Collect() {
 			<div className="text-5xl">{item.description}</div>
 			<ImageUpload itemId={item.id} />
 			<button
+				type="button"
 				className="btn-secondary btn"
 				onClick={() => {
 					setSkippedItemIds([...skippedItemIds, item.id]);

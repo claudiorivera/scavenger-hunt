@@ -8,6 +8,7 @@ export function TrashIcon() {
 			stroke="currentColor"
 			className="h-6 w-6"
 		>
+			<title>Trash Icon</title>
 			<path
 				strokeLinecap="round"
 				strokeLinejoin="round"

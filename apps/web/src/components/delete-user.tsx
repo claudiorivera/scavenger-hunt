@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 import type { User } from "@claudiorivera/db";
 
-import { TrashIcon } from "~/components/TrashIcon";
+import { TrashIcon } from "~/components/trash-icon";
 import { api } from "~/utils/api";
 
 export function DeleteUser({ id }: { id: User["id"] }) {
@@ -13,6 +13,7 @@ export function DeleteUser({ id }: { id: User["id"] }) {
 
 	return (
 		<button
+			type="button"
 			className={classNames("btn-error btn w-12", {
 				loading: isLoading,
 			})}

@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Avatar } from "~/components/Avatar";
-import { DeleteItem } from "~/components/DeleteItem";
-import { EyeIcon } from "~/components/EyeIcon";
-import { Loading } from "~/components/Loading";
-import { useItemDetails } from "~/hooks/useItemDetails";
+import { Avatar } from "~/components/avatar";
+import { DeleteItem } from "~/components/delete-item";
+import { EyeIcon } from "~/components/eye-icon";
+import { Loading } from "~/components/loading";
+import { useItemDetails } from "~/hooks/use-item-details";
 import type { RouterOutputs } from "~/utils/api";
 import { api } from "~/utils/api";
 

@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@claudiorivera/auth";
 
-import { Avatar } from "~/components/Avatar";
+import { Avatar } from "~/components/avatar";
 
 export default async function ProfilePage() {
 	const session = await auth();

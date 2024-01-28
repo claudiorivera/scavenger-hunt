@@ -1,5 +1,5 @@
-import Image from "next/image";
 import classNames from "classnames";
+import Image from "next/image";
 import { HiUserCircle } from "react-icons/hi";
 
 type ImageSize = "sm" | "md" | "lg";
