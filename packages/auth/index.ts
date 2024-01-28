@@ -38,6 +38,7 @@ const config = {
 		DiscordProvider,
 	],
 	callbacks: {
+		// @ts-expect-error NextAuth type is wrong here
 		session: ({ session, user }) => ({
 			...session,
 			user: {
