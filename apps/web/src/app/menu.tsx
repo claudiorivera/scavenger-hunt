@@ -8,9 +8,7 @@ import { userLinks } from "~/constants";
 export function Menu() {
 	return (
 		<div className="dropdown-end dropdown">
-			{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 			<label
-				// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 				tabIndex={0}
 				className="btn-ghost btn-circle btn"
 			>
@@ -30,7 +28,6 @@ export function Menu() {
 				</svg>
 			</label>
 			<ul
-				// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 				tabIndex={0}
 				className="dropdown-content menu rounded-box bg-base-100 text-base-content w-52 p-2 shadow"
 			>
