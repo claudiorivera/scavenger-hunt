@@ -7,6 +7,7 @@
 		"clean": "git clean -xdf .next .turbo node_modules",
 		"dev": "bun with-env next dev",
 		"start": "bun with-env next start",
+		"check": "bunx @biomejs/biome check --apply src",
 		"typecheck": "tsc --noEmit",
 		"with-env": "dotenv -e ../../.env --"
 	},

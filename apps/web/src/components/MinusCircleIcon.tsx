@@ -8,6 +8,7 @@ export function MinusCircleIcon() {
 			stroke="currentColor"
 			className="h-6 w-6"
 		>
+			<title>Minus Circle Icon</title>
 			<path
 				strokeLinecap="round"
 				strokeLinejoin="round"

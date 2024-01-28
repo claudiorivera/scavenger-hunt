@@ -8,6 +8,7 @@ export function CheckCircleIcon() {
 			stroke="currentColor"
 			className="h-6 w-6"
 		>
+			<title>Check Circle Icon</title>
 			<path
 				strokeLinecap="round"
 				strokeLinejoin="round"

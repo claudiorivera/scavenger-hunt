@@ -8,12 +8,12 @@ export const transformer = superjson;
 export function getBaseUrl() {
 	if (typeof window !== "undefined") return "";
 	const vercelUrl = process.env.VERCEL_URL;
-	if (vercelUrl) return "https://" + vercelUrl;
+	if (vercelUrl) return `https://${vercelUrl}`;
 	return "http://localhost:3000";
 }
 
 export function getUrl() {
-	return getBaseUrl() + "/api/trpc";
+	return new URL("/api/trpc", getBaseUrl()).toString();
 }
 
 /**

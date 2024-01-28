@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import classNames from "classnames";
+import { useRouter } from "next/navigation";
 
 import type { CollectionItem } from "@claudiorivera/db";
 
@@ -20,6 +20,7 @@ export function DeleteCollectionItem({ id }: { id: CollectionItem["id"] }) {
 
 	return (
 		<button
+			type="button"
 			className={classNames("btn-error btn", {
 				loading: isLoading,
 			})}

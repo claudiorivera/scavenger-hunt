@@ -1,5 +1,5 @@
-import { Fragment } from "react";
 import Link from "next/link";
+import { Fragment } from "react";
 import { Toaster } from "react-hot-toast";
 
 import { auth } from "@claudiorivera/auth";

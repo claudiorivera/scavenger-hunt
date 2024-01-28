@@ -36,6 +36,10 @@
 			"dependsOn": ["^topo", "^db:generate"],
 			"outputs": ["node_modules/.cache/tsbuildinfo.json"]
 		},
+		"check": {
+			"dependsOn": ["^topo"],
+			"cache": false
+		},
 		"clean": {
 			"cache": false
 		},

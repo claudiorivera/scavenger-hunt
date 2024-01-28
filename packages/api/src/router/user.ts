@@ -128,7 +128,7 @@ export const userRouter = createTRPCRouter({
 	update: protectedProcedure
 		.input(updateProfileSchema)
 		.mutation(async ({ ctx, input }) => {
-			let imageUrl;
+			let imageUrl: string | undefined;
 			if (input.base64) {
 				const { url } = await uploadImage({
 					base64: input.base64,

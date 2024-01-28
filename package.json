@@ -17,7 +17,8 @@
 		"db:migrate": "turbo db:migrate",
 		"db:deploy": "turbo db:deploy",
 		"dev": "turbo dev --parallel",
-		"typecheck": "turbo typecheck"
+		"typecheck": "turbo typecheck",
+		"check": "turbo check"
 	},
 	"dependencies": {
 		"@manypkg/cli": "0.21.2",

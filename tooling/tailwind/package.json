@@ -10,7 +10,8 @@
 	],
 	"scripts": {
 		"clean": "rm -rf .turbo node_modules",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"check": "bunx @biomejs/biome check --apply ."
 	},
 	"dependencies": {
 		"autoprefixer": "10.4.17",

@@ -1,10 +1,10 @@
 "use client";
 
-import type { ChangeEvent } from "react";
-import { useState } from "react";
+import classNames from "classnames";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
-import classNames from "classnames";
+import type { ChangeEvent } from "react";
+import { useState } from "react";
 
 import { updateProfileSchema } from "@claudiorivera/shared";
 

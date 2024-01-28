@@ -13,6 +13,7 @@ export function DeleteUser({ id }: { id: User["id"] }) {
 
 	return (
 		<button
+			type="button"
 			className={classNames("btn-error btn w-12", {
 				loading: isLoading,
 			})}

@@ -8,6 +8,7 @@ export function CheckmarkIcon() {
 			stroke="currentColor"
 			className="h-6 w-6"
 		>
+			<title>Checkmark Icon</title>
 			<path
 				strokeLinecap="round"
 				strokeLinejoin="round"
