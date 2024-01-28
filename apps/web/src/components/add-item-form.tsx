@@ -4,8 +4,8 @@ import classNames from "classnames";
 
 import { createItemSchema } from "@claudiorivera/shared";
 
-import { Input } from "~/components/Input";
-import { useZodForm } from "~/hooks/useZodForm";
+import { Input } from "~/components/input";
+import { useZodForm } from "~/hooks/use-zod-form";
 import { api } from "~/utils/api";
 
 export function AddItemForm() {

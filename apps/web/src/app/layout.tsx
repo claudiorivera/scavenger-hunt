@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import "~/styles/globals.css";
 
 import { AppBar } from "~/app/app-bar";
-import { TRPCReactProvider } from "./providers";
+import { TRPCReactProvider } from "~/app/providers";
 
 const fontSans = Inter({
 	subsets: ["latin"],

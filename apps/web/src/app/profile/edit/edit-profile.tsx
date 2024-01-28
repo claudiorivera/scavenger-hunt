@@ -8,10 +8,10 @@ import { useState } from "react";
 
 import { updateProfileSchema } from "@claudiorivera/shared";
 
-import { Input } from "~/components/Input";
-import { useZodForm } from "~/hooks/useZodForm";
+import { Input } from "~/components/input";
+import { useZodForm } from "~/hooks/use-zod-form";
 import { api } from "~/utils/api";
-import { base64FromFile } from "~/utils/fileHelpers";
+import { base64FromFile } from "~/utils/file-helpers";
 
 export function EditProfile() {
 	const router = useRouter();

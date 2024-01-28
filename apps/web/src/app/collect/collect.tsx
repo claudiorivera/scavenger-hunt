@@ -5,8 +5,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-import { ImageUpload } from "~/components/ImageUpload";
-import { Loading } from "~/components/Loading";
+import { ImageUpload } from "~/components/image-upload";
+import { Loading } from "~/components/loading";
 import { api } from "~/utils/api";
 
 export function Collect() {

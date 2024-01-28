@@ -9,11 +9,11 @@ import { useState } from "react";
 import type { Item } from "@claudiorivera/db";
 import { uploadImageSchema } from "@claudiorivera/shared";
 
-import { CheckmarkIcon } from "~/components/CheckmarkIcon";
-import { TrashIcon } from "~/components/TrashIcon";
-import { useZodForm } from "~/hooks/useZodForm";
+import { CheckmarkIcon } from "~/components/checkmark-icon";
+import { TrashIcon } from "~/components/trash-icon";
+import { useZodForm } from "~/hooks/use-zod-form";
 import { api } from "~/utils/api";
-import { base64FromFile, htmlImageElementFromFile } from "~/utils/fileHelpers";
+import { base64FromFile, htmlImageElementFromFile } from "~/utils/file-helpers";
 
 export function ImageUpload({ itemId }: { itemId: Item["id"] }) {
 	const router = useRouter();

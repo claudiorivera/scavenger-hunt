@@ -2,8 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { auth } from "@claudiorivera/auth";
-
-import { Avatar } from "~/components/Avatar";
+import { Avatar } from "~/components/avatar";
 
 export default async function HomePage() {
 	const session = await auth();

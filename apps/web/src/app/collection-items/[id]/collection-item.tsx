@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { DeleteCollectionItem } from "~/components/DeleteCollectionItem";
-import { Loading } from "~/components/Loading";
-import { useCollectionItemDetails } from "~/hooks/useCollectionItemDetails";
+import { DeleteCollectionItem } from "~/components/delete-collection-item";
+import { Loading } from "~/components/loading";
+import { useCollectionItemDetails } from "~/hooks/use-collection-item-details";
 import { api } from "~/utils/api";
 
 export const CollectionItem = ({ id }: { id: string }) => {

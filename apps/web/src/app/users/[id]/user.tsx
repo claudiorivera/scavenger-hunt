@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Avatar } from "~/components/Avatar";
+import { Avatar } from "~/components/avatar";
 import { api } from "~/utils/api";
 
 export const User = ({ id }: { id: string }) => {

@@ -1,4 +1,4 @@
-import { collectionItemRouter } from "./router/collectionItem";
+import { collectionItemRouter } from "./router/collection-item";
 import { itemRouter } from "./router/item";
 import { userRouter } from "./router/user";
 import { createTRPCRouter } from "./trpc";

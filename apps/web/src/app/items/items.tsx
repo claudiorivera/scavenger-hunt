@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 
-import { AddItemForm } from "~/components/AddItemForm";
-import { CheckCircleIcon } from "~/components/CheckCircleIcon";
-import { MinusCircleIcon } from "~/components/MinusCircleIcon";
+import { AddItemForm } from "~/components/add-item-form";
+import { CheckCircleIcon } from "~/components/check-circle-icon";
+import { MinusCircleIcon } from "~/components/minus-circle-icon";
 import { api } from "~/utils/api";
 
 export function Items() {

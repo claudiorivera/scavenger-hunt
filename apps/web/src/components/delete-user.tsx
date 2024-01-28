@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 import type { User } from "@claudiorivera/db";
 
-import { TrashIcon } from "~/components/TrashIcon";
+import { TrashIcon } from "~/components/trash-icon";
 import { api } from "~/utils/api";
 
 export function DeleteUser({ id }: { id: User["id"] }) {

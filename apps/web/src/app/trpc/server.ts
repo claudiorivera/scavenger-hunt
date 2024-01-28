@@ -5,8 +5,7 @@ import { experimental_createTRPCNextAppDirServer as createTRPCNextAppDirServer }
 import { headers } from "next/headers";
 
 import type { AppRouter } from "@claudiorivera/api";
-
-import { getUrl, transformer } from "./shared";
+import { getUrl, transformer } from "~/app/trpc/shared";
 
 export const api = createTRPCNextAppDirServer<AppRouter>({
 	config() {

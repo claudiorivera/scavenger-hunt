@@ -3,7 +3,6 @@ import { z } from "zod";
 
 import type { Prisma } from "@claudiorivera/db";
 import { updateProfileSchema } from "@claudiorivera/shared";
-
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 const defaultUserSelect: Prisma.UserSelect = {
