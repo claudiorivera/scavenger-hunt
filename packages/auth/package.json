@@ -11,7 +11,7 @@
 		"check": "bunx @biomejs/biome check --apply ."
 	},
 	"dependencies": {
-		"@auth/core": "0.25.0",
+		"@auth/core": "0.25.1",
 		"@auth/prisma-adapter": "1.2.0",
 		"@claudiorivera/db": "0.1.0",
 		"@t3-oss/env-nextjs": "0.8.0",
