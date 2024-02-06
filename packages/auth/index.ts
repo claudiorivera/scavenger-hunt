@@ -2,7 +2,6 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import type { DefaultSession, NextAuthConfig } from "next-auth";
 import NextAuth from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
-import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
 
 import type { User } from "@claudiorivera/db";
@@ -28,16 +27,8 @@ declare module "next-auth" {
 
 const config = {
 	adapter: PrismaAdapter(db),
-	providers: [
-		EmailProvider({
-			server: env.EMAIL_SERVER,
-			from: env.EMAIL_FROM,
-		}),
-		GitHubProvider,
-		DiscordProvider,
-	],
+	providers: [GitHubProvider, DiscordProvider],
 	callbacks: {
-		// @ts-expect-error NextAuth type is wrong here
 		session: ({ session, user }) => ({
 			...session,
 			user: {

@@ -4,10 +4,7 @@
 	"private": true,
 	"main": "index.ts",
 	"license": "MIT",
-	"files": [
-		"index.ts",
-		"postcss.js"
-	],
+	"files": ["index.ts", "postcss.js"],
 	"scripts": {
 		"clean": "rm -rf .turbo node_modules",
 		"typecheck": "tsc --noEmit",
