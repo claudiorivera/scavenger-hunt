@@ -13,8 +13,8 @@
 		"@claudiorivera/auth": "0.1.0",
 		"@claudiorivera/db": "0.1.0",
 		"@claudiorivera/shared": "0.1.0",
-		"@trpc/client": "10.45.0",
-		"@trpc/server": "10.45.0",
+		"@trpc/client": "10.45.1",
+		"@trpc/server": "10.45.1",
 		"cloudinary": "2.0.0",
 		"superjson": "2.2.1",
 		"zod": "3.22.4"
