@@ -26,7 +26,14 @@ declare module "next-auth" {
 
 const config = {
 	adapter: PrismaAdapter(db),
-	providers: [GitHubProvider, DiscordProvider],
+	providers: [
+		GitHubProvider({
+			allowDangerousEmailAccountLinking: true,
+		}),
+		DiscordProvider({
+			allowDangerousEmailAccountLinking: true,
+		}),
+	],
 	callbacks: {
 		session: ({ session, user }) => ({
 			...session,
