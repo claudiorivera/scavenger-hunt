@@ -18,7 +18,7 @@
 	},
 	"dependencies": {
 		"@claudiorivera/shared": "0.1.0",
-		"@faker-js/faker": "8.4.0",
+		"@faker-js/faker": "8.4.1",
 		"@prisma/client": "5.9.1"
 	},
 	"devDependencies": {
