@@ -24,7 +24,7 @@
 		"@trpc/next": "10.45.1",
 		"@trpc/react-query": "10.45.1",
 		"@trpc/server": "10.45.1",
-		"@vercel/analytics": "1.2.1",
+		"@vercel/analytics": "1.2.2",
 		"axios": "1.6.7",
 		"classnames": "2.5.1",
 		"daisyui": "4.7.2",
