@@ -31,7 +31,7 @@
 		"next": "canary",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
-		"react-hook-form": "7.50.1",
+		"react-hook-form": "7.51.0",
 		"react-hot-toast": "2.4.1",
 		"react-icons": "5.0.1",
 		"sharp": "0.33.2",
