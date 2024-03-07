@@ -23,7 +23,7 @@
 	},
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "0.1.0",
-		"dotenv-cli": "7.3.0",
+		"dotenv-cli": "7.4.0",
 		"prisma": "5.10.2",
 		"typescript": "5.4.2"
 	},
