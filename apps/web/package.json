@@ -44,7 +44,7 @@
 		"@types/node": "20.11.25",
 		"@types/react": "18.2.64",
 		"@types/react-dom": "18.2.21",
-		"dotenv-cli": "7.4.0",
+		"dotenv-cli": "7.4.1",
 		"tailwindcss": "3.4.1",
 		"typescript": "5.4.2"
 	}
