@@ -41,7 +41,7 @@
 	"devDependencies": {
 		"@claudiorivera/tailwind-config": "0.1.0",
 		"@claudiorivera/tsconfig": "0.1.0",
-		"@types/node": "20.11.27",
+		"@types/node": "20.11.28",
 		"@types/react": "18.2.66",
 		"@types/react-dom": "18.2.22",
 		"dotenv-cli": "7.4.1",
