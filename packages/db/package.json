@@ -25,7 +25,7 @@
 		"@claudiorivera/tsconfig": "0.1.0",
 		"dotenv-cli": "7.4.1",
 		"prisma": "5.11.0",
-		"typescript": "5.4.2"
+		"typescript": "5.4.3"
 	},
 	"prisma": {
 		"seed": "bun run ./run-seed.ts"
