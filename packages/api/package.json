@@ -15,7 +15,7 @@
 		"@claudiorivera/shared": "0.1.0",
 		"@trpc/client": "10.45.2",
 		"@trpc/server": "10.45.2",
-		"cloudinary": "2.0.3",
+		"cloudinary": "2.1.0",
 		"superjson": "2.2.1",
 		"zod": "3.22.4"
 	},
