@@ -21,7 +21,7 @@
 		"check": "turbo check"
 	},
 	"dependencies": {
-		"@biomejs/biome": "1.7.0",
+		"@biomejs/biome": "1.7.1",
 		"@manypkg/cli": "0.21.4",
 		"@turbo/gen": "1.13.2",
 		"turbo": "1.13.2",
