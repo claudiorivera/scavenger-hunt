@@ -11,7 +11,7 @@
 		"check": "bunx @biomejs/biome check --apply ."
 	},
 	"dependencies": {
-		"zod": "3.22.5"
+		"zod": "3.23.3"
 	},
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "0.1.0",
