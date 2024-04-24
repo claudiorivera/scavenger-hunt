@@ -17,7 +17,7 @@
 		"@trpc/server": "10.45.2",
 		"cloudinary": "2.2.0",
 		"superjson": "2.2.1",
-		"zod": "3.23.3"
+		"zod": "3.23.4"
 	},
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "0.1.0",
