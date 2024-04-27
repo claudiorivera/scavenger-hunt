@@ -21,21 +21,21 @@ jobs:
       - name: 🏗️ Setup Biome
         uses: biomejs/setup-biome@v2
         with:
-          version: '1.5.3'
-      - name: 🎨 Run Biome
-        run: biome ci .
-      - name: 🏗️ Setup Bun
-        uses: oven-sh/setup-bun@v1
+          version: 'latest'
+      - name: 🏗️ Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 'latest'
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+          cache: 'pnpm'
       - name: 📦 Install Dependencies
-        run: bun install
+        run: pnpm install
+      - name: 🎨 Run Biome
+        run: pnpm turbo check
+      - name: 🏷️ Check types
+        run: pnpm turbo typecheck
 
-      # Normally, this would be done as part of the turbo pipeline - however since the Expo app doesn't depend on `@claudiorivera/db` it doesn't care.
-      # TODO: Free for all to find a better solution here.
-      - name: 🗃️ Generate Prisma Client
-        run: bun turbo db:generate
 
-      - name: 🎨 Build and type-check
-        run: bun turbo build typecheck
-
-      - name: ✅ Check workspaces
-        run: bun manypkg check

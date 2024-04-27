@@ -20,7 +20,7 @@ export function Collect() {
 		? api.items.byId.useQuery(itemId)
 		: api.items.next.useQuery({
 				skipItemIds: skippedItemIds,
-		  });
+			});
 
 	useEffect(() => {
 		if (!isLoading && !item && !!skippedItemIds.length) {

@@ -7,12 +7,13 @@
 	"scripts": {
 		"clean": "rm -rf .turbo node_modules",
 		"typecheck": "tsc --noEmit",
-		"check": "bunx @biomejs/biome check --apply ."
+		"check": "pnpm biome check .",
+		"check:fix": "pnpm biome check --apply ."
 	},
 	"dependencies": {
-		"@claudiorivera/auth": "0.1.0",
-		"@claudiorivera/db": "0.1.0",
-		"@claudiorivera/shared": "0.1.0",
+		"@claudiorivera/auth": "workspace:*",
+		"@claudiorivera/db": "workspace:*",
+		"@claudiorivera/shared": "workspace:*",
 		"@trpc/client": "10.45.2",
 		"@trpc/server": "10.45.2",
 		"cloudinary": "2.2.0",
@@ -20,7 +21,7 @@
 		"zod": "3.23.4"
 	},
 	"devDependencies": {
-		"@claudiorivera/tsconfig": "0.1.0",
+		"@claudiorivera/tsconfig": "workspace:*",
 		"typescript": "5.4.5"
 	}
 }

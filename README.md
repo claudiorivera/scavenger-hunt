@@ -12,18 +12,13 @@ It's a virtual scavenger hunt! Everyone plays simultaneously and finds specific 
 
 ## Install
 
-`bun i`
+`pnpm i`
 
 ## Config
 
 - `cp .env.example .env` and update values
-- `bun db:migrate`
+- `pnpm db:migrate`
 
 ## Dev
 
-`bun dev`
-
-## TODO
-
-- [ ] Establish better Next.js App Router patterns
-- [ ] Implement React Native app
+`pnpm dev`

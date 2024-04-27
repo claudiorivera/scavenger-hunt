@@ -40,6 +40,10 @@
 			"dependsOn": ["^topo"],
 			"cache": false
 		},
+		"check:fix": {
+			"dependsOn": ["^topo"],
+			"cache": false
+		},
 		"clean": {
 			"cache": false
 		},

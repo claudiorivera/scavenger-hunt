@@ -14,7 +14,7 @@ const handler = (req: Request) =>
 						console.error(
 							`❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`,
 						);
-				  }
+					}
 				: undefined,
 	});
 

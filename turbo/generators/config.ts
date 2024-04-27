@@ -72,9 +72,6 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
 				 * Install deps and format everything
 				 */
 				if ("name" in answers && typeof answers.name === "string") {
-					execSync("bun manypkg fix", {
-						stdio: "inherit",
-					});
 					return "Package scaffolded";
 				}
 				return "Package not scaffolded";
