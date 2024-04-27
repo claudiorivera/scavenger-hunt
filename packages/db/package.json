@@ -6,23 +6,27 @@
 	"license": "MIT",
 	"scripts": {
 		"clean": "rm -rf .turbo node_modules",
-		"db:generate": "bun with-env prisma generate",
-		"db:deploy": "bun with-env prisma migrate deploy",
-		"db:migrate": "bun with-env prisma migrate dev",
-		"db:push": "bun with-env prisma db push --skip-generate",
-		"db:seed": "bun with-env prisma db seed",
-		"dev": "bun with-env prisma studio --port 5556",
+		"db:generate": "pnpm with-env prisma generate",
+		"db:deploy": "pnpm with-env prisma migrate deploy",
+		"db:migrate": "pnpm with-env prisma migrate dev",
+		"db:push": "pnpm with-env prisma db push --skip-generate",
+		"db:seed": "pnpm with-env prisma db seed",
+		"dev": "pnpm with-env prisma studio --port 5556",
 		"with-env": "dotenv -e ../../.env --",
 		"typecheck": "tsc --noEmit",
-		"check": "bunx @biomejs/biome check --apply ."
+		"check": "pnpm biome check .",
+		"check:fix": "pnpm biome check --apply .",
+		"postinstall": "pnpm db:generate"
 	},
 	"dependencies": {
-		"@claudiorivera/shared": "0.1.0",
+		"@claudiorivera/shared": "workspace:*",
 		"@faker-js/faker": "8.4.1",
 		"@prisma/client": "5.13.0"
 	},
 	"devDependencies": {
-		"@claudiorivera/tsconfig": "0.1.0",
+		"@claudiorivera/tsconfig": "workspace:*",
+		"@types/node": "20.12.7",
+		"bun": "1.1.5",
 		"dotenv-cli": "7.4.1",
 		"prisma": "5.13.0",
 		"typescript": "5.4.5"

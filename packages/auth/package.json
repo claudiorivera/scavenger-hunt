@@ -8,12 +8,13 @@
 	"scripts": {
 		"clean": "rm -rf .turbo node_modules",
 		"typecheck": "tsc --noEmit",
-		"check": "bunx @biomejs/biome check --apply ."
+		"check": "pnpm biome check .",
+		"check:fix": "pnpm biome check --apply ."
 	},
 	"dependencies": {
 		"@auth/core": "0.30.0",
 		"@auth/prisma-adapter": "2.0.0",
-		"@claudiorivera/db": "0.1.0",
+		"@claudiorivera/db": "workspace:*",
 		"@t3-oss/env-nextjs": "0.10.1",
 		"next": "canary",
 		"next-auth": "5.0.0-beta.17",
@@ -22,7 +23,7 @@
 		"zod": "3.23.4"
 	},
 	"devDependencies": {
-		"@claudiorivera/tsconfig": "0.1.0",
+		"@claudiorivera/tsconfig": "workspace:*",
 		"typescript": "5.4.5"
 	}
 }

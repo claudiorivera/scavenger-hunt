@@ -8,13 +8,14 @@
 	"scripts": {
 		"clean": "rm -rf .turbo node_modules",
 		"typecheck": "tsc --noEmit",
-		"check": "bunx @biomejs/biome check --apply ."
+		"check": "pnpm biome check .",
+		"check:fix": "pnpm biome check --apply ."
 	},
 	"dependencies": {
 		"zod": "3.23.4"
 	},
 	"devDependencies": {
-		"@claudiorivera/tsconfig": "0.1.0",
+		"@claudiorivera/tsconfig": "workspace:*",
 		"typescript": "5.4.5"
 	}
 }
