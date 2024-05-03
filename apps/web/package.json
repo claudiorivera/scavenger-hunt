@@ -37,7 +37,7 @@
 		"react-icons": "5.2.0",
 		"sharp": "0.33.3",
 		"superjson": "2.2.1",
-		"zod": "3.23.5"
+		"zod": "3.23.6"
 	},
 	"devDependencies": {
 		"@claudiorivera/tailwind-config": "workspace:*",
