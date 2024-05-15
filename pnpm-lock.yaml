@@ -45,8 +45,8 @@ importers:
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-query-next-experimental':
-        specifier: 5.36.0
-        version: 5.36.0(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.3.0-canary.63(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        specifier: 5.36.2
+        version: 5.36.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.3.0-canary.63(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@trpc/client':
         specifier: 10.45.2
         version: 10.45.2(@trpc/server@10.45.2)
@@ -660,10 +660,10 @@ packages:
   '@tanstack/query-core@4.36.1':
     resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
 
-  '@tanstack/react-query-next-experimental@5.36.0':
-    resolution: {integrity: sha512-NBYM8HuOjZeDce+fdE9mlf2BTqJgtbSp9VJX+fN6t+wVtoUSN93SeZD/7vRnRv22yKA4PehbPNQ0maX4TWwa/A==}
+  '@tanstack/react-query-next-experimental@5.36.2':
+    resolution: {integrity: sha512-RC/QZxrUvpd9w03J1BXhN0Zt0Yw/w+hji0X7ppY2mw1ZL15OjyJ4P3i9u7oaYhKF8Wx00mkQtUkjDagXZFNB3w==}
     peerDependencies:
-      '@tanstack/react-query': ^5.36.0
+      '@tanstack/react-query': ^5.36.2
       next: ^13 || ^14
       react: ^18.0.0
 
@@ -2426,7 +2426,7 @@ snapshots:
 
   '@tanstack/query-core@4.36.1': {}
 
-  '@tanstack/react-query-next-experimental@5.36.0(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.3.0-canary.63(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@tanstack/react-query-next-experimental@5.36.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.3.0-canary.63(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@tanstack/react-query': 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next: 14.3.0-canary.63(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
