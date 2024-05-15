@@ -17,7 +17,7 @@
 		"@claudiorivera/auth": "workspace:*",
 		"@claudiorivera/db": "workspace:*",
 		"@claudiorivera/shared": "workspace:*",
-		"@hookform/resolvers": "3.3.4",
+		"@hookform/resolvers": "3.4.0",
 		"@t3-oss/env-nextjs": "0.10.1",
 		"@tanstack/react-query": "4.36.1",
 		"@tanstack/react-query-next-experimental": "5.36.0",
