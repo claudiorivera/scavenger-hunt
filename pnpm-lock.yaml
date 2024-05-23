@@ -45,8 +45,8 @@ importers:
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-query-next-experimental':
-        specifier: 5.36.2
-        version: 5.36.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.3.0-canary.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        specifier: 5.37.1
+        version: 5.37.1(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.3.0-canary.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@trpc/client':
         specifier: 10.45.2
         version: 10.45.2(@trpc/server@10.45.2)
@@ -660,10 +660,10 @@ packages:
   '@tanstack/query-core@4.36.1':
     resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
 
-  '@tanstack/react-query-next-experimental@5.36.2':
-    resolution: {integrity: sha512-RC/QZxrUvpd9w03J1BXhN0Zt0Yw/w+hji0X7ppY2mw1ZL15OjyJ4P3i9u7oaYhKF8Wx00mkQtUkjDagXZFNB3w==}
+  '@tanstack/react-query-next-experimental@5.37.1':
+    resolution: {integrity: sha512-Z4ksCK2Ta4UhQ2fwowlOT3P94pcfRLIY+cHHsp92y2di9Bft6q6yODoDVOSvVho1tqQjlJemljegZaUZUvtKVA==}
     peerDependencies:
-      '@tanstack/react-query': ^5.36.2
+      '@tanstack/react-query': ^5.37.1
       next: ^13 || ^14
       react: ^18.0.0
 
@@ -889,7 +889,6 @@ packages:
 
   bun@1.1.8:
     resolution: {integrity: sha512-TSL3POeJspEvIsfVqQZ/Sbl81kkzuUYCdE5fPdaDw0V6uU1j9d6JzfjYwNyDRnaacAAPnz3ZJukwGz3d6qJNzw==}
-    cpu: [arm64, x64]
     os: [darwin, linux, win32]
     hasBin: true
 
@@ -2429,7 +2428,7 @@ snapshots:
 
   '@tanstack/query-core@4.36.1': {}
 
-  '@tanstack/react-query-next-experimental@5.36.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.3.0-canary.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@tanstack/react-query-next-experimental@5.37.1(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.3.0-canary.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@tanstack/react-query': 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next: 14.3.0-canary.73(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
