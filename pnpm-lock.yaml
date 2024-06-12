@@ -12,8 +12,8 @@ importers:
         specifier: 1.8.1
         version: 1.8.1
       '@turbo/gen':
-        specifier: 1.13.4
-        version: 1.13.4(@types/node@20.14.2)(typescript@5.4.5)
+        specifier: 2.0.3
+        version: 2.0.3(@types/node@20.14.2)(typescript@5.4.5)
       turbo:
         specifier: 2.0.3
         version: 2.0.3
@@ -725,12 +725,12 @@ packages:
   '@tsconfig/node16@1.0.4':
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
 
-  '@turbo/gen@1.13.4':
-    resolution: {integrity: sha512-PK38N1fHhDUyjLi0mUjv0RbX0xXGwDLQeRSGsIlLcVpP1B5fwodSIwIYXc9vJok26Yne94BX5AGjueYsUT3uUw==}
+  '@turbo/gen@2.0.3':
+    resolution: {integrity: sha512-UY/90ikcHg5cUUhzyGf9tGj43OZFoKYlpWrk+Q8o89aHvsUwMH9cZ25tlBZ1Iu6PKztCHiPIFTTg+9LLkn57hA==}
     hasBin: true
 
-  '@turbo/workspaces@1.13.4':
-    resolution: {integrity: sha512-3uYg2b5TWCiupetbDFMbBFMHl33xQTvp5DNg0fZSYal73Z9AlFH9yWabHWMYw6ywmwM1evkYRpTVA2n7GgqT5A==}
+  '@turbo/workspaces@2.0.3':
+    resolution: {integrity: sha512-b3SPg9k3m6rgvhyabE1zdSc5Ln5NBCpFa4sYwfVaFnZWHnn0CBxOircwNpMR+VffsSYchc0m4Pszvp1XwlgXrg==}
     hasBin: true
 
   '@types/cookie@0.6.0':
@@ -892,6 +892,7 @@ packages:
 
   bun@1.1.13:
     resolution: {integrity: sha512-yrujTLEspzQJfh7hd2xkYM5skQsjBwVm/wq0cyYBkR5x4FRveOUqeAqtFOPH4aHvsDgwVN+dO0uIrlvE7dDsDQ==}
+    cpu: [arm64, x64]
     os: [darwin, linux, win32]
     hasBin: true
 
@@ -1727,6 +1728,7 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     deprecated: |-
       You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
+
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   queue-microtask@1.2.3:
@@ -2485,9 +2487,9 @@ snapshots:
 
   '@tsconfig/node16@1.0.4': {}
 
-  '@turbo/gen@1.13.4(@types/node@20.14.2)(typescript@5.4.5)':
+  '@turbo/gen@2.0.3(@types/node@20.14.2)(typescript@5.4.5)':
     dependencies:
-      '@turbo/workspaces': 1.13.4
+      '@turbo/workspaces': 2.0.3
       chalk: 2.4.2
       commander: 10.0.1
       fs-extra: 10.1.0
@@ -2505,7 +2507,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@turbo/workspaces@1.13.4':
+  '@turbo/workspaces@2.0.3':
     dependencies:
       chalk: 2.4.2
       commander: 10.0.1

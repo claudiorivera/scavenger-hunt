@@ -23,7 +23,7 @@
 	},
 	"dependencies": {
 		"@biomejs/biome": "1.8.1",
-		"@turbo/gen": "1.13.4",
+		"@turbo/gen": "2.0.3",
 		"turbo": "2.0.3",
 		"typescript": "5.4.5"
 	}
