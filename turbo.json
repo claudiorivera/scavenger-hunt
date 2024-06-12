@@ -1,7 +1,20 @@
 {
 	"$schema": "https://turborepo.org/schema.json",
 	"globalDependencies": ["**/.env", "tsconfig.json"],
-	"pipeline": {
+	"globalEnv": [
+		"CI",
+		"CRON_SECRET",
+		"DATABASE_URL",
+		"AUTH_GITHUB_ID",
+		"AUTH_GITHUB_SECRET",
+		"EXPO_ROUTER_APP_ROOT",
+		"AUTH_SECRET",
+		"NODE_ENV",
+		"PORT",
+		"SKIP_ENV_VALIDATION",
+		"VERCEL_URL"
+	],
+	"tasks": {
 		"topo": {
 			"dependsOn": ["^topo"]
 		},
@@ -50,18 +63,5 @@
 		"//#clean": {
 			"cache": false
 		}
-	},
-	"globalEnv": [
-		"CI",
-		"CRON_SECRET",
-		"DATABASE_URL",
-		"AUTH_GITHUB_ID",
-		"AUTH_GITHUB_SECRET",
-		"EXPO_ROUTER_APP_ROOT",
-		"AUTH_SECRET",
-		"NODE_ENV",
-		"PORT",
-		"SKIP_ENV_VALIDATION",
-		"VERCEL_URL"
-	]
+	}
 }
