@@ -12,7 +12,7 @@
 		"check:fix": "pnpm biome check --apply ."
 	},
 	"dependencies": {
-		"@auth/core": "0.33.0",
+		"@auth/core": "0.34.1",
 		"@auth/prisma-adapter": "2.3.0",
 		"@claudiorivera/db": "workspace:*",
 		"@t3-oss/env-nextjs": "0.10.1",
