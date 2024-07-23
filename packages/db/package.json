@@ -25,7 +25,7 @@
 	},
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "workspace:*",
-		"@types/node": "20.14.11",
+		"@types/node": "20.14.12",
 		"bun": "1.1.20",
 		"dotenv-cli": "7.4.2",
 		"prisma": "5.17.0",
