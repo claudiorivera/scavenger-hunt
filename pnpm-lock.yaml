@@ -201,8 +201,8 @@ importers:
         specifier: workspace:*
         version: link:../shared
       '@faker-js/faker':
-        specifier: 9.0.1
-        version: 9.0.1
+        specifier: 9.0.2
+        version: 9.0.2
       '@prisma/client':
         specifier: 5.19.1
         version: 5.19.1(prisma@5.19.1)
@@ -349,8 +349,8 @@ packages:
   '@emnapi/runtime@1.2.0':
     resolution: {integrity: sha512-bV21/9LQmcQeCPEg3BDFtvwL6cwiTMksYNWQQ4KOxCZikEGalWtenoZ0wCiukJINlGCIi2KXx01g4FoH/LxpzQ==}
 
-  '@faker-js/faker@9.0.1':
-    resolution: {integrity: sha512-4mDeYIgM3By7X6t5E6eYwLAa+2h4DeZDF7thhzIg6XB76jeEvMwadYAMCFJL/R4AnEBcAUO9+gL0vhy3s+qvZA==}
+  '@faker-js/faker@9.0.2':
+    resolution: {integrity: sha512-nI/FP30ZGXb+UaR7yXawVTH40NVKXPIx0tA3GKjkKLjorqBoMAeq4iSEacl8mJmpVhOCDa0vYHwYDmOOcFMrYw==}
     engines: {node: '>=18.0.0', npm: '>=9.0.0'}
 
   '@hookform/resolvers@3.9.0':
@@ -2201,7 +2201,7 @@ snapshots:
       tslib: 2.6.2
     optional: true
 
-  '@faker-js/faker@9.0.1': {}
+  '@faker-js/faker@9.0.2': {}
 
   '@hookform/resolvers@3.9.0(react-hook-form@7.53.0(react@18.3.1))':
     dependencies:
