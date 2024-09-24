@@ -14,7 +14,7 @@
 	"dependencies": {
 		"autoprefixer": "10.4.20",
 		"postcss": "8.4.47",
-		"tailwindcss": "3.4.12"
+		"tailwindcss": "3.4.13"
 	},
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "workspace:*",
