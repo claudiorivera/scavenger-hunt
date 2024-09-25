@@ -161,8 +161,8 @@ importers:
   packages/auth:
     dependencies:
       '@auth/core':
-        specifier: 0.35.0
-        version: 0.35.0
+        specifier: 0.35.2
+        version: 0.35.2
       '@auth/prisma-adapter':
         specifier: 2.5.0
         version: 2.5.0(@prisma/client@5.20.0(prisma@5.20.0))
@@ -268,6 +268,20 @@ packages:
 
   '@auth/core@0.35.0':
     resolution: {integrity: sha512-XvMALiYn5ZQd1hVeG1t+jCU89jRrc7ortl/05wkBrPHnRWZScxAK5jKuzBz+AOBQXewDjYcMpzeF5tTqg6rDhQ==}
+    peerDependencies:
+      '@simplewebauthn/browser': ^9.0.1
+      '@simplewebauthn/server': ^9.0.2
+      nodemailer: ^6.8.0
+    peerDependenciesMeta:
+      '@simplewebauthn/browser':
+        optional: true
+      '@simplewebauthn/server':
+        optional: true
+      nodemailer:
+        optional: true
+
+  '@auth/core@0.35.2':
+    resolution: {integrity: sha512-4PSrmSkZNMNQEHq86jARBYqls/9G2ECGMJmlazXxkRpZWgtKMUBXF1HUPz82cxy3qFXZ9/HPEiGIEGtIvu4YGQ==}
     peerDependencies:
       '@simplewebauthn/browser': ^9.0.1
       '@simplewebauthn/server': ^9.0.2
@@ -2134,6 +2148,16 @@ snapshots:
   '@alloc/quick-lru@5.2.0': {}
 
   '@auth/core@0.35.0':
+    dependencies:
+      '@panva/hkdf': 1.1.1
+      '@types/cookie': 0.6.0
+      cookie: 0.6.0
+      jose: 5.2.4
+      oauth4webapi: 2.10.4
+      preact: 10.11.3
+      preact-render-to-string: 5.2.3(preact@10.11.3)
+
+  '@auth/core@0.35.2':
     dependencies:
       '@panva/hkdf': 1.1.1
       '@types/cookie': 0.6.0
