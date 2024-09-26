@@ -20,7 +20,7 @@
 	},
 	"dependencies": {
 		"@claudiorivera/shared": "workspace:*",
-		"@faker-js/faker": "9.0.2",
+		"@faker-js/faker": "9.0.3",
 		"@prisma/client": "5.20.0"
 	},
 	"devDependencies": {
