@@ -13,7 +13,7 @@
 	},
 	"dependencies": {
 		"@auth/core": "0.35.3",
-		"@auth/prisma-adapter": "2.5.2",
+		"@auth/prisma-adapter": "2.5.3",
 		"@claudiorivera/db": "workspace:*",
 		"@t3-oss/env-nextjs": "0.11.1",
 		"next": "14.2.13",
