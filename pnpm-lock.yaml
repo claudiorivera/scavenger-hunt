@@ -164,8 +164,8 @@ importers:
         specifier: 0.36.0
         version: 0.36.0
       '@auth/prisma-adapter':
-        specifier: 2.5.3
-        version: 2.5.3(@prisma/client@5.20.0(prisma@5.20.0))
+        specifier: 2.6.0
+        version: 2.6.0(@prisma/client@5.20.0(prisma@5.20.0))
       '@claudiorivera/db':
         specifier: workspace:*
         version: link:../db
@@ -294,8 +294,8 @@ packages:
       nodemailer:
         optional: true
 
-  '@auth/prisma-adapter@2.5.3':
-    resolution: {integrity: sha512-hUQ7KT4Ufbg4RqmfvRUNwQjuNsTdxWXTIid8IbmAcT5b6DMWQEvDEJUZL14rgrBHk5xZQbagfM28VxF75NgnNw==}
+  '@auth/prisma-adapter@2.6.0':
+    resolution: {integrity: sha512-AXitVzWwdGZKmrU5UdgHmdRFu87DXfU6GLX6CupMejgXUGlo/f7uPCrZ10/E+GrEcdZLnmULf9uR51PnhZxIgA==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3 || >=4 || >=5'
 
@@ -2177,9 +2177,9 @@ snapshots:
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
 
-  '@auth/prisma-adapter@2.5.3(@prisma/client@5.20.0(prisma@5.20.0))':
+  '@auth/prisma-adapter@2.6.0(@prisma/client@5.20.0(prisma@5.20.0))':
     dependencies:
-      '@auth/core': 0.35.3
+      '@auth/core': 0.36.0
       '@prisma/client': 5.20.0(prisma@5.20.0)
     transitivePeerDependencies:
       - '@simplewebauthn/browser'
