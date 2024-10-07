@@ -8,7 +8,7 @@ import { userLinks } from "~/constants";
 export function Menu() {
 	return (
 		<div className="dropdown-end dropdown">
-			<div tabIndex={0} role="button" className="btn-ghost btn-circle btn">
+			<button tabIndex={0} type="button" className="btn-ghost btn-circle btn">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -24,7 +24,7 @@ export function Menu() {
 						d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
 					/>
 				</svg>
-			</div>
+			</button>
 			<ul
 				// biome-ignore lint/a11y/noNoninteractiveTabindex: daisyUI limitation
 				tabIndex={0}
