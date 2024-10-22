@@ -13,7 +13,7 @@ importers:
         version: 1.9.3
       '@turbo/gen':
         specifier: 2.2.3
-        version: 2.2.3(@types/node@20.16.13)(typescript@5.6.3)
+        version: 2.2.3(@types/node@20.16.14)(typescript@5.6.3)
       turbo:
         specifier: 2.2.3
         version: 2.2.3
@@ -106,8 +106,8 @@ importers:
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/node':
-        specifier: 20.16.13
-        version: 20.16.13
+        specifier: 20.16.14
+        version: 20.16.14
       '@types/react':
         specifier: 18.3.11
         version: 18.3.11
@@ -119,7 +119,7 @@ importers:
         version: 7.4.2
       tailwindcss:
         specifier: 3.4.14
-        version: 3.4.14(ts-node@10.9.2(@types/node@20.16.13)(typescript@5.6.3))
+        version: 3.4.14(ts-node@10.9.2(@types/node@20.16.14)(typescript@5.6.3))
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -211,8 +211,8 @@ importers:
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/node':
-        specifier: 20.16.13
-        version: 20.16.13
+        specifier: 20.16.14
+        version: 20.16.14
       bun:
         specifier: 1.1.32
         version: 1.1.32
@@ -249,7 +249,7 @@ importers:
         version: 8.4.47
       tailwindcss:
         specifier: 3.4.14
-        version: 3.4.14(ts-node@10.9.2(@types/node@20.16.13)(typescript@5.6.3))
+        version: 3.4.14(ts-node@10.9.2(@types/node@20.16.14)(typescript@5.6.3))
     devDependencies:
       '@claudiorivera/tsconfig':
         specifier: workspace:*
@@ -737,8 +737,8 @@ packages:
   '@types/minimatch@5.1.2':
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
 
-  '@types/node@20.16.13':
-    resolution: {integrity: sha512-GjQ7im10B0labo8ZGXDGROUl9k0BNyDgzfGpb4g/cl+4yYDWVKcozANF4FGr4/p0O/rAkQClM6Wiwkije++1Tg==}
+  '@types/node@20.16.14':
+    resolution: {integrity: sha512-vtgGzjxLF7QT88qRHtXMzCWpAAmwonE7fwgVjFtXosUva2oSpnIEc3gNO9P7uIfOxKnii2f79/xtOnfreYtDaA==}
 
   '@types/prop-types@15.7.12':
     resolution: {integrity: sha512-5zvhXYtRNRluoE/jAp4GVsSduVUzNWKkOZrCDBWYtE7biZywwdC2AcEzg+cSMLFRfVgeAFqpfNabiPjxFddV1Q==}
@@ -2475,7 +2475,7 @@ snapshots:
 
   '@tsconfig/node16@1.0.4': {}
 
-  '@turbo/gen@2.2.3(@types/node@20.16.13)(typescript@5.6.3)':
+  '@turbo/gen@2.2.3(@types/node@20.16.14)(typescript@5.6.3)':
     dependencies:
       '@turbo/workspaces': 2.2.3
       commander: 10.0.1
@@ -2485,7 +2485,7 @@ snapshots:
       node-plop: 0.26.3
       picocolors: 1.0.1
       proxy-agent: 6.4.0
-      ts-node: 10.9.2(@types/node@20.16.13)(typescript@5.6.3)
+      ts-node: 10.9.2(@types/node@20.16.14)(typescript@5.6.3)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -2515,7 +2515,7 @@ snapshots:
   '@types/glob@7.2.0':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.16.13
+      '@types/node': 20.16.14
 
   '@types/inquirer@6.5.0':
     dependencies:
@@ -2524,7 +2524,7 @@ snapshots:
 
   '@types/minimatch@5.1.2': {}
 
-  '@types/node@20.16.13':
+  '@types/node@20.16.14':
     dependencies:
       undici-types: 6.19.6
 
@@ -2541,7 +2541,7 @@ snapshots:
 
   '@types/through@0.0.33':
     dependencies:
-      '@types/node': 20.16.13
+      '@types/node': 20.16.14
 
   '@types/tinycolor2@1.4.6': {}
 
@@ -3468,13 +3468,13 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.4.47
 
-  postcss-load-config@4.0.2(postcss@8.4.47)(ts-node@10.9.2(@types/node@20.16.13)(typescript@5.6.3)):
+  postcss-load-config@4.0.2(postcss@8.4.47)(ts-node@10.9.2(@types/node@20.16.14)(typescript@5.6.3)):
     dependencies:
       lilconfig: 3.1.1
       yaml: 2.4.1
     optionalDependencies:
       postcss: 8.4.47
-      ts-node: 10.9.2(@types/node@20.16.13)(typescript@5.6.3)
+      ts-node: 10.9.2(@types/node@20.16.14)(typescript@5.6.3)
 
   postcss-nested@6.0.1(postcss@8.4.47):
     dependencies:
@@ -3771,7 +3771,7 @@ snapshots:
       lower-case: 1.1.4
       upper-case: 1.1.3
 
-  tailwindcss@3.4.14(ts-node@10.9.2(@types/node@20.16.13)(typescript@5.6.3)):
+  tailwindcss@3.4.14(ts-node@10.9.2(@types/node@20.16.14)(typescript@5.6.3)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -3790,7 +3790,7 @@ snapshots:
       postcss: 8.4.47
       postcss-import: 15.1.0(postcss@8.4.47)
       postcss-js: 4.0.1(postcss@8.4.47)
-      postcss-load-config: 4.0.2(postcss@8.4.47)(ts-node@10.9.2(@types/node@20.16.13)(typescript@5.6.3))
+      postcss-load-config: 4.0.2(postcss@8.4.47)(ts-node@10.9.2(@types/node@20.16.14)(typescript@5.6.3))
       postcss-nested: 6.0.1(postcss@8.4.47)
       postcss-selector-parser: 6.0.16
       resolve: 1.22.8
@@ -3830,14 +3830,14 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-node@10.9.2(@types/node@20.16.13)(typescript@5.6.3):
+  ts-node@10.9.2(@types/node@20.16.14)(typescript@5.6.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.16.13
+      '@types/node': 20.16.14
       acorn: 8.11.3
       acorn-walk: 8.3.2
       arg: 4.1.3
