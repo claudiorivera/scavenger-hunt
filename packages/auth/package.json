@@ -9,7 +9,7 @@
 		"clean": "rm -rf .turbo node_modules",
 		"typecheck": "tsc --noEmit",
 		"check": "pnpm biome check .",
-		"check:fix": "pnpm biome check --apply ."
+		"check:fix": "pnpm biome check --write ."
 	},
 	"dependencies": {
 		"@auth/core": "0.37.2",

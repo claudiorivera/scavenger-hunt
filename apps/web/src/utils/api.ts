@@ -4,4 +4,4 @@ import type { AppRouter } from "@claudiorivera/api";
 
 export const api = createTRPCReact<AppRouter>();
 
-export { type RouterInputs, type RouterOutputs } from "@claudiorivera/api";
+export type { RouterInputs, RouterOutputs } from "@claudiorivera/api";

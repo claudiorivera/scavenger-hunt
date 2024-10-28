@@ -15,7 +15,7 @@
 		"with-env": "dotenv -e ../../.env --",
 		"typecheck": "tsc --noEmit",
 		"check": "pnpm biome check .",
-		"check:fix": "pnpm biome check --apply .",
+		"check:fix": "pnpm biome check --write .",
 		"postinstall": "pnpm db:generate"
 	},
 	"dependencies": {

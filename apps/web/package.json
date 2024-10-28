@@ -8,7 +8,7 @@
 		"dev": "pnpm with-env next dev",
 		"start": "pnpm with-env next start",
 		"check": "pnpm biome check src",
-		"check:fix": "pnpm biome check --apply src",
+		"check:fix": "pnpm biome check --write src",
 		"typecheck": "tsc --noEmit",
 		"with-env": "dotenv -e ../../.env --"
 	},
