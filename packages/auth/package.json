@@ -16,7 +16,7 @@
 		"@auth/prisma-adapter": "2.7.3",
 		"@claudiorivera/db": "workspace:*",
 		"@t3-oss/env-nextjs": "0.11.1",
-		"next": "14.2.17",
+		"next": "14.2.18",
 		"next-auth": "5.0.0-beta.25",
 		"react": "18.3.1",
 		"react-dom": "18.3.1",
