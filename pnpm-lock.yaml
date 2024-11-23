@@ -13,13 +13,13 @@ importers:
         version: 1.9.4
       '@turbo/gen':
         specifier: 2.3.1
-        version: 2.3.1(@types/node@22.9.1)(typescript@5.6.3)
+        version: 2.3.1(@types/node@22.9.1)(typescript@5.7.2)
       turbo:
         specifier: 2.3.1
         version: 2.3.1
       typescript:
-        specifier: 5.6.3
-        version: 5.6.3
+        specifier: 5.7.2
+        version: 5.7.2
 
   apps/web:
     dependencies:
@@ -40,7 +40,7 @@ importers:
         version: 3.9.1(react-hook-form@7.53.2(react@18.3.1))
       '@t3-oss/env-nextjs':
         specifier: 0.11.1
-        version: 0.11.1(typescript@5.6.3)(zod@3.23.8)
+        version: 0.11.1(typescript@5.7.2)(zod@3.23.8)
       '@tanstack/react-query':
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -119,10 +119,10 @@ importers:
         version: 7.4.4
       tailwindcss:
         specifier: 3.4.15
-        version: 3.4.15(ts-node@10.9.2(@types/node@22.9.1)(typescript@5.6.3))
+        version: 3.4.15(ts-node@10.9.2(@types/node@22.9.1)(typescript@5.7.2))
       typescript:
-        specifier: 5.6.3
-        version: 5.6.3
+        specifier: 5.7.2
+        version: 5.7.2
 
   packages/api:
     dependencies:
@@ -155,8 +155,8 @@ importers:
         specifier: workspace:*
         version: link:../../tooling/typescript
       typescript:
-        specifier: 5.6.3
-        version: 5.6.3
+        specifier: 5.7.2
+        version: 5.7.2
 
   packages/auth:
     dependencies:
@@ -171,7 +171,7 @@ importers:
         version: link:../db
       '@t3-oss/env-nextjs':
         specifier: 0.11.1
-        version: 0.11.1(typescript@5.6.3)(zod@3.23.8)
+        version: 0.11.1(typescript@5.7.2)(zod@3.23.8)
       next:
         specifier: 14.2.18
         version: 14.2.18(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -192,8 +192,8 @@ importers:
         specifier: workspace:*
         version: link:../../tooling/typescript
       typescript:
-        specifier: 5.6.3
-        version: 5.6.3
+        specifier: 5.7.2
+        version: 5.7.2
 
   packages/db:
     dependencies:
@@ -223,8 +223,8 @@ importers:
         specifier: 5.22.0
         version: 5.22.0
       typescript:
-        specifier: 5.6.3
-        version: 5.6.3
+        specifier: 5.7.2
+        version: 5.7.2
 
   packages/shared:
     dependencies:
@@ -236,8 +236,8 @@ importers:
         specifier: workspace:*
         version: link:../../tooling/typescript
       typescript:
-        specifier: 5.6.3
-        version: 5.6.3
+        specifier: 5.7.2
+        version: 5.7.2
 
   tooling/tailwind:
     dependencies:
@@ -249,14 +249,14 @@ importers:
         version: 8.4.49
       tailwindcss:
         specifier: 3.4.15
-        version: 3.4.15(ts-node@10.9.2(@types/node@22.9.1)(typescript@5.6.3))
+        version: 3.4.15(ts-node@10.9.2(@types/node@22.9.1)(typescript@5.7.2))
     devDependencies:
       '@claudiorivera/tsconfig':
         specifier: workspace:*
         version: link:../typescript
       typescript:
-        specifier: 5.6.3
-        version: 5.6.3
+        specifier: 5.7.2
+        version: 5.7.2
 
   tooling/typescript: {}
 
@@ -2101,8 +2101,8 @@ packages:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}
     engines: {node: '>=10'}
 
-  typescript@5.6.3:
-    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
+  typescript@5.7.2:
+    resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -2480,18 +2480,18 @@ snapshots:
       '@swc/counter': 0.1.3
       tslib: 2.6.2
 
-  '@t3-oss/env-core@0.11.1(typescript@5.6.3)(zod@3.23.8)':
+  '@t3-oss/env-core@0.11.1(typescript@5.7.2)(zod@3.23.8)':
     dependencies:
       zod: 3.23.8
     optionalDependencies:
-      typescript: 5.6.3
+      typescript: 5.7.2
 
-  '@t3-oss/env-nextjs@0.11.1(typescript@5.6.3)(zod@3.23.8)':
+  '@t3-oss/env-nextjs@0.11.1(typescript@5.7.2)(zod@3.23.8)':
     dependencies:
-      '@t3-oss/env-core': 0.11.1(typescript@5.6.3)(zod@3.23.8)
+      '@t3-oss/env-core': 0.11.1(typescript@5.7.2)(zod@3.23.8)
       zod: 3.23.8
     optionalDependencies:
-      typescript: 5.6.3
+      typescript: 5.7.2
 
   '@tanstack/query-core@4.36.1': {}
 
@@ -2543,7 +2543,7 @@ snapshots:
 
   '@tsconfig/node16@1.0.4': {}
 
-  '@turbo/gen@2.3.1(@types/node@22.9.1)(typescript@5.6.3)':
+  '@turbo/gen@2.3.1(@types/node@22.9.1)(typescript@5.7.2)':
     dependencies:
       '@turbo/workspaces': 2.3.1
       commander: 10.0.1
@@ -2553,7 +2553,7 @@ snapshots:
       node-plop: 0.26.3
       picocolors: 1.0.1
       proxy-agent: 6.4.0
-      ts-node: 10.9.2(@types/node@22.9.1)(typescript@5.6.3)
+      ts-node: 10.9.2(@types/node@22.9.1)(typescript@5.7.2)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -3554,13 +3554,13 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.4.49
 
-  postcss-load-config@4.0.2(postcss@8.4.49)(ts-node@10.9.2(@types/node@22.9.1)(typescript@5.6.3)):
+  postcss-load-config@4.0.2(postcss@8.4.49)(ts-node@10.9.2(@types/node@22.9.1)(typescript@5.7.2)):
     dependencies:
       lilconfig: 3.1.1
       yaml: 2.4.1
     optionalDependencies:
       postcss: 8.4.49
-      ts-node: 10.9.2(@types/node@22.9.1)(typescript@5.6.3)
+      ts-node: 10.9.2(@types/node@22.9.1)(typescript@5.7.2)
 
   postcss-nested@6.2.0(postcss@8.4.49):
     dependencies:
@@ -3863,7 +3863,7 @@ snapshots:
       lower-case: 1.1.4
       upper-case: 1.1.3
 
-  tailwindcss@3.4.15(ts-node@10.9.2(@types/node@22.9.1)(typescript@5.6.3)):
+  tailwindcss@3.4.15(ts-node@10.9.2(@types/node@22.9.1)(typescript@5.7.2)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -3882,7 +3882,7 @@ snapshots:
       postcss: 8.4.49
       postcss-import: 15.1.0(postcss@8.4.49)
       postcss-js: 4.0.1(postcss@8.4.49)
-      postcss-load-config: 4.0.2(postcss@8.4.49)(ts-node@10.9.2(@types/node@22.9.1)(typescript@5.6.3))
+      postcss-load-config: 4.0.2(postcss@8.4.49)(ts-node@10.9.2(@types/node@22.9.1)(typescript@5.7.2))
       postcss-nested: 6.2.0(postcss@8.4.49)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.8
@@ -3922,7 +3922,7 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-node@10.9.2(@types/node@22.9.1)(typescript@5.6.3):
+  ts-node@10.9.2(@types/node@22.9.1)(typescript@5.7.2):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -3936,7 +3936,7 @@ snapshots:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.6.3
+      typescript: 5.7.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
@@ -3973,7 +3973,7 @@ snapshots:
 
   type-fest@0.21.3: {}
 
-  typescript@5.6.3: {}
+  typescript@5.7.2: {}
 
   uglify-js@3.17.4:
     optional: true
