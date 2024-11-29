@@ -44,7 +44,7 @@
 		"@claudiorivera/tsconfig": "workspace:*",
 		"@types/node": "22.10.1",
 		"@types/react": "npm:types-react@19.0.0-rc.1",
-		"@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+		"@types/react-dom": "npm:types-react-dom@19.0.0",
 		"dotenv-cli": "7.4.4",
 		"tailwindcss": "3.4.15",
 		"typescript": "5.7.2"
@@ -52,7 +52,7 @@
 	"pnpm": {
 		"overrides": {
 			"@types/react": "npm:types-react@19.0.0-rc.1",
-			"@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+			"@types/react-dom": "npm:types-react-dom@19.0.0"
 		}
 	}
 }
