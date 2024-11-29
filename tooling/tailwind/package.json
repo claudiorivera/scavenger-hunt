@@ -7,7 +7,7 @@
 	"files": ["index.ts", "postcss.js"],
 	"scripts": {
 		"clean": "rm -rf .turbo node_modules",
-		"typecheck": "tsc --noEmit",
+		"check-types": "tsc --noEmit",
 		"check": "pnpm biome check .",
 		"check:fix": "pnpm biome check --write ."
 	},

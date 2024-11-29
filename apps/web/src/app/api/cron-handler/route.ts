@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { seed } from "@claudiorivera/db";
 
 export async function POST() {
-	const headersList = headers();
+	const headersList = await headers();
 	const authorization = headersList.get("authorization");
 
 	if (authorization === `Bearer ${process.env.CRON_SECRET}`) {

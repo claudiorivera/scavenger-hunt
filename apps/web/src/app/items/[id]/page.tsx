@@ -4,7 +4,10 @@ import { auth } from "@claudiorivera/auth";
 
 import { Item } from "~/app/items/[id]/item";
 
-export default async function ItemPage({ params }: { params: { id: string } }) {
+export default async function ItemPage(props: {
+	params: Promise<{ id: string }>;
+}) {
+	const params = await props.params;
 	const session = await auth();
 
 	if (!session) return redirect("/api/auth/signin");

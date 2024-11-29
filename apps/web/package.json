@@ -5,11 +5,11 @@
 	"scripts": {
 		"build": "pnpm with-env next build",
 		"clean": "git clean -xdf .next .turbo node_modules",
-		"dev": "pnpm with-env next dev",
+		"dev": "pnpm with-env next dev --turbopack",
 		"start": "pnpm with-env next start",
 		"check": "pnpm biome check src",
 		"check:fix": "pnpm biome check --write src",
-		"typecheck": "tsc --noEmit",
+		"check-types": "tsc --noEmit",
 		"with-env": "dotenv -e ../../.env --"
 	},
 	"dependencies": {
@@ -29,9 +29,9 @@
 		"axios": "1.7.8",
 		"classnames": "2.5.1",
 		"daisyui": "4.12.14",
-		"next": "14.2.18",
-		"react": "18.3.1",
-		"react-dom": "18.3.1",
+		"next": "15.0.3",
+		"react": "19.0.0-rc-66855b96-20241106",
+		"react-dom": "19.0.0-rc-66855b96-20241106",
 		"react-hook-form": "7.53.2",
 		"react-hot-toast": "2.4.1",
 		"react-icons": "5.3.0",
@@ -43,10 +43,16 @@
 		"@claudiorivera/tailwind-config": "workspace:*",
 		"@claudiorivera/tsconfig": "workspace:*",
 		"@types/node": "22.10.1",
-		"@types/react": "18.3.12",
-		"@types/react-dom": "18.3.1",
+		"@types/react": "npm:types-react@19.0.0-rc.1",
+		"@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
 		"dotenv-cli": "7.4.4",
 		"tailwindcss": "3.4.15",
 		"typescript": "5.7.2"
+	},
+	"pnpm": {
+		"overrides": {
+			"@types/react": "npm:types-react@19.0.0-rc.1",
+			"@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+		}
 	}
 }

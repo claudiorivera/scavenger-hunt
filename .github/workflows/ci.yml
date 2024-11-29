@@ -36,6 +36,6 @@ jobs:
       - name: 🎨 Run Biome
         run: pnpm turbo check
       - name: 🏷️ Check types
-        run: pnpm turbo typecheck
+        run: pnpm turbo check-types
 
 

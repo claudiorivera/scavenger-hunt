@@ -17,7 +17,7 @@
 		"db:migrate": "turbo db:migrate",
 		"db:deploy": "turbo db:deploy",
 		"dev": "turbo dev --parallel",
-		"typecheck": "turbo typecheck",
+		"check-types": "turbo check-types",
 		"check": "turbo check",
 		"check:fix": "turbo check:fix"
 	},

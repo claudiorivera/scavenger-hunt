@@ -45,7 +45,7 @@
 			"persistent": true,
 			"cache": false
 		},
-		"typecheck": {
+		"check-types": {
 			"dependsOn": ["^topo", "^db:generate"],
 			"outputs": ["node_modules/.cache/tsbuildinfo.json"]
 		},
