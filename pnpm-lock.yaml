@@ -45,8 +45,8 @@ importers:
         specifier: 4.36.1
         version: 4.36.1(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)
       '@tanstack/react-query-next-experimental':
-        specifier: 5.62.0
-        version: 5.62.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614))(next@15.0.3(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)
+        specifier: 5.62.1
+        version: 5.62.1(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614))(next@15.0.3(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)
       '@trpc/client':
         specifier: 10.45.2
         version: 10.45.2(@trpc/server@10.45.2)
@@ -663,10 +663,10 @@ packages:
   '@tanstack/query-core@4.36.1':
     resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
 
-  '@tanstack/react-query-next-experimental@5.62.0':
-    resolution: {integrity: sha512-Fml6J0LduC/xxYIDVTn/QYr66nzfob03O1mylgn9X6dfUwnhH9584hKOl+4UKGxCGjkEugp+FvI2T02FqhW/3g==}
+  '@tanstack/react-query-next-experimental@5.62.1':
+    resolution: {integrity: sha512-EYqa/DcSKoDJzFDzMpPaZpvvOHSQmX1BOzwGJmjAZPBPBLWdLWNYe0T9JNVjRdAlfnwBbT1mfgSLuS4XlwmRQQ==}
     peerDependencies:
-      '@tanstack/react-query': ^5.62.0
+      '@tanstack/react-query': ^5.62.1
       next: ^13 || ^14 || ^15
       react: ^18 || ^19
 
@@ -2484,7 +2484,7 @@ snapshots:
 
   '@tanstack/query-core@4.36.1': {}
 
-  '@tanstack/react-query-next-experimental@5.62.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614))(next@15.0.3(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)':
+  '@tanstack/react-query-next-experimental@5.62.1(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614))(next@15.0.3(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)':
     dependencies:
       '@tanstack/react-query': 4.36.1(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)
       next: 15.0.3(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)
