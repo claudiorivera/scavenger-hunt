@@ -29,7 +29,7 @@
 		"axios": "1.7.9",
 		"classnames": "2.5.1",
 		"daisyui": "4.12.14",
-		"next": "15.0.3",
+		"next": "15.0.4",
 		"react": "19.0.0",
 		"react-dom": "19.0.0",
 		"react-hook-form": "7.53.2",
