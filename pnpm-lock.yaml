@@ -45,8 +45,8 @@ importers:
         specifier: 4.36.1
         version: 4.36.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@tanstack/react-query-next-experimental':
-        specifier: 5.62.2
-        version: 5.62.2(@tanstack/react-query@4.36.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(next@15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
+        specifier: 5.62.3
+        version: 5.62.3(@tanstack/react-query@4.36.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(next@15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       '@trpc/client':
         specifier: 10.45.2
         version: 10.45.2(@trpc/server@10.45.2)
@@ -663,10 +663,10 @@ packages:
   '@tanstack/query-core@4.36.1':
     resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
 
-  '@tanstack/react-query-next-experimental@5.62.2':
-    resolution: {integrity: sha512-XmMRnF+Lnhua0qzMiti1GEV08/g2v6hE44KuU1AQJHTUp1YoQEhPmzRYl09f4hm/LuVEjuMRYPmtd/Im57V3nw==}
+  '@tanstack/react-query-next-experimental@5.62.3':
+    resolution: {integrity: sha512-RgYGLIb12alB6Yd3StknzKcWOpPerPCfNtlp69TiDRLrXtHc5L8gPqC5uVqM2lPRoUbj32FrVUmfSEmLhlVl6A==}
     peerDependencies:
-      '@tanstack/react-query': ^5.62.2
+      '@tanstack/react-query': ^5.62.3
       next: ^13 || ^14 || ^15
       react: ^18 || ^19
 
@@ -2468,7 +2468,7 @@ snapshots:
 
   '@tanstack/query-core@4.36.1': {}
 
-  '@tanstack/react-query-next-experimental@5.62.2(@tanstack/react-query@4.36.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(next@15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)':
+  '@tanstack/react-query-next-experimental@5.62.3(@tanstack/react-query@4.36.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(next@15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@tanstack/react-query': 4.36.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next: 15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
