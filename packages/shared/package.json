@@ -12,7 +12,7 @@
 		"check:fix": "pnpm biome check --write ."
 	},
 	"dependencies": {
-		"zod": "3.24.0"
+		"zod": "3.24.1"
 	},
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "workspace:*",
