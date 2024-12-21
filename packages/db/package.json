@@ -27,7 +27,7 @@
 		"@claudiorivera/tsconfig": "workspace:*",
 		"@types/node": "22.10.2",
 		"bun": "1.1.41",
-		"dotenv-cli": "7.4.4",
+		"dotenv-cli": "8.0.0",
 		"prisma": "6.1.0",
 		"typescript": "5.7.2"
 	},

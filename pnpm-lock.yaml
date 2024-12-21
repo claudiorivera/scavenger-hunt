@@ -115,8 +115,8 @@ importers:
         specifier: npm:types-react-dom@19.0.0
         version: types-react-dom@19.0.0
       dotenv-cli:
-        specifier: 7.4.4
-        version: 7.4.4
+        specifier: 8.0.0
+        version: 8.0.0
       tailwindcss:
         specifier: 3.4.17
         version: 3.4.17(ts-node@10.9.2(@types/node@22.10.2)(typescript@5.7.2))
@@ -217,8 +217,8 @@ importers:
         specifier: 1.1.41
         version: 1.1.41
       dotenv-cli:
-        specifier: 7.4.4
-        version: 7.4.4
+        specifier: 8.0.0
+        version: 8.0.0
       prisma:
         specifier: 6.1.0
         version: 6.1.0
@@ -1117,8 +1117,8 @@ packages:
   dot-case@2.1.1:
     resolution: {integrity: sha512-HnM6ZlFqcajLsyudHq7LeeLDr2rFAVYtDv/hV5qchQEidSck8j9OPUsXY9KwJv/lHMtYlX4DjRQqwFYa+0r8Ug==}
 
-  dotenv-cli@7.4.4:
-    resolution: {integrity: sha512-XkBYCG0tPIes+YZr4SpfFv76SQrV/LeCE8CI7JSEMi3VR9MvTihCGTOtbIexD6i2mXF+6px7trb1imVCXSNMDw==}
+  dotenv-cli@8.0.0:
+    resolution: {integrity: sha512-aLqYbK7xKOiTMIRf1lDPbI+Y+Ip/wo5k3eyp6ePysVaSqbyxjyK3dK35BTxG+rmd7djf5q2UPs4noPNH+cj0Qw==}
     hasBin: true
 
   dotenv-expand@10.0.0:
@@ -2944,7 +2944,7 @@ snapshots:
     dependencies:
       no-case: 2.3.2
 
-  dotenv-cli@7.4.4:
+  dotenv-cli@8.0.0:
     dependencies:
       cross-spawn: 7.0.6
       dotenv: 16.4.5
