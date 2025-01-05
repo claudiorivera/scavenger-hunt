@@ -1,51 +1,101 @@
 "use client";
 
+import { Role } from "@claudiorivera/db";
+import {
+	CameraIcon,
+	HomeIcon,
+	ImagesIcon,
+	LogOutIcon,
+	MedalIcon,
+	MenuIcon,
+	UserRoundIcon,
+} from "lucide-react";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Button } from "~/components/ui/button";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
 
-import { userLinks } from "~/constants";
+const userLinks = [
+	{
+		title: "Home",
+		url: "/",
+		icon: <HomeIcon />,
+	},
+	{
+		title: "Collect",
+		url: "/collect",
+		icon: <CameraIcon />,
+	},
+	{
+		title: "Leaderboard",
+		url: "/leaderboard",
+		icon: <MedalIcon />,
+	},
+	{
+		title: "Items",
+		url: "/items",
+		icon: <ImagesIcon />,
+	},
+	{
+		title: "My Profile",
+		url: "/profile",
+		icon: <UserRoundIcon />,
+	},
+	{
+		title: "Sign Out",
+		url: "/api/auth/signout",
+		icon: <LogOutIcon />,
+	},
+];
 
-export function Menu() {
+const adminLinks = [
+	{
+		title: "Admin",
+		url: "/admin",
+		icon: <UserRoundIcon />,
+	},
+];
+
+export function Menu({
+	userRole,
+}: {
+	userRole?: Role;
+}) {
 	return (
-		<div className="dropdown-end dropdown">
-			<button tabIndex={0} type="button" className="btn-ghost btn-circle btn">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					strokeWidth={1.5}
-					stroke="currentColor"
-					className="h-6 w-6"
-				>
-					<title>Menu Icon</title>
-					<path
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-					/>
-				</svg>
-			</button>
-			<ul
-				// biome-ignore lint/a11y/noNoninteractiveTabindex: daisyUI limitation
-				tabIndex={0}
-				className="dropdown-content menu rounded-box bg-base-100 text-base-content w-52 p-2 shadow"
-			>
-				<Fragment>
-					{userLinks.map((link) => (
-						<li key={link.url}>
-							<Link
-								href={link.url}
-								onClick={() =>
-									document.activeElement instanceof HTMLElement &&
-									document.activeElement.blur()
-								}
-							>
-								{link.title}
-							</Link>
-						</li>
-					))}
-				</Fragment>
-			</ul>
-		</div>
+		<DropdownMenu>
+			<DropdownMenuTrigger asChild>
+				<Button variant="ghost">
+					<MenuIcon />
+				</Button>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent className="p-2" align="end">
+				{userLinks.map((link) => (
+					<DropdownMenuItem key={link.url} asChild>
+						<Link href={link.url} className="cursor-pointer">
+							{link.icon}
+							<span>{link.title}</span>
+						</Link>
+					</DropdownMenuItem>
+				))}
+				{userRole === Role.ADMIN && (
+					<>
+						<DropdownMenuSeparator />
+						{adminLinks.map((link) => (
+							<DropdownMenuItem key={link.url} asChild>
+								<Link href={link.url} className="cursor-pointer">
+									{link.icon}
+									<span>{link.title}</span>
+								</Link>
+							</DropdownMenuItem>
+						))}
+					</>
+				)}
+			</DropdownMenuContent>
+		</DropdownMenu>
 	);
 }

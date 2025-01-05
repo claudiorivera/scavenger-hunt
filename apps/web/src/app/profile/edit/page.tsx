@@ -1,7 +1,6 @@
-import { redirect } from "next/navigation";
-
 import { auth } from "@claudiorivera/auth";
-
+import { db } from "@claudiorivera/db";
+import { notFound, redirect } from "next/navigation";
 import { EditProfile } from "~/app/profile/edit/edit-profile";
 
 export default async function EditProfilePage() {
@@ -9,5 +8,13 @@ export default async function EditProfilePage() {
 
 	if (!session) return redirect("/api/auth/signin");
 
-	return <EditProfile />;
+	const user = await db.user.findUnique({
+		where: {
+			id: session.user.id,
+		},
+	});
+
+	if (!user) return notFound();
+
+	return <EditProfile user={user} />;
 }

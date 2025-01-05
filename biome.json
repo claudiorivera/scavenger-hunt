@@ -1,17 +1,72 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"vcs": {
+		"enabled": true,
+		"useIgnoreFile": true,
+		"clientKind": "git"
+	},
 	"organizeImports": {
 		"enabled": true
 	},
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"style": {
+				"noDefaultExport": "error",
+				"useFragmentSyntax": {
+					"fix": "safe",
+					"level": "error"
+				},
+				"useConsistentArrayType": {
+					"fix": "safe",
+					"level": "warn",
+					"options": {
+						"syntax": "generic"
+					}
+				}
+			},
+			"correctness": {
+				"noUnusedImports": "error",
+				"noUnusedVariables": "error",
+				"noUnusedFunctionParameters": "error",
+				"useHookAtTopLevel": "error"
+			},
+			"nursery": {
+				"useSortedClasses": {
+					"fix": "safe",
+					"level": "warn",
+					"options": {
+						"functions": ["cn", "clsx"]
+					}
+				},
+				"useConsistentCurlyBraces": {
+					"fix": "safe",
+					"level": "error"
+				},
+				"noEnum": "error"
+			}
 		}
 	},
-	"vcs": {
-		"enabled": true,
-		"clientKind": "git",
-		"useIgnoreFile": true
-	}
+	"overrides": [
+		{
+			"include": [
+				"src/app/**/layout.tsx",
+				"src/app/**/page.tsx",
+				"src/app/**/loading.tsx",
+				"next.config.*",
+				"tailwind.config.*",
+				"postcss.config.*",
+				"playwright.config.*",
+				"vitest.config.*"
+			],
+			"linter": {
+				"rules": {
+					"style": {
+						"noDefaultExport": "off"
+					}
+				}
+			}
+		}
+	]
 }

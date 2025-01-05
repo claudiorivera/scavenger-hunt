@@ -1,9 +1,12 @@
 "use client";
-
-import Image from "next/image";
 import Link from "next/link";
-
-import { Avatar } from "~/components/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "~/components/ui/tooltip";
+import { getInitials } from "~/lib/get-initials";
 import { api } from "~/utils/api";
 
 export const User = ({ id }: { id: string }) => {
@@ -12,7 +15,10 @@ export const User = ({ id }: { id: string }) => {
 	return (
 		<div className="flex flex-col gap-4">
 			<div className="flex flex-col items-center gap-2">
-				<Avatar imageSrc={user?.image} size="lg" />
+				<Avatar className="h-24 w-24">
+					<AvatarImage src={user?.image ?? undefined} />
+					<AvatarFallback>{getInitials(user?.name)}</AvatarFallback>
+				</Avatar>
 				<header className="text-5xl">{user?.name}</header>
 				<div className="text-2xl">Found the Following Items:</div>
 			</div>
@@ -22,19 +28,16 @@ export const User = ({ id }: { id: string }) => {
 						key={collectionItem.id}
 						href={`/collection-items/${collectionItem.id}`}
 					>
-						<li
-							className="avatar tooltip"
-							data-tip={`${collectionItem.item.description}`}
-						>
-							<div className="relative h-14 w-14 rounded-full">
-								<Image
-									src={collectionItem.url}
-									fill
-									alt={`${user.name}`}
-									sizes="33vw"
-								/>
-							</div>
-						</li>
+						<Tooltip>
+							<TooltipTrigger asChild>
+								<Avatar>
+									<AvatarImage src={collectionItem.url} />
+								</Avatar>
+							</TooltipTrigger>
+							<TooltipContent className="bg-black">
+								{collectionItem.item.description}
+							</TooltipContent>
+						</Tooltip>
 					</Link>
 				))}
 			</ul>

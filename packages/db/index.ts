@@ -102,8 +102,7 @@ export async function seed() {
 							id: user.id,
 						},
 					},
-					url: faker.image.urlLoremFlickr({
-						category: "animals",
+					url: faker.image.urlPicsumPhotos({
 						height: 320,
 						width: 320,
 					}),

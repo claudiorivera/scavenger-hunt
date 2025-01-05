@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Avatar } from "~/components/avatar";
 import { DeleteItem } from "~/components/delete-item";
 import { EyeIcon } from "~/components/eye-icon";
 import { Loading } from "~/components/loading";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { Button } from "~/components/ui/button";
 import { useItemDetails } from "~/hooks/use-item-details";
+import { getInitials } from "~/lib/get-initials";
 import type { RouterOutputs } from "~/utils/api";
 import { api } from "~/utils/api";
 
@@ -35,9 +37,9 @@ export function Item({ id }: { id: string }) {
 				<div className="text-2xl">Nobody, yet 😢</div>
 			)}
 			{isUncollectedByCurrentUser && (
-				<Link className="btn-secondary btn" href={`/collect?itemId=${item.id}`}>
-					Found It?
-				</Link>
+				<Button variant="secondary" asChild>
+					<Link href={`/collect?itemId=${item.id}`}>Found It?</Link>
+				</Button>
 			)}
 			{currentUser?.role === "ADMIN" && <DeleteItem id={item.id} />}
 		</div>
@@ -61,16 +63,18 @@ function UsersList({
 				return (
 					<li key={user.id} className="flex items-center gap-4">
 						<Link href={`/users/${user.id}`}>
-							<Avatar imageSrc={user.image} size="sm" />
+							<Avatar>
+								<AvatarImage src={user.image ?? undefined} />
+								<AvatarFallback>{getInitials(user.name)}</AvatarFallback>
+							</Avatar>
 						</Link>
 						<div className="flex-1 text-left">{user.name}</div>
 						{!!collectionItem?.id && (
-							<Link
-								className="btn-secondary btn"
-								href={`/collection-items/${collectionItem.id}`}
-							>
-								<EyeIcon />
-							</Link>
+							<Button variant="secondary" asChild>
+								<Link href={`/collection-items/${collectionItem.id}`}>
+									<EyeIcon />
+								</Link>
+							</Button>
 						)}
 					</li>
 				);

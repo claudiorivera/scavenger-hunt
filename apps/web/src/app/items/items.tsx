@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-
 import { AddItemForm } from "~/components/add-item-form";
 import { CheckCircleIcon } from "~/components/check-circle-icon";
-import { MinusCircleIcon } from "~/components/minus-circle-icon";
+import { Button } from "~/components/ui/button";
 import { api } from "~/utils/api";
 
 export function Items() {
@@ -25,28 +24,19 @@ export function Items() {
 				{uncollectedItems.map((item) => (
 					<li key={item.id}>
 						<div className="relative flex items-center gap-2">
-							<Link
-								className="btn-secondary btn flex-1"
-								href={`/items/${item.id}`}
-							>
-								{item.description}
-							</Link>
-							<div className="text-warning absolute -right-8">
-								<MinusCircleIcon />
-							</div>
+							<Button variant="secondary" asChild className="flex-1">
+								<Link href={`/items/${item.id}`}>{item.description}</Link>
+							</Button>
 						</div>
 					</li>
 				))}
 				{collectedItems.map((item) => (
 					<li key={item.id}>
 						<div className="relative flex items-center gap-2">
-							<Link
-								className="btn-secondary btn flex-1"
-								href={`/items/${item.id}`}
-							>
-								{item.description}
-							</Link>
-							<div className="text-success absolute -right-8">
+							<Button variant="secondary" asChild className="flex-1">
+								<Link href={`/items/${item.id}`}>{item.description}</Link>
+							</Button>
+							<div className="-right-8 absolute text-success">
 								<CheckCircleIcon />
 							</div>
 						</div>

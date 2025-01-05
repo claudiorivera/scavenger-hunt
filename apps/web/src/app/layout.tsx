@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
 import "~/styles/globals.css";
 
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import { AppBar } from "~/app/app-bar";
 import { TRPCReactProvider } from "~/app/providers";
+import { TooltipProvider } from "~/components/ui/tooltip";
 
 const fontSans = Inter({
 	subsets: ["latin"],
@@ -21,23 +22,21 @@ export const metadata: Metadata = {
 		url: "https://scavenger-hunt.claudiorivera.com",
 		siteName: "Scavenger Hunt",
 	},
-	twitter: {
-		card: "summary_large_image",
-		site: "@atClaudioRivera",
-		creator: "@atClaudioRivera",
-	},
 };
 
-export default function Layout(props: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body className={["font-sans", fontSans.variable].join(" ")}>
-				<TRPCReactProvider>
-					<AppBar />
-					<main className="container mx-auto max-w-md p-8 text-center">
-						{props.children}
-					</main>
-				</TRPCReactProvider>
+			<body className={fontSans.variable}>
+				<TooltipProvider>
+					<TRPCReactProvider>
+						<Toaster />
+						<AppBar />
+						<main className="container mx-auto max-w-md p-8 text-center">
+							{children}
+						</main>
+					</TRPCReactProvider>
+				</TooltipProvider>
 			</body>
 		</html>
 	);

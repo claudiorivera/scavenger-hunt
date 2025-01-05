@@ -1,9 +1,7 @@
 "use client";
 
-import classNames from "classnames";
-
 import type { User } from "@claudiorivera/db";
-
+import { LoadingButton } from "~/components/loading-button";
 import { TrashIcon } from "~/components/trash-icon";
 import { api } from "~/utils/api";
 
@@ -12,11 +10,8 @@ export function DeleteUser({ id }: { id: User["id"] }) {
 	const { mutate: deleteUser, isLoading } = api.users.deleteById.useMutation();
 
 	return (
-		<button
-			type="button"
-			className={classNames("btn-error btn w-12", {
-				loading: isLoading,
-			})}
+		<LoadingButton
+			isLoading={isLoading}
 			onClick={() => {
 				deleteUser(id, {
 					onSuccess: () => {
@@ -27,6 +22,6 @@ export function DeleteUser({ id }: { id: User["id"] }) {
 			disabled={isLoading}
 		>
 			<TrashIcon />
-		</button>
+		</LoadingButton>
 	);
 }

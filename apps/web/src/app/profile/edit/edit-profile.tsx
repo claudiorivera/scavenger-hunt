@@ -1,30 +1,22 @@
 "use client";
 
-import classNames from "classnames";
-import NextImage from "next/image";
-import { useRouter } from "next/navigation";
-import type { ChangeEvent } from "react";
-import { useState } from "react";
-
+import type { User } from "@claudiorivera/db";
 import { updateProfileSchema } from "@claudiorivera/shared";
-
-import { Input } from "~/components/input";
+import { useRouter } from "next/navigation";
+import { LoadingButton } from "~/components/loading-button";
+import { Avatar, AvatarImage } from "~/components/ui/avatar";
+import { Input } from "~/components/ui/input";
+import { useImageUpload } from "~/hooks/use-image-upload";
 import { useZodForm } from "~/hooks/use-zod-form";
 import { api } from "~/utils/api";
-import { base64FromFile } from "~/utils/file-helpers";
 
-export function EditProfile() {
+export function EditProfile({
+	user,
+}: {
+	user: User;
+}) {
 	const router = useRouter();
-	const { data: user } = api.users.me.useQuery();
 	const utils = api.useContext();
-
-	const [image, setImage] = useState<
-		Partial<Pick<HTMLImageElement, "src" | "width" | "height">>
-	>({
-		src: user?.image ?? undefined,
-		height: 100,
-		width: 100,
-	});
 
 	const { mutateAsync: updateProfile, isLoading } =
 		api.users.update.useMutation({
@@ -37,87 +29,47 @@ export function EditProfile() {
 	const { register, setValue, handleSubmit } = useZodForm({
 		schema: updateProfileSchema,
 		defaultValues: {
-			name: user?.name ?? undefined,
+			name: user.name ?? undefined,
 		},
 	});
 
-	async function onFileChange(event: ChangeEvent<HTMLInputElement>) {
-		if (event.currentTarget.files?.[0]) {
-			const file = event.currentTarget.files[0];
-
-			const image = new Image();
-			image.src = URL.createObjectURL(file);
-			image.onload = () => {
-				setImage(image);
-			};
-
-			const base64string = await base64FromFile(file);
-
-			if (typeof base64string === "string") {
-				setValue("base64", base64string);
-			}
-		}
-	}
+	const { image, onFileChange } = useImageUpload({
+		initialSrc: user.image,
+		onSuccess: (base64) => setValue("base64", base64),
+	});
 
 	return (
-		<div className="flex flex-col gap-4">
-			<div className="flex flex-col items-center gap-2">
-				<div className="flex flex-col items-center gap-4">
-					<form
-						id="update-contact"
-						onSubmit={handleSubmit(
-							async (values) => await updateProfile(values),
-						)}
-						className="flex flex-col gap-2"
-					>
-						<div className="mx-auto">
-							<input hidden {...register("base64")} />
-							<div className="placeholder avatar">
-								<div className="bg-base-300 text-base-content ring-secondary relative w-24 rounded-full ring">
-									{!!image?.src && (
-										<NextImage
-											src={image.src}
-											alt="avatar"
-											height={image.height}
-											width={image.width}
-										/>
-									)}
-									<div className="absolute bottom-0 left-0 right-0 top-0">
-										<div className="flex h-full flex-col justify-end">
-											<label className="hover:bg-base-100/90 cursor-pointer text-center">
-												<div className="hover:text-secondary text-transparent">
-													Edit
-												</div>
-												<input
-													className="hidden"
-													type="file"
-													accept="image/*"
-													onChange={onFileChange}
-												/>
-											</label>
-										</div>
-									</div>
-								</div>
-							</div>
+		<div className="flex flex-col items-center gap-4">
+			<form
+				id="update-contact"
+				onSubmit={handleSubmit(async (values) => await updateProfile(values))}
+				className="flex flex-col items-center gap-4"
+			>
+				<input hidden {...register("base64")} />
+				<Avatar className="h-24 w-24">
+					<AvatarImage src={image.src} />
+					<label className="absolute right-0 bottom-0 left-0 cursor-pointer">
+						<div className="text-transparent hover:bg-secondary/80 hover:text-secondary-foreground">
+							Edit
 						</div>
-
-						<Input
-							{...register("name")}
-							autoComplete="name"
-							placeholder="My Name"
+						<input
+							className="hidden"
+							type="file"
+							accept="image/*"
+							onChange={onFileChange}
 						/>
-						<button
-							type="submit"
-							className={classNames("btn-secondary btn", {
-								loading: isLoading,
-							})}
-							disabled={isLoading}
-						>
-							Save Changes
-						</button>
-					</form>
-				</div>
-			</div>
+					</label>
+				</Avatar>
+
+				<Input
+					{...register("name")}
+					autoComplete="name"
+					placeholder="My Name"
+				/>
+				<LoadingButton variant="secondary" isLoading={isLoading}>
+					Save Changes
+				</LoadingButton>
+			</form>
 		</div>
 	);
 }

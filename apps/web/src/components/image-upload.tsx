@@ -1,16 +1,15 @@
 "use client";
 
-import classNames from "classnames";
+import type { Item } from "@claudiorivera/db";
+import { uploadImageSchema } from "@claudiorivera/shared";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import type { FormEvent } from "react";
 import { useState } from "react";
-
-import type { Item } from "@claudiorivera/db";
-import { uploadImageSchema } from "@claudiorivera/shared";
-
 import { CheckmarkIcon } from "~/components/checkmark-icon";
+import { LoadingButton } from "~/components/loading-button";
 import { TrashIcon } from "~/components/trash-icon";
+import { Button } from "~/components/ui/button";
 import { useZodForm } from "~/hooks/use-zod-form";
 import { api } from "~/utils/api";
 import { base64FromFile, htmlImageElementFromFile } from "~/utils/file-helpers";
@@ -56,7 +55,7 @@ export function ImageUpload({ itemId }: { itemId: Item["id"] }) {
 	if (isError) return <div>{JSON.stringify(error, null, 2)}</div>;
 
 	return (
-		<div className="aspect-square max-w-sm">
+		<div className="aspect-square w-full max-w-sm">
 			{image ? (
 				<ImagePreview
 					image={image}
@@ -64,12 +63,14 @@ export function ImageUpload({ itemId }: { itemId: Item["id"] }) {
 					onCancel={() => {
 						setImage(undefined);
 					}}
-					disabled={isLoading}
+					isLoading={isLoading}
 				/>
 			) : (
 				<div className="flex h-full w-full items-center justify-center border border-stone-400 bg-stone-100 p-4">
 					<label>
-						<div className="btn-secondary btn">Select image</div>
+						<Button variant="secondary" asChild>
+							<span className="cursor-pointer">Select image</span>
+						</Button>
 						<input
 							{...register("base64")}
 							hidden
@@ -88,12 +89,12 @@ function ImagePreview({
 	image,
 	onSubmit,
 	onCancel,
-	disabled,
+	isLoading,
 }: {
 	image: Pick<HTMLImageElement, "src" | "width" | "height">;
 	onSubmit: () => void;
 	onCancel: () => void;
-	disabled: boolean;
+	isLoading: boolean;
 }) {
 	return (
 		<div className="relative h-full w-full overflow-hidden bg-black">
@@ -104,25 +105,24 @@ function ImagePreview({
 				className="h-full w-full object-contain"
 				alt=""
 			/>
-			<div className="absolute bottom-0 left-0 right-0">
+			<div className="absolute right-0 bottom-0 left-0">
 				<form className="flex justify-center gap-8 p-4" onSubmit={onSubmit}>
-					<button
-						className={classNames("btn-success btn-circle btn", {
-							"btn-loading": disabled,
-						})}
+					<LoadingButton
+						variant="secondary"
 						type="submit"
-						disabled={disabled}
+						disabled={isLoading}
+						isLoading={isLoading}
 					>
 						<CheckmarkIcon />
-					</button>
-					<button
+					</LoadingButton>
+					<Button
 						type="button"
-						className="btn-error btn-circle btn"
-						disabled={disabled}
+						variant="destructive"
+						disabled={isLoading}
 						onClick={onCancel}
 					>
 						<TrashIcon />
-					</button>
+					</Button>
 				</form>
 			</div>
 		</div>

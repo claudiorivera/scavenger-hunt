@@ -1,10 +1,8 @@
 "use client";
 
-import classNames from "classnames";
-import { useRouter } from "next/navigation";
-
 import type { Item } from "@claudiorivera/db";
-
+import { useRouter } from "next/navigation";
+import { LoadingButton } from "~/components/loading-button";
 import { api } from "~/utils/api";
 
 export function DeleteItem({ id }: { id: Item["id"] }) {
@@ -18,15 +16,8 @@ export function DeleteItem({ id }: { id: Item["id"] }) {
 	});
 
 	return (
-		<button
-			type="button"
-			className={classNames("btn-error btn", {
-				loading: isLoading,
-			})}
-			onClick={() => deleteItem(id)}
-			disabled={isLoading}
-		>
+		<LoadingButton onClick={() => deleteItem(id)} isLoading={isLoading}>
 			Delete this Item
-		</button>
+		</LoadingButton>
 	);
 }

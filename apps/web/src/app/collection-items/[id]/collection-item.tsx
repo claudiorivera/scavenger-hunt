@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { DeleteCollectionItem } from "~/components/delete-collection-item";
 import { Loading } from "~/components/loading";
+import { Button } from "~/components/ui/button";
 import { useCollectionItemDetails } from "~/hooks/use-collection-item-details";
 import { api } from "~/utils/api";
 
@@ -39,25 +40,23 @@ export const CollectionItem = ({ id }: { id: string }) => {
 				)}
 			</div>
 			{isUncollectedByCurrentUser && !!collectionItem?.item && (
-				<Link
-					className="btn-secondary btn"
-					href={`/collect?itemId=${collectionItem.item.id}`}
-				>
-					Found It Too?
-				</Link>
+				<Button variant="secondary" asChild>
+					<Link href={`/collect?itemId=${collectionItem.item.id}`}>
+						Found It Too?
+					</Link>
+				</Button>
 			)}
 			{isCurrentUserOwner && (
-				<Link className="btn-secondary btn" href={"/collect"}>
-					Find More Stuff!
-				</Link>
+				<Button variant="secondary" asChild>
+					<Link href="/collect">Find More Stuff!</Link>
+				</Button>
 			)}
 			{!!collectionItem?.item && (
-				<Link
-					className="btn-secondary btn"
-					href={`/items/${collectionItem.item.id}`}
-				>
-					See who found this
-				</Link>
+				<Button variant="secondary" asChild>
+					<Link href={`/items/${collectionItem.item.id}`}>
+						See who found this
+					</Link>
+				</Button>
 			)}
 			{currentUser?.role === "ADMIN" && <DeleteCollectionItem id={id} />}
 		</div>

@@ -1,10 +1,7 @@
 "use client";
-
-import classNames from "classnames";
-
 import { createItemSchema } from "@claudiorivera/shared";
-
-import { Input } from "~/components/input";
+import { LoadingButton } from "~/components/loading-button";
+import { Input } from "~/components/ui/input";
 import { useZodForm } from "~/hooks/use-zod-form";
 import { api } from "~/utils/api";
 
@@ -17,7 +14,7 @@ export function AddItemForm() {
 		error,
 	} = api.items.add.useMutation();
 
-	const { register, handleSubmit, reset, formState } = useZodForm({
+	const { register, handleSubmit, reset } = useZodForm({
 		schema: createItemSchema,
 	});
 
@@ -40,21 +37,16 @@ export function AddItemForm() {
 				})}
 				className="flex w-full flex-col gap-2"
 			>
-				<Input
-					{...register("description")}
-					placeholder="Something Awesome"
-					error={formState.errors.description?.message}
-				/>
+				<Input {...register("description")} placeholder="Something Awesome" />
 
-				<button
+				<LoadingButton
 					type="submit"
-					className={classNames("btn-secondary btn", {
-						loading: isLoading,
-					})}
+					variant="secondary"
 					disabled={isLoading}
+					isLoading={isLoading}
 				>
 					Add Item
-				</button>
+				</LoadingButton>
 			</form>
 		</div>
 	);
