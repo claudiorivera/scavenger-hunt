@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useId } from "react";
 import type { FieldValues, UseFormProps, UseFormReturn } from "react-hook-form";
-import { useForm, useFormContext } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import type { z } from "zod";
 
 type UseZodForm<TInput extends FieldValues> = UseFormReturn<TInput> & {
@@ -28,8 +28,4 @@ export function useZodForm<TSchema extends z.ZodType>(
 	form.id = useId();
 
 	return form;
-}
-
-export function useZodFormContext<TSchema extends z.ZodType>() {
-	return useFormContext<TSchema["_input"]>();
 }

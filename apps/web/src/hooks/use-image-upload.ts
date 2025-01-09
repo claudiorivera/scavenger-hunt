@@ -9,12 +9,16 @@ export function useImageUpload({
 	onSuccess: (base64: string) => void;
 }) {
 	const [image, setImage] = useState<
-		Partial<Pick<HTMLImageElement, "src" | "width" | "height">>
-	>({
-		src: initialSrc ?? undefined,
-		height: 100,
-		width: 100,
-	});
+		Pick<HTMLImageElement, "src" | "width" | "height"> | undefined
+	>(
+		initialSrc
+			? {
+					src: initialSrc,
+					height: 100,
+					width: 100,
+				}
+			: undefined,
+	);
 
 	const onFileChange = useCallback(
 		async function onFileChange(event: ChangeEvent<HTMLInputElement>) {
@@ -35,8 +39,11 @@ export function useImageUpload({
 		[onSuccess],
 	);
 
+	const clearImage = useCallback(() => setImage(undefined), []);
+
 	return {
 		image,
 		onFileChange,
+		clearImage,
 	};
 }

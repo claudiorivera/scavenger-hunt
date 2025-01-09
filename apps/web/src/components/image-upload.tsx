@@ -4,22 +4,16 @@ import type { Item } from "@claudiorivera/db";
 import { uploadImageSchema } from "@claudiorivera/shared";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import type { FormEvent } from "react";
-import { useState } from "react";
 import { CheckmarkIcon } from "~/components/checkmark-icon";
 import { LoadingButton } from "~/components/loading-button";
 import { TrashIcon } from "~/components/trash-icon";
 import { Button } from "~/components/ui/button";
+import { useImageUpload } from "~/hooks/use-image-upload";
 import { useZodForm } from "~/hooks/use-zod-form";
 import { api } from "~/utils/api";
-import { base64FromFile, htmlImageElementFromFile } from "~/utils/file-helpers";
 
 export function ImageUpload({ itemId }: { itemId: Item["id"] }) {
 	const router = useRouter();
-
-	const [image, setImage] = useState<
-		Pick<HTMLImageElement, "src" | "width" | "height"> | undefined
-	>();
 
 	const {
 		mutate: uploadImage,
@@ -37,20 +31,9 @@ export function ImageUpload({ itemId }: { itemId: Item["id"] }) {
 		},
 	});
 
-	async function onFileChange(event: FormEvent<HTMLInputElement>) {
-		const file = event.currentTarget.files?.[0];
-
-		if (file) {
-			const img = await htmlImageElementFromFile(file);
-			setImage(img);
-
-			const base64 = await base64FromFile(file);
-
-			if (typeof base64 === "string") {
-				setValue("base64", base64);
-			}
-		}
-	}
+	const { image, onFileChange, clearImage } = useImageUpload({
+		onSuccess: (base64) => setValue("base64", base64),
+	});
 
 	if (isError) return <div>{JSON.stringify(error, null, 2)}</div>;
 
@@ -60,9 +43,7 @@ export function ImageUpload({ itemId }: { itemId: Item["id"] }) {
 				<ImagePreview
 					image={image}
 					onSubmit={handleSubmit((values) => uploadImage(values))}
-					onCancel={() => {
-						setImage(undefined);
-					}}
+					onCancel={clearImage}
 					isLoading={isLoading}
 				/>
 			) : (

@@ -2,7 +2,7 @@ import { auth } from "@claudiorivera/auth";
 import { db } from "@claudiorivera/db";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { Collect } from "~/app/collect/collect";
+import { ImageUpload } from "~/components/image-upload";
 import { Button } from "~/components/ui/button";
 
 export default async function CollectPage() {
@@ -28,7 +28,16 @@ export default async function CollectPage() {
 
 	if (!item) return <AllItemsFound userId={session.user.id} />;
 
-	return <Collect item={item} />;
+	return (
+		<div className="flex flex-col gap-4 text-center">
+			<header className="text-2xl">Find</header>
+			<div className="text-3xl">{item.description}</div>
+			<ImageUpload itemId={item.id} />
+			<Button variant="secondary" asChild>
+				<Link href={`/items/${item.id}`}>See who found this</Link>
+			</Button>
+		</div>
+	);
 }
 
 function AllItemsFound({ userId }: { userId: string }) {

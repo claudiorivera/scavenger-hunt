@@ -47,7 +47,7 @@ export function EditProfile({
 			>
 				<input hidden {...register("base64")} />
 				<Avatar className="h-24 w-24">
-					<AvatarImage src={image.src} />
+					<AvatarImage src={image?.src} />
 					<label className="absolute right-0 bottom-0 left-0 cursor-pointer">
 						<div className="text-transparent hover:bg-secondary/80 hover:text-secondary-foreground">
 							Edit
