@@ -29,7 +29,7 @@
 		"bun": "1.1.42",
 		"dotenv-cli": "8.0.0",
 		"prisma": "6.1.0",
-		"typescript": "5.7.2"
+		"typescript": "5.7.3"
 	},
 	"prisma": {
 		"seed": "bun run ./run-seed.ts"
