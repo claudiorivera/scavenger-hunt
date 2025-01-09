@@ -2,7 +2,7 @@ import { auth } from "@claudiorivera/auth";
 import { db } from "@claudiorivera/db";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { DeleteUser } from "~/components/delete-user";
+import { DeleteUser } from "~/app/leaderboard/_components/delete-user";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { getInitials } from "~/lib/get-initials";
 

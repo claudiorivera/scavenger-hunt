@@ -1,7 +1,7 @@
 import { auth } from "@claudiorivera/auth";
 import { db } from "@claudiorivera/db";
 import { notFound, redirect } from "next/navigation";
-import { EditProfile } from "~/app/profile/edit/edit-profile";
+import { EditProfile } from "~/app/profile/edit/_components/edit-profile";
 
 export default async function EditProfilePage() {
 	const session = await auth();

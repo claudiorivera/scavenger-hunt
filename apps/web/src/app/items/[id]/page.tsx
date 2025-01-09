@@ -1,9 +1,9 @@
 import { auth } from "@claudiorivera/auth";
 import { db } from "@claudiorivera/db";
+import { EyeIcon } from "lucide-react";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { DeleteItem } from "~/components/delete-item";
-import { EyeIcon } from "~/components/eye-icon";
+import { DeleteItem } from "~/app/items/[id]/_components/delete-item";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import { getInitials } from "~/lib/get-initials";
@@ -35,10 +35,7 @@ export default async function ItemPage(props: {
 				},
 			},
 		},
-		select: {
-			id: true,
-			name: true,
-			image: true,
+		include: {
 			collectionItems: {
 				select: {
 					id: true,

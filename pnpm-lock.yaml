@@ -74,6 +74,9 @@ importers:
       class-variance-authority:
         specifier: 0.7.1
         version: 0.7.1
+      cloudinary:
+        specifier: 2.5.1
+        version: 2.5.1
       clsx:
         specifier: 2.1.1
         version: 2.1.1

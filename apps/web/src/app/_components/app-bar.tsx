@@ -1,6 +1,6 @@
 import { auth } from "@claudiorivera/auth";
 import Link from "next/link";
-import { Menu } from "~/app/menu";
+import { Menu } from "~/app/_components/menu";
 
 export async function AppBar() {
 	const session = await auth();

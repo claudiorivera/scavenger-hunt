@@ -1,5 +1,5 @@
 import { type ChangeEvent, useCallback, useState } from "react";
-import { base64FromFile } from "~/utils/file-helpers";
+import { base64FromFile } from "~/lib/file-helpers";
 
 export function useImageUpload({
 	initialSrc,
@@ -31,9 +31,7 @@ export function useImageUpload({
 
 				const base64string = await base64FromFile(file);
 
-				if (typeof base64string === "string") {
-					onSuccess(base64string);
-				}
+				onSuccess(base64string);
 			}
 		},
 		[onSuccess],

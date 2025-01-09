@@ -8,7 +8,7 @@ import { Avatar, AvatarImage } from "~/components/ui/avatar";
 import { Input } from "~/components/ui/input";
 import { useImageUpload } from "~/hooks/use-image-upload";
 import { useZodForm } from "~/hooks/use-zod-form";
-import { api } from "~/utils/api";
+import { api } from "~/lib/api";
 
 export function EditProfile({
 	user,

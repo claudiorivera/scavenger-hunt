@@ -1,9 +1,9 @@
 "use client";
 
 import type { User } from "@claudiorivera/db";
+import { TrashIcon } from "lucide-react";
 import { LoadingButton } from "~/components/loading-button";
-import { TrashIcon } from "~/components/trash-icon";
-import { api } from "~/utils/api";
+import { api } from "~/lib/api";
 
 export function DeleteUser({ id }: { id: User["id"] }) {
 	const utils = api.useContext();

@@ -3,7 +3,7 @@ import { createItemSchema } from "@claudiorivera/shared";
 import { LoadingButton } from "~/components/loading-button";
 import { Input } from "~/components/ui/input";
 import { useZodForm } from "~/hooks/use-zod-form";
-import { api } from "~/utils/api";
+import { api } from "~/lib/api";
 
 export function AddItemForm() {
 	const utils = api.useContext();

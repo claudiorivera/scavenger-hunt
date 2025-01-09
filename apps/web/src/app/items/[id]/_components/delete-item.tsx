@@ -3,7 +3,7 @@
 import type { Item } from "@claudiorivera/db";
 import { useRouter } from "next/navigation";
 import { LoadingButton } from "~/components/loading-button";
-import { api } from "~/utils/api";
+import { api } from "~/lib/api";
 
 export function DeleteItem({ id }: { id: Item["id"] }) {
 	const router = useRouter();

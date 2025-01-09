@@ -3,8 +3,8 @@ import "~/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import { AppBar } from "~/app/app-bar";
-import { TRPCReactProvider } from "~/app/providers";
+import { AppBar } from "~/app/_components/app-bar";
+import { TRPCReactProvider } from "~/app/_components/providers";
 import { TooltipProvider } from "~/components/ui/tooltip";
 
 const fontSans = Inter({

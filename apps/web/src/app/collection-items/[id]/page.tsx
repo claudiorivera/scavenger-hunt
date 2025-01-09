@@ -3,7 +3,7 @@ import { db } from "@claudiorivera/db";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { DeleteCollectionItem } from "~/components/delete-collection-item";
+import { DeleteCollectionItem } from "~/app/collection-items/[id]/_components/delete-collection-item";
 import { Button } from "~/components/ui/button";
 
 export default async function CollectionItemPage(props: {
@@ -17,8 +17,7 @@ export default async function CollectionItemPage(props: {
 
 	const collectionItem = await db.collectionItem.findUnique({
 		where: { id },
-		select: {
-			id: true,
+		include: {
 			user: {
 				select: {
 					id: true,
@@ -31,9 +30,6 @@ export default async function CollectionItemPage(props: {
 					description: true,
 				},
 			},
-			url: true,
-			width: true,
-			height: true,
 		},
 	});
 
@@ -43,16 +39,12 @@ export default async function CollectionItemPage(props: {
 		where: {
 			id: session.user.id,
 		},
-		select: {
-			id: true,
-			name: true,
-			image: true,
+		include: {
 			collectionItems: {
 				select: {
 					itemId: true,
 				},
 			},
-			role: true,
 		},
 	});
 
@@ -65,15 +57,15 @@ export default async function CollectionItemPage(props: {
 	return (
 		<div className="flex flex-col gap-4">
 			<header className="text-2xl">{title}</header>
-			<div className="aspect-square max-w-sm">
-				<Image
-					src={collectionItem.url}
-					width={collectionItem.width}
-					height={collectionItem.height}
-					alt={title}
-					className="h-full w-full bg-black object-contain"
-				/>
-			</div>
+
+			<Image
+				src={collectionItem.url}
+				width={collectionItem.width}
+				height={collectionItem.height}
+				alt={title}
+				className="aspect-square h-full w-full max-w-sm bg-black object-contain"
+			/>
+
 			{!hasCurrentUserCollected && (
 				<Button variant="secondary" asChild>
 					<Link href={`/collect?itemId=${collectionItem.item.id}`}>
@@ -81,16 +73,19 @@ export default async function CollectionItemPage(props: {
 					</Link>
 				</Button>
 			)}
+
 			{isCurrentUserOwner && (
 				<Button variant="secondary" asChild>
 					<Link href="/collect">Find More Stuff!</Link>
 				</Button>
 			)}
+
 			<Button variant="secondary" asChild>
 				<Link href={`/items/${collectionItem.item.id}`}>
 					See who found this
 				</Link>
 			</Button>
+
 			{session.user.role === "ADMIN" && (
 				<DeleteCollectionItem id={collectionItem.id} />
 			)}

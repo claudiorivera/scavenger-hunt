@@ -3,7 +3,7 @@ import { db } from "@claudiorivera/db";
 import { CheckCircleIcon } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { AddItemForm } from "~/components/add-item-form";
+import { AddItemForm } from "~/app/items/_components/add-item-form";
 import { Button } from "~/components/ui/button";
 
 export default async function ItemsPage() {
@@ -21,10 +21,6 @@ export default async function ItemsPage() {
 				},
 			},
 		},
-		select: {
-			id: true,
-			description: true,
-		},
 	});
 
 	const uncollectedItems = await db.item.findMany({
@@ -36,10 +32,6 @@ export default async function ItemsPage() {
 					},
 				},
 			},
-		},
-		select: {
-			id: true,
-			description: true,
 		},
 	});
 

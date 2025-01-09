@@ -7,7 +7,7 @@ import { useState } from "react";
 import superjson from "superjson";
 
 import { env } from "~/env.mjs";
-import { api } from "~/utils/api";
+import { api } from "~/lib/api";
 
 const getBaseUrl = () => {
 	if (typeof window !== "undefined") return ""; // browser should use relative url
