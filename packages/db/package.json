@@ -21,14 +21,14 @@
 	"dependencies": {
 		"@claudiorivera/shared": "workspace:*",
 		"@faker-js/faker": "9.3.0",
-		"@prisma/client": "6.1.0"
+		"@prisma/client": "6.2.1"
 	},
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "workspace:*",
 		"@types/node": "22.10.5",
 		"bun": "1.1.43",
 		"dotenv-cli": "8.0.0",
-		"prisma": "6.1.0",
+		"prisma": "6.2.1",
 		"typescript": "5.7.3"
 	},
 	"prisma": {
