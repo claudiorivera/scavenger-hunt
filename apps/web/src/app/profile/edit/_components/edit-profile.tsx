@@ -1,51 +1,34 @@
 "use client";
 
 import type { User } from "@claudiorivera/db";
-import { updateProfileSchema } from "@claudiorivera/shared";
-import { useRouter } from "next/navigation";
+import { useActionState, useState } from "react";
+import { editProfile } from "~/app/profile/edit/actions";
 import { LoadingButton } from "~/components/loading-button";
 import { Avatar, AvatarImage } from "~/components/ui/avatar";
 import { Input } from "~/components/ui/input";
 import { useImageUpload } from "~/hooks/use-image-upload";
-import { useZodForm } from "~/hooks/use-zod-form";
-import { api } from "~/lib/api";
 
 export function EditProfile({
 	user,
 }: {
 	user: User;
 }) {
-	const router = useRouter();
-	const utils = api.useContext();
-
-	const { mutateAsync: updateProfile, isLoading } =
-		api.users.update.useMutation({
-			onSuccess: async () => {
-				await utils.users.me.invalidate();
-				router.push("/profile");
-			},
-		});
-
-	const { register, setValue, handleSubmit } = useZodForm({
-		schema: updateProfileSchema,
-		defaultValues: {
-			name: user.name ?? undefined,
-		},
-	});
+	const [base64, setBase64] = useState<string>();
+	const [_state, action, isPending] = useActionState(editProfile, undefined);
 
 	const { image, onFileChange } = useImageUpload({
 		initialSrc: user.image,
-		onSuccess: (base64) => setValue("base64", base64),
+		onSuccess: (_base64) => setBase64(_base64),
 	});
 
 	return (
 		<div className="flex flex-col items-center gap-4">
 			<form
 				id="update-contact"
-				onSubmit={handleSubmit(async (values) => await updateProfile(values))}
 				className="flex flex-col items-center gap-4"
+				action={action}
 			>
-				<input hidden {...register("base64")} />
+				<input hidden name="base64" defaultValue={base64} />
 				<Avatar className="h-24 w-24">
 					<AvatarImage src={image?.src} />
 					<label className="absolute right-0 bottom-0 left-0 cursor-pointer">
@@ -62,11 +45,12 @@ export function EditProfile({
 				</Avatar>
 
 				<Input
-					{...register("name")}
+					name="name"
+					defaultValue={user.name ?? undefined}
 					autoComplete="name"
 					placeholder="My Name"
 				/>
-				<LoadingButton variant="secondary" isLoading={isLoading}>
+				<LoadingButton variant="secondary" isLoading={isPending}>
 					Save Changes
 				</LoadingButton>
 			</form>

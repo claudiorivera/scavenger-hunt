@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { AppBar } from "~/app/_components/app-bar";
-import { TRPCReactProvider } from "~/app/_components/providers";
 import { TooltipProvider } from "~/components/ui/tooltip";
 
 const fontSans = Inter({
@@ -29,13 +28,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 		<html lang="en">
 			<body className={fontSans.variable}>
 				<TooltipProvider>
-					<TRPCReactProvider>
-						<Toaster />
-						<AppBar />
-						<main className="container mx-auto max-w-md p-8 text-center">
-							{children}
-						</main>
-					</TRPCReactProvider>
+					<Toaster />
+					<AppBar />
+					<main className="container mx-auto max-w-md p-8 text-center">
+						{children}
+					</main>
 				</TooltipProvider>
 			</body>
 		</html>

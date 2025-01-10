@@ -12,7 +12,7 @@ export function DeleteCollectionItem({ id }: { id: CollectionItem["id"] }) {
 	);
 
 	return (
-		<form action={action}>
+		<form action={action} className="flex flex-col">
 			<input type="hidden" name="collectionItemId" value={id} />
 			<LoadingButton isLoading={isPending}>
 				Delete this Collection Item

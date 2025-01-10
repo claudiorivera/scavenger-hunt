@@ -2,8 +2,6 @@ import { faker } from "@faker-js/faker";
 import type { Prisma } from "@prisma/client";
 import { PrismaClient } from "@prisma/client";
 
-import { capitalizeEveryWord } from "@claudiorivera/shared";
-
 export * from "@prisma/client";
 
 const globalForPrisma = globalThis as { prisma?: PrismaClient };
@@ -114,4 +112,11 @@ export async function seed() {
 			await db.collectionItem.create(collectionItemCreateParams);
 		}
 	}
+}
+
+function capitalizeEveryWord(string: string) {
+	return string
+		.split(" ")
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(" ");
 }

@@ -1,23 +1,17 @@
 "use client";
 
 import type { Item } from "@claudiorivera/db";
-import { useRouter } from "next/navigation";
+import { useActionState } from "react";
+import { deleteItem } from "~/app/items/[id]/actions";
 import { LoadingButton } from "~/components/loading-button";
-import { api } from "~/lib/api";
 
 export function DeleteItem({ id }: { id: Item["id"] }) {
-	const router = useRouter();
-
-	const { mutate: deleteItem, isLoading } = api.items.delete.useMutation({
-		onSuccess: () => {
-			router.refresh();
-			router.push("/items");
-		},
-	});
+	const [_state, action, isPending] = useActionState(deleteItem, null);
 
 	return (
-		<LoadingButton onClick={() => deleteItem(id)} isLoading={isLoading}>
-			Delete this Item
-		</LoadingButton>
+		<form action={action} className="flex flex-col">
+			<input type="hidden" name="itemId" value={id} />
+			<LoadingButton isLoading={isPending}>Delete this Item</LoadingButton>
+		</form>
 	);
 }
