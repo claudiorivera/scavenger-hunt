@@ -1,11 +1,8 @@
 import type { Config } from "tailwindcss";
 
-import baseConfig from "@claudiorivera/tailwind-config";
-
 export default {
 	darkMode: ["class"],
 	content: ["./src/**/*.{ts,tsx}"],
-	presets: [baseConfig],
 	theme: {
 		extend: {
 			fontFamily: {
