@@ -1,6 +1,7 @@
 import "~/styles/globals.css";
 
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { AppBar } from "~/app/_components/app-bar";
@@ -27,13 +28,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
 			<body className={fontSans.variable}>
-				<TooltipProvider>
-					<Toaster />
-					<AppBar />
-					<main className="container mx-auto max-w-md p-8 text-center">
-						{children}
-					</main>
-				</TooltipProvider>
+				<SessionProvider>
+					<TooltipProvider>
+						<Toaster />
+						<AppBar />
+						<main className="container mx-auto max-w-md p-8 text-center">
+							{children}
+						</main>
+					</TooltipProvider>
+				</SessionProvider>
 			</body>
 		</html>
 	);
