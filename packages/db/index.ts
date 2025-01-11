@@ -32,11 +32,10 @@ function generateManyUserCreateInputs(numOfUsers: number) {
 }
 
 async function createUsers(numOfUsersToCreate: number) {
-	const { count } = await db.user.createMany({
+	return db.user.createMany({
 		data: generateManyUserCreateInputs(numOfUsersToCreate),
 		skipDuplicates: true,
 	});
-	return count;
 }
 
 function generateItemDescription() {
@@ -60,22 +59,28 @@ export async function seed() {
 	const USERS_TO_CREATE = 8;
 	const ITEMS_TO_CREATE = 20;
 
-	await db.user.deleteMany();
-	await db.item.deleteMany();
-	await db.collectionItem.deleteMany();
+	await Promise.all([
+		db.user.deleteMany(),
+		db.item.deleteMany(),
+		db.collectionItem.deleteMany(),
+	]);
 
 	await createUsers(USERS_TO_CREATE);
 
-	for (let i = 0; i < ITEMS_TO_CREATE; i++) {
-		await db.item.create({
-			data: {
-				description: generateItemDescription(),
-			},
-		});
-	}
+	await Promise.all(
+		[...Array(ITEMS_TO_CREATE)].map(() =>
+			db.item.create({
+				data: {
+					description: generateItemDescription(),
+				},
+			}),
+		),
+	);
 
-	const users = await db.user.findMany();
-	const items = await db.item.findMany();
+	const [users, items] = await Promise.all([
+		db.user.findMany(),
+		db.item.findMany(),
+	]);
 
 	for (const item of items) {
 		const numberOfUsersToConnect = faker.number.int({
@@ -87,30 +92,30 @@ export async function seed() {
 			.shuffle(users)
 			.slice(0, numberOfUsersToConnect);
 
-		for (const user of usersToConnect) {
-			const collectionItemCreateParams: Prisma.CollectionItemCreateArgs = {
-				data: {
-					item: {
-						connect: {
-							id: item.id,
+		await Promise.all(
+			usersToConnect.map((user) =>
+				db.collectionItem.create({
+					data: {
+						item: {
+							connect: {
+								id: item.id,
+							},
 						},
-					},
-					user: {
-						connect: {
-							id: user.id,
+						user: {
+							connect: {
+								id: user.id,
+							},
 						},
-					},
-					url: faker.image.urlPicsumPhotos({
+						url: faker.image.urlPicsumPhotos({
+							height: 320,
+							width: 320,
+						}),
 						height: 320,
 						width: 320,
-					}),
-					height: 320,
-					width: 320,
-				},
-			};
-
-			await db.collectionItem.create(collectionItemCreateParams);
-		}
+					},
+				}),
+			),
+		);
 	}
 }
 
