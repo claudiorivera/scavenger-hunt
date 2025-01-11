@@ -1,24 +1,20 @@
 "use server";
-
-import { auth } from "@claudiorivera/auth";
 import { db } from "@claudiorivera/db";
-import { v2 as cloudinary } from "cloudinary";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { uploadToCloudinary } from "~/app/collect/_lib/api";
+import { getSessionOrThrow } from "~/lib/auth-utils";
 
 const createCollectionItemSchema = z.object({
 	base64: z.string(),
 	itemId: z.string().cuid(),
 });
 
-type State = unknown;
-
-export async function createCollectionItem(_state: State, formData: FormData) {
-	const session = await auth();
-
-	if (!session) {
-		throw Error("Unauthorized");
-	}
+export async function createCollectionItem(
+	_state: unknown,
+	formData: FormData,
+) {
+	const session = await getSessionOrThrow();
 
 	const input = Object.fromEntries(formData.entries());
 
@@ -30,13 +26,11 @@ export async function createCollectionItem(_state: State, formData: FormData) {
 		};
 	}
 
-	const { secure_url, height, width } = await cloudinary.uploader.upload(
-		validation.data.base64,
-		{
-			public_id: `user_${session.user.id}-item_${validation.data.itemId}`,
-			folder: "scavenger-hunt/collection-items",
-		},
-	);
+	const { secure_url, height, width } = await uploadToCloudinary({
+		base64: validation.data.base64,
+		userId: session.user.id,
+		itemId: validation.data.itemId,
+	});
 
 	const collectionItem = await db.collectionItem.create({
 		data: {

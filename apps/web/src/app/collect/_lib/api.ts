@@ -1,12 +1,10 @@
-import { auth } from "@claudiorivera/auth";
 import { db } from "@claudiorivera/db";
+import { v2 as cloudinary } from "cloudinary";
+import "server-only";
+import { getSessionOrThrow } from "~/lib/auth-utils";
 
 export async function getNextUncollectedItemForUser(userId: string) {
-	const session = await auth();
-
-	if (!session) {
-		throw new Error("Unauthorized");
-	}
+	await getSessionOrThrow();
 
 	return db.item.findFirst({
 		where: {
@@ -22,11 +20,7 @@ export async function getNextUncollectedItemForUser(userId: string) {
 }
 
 export async function getNextUncollectedItemIdForUser(userId: string) {
-	const session = await auth();
-
-	if (!session) {
-		throw new Error("Unauthorized");
-	}
+	await getSessionOrThrow();
 
 	const item = await db.item.findFirst({
 		where: {
@@ -46,16 +40,27 @@ export async function getNextUncollectedItemIdForUser(userId: string) {
 	return item?.id;
 }
 
-export async function getItemById(itemId: string) {
-	const session = await auth();
+export async function getItemByIdOrThrow(itemId: string) {
+	await getSessionOrThrow();
 
-	if (!session) {
-		throw new Error("Unauthorized");
-	}
-
-	return db.item.findUnique({
+	return db.item.findUniqueOrThrow({
 		where: {
 			id: itemId,
 		},
+	});
+}
+
+export async function uploadToCloudinary({
+	base64,
+	userId,
+	itemId,
+}: {
+	base64: string;
+	userId: string;
+	itemId: string;
+}) {
+	return cloudinary.uploader.upload(base64, {
+		public_id: `user_${userId}-item_${itemId}`,
+		folder: "scavenger-hunt/collection-items",
 	});
 }
