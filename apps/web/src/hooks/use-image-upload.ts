@@ -3,39 +3,37 @@ import { base64FromFile } from "~/lib/file-helpers";
 
 export function useImageUpload({
 	initialSrc,
-	onSuccess,
 }: {
 	initialSrc?: HTMLImageElement["src"] | null;
-	onSuccess: (base64: string) => void;
-}) {
+} = {}) {
+	const [base64, setBase64] = useState<string>();
 	const [image, setImage] = useState<
 		Pick<HTMLImageElement, "src" | "width" | "height"> | undefined
 	>(
 		initialSrc
 			? {
 					src: initialSrc,
-					height: 100,
-					width: 100,
+					height: 640,
+					width: 640,
 				}
 			: undefined,
 	);
 
-	const onFileChange = useCallback(
-		async function onFileChange(event: ChangeEvent<HTMLInputElement>) {
-			if (event.currentTarget.files?.[0]) {
-				const file = event.currentTarget.files[0];
+	const onFileChange = useCallback(async function onFileChange(
+		event: ChangeEvent<HTMLInputElement>,
+	) {
+		if (event.currentTarget.files?.[0]) {
+			const file = event.currentTarget.files[0];
 
-				const image = new Image();
-				image.src = URL.createObjectURL(file);
-				image.onload = () => setImage(image);
+			const image = new Image();
+			image.src = URL.createObjectURL(file);
+			image.onload = () => setImage(image);
 
-				const base64string = await base64FromFile(file);
+			const base64string = await base64FromFile(file);
 
-				onSuccess(base64string);
-			}
-		},
-		[onSuccess],
-	);
+			setBase64(base64string);
+		}
+	}, []);
 
 	const clearImage = useCallback(() => setImage(undefined), []);
 
@@ -43,5 +41,6 @@ export function useImageUpload({
 		image,
 		onFileChange,
 		clearImage,
+		base64,
 	};
 }

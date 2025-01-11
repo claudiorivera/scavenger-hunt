@@ -1,7 +1,7 @@
 "use client";
 
 import type { User } from "@claudiorivera/db";
-import { useActionState, useState } from "react";
+import { useActionState } from "react";
 import { editProfile } from "~/app/profile/edit/actions";
 import { LoadingButton } from "~/components/loading-button";
 import { Avatar, AvatarImage } from "~/components/ui/avatar";
@@ -13,12 +13,10 @@ export function EditProfile({
 }: {
 	user: User;
 }) {
-	const [base64, setBase64] = useState<string>();
 	const [_state, action, isPending] = useActionState(editProfile, undefined);
 
-	const { image, onFileChange } = useImageUpload({
+	const { image, onFileChange, base64 } = useImageUpload({
 		initialSrc: user.image,
-		onSuccess: (_base64) => setBase64(_base64),
 	});
 
 	return (
