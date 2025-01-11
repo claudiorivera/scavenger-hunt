@@ -7,9 +7,7 @@ const createItemSchema = z.object({
 	description: z.string().min(1),
 });
 
-type State = unknown;
-
-export async function createItem(_state: State, formData: FormData) {
+export async function createItem(_state: unknown, formData: FormData) {
 	const input = Object.fromEntries(formData.entries());
 
 	const validation = createItemSchema.safeParse(input);
