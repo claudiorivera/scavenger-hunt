@@ -1,29 +1,21 @@
-import { auth } from "@claudiorivera/auth";
 import { db } from "@claudiorivera/db";
 import { EyeIcon } from "lucide-react";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { getItemByIdOrThrow } from "~/app/collect/_lib/api";
 import { DeleteItem } from "~/app/items/[id]/_components/delete-item";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
+import { getSessionOrThrow } from "~/lib/auth-utils";
 import { getInitials } from "~/lib/get-initials";
 
 export default async function ItemPage(props: {
 	params: Promise<{ id: string }>;
 }) {
-	const session = await auth();
-
-	if (!session) return redirect("/api/auth/signin");
+	const session = await getSessionOrThrow();
 
 	const { id } = await props.params;
 
-	const item = await db.item.findUnique({
-		where: {
-			id,
-		},
-	});
-
-	if (!item) return notFound();
+	const item = await getItemByIdOrThrow(id);
 
 	const users = await db.user.findMany({
 		where: {

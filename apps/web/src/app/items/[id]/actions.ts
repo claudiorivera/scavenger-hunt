@@ -1,22 +1,16 @@
 "use server";
 
-import { auth } from "@claudiorivera/auth";
 import { db } from "@claudiorivera/db";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { getSessionOrThrow } from "~/lib/auth-utils";
 
 const deleteItemSchema = z.object({
 	itemId: z.string().cuid(),
 });
 
-type State = unknown;
-
-export async function deleteItem(_state: State, formData: FormData) {
-	const session = await auth();
-
-	if (!session) {
-		throw Error("Unauthorized");
-	}
+export async function deleteItem(_state: unknown, formData: FormData) {
+	await getSessionOrThrow();
 
 	const input = Object.fromEntries(formData.entries());
 
