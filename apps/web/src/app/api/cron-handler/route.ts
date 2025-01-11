@@ -1,7 +1,6 @@
+import { seed } from "@claudiorivera/db";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
-
-import { seed } from "@claudiorivera/db";
 
 export async function POST() {
 	const headersList = await headers();
@@ -10,12 +9,7 @@ export async function POST() {
 	if (authorization === `Bearer ${process.env.CRON_SECRET}`) {
 		await seed();
 
-		return NextResponse.json(
-			{ message: "Success" },
-			{
-				status: 200,
-			},
-		);
+		return NextResponse.json({ message: "Success" });
 	}
 
 	return NextResponse.json(
