@@ -1,17 +1,15 @@
-import { auth } from "@claudiorivera/auth";
 import { db } from "@claudiorivera/db";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { DeleteCollectionItem } from "~/app/collection-items/[id]/_components/delete-collection-item";
 import { Button } from "~/components/ui/button";
+import { getSessionOrThrow } from "~/lib/auth-utils";
 
 export default async function CollectionItemPage(props: {
 	params: Promise<{ id: string }>;
 }) {
-	const session = await auth();
-
-	if (!session) return redirect("/api/auth/signin");
+	const session = await getSessionOrThrow();
 
 	const { id } = await props.params;
 
