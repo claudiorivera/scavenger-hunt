@@ -51,9 +51,16 @@
 	"overrides": [
 		{
 			"include": [
-				"src/app/**/layout.tsx",
-				"src/app/**/page.tsx",
-				"src/app/**/loading.tsx",
+				"app/**/default.*",
+				"app/**/error.*",
+				"app/**/forbidden.*",
+				"app/**/global-error.*",
+				"app/**/layout.*",
+				"app/**/loading.*",
+				"app/**/not-found.*",
+				"app/**/page.*",
+				"app/**/template.*",
+				"app/**/unauthorized.*",
 				"next.config.*",
 				"tailwind.config.*",
 				"postcss.config.*",
