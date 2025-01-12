@@ -9,9 +9,7 @@ const deleteUserSchema = z.object({
 	userId: z.string().cuid(),
 });
 
-type State = unknown;
-
-export async function deleteUser(_state: State, formData: FormData) {
+export async function deleteUser(_state: unknown, formData: FormData) {
 	await getSessionOrThrow();
 
 	const input = Object.fromEntries(formData.entries());
