@@ -1,3 +1,5 @@
+"use client";
+
 import { type ChangeEvent, useCallback, useState } from "react";
 import { base64FromFile } from "~/lib/file-helpers";
 
