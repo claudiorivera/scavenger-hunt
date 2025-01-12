@@ -17,12 +17,7 @@ export function AddItemForm() {
 			>
 				<Input name="description" placeholder="Something Awesome" />
 
-				<LoadingButton
-					type="submit"
-					variant="secondary"
-					disabled={isPending}
-					isLoading={isPending}
-				>
+				<LoadingButton type="submit" variant="secondary" isLoading={isPending}>
 					Add Item
 				</LoadingButton>
 			</form>

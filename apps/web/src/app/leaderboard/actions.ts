@@ -3,14 +3,15 @@
 import { db } from "@claudiorivera/db";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { getSessionOrThrow } from "~/lib/auth-utils";
 
 const deleteUserSchema = z.object({
 	userId: z.string().cuid(),
 });
 
-type State = unknown;
+export async function deleteUser(_state: unknown, formData: FormData) {
+	await getSessionOrThrow();
 
-export async function deleteUser(_state: State, formData: FormData) {
 	const input = Object.fromEntries(formData.entries());
 
 	const validation = deleteUserSchema.safeParse(input);

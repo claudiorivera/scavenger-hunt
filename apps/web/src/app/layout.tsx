@@ -1,11 +1,14 @@
-import "~/styles/globals.css";
-
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 import { Toaster } from "react-hot-toast";
-import { AppBar } from "~/app/_components/app-bar";
+import { Menu } from "~/app/_components/menu";
 import { TooltipProvider } from "~/components/ui/tooltip";
+import { getSessionOrThrow } from "~/lib/auth-utils";
+
+import "~/styles/globals.css";
 
 const fontSans = Inter({
 	subsets: ["latin"],
@@ -24,16 +27,28 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({
+	children,
+}: { children: React.ReactNode }) {
+	const session = await getSessionOrThrow();
+
 	return (
 		<html lang="en">
 			<body className={fontSans.variable}>
 				<SessionProvider>
 					<TooltipProvider>
 						<Toaster />
-						<AppBar />
+						<div className="flex bg-primary p-4 text-primary-foreground">
+							<div className="flex-1">
+								<Link href="/" className="font-bold text-2xl">
+									Scavenger Hunt
+								</Link>
+							</div>
+							<Menu userRole={session.user.role} />
+						</div>
 						<main className="container mx-auto max-w-md p-8 text-center">
 							{children}
+							<Analytics />
 						</main>
 					</TooltipProvider>
 				</SessionProvider>

@@ -1,20 +1,12 @@
-import { auth } from "@claudiorivera/auth";
-import { db } from "@claudiorivera/db";
-import { notFound, redirect } from "next/navigation";
-import { EditProfile } from "~/app/profile/edit/_components/edit-profile";
+import { EditProfileForm } from "~/app/profile/edit/_components/edit-profile-form";
+import { getCurrentUser } from "~/server/api";
 
 export default async function EditProfilePage() {
-	const session = await auth();
+	const user = await getCurrentUser();
 
-	if (!session) return redirect("/api/auth/signin");
-
-	const user = await db.user.findUnique({
-		where: {
-			id: session.user.id,
-		},
-	});
-
-	if (!user) return notFound();
-
-	return <EditProfile user={user} />;
+	return (
+		<div className="flex flex-col items-center">
+			<EditProfileForm user={user} />
+		</div>
+	);
 }

@@ -1,7 +1,4 @@
-import { auth } from "@claudiorivera/auth";
-import { db } from "@claudiorivera/db";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import {
 	Tooltip,
@@ -9,28 +6,14 @@ import {
 	TooltipTrigger,
 } from "~/components/ui/tooltip";
 import { getInitials } from "~/lib/get-initials";
+import { getUserById } from "~/server/api";
 
 export default async function UserPage(props: {
 	params: Promise<{ id: string }>;
 }) {
-	const session = await auth();
-
-	if (!session) return redirect("/api/auth/signin");
-
 	const { id } = await props.params;
 
-	const user = await db.user.findUniqueOrThrow({
-		where: {
-			id,
-		},
-		include: {
-			collectionItems: {
-				include: {
-					item: true,
-				},
-			},
-		},
-	});
+	const user = await getUserById(id);
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -39,9 +22,12 @@ export default async function UserPage(props: {
 					<AvatarImage src={user.image ?? undefined} />
 					<AvatarFallback>{getInitials(user.name)}</AvatarFallback>
 				</Avatar>
+
 				<header className="text-5xl">{user.name}</header>
+
 				<div className="text-2xl">Found the Following Items:</div>
 			</div>
+
 			<ul className="flex flex-wrap justify-center gap-2">
 				{user.collectionItems.map((collectionItem) => (
 					<Link

@@ -1,8 +1,7 @@
-import { auth } from "@claudiorivera/auth";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
+import { getSessionOrThrow } from "~/lib/auth-utils";
 import { getInitials } from "~/lib/get-initials";
 
 const menuItems = [
@@ -13,9 +12,7 @@ const menuItems = [
 ];
 
 export default async function HomePage() {
-	const session = await auth();
-
-	if (!session) return redirect("/api/auth/signin");
+	const session = await getSessionOrThrow();
 
 	return (
 		<div className="flex flex-col items-center gap-4">

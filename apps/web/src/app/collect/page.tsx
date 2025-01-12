@@ -1,22 +1,18 @@
-import { auth } from "@claudiorivera/auth";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { ImageUpload } from "~/app/collect/_components/image-upload";
-import { MyCollectionLink } from "~/app/collect/_components/my-collection-link";
-import {
-	getItemById,
-	getNextUncollectedItemIdForUser,
-} from "~/app/collect/_lib/api";
 import { Button } from "~/components/ui/button";
+import { getSessionOrThrow } from "~/lib/auth-utils";
+import {
+	getItemByIdOrThrow,
+	getNextUncollectedItemIdForUser,
+} from "~/server/api";
 
 export default async function CollectPage({
 	searchParams,
 }: {
 	searchParams?: Promise<{ [key: string]: string | Array<string> | undefined }>;
 }) {
-	const session = await auth();
-
-	if (!session) return redirect("/api/auth/signin");
+	const session = await getSessionOrThrow();
 
 	const searchParamsValue = await searchParams;
 
@@ -26,12 +22,23 @@ export default async function CollectPage({
 			: await getNextUncollectedItemIdForUser(session.user.id);
 
 	if (!itemId) {
-		return <AllItemsCollected />;
+		return (
+			<div className="flex flex-col gap-4">
+				<h3>
+					You Found All The Items!&nbsp;
+					<span role="img" aria-label="celebrate emoji">
+						🎉
+					</span>
+				</h3>
+
+				<Button variant="secondary" asChild>
+					<Link href={`/users/${session.user.id}`}>My Collection</Link>
+				</Button>
+			</div>
+		);
 	}
 
-	const item = await getItemById(itemId);
-
-	if (!item) return redirect("/items");
+	const item = await getItemByIdOrThrow(itemId);
 
 	return (
 		<div className="flex flex-col gap-4 text-center">
@@ -43,21 +50,6 @@ export default async function CollectPage({
 			<Button variant="secondary" asChild>
 				<Link href={`/items/${item.id}`}>See who found this</Link>
 			</Button>
-		</div>
-	);
-}
-
-function AllItemsCollected() {
-	return (
-		<div className="flex flex-col gap-4">
-			<h3>
-				You Found All The Items!&nbsp;
-				<span role="img" aria-label="celebrate emoji">
-					🎉
-				</span>
-			</h3>
-
-			<MyCollectionLink />
 		</div>
 	);
 }

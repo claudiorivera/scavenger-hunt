@@ -1,5 +1,3 @@
-"use client";
-
 import { Role } from "@claudiorivera/db";
 import {
 	CameraIcon,
@@ -61,11 +59,7 @@ const adminLinks = [
 	},
 ];
 
-export function Menu({
-	userRole,
-}: {
-	userRole?: Role;
-}) {
+export function Menu({ userRole }: { userRole?: Role }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>

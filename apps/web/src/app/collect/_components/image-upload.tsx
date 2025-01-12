@@ -3,18 +3,14 @@
 import type { Item } from "@claudiorivera/db";
 import { CheckIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
-import { useActionState, useState } from "react";
+import { useActionState } from "react";
 import { createCollectionItem } from "~/app/collect/actions";
 import { LoadingButton } from "~/components/loading-button";
 import { Button } from "~/components/ui/button";
 import { useImageUpload } from "~/hooks/use-image-upload";
 
 export function ImageUpload({ itemId }: { itemId: Item["id"] }) {
-	const [base64, setBase64] = useState<string>();
-
-	const { image, onFileChange, clearImage } = useImageUpload({
-		onSuccess: (_base64) => setBase64(_base64),
-	});
+	const { image, onFileChange, clearImage, base64 } = useImageUpload();
 
 	return (
 		<div className="aspect-square w-full max-w-sm">

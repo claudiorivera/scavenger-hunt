@@ -12,7 +12,7 @@ export function DeleteUser({ id }: { id: User["id"] }) {
 	return (
 		<form action={action}>
 			<input type="hidden" name="userId" value={id} />
-			<LoadingButton isLoading={isPending} disabled={isPending}>
+			<LoadingButton isLoading={isPending}>
 				<TrashIcon />
 			</LoadingButton>
 		</form>

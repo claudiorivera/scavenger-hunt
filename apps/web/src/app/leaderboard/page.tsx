@@ -1,21 +1,14 @@
-import { auth } from "@claudiorivera/auth";
-import { db } from "@claudiorivera/db";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { DeleteUser } from "~/app/leaderboard/_components/delete-user";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { getSessionOrThrow } from "~/lib/auth-utils";
 import { getInitials } from "~/lib/get-initials";
+import { getLeaderboardUsers } from "~/server/api";
 
 export default async function LeaderboardPage() {
-	const session = await auth();
+	const session = await getSessionOrThrow();
 
-	if (!session) return redirect("/api/auth/signin");
-
-	const users = await db.user.findMany({
-		include: {
-			_count: true,
-		},
-	});
+	const users = await getLeaderboardUsers();
 
 	return (
 		<div className="flex flex-col items-center gap-4">

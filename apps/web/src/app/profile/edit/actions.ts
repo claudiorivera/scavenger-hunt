@@ -1,24 +1,18 @@
 "use server";
 
-import { auth } from "@claudiorivera/auth";
 import { db } from "@claudiorivera/db";
-import { v2 as cloudinary } from "cloudinary";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { getSessionOrThrow } from "~/lib/auth-utils";
+import { uploadProfileImage } from "~/server/api";
 
 const editProfileSchema = z.object({
 	name: z.string().nullish(),
 	base64: z.string().nullish(),
 });
 
-type State = unknown;
-
-export async function editProfile(_state: State, formData: FormData) {
-	const session = await auth();
-
-	if (!session) {
-		throw Error("Unauthorized");
-	}
+export async function editProfile(_state: unknown, formData: FormData) {
+	const session = await getSessionOrThrow();
 
 	const input = Object.fromEntries(formData.entries());
 
@@ -36,7 +30,7 @@ export async function editProfile(_state: State, formData: FormData) {
 		},
 		data: {
 			image: validation.data.base64
-				? await uploadImage({
+				? await uploadProfileImage({
 						base64: validation.data.base64,
 						userId: session.user.id,
 					}).then(({ url }) => url)
@@ -46,27 +40,4 @@ export async function editProfile(_state: State, formData: FormData) {
 	});
 
 	redirect("/profile");
-}
-
-async function uploadImage({
-	base64,
-	userId,
-}: {
-	base64: string;
-	userId: string;
-}) {
-	try {
-		const { secure_url, height, width } = await cloudinary.uploader.upload(
-			base64,
-			{
-				public_id: `${userId}`,
-				folder: "scavenger-hunt/profile-images",
-			},
-		);
-
-		return { url: secure_url, height, width };
-	} catch (error) {
-		console.error(error);
-		throw error;
-	}
 }

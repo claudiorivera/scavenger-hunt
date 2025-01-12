@@ -12,8 +12,7 @@ export function LoadingButton({
 } & ComponentProps<typeof Button>) {
 	return (
 		<Button disabled={isLoading} {...props}>
-			{isLoading && <Loader2Icon className="animate-spin" />}
-			{children}
+			{isLoading ? <Loader2Icon className="animate-spin" /> : children}
 		</Button>
 	);
 }
