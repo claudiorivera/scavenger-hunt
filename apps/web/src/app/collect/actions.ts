@@ -3,8 +3,8 @@
 import { db } from "@claudiorivera/db";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { uploadToCloudinary } from "~/app/collect/_lib/api";
 import { getSessionOrThrow } from "~/lib/auth-utils";
+import { uploadCollectionItem } from "~/server/api";
 
 const createCollectionItemSchema = z.object({
 	base64: z.string(),
@@ -27,7 +27,7 @@ export async function createCollectionItem(
 		};
 	}
 
-	const { secure_url, height, width } = await uploadToCloudinary({
+	const { url, height, width } = await uploadCollectionItem({
 		base64: validation.data.base64,
 		userId: session.user.id,
 		itemId: validation.data.itemId,
@@ -35,7 +35,7 @@ export async function createCollectionItem(
 
 	const collectionItem = await db.collectionItem.create({
 		data: {
-			url: secure_url,
+			url,
 			height,
 			width,
 			itemId: validation.data.itemId,

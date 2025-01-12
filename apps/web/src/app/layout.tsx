@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
@@ -6,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import { Menu } from "~/app/_components/menu";
 import { TooltipProvider } from "~/components/ui/tooltip";
 import { getSessionOrThrow } from "~/lib/auth-utils";
+
 import "~/styles/globals.css";
 
 const fontSans = Inter({
@@ -46,6 +48,7 @@ export default async function Layout({
 						</div>
 						<main className="container mx-auto max-w-md p-8 text-center">
 							{children}
+							<Analytics />
 						</main>
 					</TooltipProvider>
 				</SessionProvider>

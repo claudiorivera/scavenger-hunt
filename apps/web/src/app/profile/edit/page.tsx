@@ -1,5 +1,5 @@
 import { EditProfileForm } from "~/app/profile/edit/_components/edit-profile-form";
-import { getCurrentUser } from "~/app/profile/edit/_lib/api";
+import { getCurrentUser } from "~/server/api";
 
 export default async function EditProfilePage() {
 	const user = await getCurrentUser();

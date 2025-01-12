@@ -2,12 +2,13 @@ import type { Item } from "@claudiorivera/db";
 import { CheckCircleIcon } from "lucide-react";
 import Link from "next/link";
 import { AddItemForm } from "~/app/items/_components/add-item-form";
-import { getItems } from "~/app/items/_lib/api";
 import { Button } from "~/components/ui/button";
 import { getSessionOrThrow } from "~/lib/auth-utils";
+import { getItems } from "~/server/api";
 
 export default async function ItemsPage() {
 	const session = await getSessionOrThrow();
+
 	const {
 		collectedItems = [],
 		totalItems = 0,

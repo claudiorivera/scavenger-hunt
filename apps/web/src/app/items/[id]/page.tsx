@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { getItemByIdOrThrow } from "~/app/collect/_lib/api";
 import { DeleteItem } from "~/app/items/[id]/_components/delete-item";
 import { UsersList } from "~/app/items/[id]/_components/users-list";
-import { getUsersWhoCollectedItem } from "~/app/items/[id]/_lib/api";
 import { Button } from "~/components/ui/button";
 import { getSessionOrThrow } from "~/lib/auth-utils";
+import { getItemByIdOrThrow, getUsersWhoCollectedItem } from "~/server/api";
 
 export default async function ItemPage(props: {
 	params: Promise<{ id: string }>;

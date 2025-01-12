@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { DeleteUser } from "~/app/leaderboard/_components/delete-user";
-import { getLeaderboardUsers } from "~/app/leaderboard/_lib/api";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { getSessionOrThrow } from "~/lib/auth-utils";
 import { getInitials } from "~/lib/get-initials";
+import { getLeaderboardUsers } from "~/server/api";
 
 export default async function LeaderboardPage() {
 	const session = await getSessionOrThrow();

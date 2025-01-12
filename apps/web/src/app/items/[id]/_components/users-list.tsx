@@ -1,9 +1,9 @@
 import { EyeIcon } from "lucide-react";
 import Link from "next/link";
-import type { UserWithCollectionItems } from "~/app/items/[id]/_lib/api";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import { getInitials } from "~/lib/get-initials";
+import type { UserWithCollectionItems } from "~/server/api";
 
 export function UsersList({
 	users,

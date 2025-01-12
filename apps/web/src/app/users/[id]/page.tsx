@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { getUserById } from "~/app/users/[id]/_lib/api";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import {
 	Tooltip,
@@ -7,6 +6,7 @@ import {
 	TooltipTrigger,
 } from "~/components/ui/tooltip";
 import { getInitials } from "~/lib/get-initials";
+import { getUserById } from "~/server/api";
 
 export default async function UserPage(props: {
 	params: Promise<{ id: string }>;

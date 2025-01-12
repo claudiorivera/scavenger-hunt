@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { CollectionLink } from "~/app/collect/_components/collection-link";
 import { ImageUpload } from "~/app/collect/_components/image-upload";
+import { Button } from "~/components/ui/button";
+import { getSessionOrThrow } from "~/lib/auth-utils";
 import {
 	getItemByIdOrThrow,
 	getNextUncollectedItemIdForUser,
-} from "~/app/collect/_lib/api";
-import { Button } from "~/components/ui/button";
-import { getSessionOrThrow } from "~/lib/auth-utils";
+} from "~/server/api";
 
 export default async function CollectPage({
 	searchParams,
@@ -32,7 +31,9 @@ export default async function CollectPage({
 					</span>
 				</h3>
 
-				<CollectionLink userId={session.user.id} />
+				<Button variant="secondary" asChild>
+					<Link href={`/users/${session.user.id}`}>My Collection</Link>
+				</Button>
 			</div>
 		);
 	}
