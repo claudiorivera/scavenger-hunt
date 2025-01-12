@@ -1,10 +1,9 @@
 "use server";
-
-import { auth } from "@claudiorivera/auth";
 import { db } from "@claudiorivera/db";
 import { v2 as cloudinary } from "cloudinary";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { getSessionOrThrow } from "~/lib/auth-utils";
 
 const editProfileSchema = z.object({
 	name: z.string().nullish(),
@@ -14,11 +13,7 @@ const editProfileSchema = z.object({
 type State = unknown;
 
 export async function editProfile(_state: State, formData: FormData) {
-	const session = await auth();
-
-	if (!session) {
-		throw Error("Unauthorized");
-	}
+	const session = await getSessionOrThrow();
 
 	const input = Object.fromEntries(formData.entries());
 
