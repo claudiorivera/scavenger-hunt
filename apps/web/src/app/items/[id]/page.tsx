@@ -1,12 +1,10 @@
-import { db } from "@claudiorivera/db";
-import { EyeIcon } from "lucide-react";
 import Link from "next/link";
 import { getItemByIdOrThrow } from "~/app/collect/_lib/api";
 import { DeleteItem } from "~/app/items/[id]/_components/delete-item";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { UsersList } from "~/app/items/[id]/_components/users-list";
+import { getUsersWhoCollectedItem } from "~/app/items/[id]/_lib/api";
 import { Button } from "~/components/ui/button";
 import { getSessionOrThrow } from "~/lib/auth-utils";
-import { getInitials } from "~/lib/get-initials";
 
 export default async function ItemPage(props: {
 	params: Promise<{ id: string }>;
@@ -15,27 +13,10 @@ export default async function ItemPage(props: {
 
 	const { id } = await props.params;
 
-	const item = await getItemByIdOrThrow(id);
-
-	const users = await db.user.findMany({
-		where: {
-			collectionItems: {
-				some: {
-					itemId: {
-						equals: id,
-					},
-				},
-			},
-		},
-		include: {
-			collectionItems: {
-				select: {
-					id: true,
-					itemId: true,
-				},
-			},
-		},
-	});
+	const [item, users] = await Promise.all([
+		getItemByIdOrThrow(id),
+		getUsersWhoCollectedItem(id),
+	]);
 
 	const hasCurrentUserCollected = users.some(
 		(user) => user.id === session.user.id,
@@ -45,62 +26,20 @@ export default async function ItemPage(props: {
 		<div className="flex flex-col gap-4">
 			<header className="text-5xl">{item.description}</header>
 			<div className="text-2xl">Collected By:</div>
+
 			{users.length ? (
 				<UsersList users={users} itemId={item.id} />
 			) : (
 				<div className="text-2xl">Nobody, yet 😢</div>
 			)}
+
 			{!hasCurrentUserCollected && (
 				<Button variant="secondary" asChild>
 					<Link href={`/collect?itemId=${item.id}`}>Found It?</Link>
 				</Button>
 			)}
+
 			{session.user.role === "ADMIN" && <DeleteItem id={item.id} />}
 		</div>
-	);
-}
-
-function UsersList({
-	users,
-	itemId,
-}: {
-	users: Array<{
-		id: string;
-		collectionItems: Array<{
-			id: string;
-			itemId: string;
-		}>;
-		name: string | null;
-		image: string | null;
-	}>;
-	itemId: string;
-}) {
-	return (
-		<ul className="flex flex-col gap-4 pb-4">
-			{users.map((user) => {
-				const collectionItem = user.collectionItems.find(
-					(item) => item.itemId === itemId,
-				);
-
-				return (
-					<li key={user.id} className="flex items-center gap-4">
-						<Link href={`/users/${user.id}`}>
-							<Avatar>
-								<AvatarImage src={user.image ?? undefined} />
-								<AvatarFallback>{getInitials(user.name)}</AvatarFallback>
-							</Avatar>
-						</Link>
-						<div className="flex-1 text-left">{user.name}</div>
-						{!!collectionItem?.id && (
-							<Button variant="secondary" asChild>
-								<Link href={`/collection-items/${collectionItem.id}`}>
-									<EyeIcon />
-								</Link>
-							</Button>
-						)}
-					</li>
-				);
-			})}
-		</ul>
 	);
 }
