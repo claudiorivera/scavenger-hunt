@@ -1,6 +1,3 @@
-import "~/styles/globals.css";
-
-import { auth } from "@claudiorivera/auth";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
@@ -8,6 +5,8 @@ import Link from "next/link";
 import { Toaster } from "react-hot-toast";
 import { Menu } from "~/app/_components/menu";
 import { TooltipProvider } from "~/components/ui/tooltip";
+import { getSessionOrThrow } from "~/lib/auth-utils";
+import "~/styles/globals.css";
 
 const fontSans = Inter({
 	subsets: ["latin"],
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
 export default async function Layout({
 	children,
 }: { children: React.ReactNode }) {
-	const session = await auth();
+	const session = await getSessionOrThrow();
 
 	return (
 		<html lang="en">
@@ -43,7 +42,7 @@ export default async function Layout({
 									Scavenger Hunt
 								</Link>
 							</div>
-							<Menu userRole={session?.user.role} />
+							<Menu userRole={session.user.role} />
 						</div>
 						<main className="container mx-auto max-w-md p-8 text-center">
 							{children}
