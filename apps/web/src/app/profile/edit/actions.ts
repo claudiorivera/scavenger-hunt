@@ -1,4 +1,5 @@
 "use server";
+
 import { db } from "@claudiorivera/db";
 import { v2 as cloudinary } from "cloudinary";
 import { redirect } from "next/navigation";
@@ -10,9 +11,7 @@ const editProfileSchema = z.object({
 	base64: z.string().nullish(),
 });
 
-type State = unknown;
-
-export async function editProfile(_state: State, formData: FormData) {
+export async function editProfile(_state: unknown, formData: FormData) {
 	const session = await getSessionOrThrow();
 
 	const input = Object.fromEntries(formData.entries());
