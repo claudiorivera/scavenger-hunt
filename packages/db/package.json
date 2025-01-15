@@ -26,12 +26,12 @@
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "workspace:*",
 		"@types/node": "22.10.7",
-		"bun": "1.1.45",
 		"dotenv-cli": "8.0.0",
 		"prisma": "6.2.1",
+		"tsx": "4.19.2",
 		"typescript": "5.7.3"
 	},
 	"prisma": {
-		"seed": "bun run ./run-seed.ts"
+		"seed": "tsx ./run-seed.ts"
 	}
 }
