@@ -7,5 +7,11 @@
 	"typescript.preferences.autoImportFileExcludePatterns": [
 		"next/router.d.ts",
 		"next/dist/client/router.d.ts"
-	]
+	],
+	"[prisma]": {
+		"editor.defaultFormatter": "Prisma.prisma"
+	},
+	"[markdown][yaml]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
 }

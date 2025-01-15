@@ -33,32 +33,34 @@ model Session {
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-
-    role       Role    @default(USER)
-    isDemoUser Boolean @default(false)
-
-    accounts        Account[]
-    sessions        Session[]
-    collectionItems CollectionItem[]
-}
-
-enum Role {
-    USER
-    ADMIN
-}
-
 model VerificationToken {
     identifier String
     token      String   @unique
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model User {
+    id            String    @id @default(cuid())
+    name          String?
+    email         String?   @unique
+    emailVerified DateTime?
+    image         String?
+    role          Role      @default(USER)
+    isDemoUser    Boolean   @default(false)
+
+    accounts Account[]
+    sessions Session[]
+
+    collectionItems CollectionItem[]
+    huntsCreated    Hunt[]
+    participations  Participation[]
+}
+
+enum Role {
+    USER
+    ADMIN
 }
 
 model CollectionItem {
@@ -75,6 +77,10 @@ model CollectionItem {
 
     item   Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
     itemId String
+
+    @@unique([userId, itemId])
+    @@index([userId])
+    @@index([itemId])
 }
 
 model Item {
@@ -84,5 +90,37 @@ model Item {
 
     description String
 
+    hunt            Hunt             @relation(fields: [huntId], references: [id], onDelete: Cascade)
+    huntId          String
     collectionItems CollectionItem[]
+
+    @@index([huntId])
+}
+
+model Hunt {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    createdBy   User   @relation(fields: [createdById], references: [id], onDelete: Cascade)
+    createdById String
+
+    items        Item[]
+    participants Participation[]
+
+    @@index([createdById])
+}
+
+model Participation {
+    id String @id @default(cuid())
+
+    hunt   Hunt   @relation(fields: [huntId], references: [id], onDelete: Cascade)
+    huntId String
+
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId String
+
+    @@unique([huntId, userId])
+    @@index([userId])
+    @@index([huntId])
 }

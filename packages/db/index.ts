@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import { createId } from "@paralleldrive/cuid2";
 import type { Prisma } from "@prisma/client";
 import { PrismaClient } from "@prisma/client";
 
@@ -19,6 +20,7 @@ if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db;
 
 function generateUserCreateInput(): Prisma.UserCreateInput {
 	return {
+		id: createId(),
 		email: faker.internet.email(),
 		emailVerified: faker.date.past(),
 		image: faker.image.avatar(),
@@ -59,29 +61,49 @@ export async function seed() {
 	const USERS_TO_CREATE = 8;
 	const ITEMS_TO_CREATE = 20;
 
-	await Promise.all([
-		db.user.deleteMany(),
-		db.item.deleteMany(),
-		db.collectionItem.deleteMany(),
-	]);
+	console.log("Wiping database...");
+	await db.user.deleteMany();
 
+	console.log("Creating users...");
 	await createUsers(USERS_TO_CREATE);
 
-	await Promise.all(
-		[...Array(ITEMS_TO_CREATE)].map(() =>
-			db.item.create({
-				data: {
-					description: generateItemDescription(),
-				},
-			}),
-		),
-	);
-
-	const [users, items] = await Promise.all([
+	const [users, huntCreator] = await Promise.all([
 		db.user.findMany(),
-		db.item.findMany(),
+		db.user.findFirstOrThrow(),
 	]);
 
+	console.log("Creating hunt and items...");
+	const hunt = await db.hunt.create({
+		data: {
+			createdBy: {
+				connect: {
+					id: huntCreator.id,
+				},
+			},
+			items: {
+				createMany: {
+					data: [...Array(ITEMS_TO_CREATE)].map(() => ({
+						description: generateItemDescription(),
+					})),
+				},
+			},
+			participants: {
+				createMany: {
+					data: users.map((user) => ({
+						userId: user.id,
+					})),
+				},
+			},
+		},
+	});
+
+	const items = await db.item.findMany({
+		where: {
+			huntId: hunt.id,
+		},
+	});
+
+	console.log("Creating collection items...");
 	for (const item of items) {
 		const numberOfUsersToConnect = faker.number.int({
 			min: 0,

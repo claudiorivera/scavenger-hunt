@@ -198,6 +198,57 @@ export async function getUserById(id: string) {
 	});
 }
 
+export async function getAvailableHunts() {
+	const session = await getSessionOrThrow();
+
+	return db.hunt.findMany({
+		where: {
+			participants: {
+				none: {
+					userId: session.user.id,
+				},
+			},
+		},
+		include: {
+			createdBy: true,
+		},
+	});
+}
+
+export async function getMyParticipations() {
+	const session = await getSessionOrThrow();
+
+	return db.participation.findMany({
+		where: {
+			userId: session.user.id,
+		},
+		include: {
+			hunt: {
+				include: {
+					createdBy: true,
+				},
+			},
+		},
+	});
+}
+
+export type Hunt = Awaited<ReturnType<typeof getAvailableHunts>>[number];
+
+export async function joinHunt({
+	huntId,
+}: {
+	huntId: string;
+}) {
+	const session = await getSessionOrThrow();
+
+	return db.participation.create({
+		data: {
+			huntId,
+			userId: session.user.id,
+		},
+	});
+}
+
 export type UserWithCollectionItems = Awaited<
 	ReturnType<typeof getUsersWhoCollectedItem>
 >[number];
