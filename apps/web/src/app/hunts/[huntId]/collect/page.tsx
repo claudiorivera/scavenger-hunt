@@ -53,7 +53,9 @@ export default async function CollectPage({
 			<ImageUpload itemId={item.id} />
 
 			<Button variant="secondary" asChild>
-				<Link href={`/items/${item.id}`}>See who found this</Link>
+				<Link href={`/hunts/${huntId}/items/${item.id}`}>
+					See who found this
+				</Link>
 			</Button>
 		</div>
 	);
