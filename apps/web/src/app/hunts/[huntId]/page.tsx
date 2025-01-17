@@ -19,20 +19,25 @@ export default async function HuntPage({
 	];
 
 	return (
-		<div className="flex flex-col items-center gap-4">
-			<Avatar className="h-24 w-24">
-				<AvatarImage src={session.user.image ?? undefined} alt="User Avatar" />
-				<AvatarFallback>{getInitials(session.user?.name)}</AvatarFallback>
-			</Avatar>
+		<div className="flex flex-col gap-4">
+			<div className="flex justify-center">
+				<Avatar className="h-24 w-24">
+					<AvatarImage
+						src={session.user.image ?? undefined}
+						alt="User Avatar"
+					/>
+					<AvatarFallback>{getInitials(session.user?.name)}</AvatarFallback>
+				</Avatar>
+			</div>
 
 			<header className="font-semibold text-2xl leading-snug">
 				{session.user?.name ?? "Anonymous User"}
 			</header>
 
-			<ul className="flex w-full flex-col gap-2">
+			<ul className="flex flex-col gap-2">
 				{menuItems.map((item) => (
 					<li key={item.href}>
-						<Button asChild variant="secondary">
+						<Button asChild className="w-full" variant="secondary">
 							<Link href={item.href}>{item.label}</Link>
 						</Button>
 					</li>
