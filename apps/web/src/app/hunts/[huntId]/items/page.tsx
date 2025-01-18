@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AddItemForm } from "~/app/hunts/[huntId]/items/_components/add-item-form";
 import { Button } from "~/components/ui/button";
 import { getSessionOrThrow } from "~/lib/auth-utils";
-import { getItems } from "~/server/api";
+import { getItemsForHunt } from "~/server/api";
 
 export default async function ItemsPage({
 	params,
@@ -19,7 +19,7 @@ export default async function ItemsPage({
 		collectedItems = [],
 		totalItems = 0,
 		uncollectedItems = [],
-	} = await getItems();
+	} = await getItemsForHunt(huntId);
 
 	return (
 		<div className="flex flex-col gap-4">

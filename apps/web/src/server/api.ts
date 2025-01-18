@@ -112,10 +112,13 @@ export async function getCurrentUser() {
 	});
 }
 
-export async function getItems() {
+export async function getItemsForHunt(huntId: string) {
 	const session = await getSessionOrThrow();
 
 	const items = await db.item.findMany({
+		where: {
+			huntId,
+		},
 		include: {
 			collectionItems: true,
 		},
