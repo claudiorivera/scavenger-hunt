@@ -252,6 +252,21 @@ export async function joinHunt({
 	});
 }
 
+export async function leaveHunt({
+	huntId,
+}: {
+	huntId: string;
+}) {
+	const session = await getSessionOrThrow();
+
+	return db.participation.deleteMany({
+		where: {
+			huntId,
+			userId: session.user.id,
+		},
+	});
+}
+
 export type UserWithCollectionItems = Awaited<
 	ReturnType<typeof getUsersWhoCollectedItem>
 >[number];

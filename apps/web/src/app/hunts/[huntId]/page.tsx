@@ -1,15 +1,12 @@
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { LeaveHunt } from "~/app/hunts/[huntId]/_components/leave-hunt";
 import { Button } from "~/components/ui/button";
-import { getSessionOrThrow } from "~/lib/auth-utils";
-import { getInitials } from "~/lib/get-initials";
 
 export default async function HuntPage({
 	params,
 }: {
 	params: Promise<{ huntId: string }>;
 }) {
-	const session = await getSessionOrThrow();
 	const { huntId } = await params;
 
 	const menuItems = [
@@ -20,20 +17,6 @@ export default async function HuntPage({
 
 	return (
 		<div className="flex flex-col gap-4">
-			<div className="flex justify-center">
-				<Avatar className="h-24 w-24">
-					<AvatarImage
-						src={session.user.image ?? undefined}
-						alt="User Avatar"
-					/>
-					<AvatarFallback>{getInitials(session.user?.name)}</AvatarFallback>
-				</Avatar>
-			</div>
-
-			<header className="font-semibold text-2xl leading-snug">
-				{session.user?.name ?? "Anonymous User"}
-			</header>
-
 			<ul className="flex flex-col gap-2">
 				{menuItems.map((item) => (
 					<li key={item.href}>
@@ -43,6 +26,8 @@ export default async function HuntPage({
 					</li>
 				))}
 			</ul>
+
+			<LeaveHunt huntId={huntId} />
 		</div>
 	);
 }

@@ -1,15 +1,7 @@
-import { Role } from "@claudiorivera/db";
-import {
-	CameraIcon,
-	HomeIcon,
-	ImagesIcon,
-	LogOutIcon,
-	MedalIcon,
-	MenuIcon,
-	UserRoundIcon,
-} from "lucide-react";
+import { Role, type User } from "@claudiorivera/db";
+import { LogOutIcon, UserRoundIcon } from "lucide-react";
 import Link from "next/link";
-import { Button } from "~/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -17,28 +9,9 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import { getInitials } from "~/lib/get-initials";
 
 const userLinks = [
-	{
-		title: "Home",
-		url: "/",
-		icon: <HomeIcon />,
-	},
-	{
-		title: "Collect",
-		url: "/collect",
-		icon: <CameraIcon />,
-	},
-	{
-		title: "Leaderboard",
-		url: "/leaderboard",
-		icon: <MedalIcon />,
-	},
-	{
-		title: "Items",
-		url: "/items",
-		icon: <ImagesIcon />,
-	},
 	{
 		title: "My Profile",
 		url: "/profile",
@@ -59,13 +32,16 @@ const adminLinks = [
 	},
 ];
 
-export function Menu({ userRole }: { userRole?: Role }) {
+export function Menu({ user }: { user?: User }) {
+	const userRole = user?.role ?? Role.USER;
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="ghost">
-					<MenuIcon />
-				</Button>
+				<Avatar className="cursor-pointer outline outline-1 outline-white">
+					<AvatarImage src={user?.image ?? undefined} alt="User Avatar" />
+					<AvatarFallback>{getInitials(user?.name)}</AvatarFallback>
+				</Avatar>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="p-2" align="end">
 				{userLinks.map((link) => (

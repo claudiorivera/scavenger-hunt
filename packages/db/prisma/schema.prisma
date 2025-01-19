@@ -112,15 +112,13 @@ model Hunt {
 }
 
 model Participation {
-    id String @id @default(cuid())
-
     hunt   Hunt   @relation(fields: [huntId], references: [id], onDelete: Cascade)
     huntId String
 
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String
 
-    @@unique([huntId, userId])
+    @@id(name: "id", fields: [huntId, userId])
     @@index([userId])
     @@index([huntId])
 }
