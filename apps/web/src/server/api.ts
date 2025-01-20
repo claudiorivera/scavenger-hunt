@@ -174,12 +174,24 @@ export async function getUsersWhoCollectedItem(itemId: string) {
 	});
 }
 
-export async function getLeaderboardUsers() {
+export async function getLeaderboardUsersForHunt(huntId: string) {
 	await getSessionOrThrow();
 
 	return db.user.findMany({
+		where: {
+			participations: {
+				some: {
+					huntId,
+				},
+			},
+		},
 		include: {
 			_count: true,
+		},
+		orderBy: {
+			collectionItems: {
+				_count: "desc",
+			},
 		},
 	});
 }

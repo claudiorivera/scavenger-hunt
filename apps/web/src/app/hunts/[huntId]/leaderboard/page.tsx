@@ -3,7 +3,7 @@ import { DeleteUser } from "~/app/hunts/[huntId]/leaderboard/_components/delete-
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { getInitials } from "~/lib/get-initials";
 import { can } from "~/lib/permissions";
-import { getCurrentUser, getLeaderboardUsers } from "~/server/api";
+import { getCurrentUser, getLeaderboardUsersForHunt } from "~/server/api";
 
 export default async function LeaderboardPage({
 	params,
@@ -12,9 +12,9 @@ export default async function LeaderboardPage({
 }) {
 	const currentUser = await getCurrentUser();
 
-	const users = await getLeaderboardUsers();
-
 	const { huntId } = await params;
+
+	const users = await getLeaderboardUsersForHunt(huntId);
 
 	return (
 		<div className="flex flex-col items-center gap-4">
