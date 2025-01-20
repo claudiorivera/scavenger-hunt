@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Toaster } from "react-hot-toast";
 import { Menu } from "~/app/_components/menu";
 import { TooltipProvider } from "~/components/ui/tooltip";
-import { getSessionOrThrow } from "~/lib/auth-utils";
+import { getCurrentUser } from "~/server/api";
 
 import "~/styles/globals.css";
 
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 export default async function Layout({
 	children,
 }: { children: React.ReactNode }) {
-	const session = await getSessionOrThrow();
+	const user = await getCurrentUser();
 
 	return (
 		<html lang="en">
@@ -44,7 +44,7 @@ export default async function Layout({
 									Scavenger Hunt
 								</Link>
 							</div>
-							<Menu userRole={session.user.role} />
+							<Menu user={user} />
 						</div>
 						<main className="container mx-auto max-w-md p-8 text-center">
 							{children}

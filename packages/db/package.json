@@ -9,10 +9,11 @@
 		"db:generate": "pnpm with-env prisma generate",
 		"db:deploy": "pnpm with-env prisma migrate deploy",
 		"db:migrate": "pnpm with-env prisma migrate dev",
+		"db:reset": "pnpm with-env prisma migrate reset",
 		"db:push": "pnpm with-env prisma db push --skip-generate",
 		"db:seed": "pnpm with-env prisma db seed",
 		"dev": "pnpm with-env prisma studio --port 5556",
-		"with-env": "dotenv -e ../../.env --",
+		"with-env": "dotenvx run -f ../../.env --",
 		"check-types": "tsc --noEmit",
 		"check": "pnpm biome check .",
 		"check:fix": "pnpm biome check --write .",
@@ -20,17 +21,18 @@
 	},
 	"dependencies": {
 		"@faker-js/faker": "9.4.0",
+		"@paralleldrive/cuid2": "2.2.2",
 		"@prisma/client": "6.2.1"
 	},
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "workspace:*",
+		"@dotenvx/dotenvx": "1.33.0",
 		"@types/node": "22.10.7",
-		"bun": "1.1.45",
-		"dotenv-cli": "8.0.0",
 		"prisma": "6.2.1",
+		"tsx": "4.19.2",
 		"typescript": "5.7.3"
 	},
 	"prisma": {
-		"seed": "bun run ./run-seed.ts"
+		"seed": "tsx ./run-seed.ts"
 	}
 }

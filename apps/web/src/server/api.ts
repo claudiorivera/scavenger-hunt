@@ -112,10 +112,13 @@ export async function getCurrentUser() {
 	});
 }
 
-export async function getItems() {
+export async function getItemsForHunt(huntId: string) {
 	const session = await getSessionOrThrow();
 
 	const items = await db.item.findMany({
+		where: {
+			huntId,
+		},
 		include: {
 			collectionItems: true,
 		},
@@ -198,6 +201,80 @@ export async function getUserById(id: string) {
 	});
 }
 
+export async function getAvailableHunts() {
+	const session = await getSessionOrThrow();
+
+	return db.hunt.findMany({
+		where: {
+			participants: {
+				none: {
+					userId: session.user.id,
+				},
+			},
+		},
+		include: {
+			createdBy: true,
+		},
+	});
+}
+
+export async function getMyParticipations() {
+	const session = await getSessionOrThrow();
+
+	return db.participation.findMany({
+		where: {
+			userId: session.user.id,
+		},
+		include: {
+			hunt: {
+				include: {
+					createdBy: true,
+				},
+			},
+		},
+	});
+}
+
+export type Hunt = Awaited<ReturnType<typeof getAvailableHunts>>[number];
+
+export async function joinHunt({
+	huntId,
+}: {
+	huntId: string;
+}) {
+	const session = await getSessionOrThrow();
+
+	return db.participation.create({
+		data: {
+			huntId,
+			userId: session.user.id,
+		},
+	});
+}
+
+export async function leaveHunt({
+	huntId,
+}: {
+	huntId: string;
+}) {
+	const session = await getSessionOrThrow();
+
+	return db.participation.deleteMany({
+		where: {
+			huntId,
+			userId: session.user.id,
+		},
+	});
+}
+
 export type UserWithCollectionItems = Awaited<
 	ReturnType<typeof getUsersWhoCollectedItem>
 >[number];
+
+export function getHunt(id: string) {
+	return db.hunt.findUniqueOrThrow({
+		where: {
+			id,
+		},
+	});
+}
