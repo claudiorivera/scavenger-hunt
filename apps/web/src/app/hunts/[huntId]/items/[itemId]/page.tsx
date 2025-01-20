@@ -2,13 +2,17 @@ import Link from "next/link";
 import { DeleteItem } from "~/app/hunts/[huntId]/items/[itemId]/_components/delete-item";
 import { UsersList } from "~/app/hunts/[huntId]/items/[itemId]/_components/users-list";
 import { Button } from "~/components/ui/button";
-import { getSessionOrThrow } from "~/lib/auth-utils";
-import { getItemByIdOrThrow, getUsersWhoCollectedItem } from "~/server/api";
+import { can } from "~/lib/permissions";
+import {
+	getCurrentUser,
+	getItemByIdOrThrow,
+	getUsersWhoCollectedItem,
+} from "~/server/api";
 
 export default async function ItemPage(props: {
 	params: Promise<{ itemId: string; huntId: string }>;
 }) {
-	const session = await getSessionOrThrow();
+	const user = await getCurrentUser();
 
 	const { itemId, huntId } = await props.params;
 
@@ -17,9 +21,7 @@ export default async function ItemPage(props: {
 		getUsersWhoCollectedItem(itemId),
 	]);
 
-	const hasCurrentUserCollected = users.some(
-		(user) => user.id === session.user.id,
-	);
+	const hasCurrentUserCollected = users.some((_user) => _user.id === user.id);
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -38,7 +40,7 @@ export default async function ItemPage(props: {
 				</Button>
 			)}
 
-			{session.user.role === "ADMIN" && <DeleteItem id={item.id} />}
+			{can(user).deleteItem(item) && <DeleteItem id={item.id} />}
 		</div>
 	);
 }

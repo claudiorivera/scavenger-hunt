@@ -85,12 +85,17 @@ async function createParticipations(hunts: Array<Hunt>, users: Array<User>) {
 	});
 }
 
-async function createItems(hunts: Array<Hunt>, itemsPerHunt: number) {
+async function createItems(
+	hunts: Array<Hunt>,
+	itemsPerHunt: number,
+	createdById: string,
+) {
 	return db.item.createManyAndReturn({
 		data: hunts.flatMap((hunt) =>
 			[...Array(itemsPerHunt)].map(() => ({
 				description: generateItemDescription(),
 				huntId: hunt.id,
+				createdById,
 			})),
 		),
 	});
@@ -110,7 +115,8 @@ async function generateCollectionItemsData() {
 	console.log("Creating hunts...");
 	const hunts = await createHunts(users, HUNTS_TO_CREATE);
 	console.log("Creating items...");
-	const items = await createItems(hunts, ITEMS_PER_HUNT);
+	const createdById = faker.helpers.arrayElement(users).id;
+	const items = await createItems(hunts, ITEMS_PER_HUNT, createdById);
 	console.log("Creating participations...");
 	const participations = await createParticipations(hunts, users);
 

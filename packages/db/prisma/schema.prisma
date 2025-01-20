@@ -56,6 +56,7 @@ model User {
     collectionItems CollectionItem[]
     huntsCreated    Hunt[]
     participations  Participation[]
+    items           Item[]
 }
 
 enum Role {
@@ -93,6 +94,8 @@ model Item {
     hunt            Hunt             @relation(fields: [huntId], references: [id], onDelete: Cascade)
     huntId          String
     collectionItems CollectionItem[]
+    createdBy       User             @relation(fields: [createdById], references: [id], onDelete: Cascade)
+    createdById     String
 
     @@index([huntId])
 }

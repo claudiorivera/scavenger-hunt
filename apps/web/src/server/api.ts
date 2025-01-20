@@ -270,3 +270,11 @@ export async function leaveHunt({
 export type UserWithCollectionItems = Awaited<
 	ReturnType<typeof getUsersWhoCollectedItem>
 >[number];
+
+export function getHunt(id: string) {
+	return db.hunt.findUniqueOrThrow({
+		where: {
+			id,
+		},
+	});
+}

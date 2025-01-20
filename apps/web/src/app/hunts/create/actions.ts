@@ -34,6 +34,7 @@ export async function createHunt(_state: unknown, formData: FormData) {
 				createMany: {
 					data: Object.entries(validation.data).map(([_key, value]) => ({
 						description: value,
+						createdById: session.user.id,
 					})),
 				},
 			},

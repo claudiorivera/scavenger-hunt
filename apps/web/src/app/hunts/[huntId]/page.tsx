@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { DeleteHunt } from "~/app/hunts/[huntId]/_components/delete-hunt";
 import { LeaveHunt } from "~/app/hunts/[huntId]/_components/leave-hunt";
 import { Button } from "~/components/ui/button";
+import { can } from "~/lib/permissions";
+import { getCurrentUser, getHunt } from "~/server/api";
 
 export default async function HuntPage({
 	params,
@@ -8,6 +11,9 @@ export default async function HuntPage({
 	params: Promise<{ huntId: string }>;
 }) {
 	const { huntId } = await params;
+
+	const user = await getCurrentUser();
+	const hunt = await getHunt(huntId);
 
 	const menuItems = [
 		{ href: `/hunts/${huntId}/collect`, label: "Collect Items" },
@@ -28,6 +34,8 @@ export default async function HuntPage({
 			</ul>
 
 			<LeaveHunt huntId={huntId} />
+
+			{can(user).deleteHunt(hunt) && <DeleteHunt id={huntId} />}
 		</div>
 	);
 }

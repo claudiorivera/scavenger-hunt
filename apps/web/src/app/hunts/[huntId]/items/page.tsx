@@ -3,17 +3,19 @@ import { CheckCircleIcon } from "lucide-react";
 import Link from "next/link";
 import { AddItemForm } from "~/app/hunts/[huntId]/items/_components/add-item-form";
 import { Button } from "~/components/ui/button";
-import { getSessionOrThrow } from "~/lib/auth-utils";
-import { getItemsForHunt } from "~/server/api";
+import { can } from "~/lib/permissions";
+import { getCurrentUser, getHunt, getItemsForHunt } from "~/server/api";
 
 export default async function ItemsPage({
 	params,
 }: {
 	params: Promise<{ huntId: string }>;
 }) {
-	const session = await getSessionOrThrow();
+	const user = await getCurrentUser();
 
 	const { huntId } = await params;
+
+	const hunt = await getHunt(huntId);
 
 	const {
 		collectedItems = [],
@@ -24,7 +26,7 @@ export default async function ItemsPage({
 	return (
 		<div className="flex flex-col gap-4">
 			<header className="text-5xl">All Items</header>
-			{session.user.role === "ADMIN" && <AddItemForm />}
+			{can(user).addItemToHunt(hunt) && <AddItemForm />}
 			<div>
 				Found {collectedItems.length} out of {totalItems} items! 📷
 			</div>

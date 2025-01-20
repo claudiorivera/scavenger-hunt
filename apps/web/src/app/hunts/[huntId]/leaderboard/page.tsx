@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { DeleteUser } from "~/app/hunts/[huntId]/leaderboard/_components/delete-user";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { getSessionOrThrow } from "~/lib/auth-utils";
 import { getInitials } from "~/lib/get-initials";
-import { getLeaderboardUsers } from "~/server/api";
+import { can } from "~/lib/permissions";
+import { getCurrentUser, getLeaderboardUsers } from "~/server/api";
 
 export default async function LeaderboardPage({
 	params,
 }: {
 	params: Promise<{ huntId: string }>;
 }) {
-	const session = await getSessionOrThrow();
+	const currentUser = await getCurrentUser();
 
 	const users = await getLeaderboardUsers();
 
@@ -22,9 +22,7 @@ export default async function LeaderboardPage({
 			<ul className="flex flex-col gap-4">
 				{users.map((user) => (
 					<li key={user.id} className="flex items-center gap-4">
-						{session.user.role === "ADMIN" && session.user.id !== user.id && (
-							<DeleteUser id={user.id} />
-						)}
+						{can(currentUser).deleteUser(user) && <DeleteUser id={user.id} />}
 						<Link
 							href={`/hunts/${huntId}/users/${user.id}`}
 							className="flex w-full items-center gap-4"

@@ -11,7 +11,7 @@ const createItemSchema = z.object({
 });
 
 export async function createItem(_state: unknown, formData: FormData) {
-	await getSessionOrThrow();
+	const session = await getSessionOrThrow();
 
 	const input = Object.fromEntries(formData.entries());
 
@@ -24,7 +24,7 @@ export async function createItem(_state: unknown, formData: FormData) {
 	}
 
 	await db.item.create({
-		data: validation.data,
+		data: { ...validation.data, createdById: session.user.id },
 	});
 
 	revalidatePath(`/hunts/${validation.data.huntId}/items`);

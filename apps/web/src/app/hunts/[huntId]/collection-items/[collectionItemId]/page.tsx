@@ -2,13 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { DeleteCollectionItem } from "~/app/hunts/[huntId]/collection-items/[collectionItemId]/_components/delete-collection-item";
 import { Button } from "~/components/ui/button";
-import { getSessionOrThrow } from "~/lib/auth-utils";
+import { can } from "~/lib/permissions";
 import { getCollectionItem, getCurrentUser } from "~/server/api";
 
 export default async function CollectionItemPage(props: {
 	params: Promise<{ collectionItemId: string; huntId: string }>;
 }) {
-	const session = await getSessionOrThrow();
+	const user = await getCurrentUser();
 
 	const { collectionItemId, huntId } = await props.params;
 
@@ -57,7 +57,7 @@ export default async function CollectionItemPage(props: {
 				</Link>
 			</Button>
 
-			{session.user.role === "ADMIN" && (
+			{can(user).deleteCollectionItem(collectionItem) && (
 				<DeleteCollectionItem id={collectionItem.id} />
 			)}
 		</div>
