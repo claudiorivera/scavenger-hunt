@@ -1,6 +1,7 @@
 import { Role, type User } from "@claudiorivera/db";
 import { LogOutIcon, UserRoundIcon } from "lucide-react";
 import Link from "next/link";
+import { use } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import {
 	DropdownMenu,
@@ -32,7 +33,9 @@ const adminLinks = [
 	},
 ];
 
-export function Menu({ user }: { user?: User }) {
+export function Menu({ userPromise }: { userPromise: Promise<User> }) {
+	const user = use(userPromise);
+
 	const userRole = user?.role ?? Role.USER;
 
 	return (

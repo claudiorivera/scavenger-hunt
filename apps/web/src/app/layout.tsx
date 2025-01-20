@@ -3,8 +3,10 @@ import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
 import Link from "next/link";
+import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 import { Menu } from "~/app/_components/menu";
+import { MenuSkeleton } from "~/app/_components/menu-skeleton";
 import { TooltipProvider } from "~/components/ui/tooltip";
 import { getCurrentUser } from "~/server/api";
 
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
 export default async function Layout({
 	children,
 }: { children: React.ReactNode }) {
-	const user = await getCurrentUser();
+	const user = getCurrentUser();
 
 	return (
 		<html lang="en">
@@ -44,7 +46,9 @@ export default async function Layout({
 									Scavenger Hunt
 								</Link>
 							</div>
-							<Menu user={user} />
+							<Suspense fallback={<MenuSkeleton />}>
+								<Menu userPromise={user} />
+							</Suspense>
 						</div>
 						<main className="container mx-auto max-w-md p-8 text-center">
 							{children}

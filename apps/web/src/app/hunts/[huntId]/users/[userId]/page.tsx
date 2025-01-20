@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { Skeleton } from "~/components/ui/skeleton";
 import {
 	Tooltip,
 	TooltipContent,
@@ -37,6 +38,9 @@ export default async function UserPage(props: {
 						<Tooltip>
 							<TooltipTrigger asChild>
 								<Avatar>
+									<AvatarFallback>
+										<Skeleton className="h-10 w-10" />
+									</AvatarFallback>
 									<AvatarImage src={collectionItem.url} />
 								</Avatar>
 							</TooltipTrigger>
