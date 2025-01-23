@@ -38,7 +38,7 @@
 	},
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "workspace:*",
-		"@types/node": "22.10.7",
+		"@types/node": "22.10.9",
 		"@types/react": "19.0.7",
 		"@types/react-dom": "19.0.3",
 		"autoprefixer": "10.4.20",
