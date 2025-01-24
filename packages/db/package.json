@@ -6,7 +6,7 @@
 	"license": "MIT",
 	"scripts": {
 		"clean": "rm -rf .turbo node_modules",
-		"db:generate": "pnpm with-env prisma generate",
+		"db:generate": "prisma generate",
 		"db:deploy": "pnpm with-env prisma migrate deploy",
 		"db:migrate": "pnpm with-env prisma migrate dev",
 		"db:reset": "pnpm with-env prisma migrate reset",
