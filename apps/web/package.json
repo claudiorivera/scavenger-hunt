@@ -38,7 +38,7 @@
 	},
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "workspace:*",
-		"@dotenvx/dotenvx": "1.37.0",
+		"@dotenvx/dotenvx": "1.38.2",
 		"@tailwindcss/postcss": "4.0.8",
 		"@types/node": "22.13.5",
 		"@types/react": "19.0.10",
