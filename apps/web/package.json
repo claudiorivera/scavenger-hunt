@@ -24,7 +24,7 @@
 		"class-variance-authority": "0.7.1",
 		"cloudinary": "2.5.1",
 		"clsx": "2.1.1",
-		"lucide-react": "0.475.0",
+		"lucide-react": "0.476.0",
 		"next": "15.1.7",
 		"next-auth": "5.0.0-beta.25",
 		"react": "19.0.0",
@@ -38,13 +38,13 @@
 	},
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "workspace:*",
-		"@dotenvx/dotenvx": "1.38.2",
-		"@tailwindcss/postcss": "4.0.8",
+		"@dotenvx/dotenvx": "1.38.3",
+		"@tailwindcss/postcss": "4.0.9",
 		"@types/node": "22.13.5",
 		"@types/react": "19.0.10",
 		"@types/react-dom": "19.0.4",
 		"postcss": "8.5.3",
-		"tailwindcss": "4.0.8",
+		"tailwindcss": "4.0.9",
 		"typescript": "5.7.3"
 	}
 }
