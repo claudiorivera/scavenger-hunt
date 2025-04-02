@@ -40,7 +40,7 @@
 		"@claudiorivera/tsconfig": "workspace:*",
 		"@dotenvx/dotenvx": "1.39.0",
 		"@tailwindcss/postcss": "4.1.1",
-		"@types/node": "22.13.17",
+		"@types/node": "22.14.0",
 		"@types/react": "19.0.12",
 		"@types/react-dom": "19.0.4",
 		"postcss": "8.5.3",
