@@ -22,13 +22,13 @@
 	"dependencies": {
 		"@faker-js/faker": "9.7.0",
 		"@paralleldrive/cuid2": "2.2.2",
-		"@prisma/client": "6.6.0"
+		"@prisma/client": "6.7.0"
 	},
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "workspace:*",
 		"@dotenvx/dotenvx": "1.41.0",
 		"@types/node": "22.15.3",
-		"prisma": "6.6.0",
+		"prisma": "6.7.0",
 		"tsx": "4.19.4",
 		"typescript": "5.8.3"
 	},
