@@ -94,8 +94,8 @@ importers:
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@dotenvx/dotenvx':
-        specifier: 1.43.0
-        version: 1.43.0
+        specifier: 1.44.0
+        version: 1.44.0
       '@tailwindcss/postcss':
         specifier: 4.1.6
         version: 4.1.6
@@ -171,8 +171,8 @@ importers:
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@dotenvx/dotenvx':
-        specifier: 1.43.0
-        version: 1.43.0
+        specifier: 1.44.0
+        version: 1.44.0
       '@types/node':
         specifier: 22.15.17
         version: 22.15.17
@@ -284,8 +284,8 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
-  '@dotenvx/dotenvx@1.43.0':
-    resolution: {integrity: sha512-Z8XjM75aWZ/ekUzBjlr/OqQsLWtJY4nVtruxopAt+FlYHfY0/gKl85nD16aEqbTkU53kJcm5psID0L2/sQMmuw==}
+  '@dotenvx/dotenvx@1.44.0':
+    resolution: {integrity: sha512-18Aa+7KP/L2Kj9lxmT4EJZnsCq/xGIHgzU26rdzsKMhjpeT3YY+qin/dNAnIaVHPZnee7kXpZL55M9htd30r7Q==}
     hasBin: true
 
   '@ecies/ciphers@0.2.2':
@@ -2579,7 +2579,7 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
-  '@dotenvx/dotenvx@1.43.0':
+  '@dotenvx/dotenvx@1.44.0':
     dependencies:
       commander: 11.1.0
       dotenv: 16.4.7
