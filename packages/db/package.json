@@ -20,7 +20,7 @@
 		"postinstall": "pnpm db:generate"
 	},
 	"dependencies": {
-		"@faker-js/faker": "9.7.0",
+		"@faker-js/faker": "9.8.0",
 		"@paralleldrive/cuid2": "2.2.2",
 		"@prisma/client": "6.7.0"
 	},
