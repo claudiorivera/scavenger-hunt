@@ -26,7 +26,7 @@
 	},
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "workspace:*",
-		"@dotenvx/dotenvx": "1.44.0",
+		"@dotenvx/dotenvx": "1.44.1",
 		"@types/node": "22.15.19",
 		"prisma": "6.8.2",
 		"tsx": "4.19.4",
