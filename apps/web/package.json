@@ -41,7 +41,7 @@
 		"@dotenvx/dotenvx": "1.44.1",
 		"@tailwindcss/postcss": "4.1.7",
 		"@types/node": "22.15.23",
-		"@types/react": "19.1.5",
+		"@types/react": "19.1.6",
 		"@types/react-dom": "19.1.5",
 		"postcss": "8.5.3",
 		"tailwindcss": "4.1.7",
