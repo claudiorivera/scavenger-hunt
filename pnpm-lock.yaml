@@ -51,8 +51,8 @@ importers:
         specifier: 0.7.1
         version: 0.7.1
       cloudinary:
-        specifier: 2.6.1
-        version: 2.6.1
+        specifier: 2.7.0
+        version: 2.7.0
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -1371,8 +1371,8 @@ packages:
     resolution: {integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==}
     engines: {node: '>=0.8'}
 
-  cloudinary@2.6.1:
-    resolution: {integrity: sha512-Dt7o3p4VzxYoTi+EqWkVQmGy6WiXIyMcG5Gbr9kPR/EQ+jZa+3FFzlDKfDx1uDsaB1aTR1gYeO6wZqrgLFaByQ==}
+  cloudinary@2.7.0:
+    resolution: {integrity: sha512-qrqDn31+qkMCzKu1GfRpzPNAO86jchcNwEHCUiqvPHNSFqu7FTNF9FuAkBUyvM1CFFgFPu64NT0DyeREwLwK0w==}
     engines: {node: '>=9'}
 
   clsx@2.1.1:
@@ -3487,7 +3487,7 @@ snapshots:
 
   clone@1.0.4: {}
 
-  cloudinary@2.6.1:
+  cloudinary@2.7.0:
     dependencies:
       lodash: 4.17.21
       q: 1.5.1
