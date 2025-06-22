@@ -121,8 +121,8 @@ importers:
   packages/auth:
     dependencies:
       '@auth/core':
-        specifier: 0.39.1
-        version: 0.39.1
+        specifier: 0.40.0
+        version: 0.40.0
       '@auth/prisma-adapter':
         specifier: 2.9.1
         version: 2.9.1(@prisma/client@6.10.1(prisma@6.10.1(typescript@5.8.3))(typescript@5.8.3))
