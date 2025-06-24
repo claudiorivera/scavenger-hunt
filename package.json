@@ -5,7 +5,7 @@
 	"engines": {
 		"node": ">=22.16.0"
 	},
-	"packageManager": "pnpm@10.12.2",
+	"packageManager": "pnpm@10.12.3",
 	"scripts": {
 		"build": "turbo build",
 		"clean": "git clean -xdf node_modules",
