@@ -22,7 +22,7 @@
 		"check:fix": "turbo check:fix"
 	},
 	"dependencies": {
-		"@biomejs/biome": "1.9.4",
+		"@biomejs/biome": "2.1.4",
 		"@turbo/gen": "2.5.5",
 		"turbo": "2.5.5",
 		"typescript": "5.9.2"
