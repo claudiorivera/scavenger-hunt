@@ -39,12 +39,12 @@
 	"devDependencies": {
 		"@claudiorivera/tsconfig": "workspace:*",
 		"@dotenvx/dotenvx": "1.48.4",
-		"@tailwindcss/postcss": "4.1.11",
+		"@tailwindcss/postcss": "4.1.12",
 		"@types/node": "22.17.1",
 		"@types/react": "19.1.10",
 		"@types/react-dom": "19.1.7",
 		"postcss": "8.5.6",
-		"tailwindcss": "4.1.11",
+		"tailwindcss": "4.1.12",
 		"typescript": "5.9.2"
 	}
 }
