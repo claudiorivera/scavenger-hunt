@@ -61,11 +61,7 @@
 				"app/**/page.*",
 				"app/**/template.*",
 				"app/**/unauthorized.*",
-				"next.config.*",
-				"tailwind.config.*",
-				"postcss.config.*",
-				"playwright.config.*",
-				"vitest.config.*"
+				"*.config.*"
 			],
 			"linter": {
 				"rules": {
