@@ -36,7 +36,9 @@ export default async function ItemPage(props: {
 
 			{!hasCurrentUserCollected && (
 				<Button variant="secondary" asChild>
-					<Link href={`/collect?itemId=${item.id}`}>Found It?</Link>
+					<Link href={`/hunts/${huntId}/collect?itemId=${item.id}`}>
+						Found It?
+					</Link>
 				</Button>
 			)}
 

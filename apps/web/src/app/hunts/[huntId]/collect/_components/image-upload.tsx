@@ -3,6 +3,7 @@
 import type { Item } from "@claudiorivera/db";
 import { CheckIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { useActionState } from "react";
 import { createCollectionItem } from "~/app/hunts/[huntId]/collect/actions";
 import { LoadingButton } from "~/components/loading-button";
@@ -39,6 +40,7 @@ function ImagePreview({
 	clearImage: () => void;
 	itemId: Item["id"];
 }) {
+	const { huntId } = useParams();
 	const [_state, action, isPending] = useActionState(
 		createCollectionItem,
 		null,
@@ -58,6 +60,7 @@ function ImagePreview({
 					<form action={action}>
 						<input type="hidden" name="base64" value={base64} />
 						<input type="hidden" name="itemId" value={itemId} />
+						<input type="hidden" name="huntId" value={huntId} />
 
 						<LoadingButton variant="secondary" isLoading={isPending}>
 							<CheckIcon />
