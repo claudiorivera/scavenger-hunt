@@ -15,13 +15,31 @@ const config = {
 	eslint: { ignoreDuringBuilds: true },
 	typescript: { ignoreBuildErrors: true },
 	images: {
-		domains: [
-			"res.cloudinary.com",
-			"claudiorivera.com",
-			"loremflickr.com",
-			"picsum.photos",
-			"avatars.githubusercontent.com",
-			"cloudflare-ipfs.com",
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "res.cloudinary.com",
+			},
+			{
+				protocol: "https",
+				hostname: "claudiorivera.com",
+			},
+			{
+				protocol: "https",
+				hostname: "loremflickr.com",
+			},
+			{
+				protocol: "https",
+				hostname: "picsum.photos",
+			},
+			{
+				protocol: "https",
+				hostname: "avatars.githubusercontent.com",
+			},
+			{
+				protocol: "https",
+				hostname: "cloudflare-ipfs.com",
+			},
 		],
 	},
 };
