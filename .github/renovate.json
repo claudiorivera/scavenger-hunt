@@ -3,12 +3,10 @@
 	"extends": ["config:base"],
 	"packageRules": [
 		{
-			"matchPackagePatterns": ["^@claudiorivera/"],
-			"enabled": false
+			"matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+			"automerge": true
 		}
 	],
-	"updateInternalDeps": true,
-	"rangeStrategy": "bump",
-	"automerge": true,
-	"commitMessagePrefix": "🤖"
+	"commitMessagePrefix": "🤖",
+	"prConcurrentLimit": 3
 }

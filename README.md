@@ -1,24 +1,46 @@
 # Scavenger Hunt
 
-It's a virtual scavenger hunt! Everyone plays simultaneously and finds specific items around their house from a list that the host has created. Set your own win conditions (most items found in 15 minutes, first to find all items, etc.) and have fun!
+An app that lets you have virtual scavenger hunts with you and a group of friends, remotely. Hop on a video call, and have everyone join your scavenger hunt on their devices. View everyone's collections and compete for a top spot on the leaderboard.
 
-## Technologies Used
+## Tech Stack
 
-- React
-- TypeScript
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Create T3 Turbo](https://github.com/t3-oss/create-t3-turbo)
+- **Framework**: Next.js
+- **Database**: PostgreSQL with Drizzle ORM
+- **Authentication**: Better Auth
+- **Forms**: React Hook Form with Zod validation
+- **Actions**: next-safe-action
+- **Image Upload**: Cloudinary
+- **Analytics**: Vercel Analytics
+- **Notifications**: React Hot Toast
 
-## Install
+### Prepare
 
-`pnpm i`
+### Environment variables
 
-## Config
+```bash
+cp .env.example .env
+```
 
-- `cp .env.example .env` and update values
-- `pnpm db:migrate`
+> Note: Update values accordingly
 
-## Dev
+### Database
 
-`pnpm dev`
+```bash
+docker compose up -d
+```
+
+> Note: This is optional but makes it convenient to spin up everything at once
+
+### Dependencies
+
+```bash
+pnpm i
+```
+
+## Develop
+
+```bash
+pnpm dev
+```
+
+> Note: App will be live at `http://localhost:3001`
