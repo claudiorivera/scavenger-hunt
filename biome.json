@@ -1,67 +1,67 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
 	"vcs": {
 		"enabled": true,
 		"useIgnoreFile": true,
 		"clientKind": "git"
 	},
-	"organizeImports": {
-		"enabled": true
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
 	},
 	"linter": {
 		"enabled": true,
+		"domains": {
+			"next": "recommended"
+		},
 		"rules": {
 			"recommended": true,
 			"style": {
 				"noDefaultExport": "error",
-				"useFragmentSyntax": {
-					"fix": "safe",
-					"level": "error"
-				},
 				"useConsistentArrayType": {
 					"fix": "safe",
 					"level": "warn",
 					"options": {
 						"syntax": "generic"
 					}
-				}
-			},
-			"correctness": {
-				"noUnusedImports": "error",
-				"noUnusedVariables": "error",
-				"noUnusedFunctionParameters": "error",
-				"useHookAtTopLevel": "error"
+				},
+				"useConsistentCurlyBraces": {
+					"fix": "safe",
+					"level": "error",
+					"options": {}
+				},
+				"noEnum": "error"
 			},
 			"nursery": {
 				"useSortedClasses": {
 					"fix": "safe",
 					"level": "warn",
 					"options": {
-						"functions": ["cn", "clsx"]
+						"functions": ["cn", "clsx", "cva"]
 					}
-				},
-				"useConsistentCurlyBraces": {
-					"fix": "safe",
-					"level": "error"
-				},
-				"noEnum": "error"
+				}
 			}
 		}
 	},
 	"overrides": [
 		{
-			"include": [
-				"app/**/default.*",
-				"app/**/error.*",
-				"app/**/forbidden.*",
-				"app/**/global-error.*",
-				"app/**/layout.*",
-				"app/**/loading.*",
-				"app/**/not-found.*",
-				"app/**/page.*",
-				"app/**/template.*",
-				"app/**/unauthorized.*",
-				"*.config.*"
+			"includes": [
+				"**/app/**/default.*",
+				"**/app/**/error.*",
+				"**/app/**/forbidden.*",
+				"**/app/**/global-error.*",
+				"**/app/**/layout.*",
+				"**/app/**/loading.*",
+				"**/app/**/not-found.*",
+				"**/app/**/page.*",
+				"**/app/**/template.*",
+				"**/app/**/unauthorized.*",
+				"**/pages/**/*.tsx",
+				"**/pages/**/*.ts",
+				"**/*.config.*",
+				"**/*.d.ts"
 			],
 			"linter": {
 				"rules": {
