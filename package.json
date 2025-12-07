@@ -6,7 +6,7 @@
 	"packageManager": "pnpm@10.22.0",
 	"scripts": {
 		"build": "next build",
-		"dev": "next dev --turbopack",
+		"dev": "next dev",
 		"start": "next start",
 		"check-types": "tsc --noEmit",
 		"check": "biome check",

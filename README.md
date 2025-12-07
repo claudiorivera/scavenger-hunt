@@ -11,36 +11,30 @@ An app that lets you have virtual scavenger hunts with you and a group of friend
 - **Actions**: next-safe-action
 - **Image Upload**: Cloudinary
 - **Analytics**: Vercel Analytics
-- **Notifications**: React Hot Toast
 
-### Prepare
+## Getting Started
 
-### Environment variables
+### Environment Variables
 
 ```bash
 cp .env.example .env
 ```
 
-> Note: Update values accordingly
+Then update the following variables:
 
-### Database
+- `BETTER_AUTH_SECRET`: A secure secret for Better Auth
+- `CLOUDINARY_URL`: Your Cloudinary API credentials
+- `CRON_SECRET`: Secret for cron job endpoints
+- `DATABASE_URL`: PostgreSQL connection string (defaults to `postgresql://localhost/scavenger-hunt`)
 
-```bash
-docker compose up -d
-```
-
-> Note: This is optional but makes it convenient to spin up everything at once
-
-### Dependencies
+### Install Dependencies
 
 ```bash
-pnpm i
+pnpm install
 ```
 
-## Develop
+## Development
 
 ```bash
 pnpm dev
 ```
-
-> Note: App will be live at `http://localhost:3001`
