@@ -29,7 +29,7 @@
 		"@t3-oss/env-nextjs": "0.13.8",
 		"@tailwindcss/postcss": "^4.1.17",
 		"@vercel/analytics": "1.6.1",
-		"better-auth": "1.4.6",
+		"better-auth": "1.4.7",
 		"class-variance-authority": "^0.7.1",
 		"cloudinary": "2.8.0",
 		"clsx": "^2.1.1",
