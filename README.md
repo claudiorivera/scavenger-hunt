@@ -4,13 +4,11 @@ An app that lets you have virtual scavenger hunts with you and a group of friend
 
 ## Tech Stack
 
-- **Framework**: Next.js
+- **Framework**: TanStack Start
 - **Database**: PostgreSQL with Drizzle ORM
 - **Authentication**: Better Auth
 - **Forms**: React Hook Form with Zod validation
-- **Actions**: next-safe-action
 - **Image Upload**: Cloudinary
-- **Analytics**: Vercel Analytics
 
 ## Getting Started
 
