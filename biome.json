@@ -1,9 +1,20 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.3.10/schema.json",
 	"vcs": {
 		"enabled": true,
-		"useIgnoreFile": true,
-		"clientKind": "git"
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"includes": [
+			"**/src/**/*",
+			"**/.vscode/**/*",
+			"**/index.html",
+			"**/vite.config.js",
+			"!**/src/routeTree.gen.ts",
+			"!**/src/styles.css"
+		]
 	},
 	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"css": {
@@ -13,9 +24,6 @@
 	},
 	"linter": {
 		"enabled": true,
-		"domains": {
-			"next": "recommended"
-		},
 		"rules": {
 			"recommended": true,
 			"style": {
@@ -47,22 +55,7 @@
 	},
 	"overrides": [
 		{
-			"includes": [
-				"**/app/**/default.*",
-				"**/app/**/error.*",
-				"**/app/**/forbidden.*",
-				"**/app/**/global-error.*",
-				"**/app/**/layout.*",
-				"**/app/**/loading.*",
-				"**/app/**/not-found.*",
-				"**/app/**/page.*",
-				"**/app/**/template.*",
-				"**/app/**/unauthorized.*",
-				"**/pages/**/*.tsx",
-				"**/pages/**/*.ts",
-				"**/*.config.*",
-				"**/*.d.ts"
-			],
+			"includes": ["**/*.config.*"],
 			"linter": {
 				"rules": {
 					"style": {

@@ -11,14 +11,17 @@ coverage
 # database
 db.sqlite
 db.sqlite-journal
-
-# next.js
-.next/
-out/
-next-env.d.ts
+# tanstack start
+.nitro
+.tanstack
+.wrangler
+.output
+.vinxi
 
 # production
 build
+dist
+dist-ssr
 
 # misc
 .DS_Store
@@ -40,5 +43,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-# turbo
-.turbo
+

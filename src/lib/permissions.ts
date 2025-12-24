@@ -1,9 +1,9 @@
 // https://github.com/WebDevSimplified/permission-system/issues/1#issue-2709020454
 
 import z4 from "zod/v4";
+import { Role } from "@/db/schema";
+import type { CollectionItem, Hunt, Item } from "@/db/types";
 import type { SessionUser } from "@/lib/auth-client";
-import { Role } from "@/server/db/schema";
-import type { CollectionItem, Hunt, Item } from "@/server/db/types";
 
 type Permissions = {
 	deleteItem: (item: Item) => boolean;
@@ -35,13 +35,13 @@ const permissionsFactoryMap: PermissionsFactoryMap = {
 		deleteUser: () => false,
 		viewAdminPanel: () => false,
 	}),
-	demo: () => ({
-		deleteItem: () => false,
-		addItemToHunt: () => false,
-		deleteHunt: () => false,
-		deleteCollectionItem: () => false,
-		deleteUser: () => false,
-		viewAdminPanel: () => false,
+	demo: (user: SessionUser) => ({
+		deleteItem: () => true,
+		addItemToHunt: () => true,
+		deleteHunt: () => true,
+		deleteCollectionItem: () => true,
+		deleteUser: (userToDelete) => userToDelete.id !== user.id,
+		viewAdminPanel: () => true,
 	}),
 };
 
