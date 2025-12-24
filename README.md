@@ -9,6 +9,7 @@ An app that lets you have virtual scavenger hunts with you and a group of friend
 - **Authentication**: Better Auth
 - **Forms**: React Hook Form with Zod validation
 - **Image Upload**: Cloudinary
+- **UI**: Radix UI, Tailwind, shadcn/ui
 
 ## Getting Started
 
