@@ -2,7 +2,7 @@ import { queryOptions } from "@tanstack/react-query";
 import {
 	getAvailableHuntsServerFn,
 	getHuntByIdServerFn,
-} from "@/server-funcs/hunts";
+} from "@/server-funcs/hunt";
 
 export const huntQueries = {
 	base: () => ["hunt"],

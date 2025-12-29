@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { authClient } from "@/lib/auth-client";
+import { signIn } from "@/lib/auth-client";
 
 export const Route = createFileRoute("/sign-in/")({
 	beforeLoad: async ({ context }) => {
@@ -14,7 +14,7 @@ export const Route = createFileRoute("/sign-in/")({
 function RouteComponent() {
 	const handleSignIn = async () => {
 		try {
-			await authClient.signIn.email({
+			await signIn.email({
 				email: "demo@example.com",
 				password: "password1234",
 				callbackURL: "/",
@@ -26,7 +26,7 @@ function RouteComponent() {
 
 	return (
 		<div className="flex flex-col gap-4">
-			<Button onClick={handleSignIn}>Sign In as Demo User</Button>
+			<Button onClick={handleSignIn}>Sign in as demo user</Button>
 		</div>
 	);
 }

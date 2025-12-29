@@ -3,7 +3,7 @@ import { getRouteApi } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import type { Item } from "@/db/types";
 import { itemQueries } from "@/queries/item";
-import { createCollectionItemServerFn } from "@/server-funcs/collection-items";
+import { createCollectionItemServerFn } from "@/server-funcs/collection-item";
 
 const routeApi = getRouteApi("/hunts/$huntId/items/$itemId/collect/");
 
