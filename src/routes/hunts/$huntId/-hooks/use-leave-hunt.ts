@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { huntQueries } from "@/queries/hunt";
 import { participationQueries } from "@/queries/participation";
-import { leaveHuntServerFn } from "@/server-funcs/hunts";
+import { leaveHuntServerFn } from "@/server-funcs/hunt";
 
 export function useLeaveHunt() {
 	const leaveHunt = useServerFn(leaveHuntServerFn);

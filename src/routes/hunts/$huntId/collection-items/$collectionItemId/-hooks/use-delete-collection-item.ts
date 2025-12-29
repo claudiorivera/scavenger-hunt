@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { deleteCollectionItemServerFn } from "@/server-funcs/collection-items";
+import { deleteCollectionItemServerFn } from "@/server-funcs/collection-item";
 
 export function useDeleteCollectionItem() {
 	const deleteCollectionItem = useServerFn(deleteCollectionItemServerFn);

@@ -4,7 +4,7 @@ import {
 	getItemByIdServerFn,
 	getItemsByHuntIdServerFn,
 	getNextUncollectedItemForHuntServerFn,
-} from "@/server-funcs/items";
+} from "@/server-funcs/item";
 
 export const itemQueries = {
 	base: () => ["item"],

@@ -13,7 +13,7 @@ import { getInitials } from "@/lib/utils";
 import { itemQueries } from "@/queries/item";
 import { userQueries } from "@/queries/user";
 import { useDeleteItem } from "@/routes/hunts/$huntId/items/$itemId/-hooks/use-delete-item";
-import type { UserWithCollectionItems } from "@/server-funcs/users";
+import type { UserWithCollectionItems } from "@/server-funcs/user";
 
 export const Route = createFileRoute("/hunts/$huntId/items/$itemId/")({
 	beforeLoad: async ({ context }) => {

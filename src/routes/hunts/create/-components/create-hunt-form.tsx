@@ -7,7 +7,7 @@ import { LoadingButton } from "@/components/loading-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCreateHunt } from "@/routes/hunts/create/-hooks/use-create-hunt";
-import { createHuntInputSchema } from "@/server-funcs/hunts";
+import { createHuntInputSchema } from "@/server-funcs/hunt";
 
 export function CreateHuntForm() {
 	const form = useForm({

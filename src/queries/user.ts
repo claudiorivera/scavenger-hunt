@@ -3,7 +3,7 @@ import {
 	getUsersByHuntIdServerFn,
 	getUsersWhoCollectedItemServerFn,
 	getUserWithCollectionItemsForHuntServerFn,
-} from "@/server-funcs/users";
+} from "@/server-funcs/user";
 
 export const userQueries = {
 	base: () => ["user"],

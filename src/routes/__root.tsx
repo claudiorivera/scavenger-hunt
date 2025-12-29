@@ -5,9 +5,11 @@ import {
 	HeadContent,
 	Link,
 	Scripts,
+	useNavigate,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { LogOutIcon, ShieldUserIcon, UserRoundIcon } from "lucide-react";
+import { useCallback } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
 	DropdownMenu,
@@ -83,7 +85,25 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-	const { user } = Route.useRouteContext();
+	const { user, queryClient } = Route.useRouteContext();
+
+	const navigate = useNavigate();
+
+	const handleSignOut = useCallback(
+		() =>
+			signOut({
+				fetchOptions: {
+					onSuccess: () => {
+						queryClient.resetQueries({
+							queryKey: authQueries.me().queryKey,
+						});
+
+						navigate({ to: "/sign-in" });
+					},
+				},
+			}),
+		[navigate, queryClient],
+	);
 
 	return (
 		<html lang="en">
@@ -119,12 +139,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 										<span>My Profile</span>
 									</Link>
 								</DropdownMenuItem>
-								<DropdownMenuItem asChild onClick={() => signOut()}>
-									<div className="cursor-pointer">
-										<LogOutIcon />
-										<span>Sign Out</span>
-									</div>
+								<DropdownMenuItem
+									className="cursor-pointer"
+									onClick={handleSignOut}
+								>
+									<LogOutIcon />
+									<span>Sign Out</span>
 								</DropdownMenuItem>
+
 								{can(user).viewAdminPanel() && (
 									<>
 										<DropdownMenuSeparator />

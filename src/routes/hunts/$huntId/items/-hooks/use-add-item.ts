@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { getRouteApi } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { itemQueries } from "@/queries/item";
-import { createItemServerFn } from "@/server-funcs/items";
+import { createItemServerFn } from "@/server-funcs/item";
 
 const routeApi = getRouteApi("/hunts/$huntId/items/");
 
