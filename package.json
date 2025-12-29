@@ -33,7 +33,7 @@
     "@t3-oss/env-core": "0.13.10",
     "@tailwindcss/vite": "4.1.18",
     "@tanstack/react-devtools": "0.9.0",
-    "@tanstack/react-query": "5.90.14",
+    "@tanstack/react-query": "5.90.15",
     "@tanstack/react-query-devtools": "5.91.2",
     "@tanstack/react-router": "1.144.0",
     "@tanstack/react-router-devtools": "1.144.0",
