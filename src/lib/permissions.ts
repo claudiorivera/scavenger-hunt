@@ -35,13 +35,13 @@ const permissionsFactoryMap: PermissionsFactoryMap = {
 		deleteUser: () => false,
 		viewAdminPanel: () => false,
 	}),
-	demo: (user: SessionUser) => ({
-		deleteItem: () => true,
-		addItemToHunt: () => true,
-		deleteHunt: () => true,
-		deleteCollectionItem: () => true,
-		deleteUser: (userToDelete) => userToDelete.id !== user.id,
-		viewAdminPanel: () => true,
+	demo: () => ({
+		deleteItem: () => false,
+		addItemToHunt: () => false,
+		deleteHunt: () => false,
+		deleteCollectionItem: () => false,
+		deleteUser: () => false,
+		viewAdminPanel: () => false,
 	}),
 };
 
