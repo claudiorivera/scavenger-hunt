@@ -22,7 +22,7 @@ export function CreateHuntForm() {
 		name: "items",
 	});
 
-	const { mutate: createHunt, isPending } = useCreateHunt();
+	const { mutate: createHunt, isPending: isPendingCreate } = useCreateHunt();
 
 	const navigate = useNavigate();
 
@@ -91,7 +91,7 @@ export function CreateHuntForm() {
 				</p>
 			)}
 
-			<LoadingButton isLoading={isPending} variant="secondary">
+			<LoadingButton isLoading={isPendingCreate} variant="secondary">
 				Submit
 			</LoadingButton>
 		</form>

@@ -5,6 +5,7 @@ import {
 	redirect,
 	useNavigate,
 } from "@tanstack/react-router";
+import { LoadingButton } from "@/components/loading-button";
 import { Button } from "@/components/ui/button";
 import { can } from "@/lib/permissions";
 import { huntQueries } from "@/queries/hunt";
@@ -31,8 +32,8 @@ function RouteComponent() {
 	const { data: hunt } = useSuspenseQuery(huntQueries.byId(huntId));
 	const { user } = Route.useRouteContext();
 
-	const { mutate: leaveHunt } = useLeaveHunt();
-	const { mutate: deleteHunt } = useDeleteHunt();
+	const { mutate: leaveHunt, isPending: isPendingLeave } = useLeaveHunt();
+	const { mutate: deleteHunt, isPending: isPendingDelete } = useDeleteHunt();
 
 	const navigate = useNavigate();
 
@@ -77,7 +78,8 @@ function RouteComponent() {
 				</li>
 			</ul>
 
-			<Button
+			<LoadingButton
+				isLoading={isPendingLeave}
 				variant="secondary"
 				onClick={() => {
 					leaveHunt(
@@ -93,10 +95,11 @@ function RouteComponent() {
 				}}
 			>
 				Leave
-			</Button>
+			</LoadingButton>
 
 			{can(user).deleteHunt(hunt) && (
-				<Button
+				<LoadingButton
+					isLoading={isPendingDelete}
 					variant="destructive"
 					onClick={() => {
 						deleteHunt(
@@ -111,8 +114,8 @@ function RouteComponent() {
 						);
 					}}
 				>
-					Delete Hunt
-				</Button>
+					Delete hunt
+				</LoadingButton>
 			)}
 		</div>
 	);

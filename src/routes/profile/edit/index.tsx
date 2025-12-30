@@ -42,7 +42,7 @@ function RouteComponent() {
 		},
 	});
 
-	const { mutate: editProfile, isPending } = useEditProfile();
+	const { mutate: editProfile, isPending: isPendingEdit } = useEditProfile();
 
 	useEffect(() => {
 		if (base64) {
@@ -88,7 +88,7 @@ function RouteComponent() {
 					autoComplete="name"
 					placeholder="My Name"
 				/>
-				<LoadingButton variant="secondary" isLoading={isPending}>
+				<LoadingButton variant="secondary" isLoading={isPendingEdit}>
 					Save Changes
 				</LoadingButton>
 			</form>

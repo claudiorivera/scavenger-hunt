@@ -17,7 +17,7 @@ export function AddItemForm() {
 		},
 	});
 
-	const { mutate: addItem, isPending } = useAddItem();
+	const { mutate: addItem, isPending: isPendingAdd } = useAddItem();
 
 	return (
 		<form
@@ -29,11 +29,11 @@ export function AddItemForm() {
 			)}
 		>
 			<Input
-				{...form.register("description", { disabled: isPending })}
+				{...form.register("description", { disabled: isPendingAdd })}
 				placeholder="Something Awesome"
 			/>
 
-			<LoadingButton type="submit" variant="secondary" isLoading={isPending}>
+			<LoadingButton type="submit" variant="secondary" isLoading={isPendingAdd}>
 				Add Item
 			</LoadingButton>
 		</form>

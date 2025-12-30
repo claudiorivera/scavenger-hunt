@@ -56,7 +56,8 @@ function RouteComponent() {
 	);
 	const isCurrentUserOwner = collectionItem.user.id === user.id;
 
-	const { mutate: deleteCollectionItem, isPending } = useDeleteCollectionItem();
+	const { mutate: deleteCollectionItem, isPending: isPendingDelete } =
+		useDeleteCollectionItem();
 
 	const navigate = useNavigate();
 
@@ -105,7 +106,7 @@ function RouteComponent() {
 
 			{can(user).deleteCollectionItem(collectionItem) && (
 				<LoadingButton
-					isLoading={isPending}
+					isLoading={isPendingDelete}
 					onClick={() =>
 						deleteCollectionItem(
 							{
@@ -114,11 +115,16 @@ function RouteComponent() {
 								},
 							},
 							{
-								onSuccess: () =>
+								onSuccess: (_data, _variables, _onMutateResult, context) => {
+									context.client.invalidateQueries({
+										queryKey: userQueries.byHuntId(huntId).queryKey,
+									});
+
 									navigate({
 										to: "/hunts/$huntId/leaderboard",
 										params: { huntId },
-									}),
+									});
+								},
 							},
 						)
 					}

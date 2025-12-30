@@ -43,7 +43,7 @@ function RouteComponent() {
 	const { item, users } = Route.useLoaderData();
 	const { huntId } = Route.useParams();
 
-	const { mutate: deleteItem, isPending } = useDeleteItem();
+	const { mutate: deleteItem, isPending: isPendingDelete } = useDeleteItem();
 
 	const navigate = useNavigate();
 
@@ -73,13 +73,19 @@ function RouteComponent() {
 
 			{can(user).deleteItem(item) && (
 				<LoadingButton
-					isLoading={isPending}
+					isLoading={isPendingDelete}
 					onClick={() =>
 						deleteItem(
 							{ data: { itemId: item.id } },
 							{
-								onSuccess: () =>
-									navigate({ to: "/hunts/$huntId/items", params: { huntId } }),
+								onSuccess: (_data, _variables, _onMutateResult, context) => {
+									context.client.invalidateQueries({
+										queryKey:
+											itemQueries.byHuntIdGroupByStatus(huntId).queryKey,
+									});
+
+									navigate({ to: "/hunts/$huntId/items", params: { huntId } });
+								},
 							},
 						)
 					}

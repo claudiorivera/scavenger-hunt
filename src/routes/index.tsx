@@ -5,6 +5,7 @@ import {
 	redirect,
 	useNavigate,
 } from "@tanstack/react-router";
+import { LoadingButton } from "@/components/loading-button";
 import { Button } from "@/components/ui/button";
 import { huntQueries } from "@/queries/hunt";
 import { participationQueries } from "@/queries/participation";
@@ -34,7 +35,7 @@ function App() {
 			queries: [participationQueries.mine(), huntQueries.available()],
 		});
 
-	const { mutate: joinHunt } = useJoinHunt();
+	const { mutate: joinHunt, isPending: isPendingJoin } = useJoinHunt();
 
 	const navigate = useNavigate();
 
@@ -67,7 +68,8 @@ function App() {
 				{availableHunts.map((hunt) => (
 					<li key={hunt.id} className="flex items-center justify-between gap-4">
 						<p>{hunt.createdBy.name}'s Hunt</p>
-						<Button
+						<LoadingButton
+							isLoading={isPendingJoin}
 							variant="secondary"
 							onClick={() =>
 								joinHunt(
@@ -87,7 +89,7 @@ function App() {
 							}
 						>
 							Join
-						</Button>
+						</LoadingButton>
 					</li>
 				))}
 			</ul>

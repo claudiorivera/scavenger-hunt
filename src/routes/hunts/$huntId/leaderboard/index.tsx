@@ -34,7 +34,7 @@ function RouteComponent() {
 	});
 	const { user: sessionUser } = Route.useRouteContext();
 
-	const { mutate: deleteUser, isPending } = useDeleteUser();
+	const { mutate: deleteUser, isPending: isPendingDelete } = useDeleteUser();
 
 	return (
 		<div className="flex flex-col items-center gap-4">
@@ -45,7 +45,7 @@ function RouteComponent() {
 						{hunt.createdById !== user.id &&
 							can(sessionUser).deleteUser(user) && (
 								<LoadingButton
-									isLoading={isPending}
+									isLoading={isPendingDelete}
 									onClick={() =>
 										deleteUser(
 											{

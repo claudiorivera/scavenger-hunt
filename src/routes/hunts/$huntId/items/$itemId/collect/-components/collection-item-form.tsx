@@ -35,14 +35,15 @@ export function CollectionItemForm({ item }: { item: Item }) {
 		}
 	}, [base64, form]);
 
-	const { mutate: createCollectionItem, isPending } = useCreateCollectionItem();
+	const { mutate: createCollectionItem, isPending: isPendingCreate } =
+		useCreateCollectionItem();
 
 	return (
 		<div className="aspect-square w-full max-w-sm">
 			{image ? (
 				<ImagePreview
 					image={image}
-					isLoading={isPending}
+					isLoading={isPendingCreate}
 					onClear={clearImage}
 					onSubmit={form.handleSubmit((values) =>
 						createCollectionItem(values, {
