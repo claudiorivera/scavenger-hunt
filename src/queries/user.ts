@@ -7,10 +7,11 @@ import {
 
 export const userQueries = {
 	base: () => ["user"],
+	list: () => [...userQueries.base(), userQueries.list.name],
 	byItemIdInCollection: (itemId: string) =>
 		queryOptions({
 			queryKey: [
-				...userQueries.base(),
+				...userQueries.list(),
 				userQueries.byItemIdInCollection.name,
 				itemId,
 			],
@@ -39,7 +40,7 @@ export const userQueries = {
 		}),
 	byHuntId: (huntId: string) =>
 		queryOptions({
-			queryKey: [...userQueries.base(), userQueries.byHuntId.name, huntId],
+			queryKey: [...userQueries.list(), userQueries.byHuntId.name, huntId],
 			queryFn: () =>
 				getUsersByHuntIdServerFn({
 					data: {

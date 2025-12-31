@@ -8,10 +8,11 @@ import {
 
 export const itemQueries = {
 	base: () => ["item"],
+	list: () => [...itemQueries.base(), itemQueries.list.name],
 	byHuntIdGroupByStatus: (huntId: string) =>
 		queryOptions({
 			queryKey: [
-				...itemQueries.base(),
+				...itemQueries.list(),
 				itemQueries.byHuntIdGroupByStatus.name,
 				huntId,
 			],

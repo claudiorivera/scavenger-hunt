@@ -6,9 +6,10 @@ import {
 
 export const huntQueries = {
 	base: () => ["hunt"],
+	list: () => [...huntQueries.base(), huntQueries.list.name],
 	available: () =>
 		queryOptions({
-			queryKey: [...huntQueries.base(), huntQueries.available.name],
+			queryKey: [...huntQueries.list(), huntQueries.available.name],
 			queryFn: getAvailableHuntsServerFn,
 		}),
 	byId: (id: string) =>
