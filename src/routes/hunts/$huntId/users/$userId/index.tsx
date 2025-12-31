@@ -1,3 +1,4 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -20,18 +21,17 @@ export const Route = createFileRoute("/hunts/$huntId/users/$userId/")({
 			user: context.user,
 		};
 	},
-	loader: async ({ context, params }) => {
-		const user = await context.queryClient.ensureQueryData(
+	loader: async ({ context, params }) =>
+		context.queryClient.ensureQueryData(
 			userQueries.byIdAndHuntWithCollectionItems(params.userId, params.huntId),
-		);
-
-		return { user };
-	},
+		),
 });
 
 function RouteComponent() {
-	const { user } = Route.useLoaderData();
-	const { huntId } = Route.useParams();
+	const { huntId, userId } = Route.useParams();
+	const { data: user } = useSuspenseQuery(
+		userQueries.byIdAndHuntWithCollectionItems(userId, huntId),
+	);
 
 	return (
 		<div className="flex flex-col gap-4">

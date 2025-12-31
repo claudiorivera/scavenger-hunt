@@ -1,3 +1,4 @@
+import { useSuspenseQueries } from "@tanstack/react-query";
 import {
 	createFileRoute,
 	Link,
@@ -25,22 +26,24 @@ export const Route = createFileRoute("/hunts/$huntId/items/$itemId/")({
 			user: context.user,
 		};
 	},
-	loader: async ({ context, params }) => {
-		const [item, users] = await Promise.all([
+	loader: async ({ context, params }) =>
+		Promise.all([
 			context.queryClient.ensureQueryData(itemQueries.byId(params.itemId)),
 			context.queryClient.ensureQueryData(
 				userQueries.byItemIdInCollection(params.itemId),
 			),
-		]);
-
-		return { item, users };
-	},
+		]),
 	component: RouteComponent,
 });
 
 function RouteComponent() {
 	const { user } = Route.useRouteContext();
-	const { item, users } = Route.useLoaderData();
+	const [{ data: item }, { data: users }] = useSuspenseQueries({
+		queries: [
+			itemQueries.byId(Route.useParams().itemId),
+			userQueries.byItemIdInCollection(Route.useParams().itemId),
+		],
+	});
 	const { huntId } = Route.useParams();
 
 	const { mutate: deleteItem, isPending: isPendingDelete } = useDeleteItem();
