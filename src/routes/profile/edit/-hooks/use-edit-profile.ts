@@ -9,7 +9,7 @@ export function useEditProfile() {
 	return useMutation({
 		mutationFn: editProfile,
 		onSettled: (_data, _error, _variables, _onMutateResult, context) =>
-			context.client.invalidateQueries({
+			context.client.resetQueries({
 				queryKey: authQueries.me().queryKey,
 			}),
 	});
