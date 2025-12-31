@@ -35,7 +35,11 @@ function App() {
 			queries: [participationQueries.mine(), huntQueries.available()],
 		});
 
-	const { mutate: joinHunt, isPending: isPendingJoin } = useJoinHunt();
+	const {
+		mutate: joinHunt,
+		isPending: isPendingJoin,
+		variables,
+	} = useJoinHunt();
 
 	const navigate = useNavigate();
 
@@ -69,7 +73,7 @@ function App() {
 					<li key={hunt.id} className="flex items-center justify-between gap-4">
 						<p>{hunt.createdBy.name}'s Hunt</p>
 						<LoadingButton
-							isLoading={isPendingJoin}
+							isLoading={isPendingJoin && variables.data.huntId === hunt.id}
 							variant="secondary"
 							onClick={() =>
 								joinHunt(
