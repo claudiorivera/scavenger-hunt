@@ -1,5 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
+import { useTransition } from "react";
+import { LoadingButton } from "@/components/loading-button";
 import { signIn } from "@/lib/auth-client";
 
 export const Route = createFileRoute("/sign-in/")({
@@ -12,6 +13,8 @@ export const Route = createFileRoute("/sign-in/")({
 });
 
 function RouteComponent() {
+	const [isPending, startTransition] = useTransition();
+
 	const handleSignIn = async () => {
 		try {
 			await signIn.email({
@@ -26,7 +29,12 @@ function RouteComponent() {
 
 	return (
 		<div className="flex flex-col gap-4">
-			<Button onClick={handleSignIn}>Sign in as demo user</Button>
+			<LoadingButton
+				isLoading={isPending}
+				onClick={() => startTransition(handleSignIn)}
+			>
+				Sign in as demo user
+			</LoadingButton>
 		</div>
 	);
 }
