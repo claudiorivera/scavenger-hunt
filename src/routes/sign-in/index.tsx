@@ -32,6 +32,7 @@ function RouteComponent() {
 			<LoadingButton
 				isLoading={isPending}
 				onClick={() => startTransition(handleSignIn)}
+				aria-label="Sign in as demo user"
 			>
 				Sign in as demo user
 			</LoadingButton>
