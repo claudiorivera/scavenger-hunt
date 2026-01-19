@@ -8,7 +8,8 @@ import {
 } from "react";
 import { useForm } from "react-hook-form";
 import { LoadingButton } from "@/components/loading-button";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 import type { Item } from "@/db/types";
 import { useImageFileHandler } from "@/hooks/use-image-file-handler";
 import { useCreateCollectionItem } from "@/routes/hunts/$huntId/items/$itemId/collect/-hooks/use-create-collection-item";
@@ -92,12 +93,18 @@ function ImagePreview({
 							variant="secondary"
 							type="submit"
 							isLoading={isLoading}
+							aria-label="Confirm"
 						>
 							<CheckIcon />
 						</LoadingButton>
 					</form>
 
-					<Button type="button" variant="destructive" onClick={onClear}>
+					<Button
+						type="button"
+						variant="destructive"
+						onClick={onClear}
+						aria-label="Clear"
+					>
 						<TrashIcon />
 					</Button>
 				</div>
@@ -113,10 +120,8 @@ function ImagePicker({
 }) {
 	return (
 		<div className="flex h-full w-full items-center justify-center border border-stone-400 bg-stone-100 p-4">
-			<label>
-				<Button variant="secondary" asChild>
-					<span className="cursor-pointer">Select image</span>
-				</Button>
+			<Label className={buttonVariants({ variant: "secondary" })}>
+				Select image
 				<input
 					name="base64"
 					hidden
@@ -124,7 +129,7 @@ function ImagePicker({
 					accept="image/*"
 					onChange={onFileChange}
 				/>
-			</label>
+			</Label>
 		</div>
 	);
 }

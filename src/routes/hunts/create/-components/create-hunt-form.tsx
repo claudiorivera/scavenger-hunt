@@ -69,6 +69,7 @@ export function CreateHuntForm() {
 								type="button"
 								onClick={() => remove(index)}
 								tabIndex={0}
+								aria-label="Delete item"
 							>
 								<TrashIcon />
 							</Button>
@@ -81,7 +82,13 @@ export function CreateHuntForm() {
 				))}
 			</ul>
 
-			<Button type="button" variant="outline" onClick={handleAddField}>
+			<Button
+				type="button"
+				variant="outline"
+				onClick={handleAddField}
+				aria-label="Add item"
+				tabIndex={0}
+			>
 				<PlusIcon />
 			</Button>
 
@@ -91,7 +98,11 @@ export function CreateHuntForm() {
 				</p>
 			)}
 
-			<LoadingButton isLoading={isPendingCreate} variant="secondary">
+			<LoadingButton
+				isLoading={isPendingCreate}
+				variant="secondary"
+				tabIndex={0}
+			>
 				Submit
 			</LoadingButton>
 		</form>
