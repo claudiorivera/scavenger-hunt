@@ -114,21 +114,21 @@ const HuntsHuntIdItemsItemIdCollectIndexRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminIndexRoute
-  '/profile': typeof ProfileIndexRoute
-  '/sign-in': typeof SignInIndexRoute
+  '/admin/': typeof AdminIndexRoute
+  '/profile/': typeof ProfileIndexRoute
+  '/sign-in/': typeof SignInIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/cron-handler': typeof ApiCronHandlerIndexRoute
-  '/hunts/$huntId': typeof HuntsHuntIdIndexRoute
-  '/hunts/create': typeof HuntsCreateIndexRoute
-  '/profile/edit': typeof ProfileEditIndexRoute
-  '/hunts/$huntId/collect': typeof HuntsHuntIdCollectIndexRoute
-  '/hunts/$huntId/items': typeof HuntsHuntIdItemsIndexRoute
-  '/hunts/$huntId/leaderboard': typeof HuntsHuntIdLeaderboardIndexRoute
-  '/hunts/$huntId/collection-items/$collectionItemId': typeof HuntsHuntIdCollectionItemsCollectionItemIdIndexRoute
-  '/hunts/$huntId/items/$itemId': typeof HuntsHuntIdItemsItemIdIndexRoute
-  '/hunts/$huntId/users/$userId': typeof HuntsHuntIdUsersUserIdIndexRoute
-  '/hunts/$huntId/items/$itemId/collect': typeof HuntsHuntIdItemsItemIdCollectIndexRoute
+  '/api/cron-handler/': typeof ApiCronHandlerIndexRoute
+  '/hunts/$huntId/': typeof HuntsHuntIdIndexRoute
+  '/hunts/create/': typeof HuntsCreateIndexRoute
+  '/profile/edit/': typeof ProfileEditIndexRoute
+  '/hunts/$huntId/collect/': typeof HuntsHuntIdCollectIndexRoute
+  '/hunts/$huntId/items/': typeof HuntsHuntIdItemsIndexRoute
+  '/hunts/$huntId/leaderboard/': typeof HuntsHuntIdLeaderboardIndexRoute
+  '/hunts/$huntId/collection-items/$collectionItemId/': typeof HuntsHuntIdCollectionItemsCollectionItemIdIndexRoute
+  '/hunts/$huntId/items/$itemId/': typeof HuntsHuntIdItemsItemIdIndexRoute
+  '/hunts/$huntId/users/$userId/': typeof HuntsHuntIdUsersUserIdIndexRoute
+  '/hunts/$huntId/items/$itemId/collect/': typeof HuntsHuntIdItemsItemIdCollectIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -171,21 +171,21 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/admin'
-    | '/profile'
-    | '/sign-in'
+    | '/admin/'
+    | '/profile/'
+    | '/sign-in/'
     | '/api/auth/$'
-    | '/api/cron-handler'
-    | '/hunts/$huntId'
-    | '/hunts/create'
-    | '/profile/edit'
-    | '/hunts/$huntId/collect'
-    | '/hunts/$huntId/items'
-    | '/hunts/$huntId/leaderboard'
-    | '/hunts/$huntId/collection-items/$collectionItemId'
-    | '/hunts/$huntId/items/$itemId'
-    | '/hunts/$huntId/users/$userId'
-    | '/hunts/$huntId/items/$itemId/collect'
+    | '/api/cron-handler/'
+    | '/hunts/$huntId/'
+    | '/hunts/create/'
+    | '/profile/edit/'
+    | '/hunts/$huntId/collect/'
+    | '/hunts/$huntId/items/'
+    | '/hunts/$huntId/leaderboard/'
+    | '/hunts/$huntId/collection-items/$collectionItemId/'
+    | '/hunts/$huntId/items/$itemId/'
+    | '/hunts/$huntId/users/$userId/'
+    | '/hunts/$huntId/items/$itemId/collect/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -255,49 +255,49 @@ declare module '@tanstack/react-router' {
     '/sign-in/': {
       id: '/sign-in/'
       path: '/sign-in'
-      fullPath: '/sign-in'
+      fullPath: '/sign-in/'
       preLoaderRoute: typeof SignInIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile/': {
       id: '/profile/'
       path: '/profile'
-      fullPath: '/profile'
+      fullPath: '/profile/'
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
       id: '/admin/'
       path: '/admin'
-      fullPath: '/admin'
+      fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile/edit/': {
       id: '/profile/edit/'
       path: '/profile/edit'
-      fullPath: '/profile/edit'
+      fullPath: '/profile/edit/'
       preLoaderRoute: typeof ProfileEditIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hunts/create/': {
       id: '/hunts/create/'
       path: '/hunts/create'
-      fullPath: '/hunts/create'
+      fullPath: '/hunts/create/'
       preLoaderRoute: typeof HuntsCreateIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hunts/$huntId/': {
       id: '/hunts/$huntId/'
       path: '/hunts/$huntId'
-      fullPath: '/hunts/$huntId'
+      fullPath: '/hunts/$huntId/'
       preLoaderRoute: typeof HuntsHuntIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/cron-handler/': {
       id: '/api/cron-handler/'
       path: '/api/cron-handler'
-      fullPath: '/api/cron-handler'
+      fullPath: '/api/cron-handler/'
       preLoaderRoute: typeof ApiCronHandlerIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -311,49 +311,49 @@ declare module '@tanstack/react-router' {
     '/hunts/$huntId/leaderboard/': {
       id: '/hunts/$huntId/leaderboard/'
       path: '/hunts/$huntId/leaderboard'
-      fullPath: '/hunts/$huntId/leaderboard'
+      fullPath: '/hunts/$huntId/leaderboard/'
       preLoaderRoute: typeof HuntsHuntIdLeaderboardIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hunts/$huntId/items/': {
       id: '/hunts/$huntId/items/'
       path: '/hunts/$huntId/items'
-      fullPath: '/hunts/$huntId/items'
+      fullPath: '/hunts/$huntId/items/'
       preLoaderRoute: typeof HuntsHuntIdItemsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hunts/$huntId/collect/': {
       id: '/hunts/$huntId/collect/'
       path: '/hunts/$huntId/collect'
-      fullPath: '/hunts/$huntId/collect'
+      fullPath: '/hunts/$huntId/collect/'
       preLoaderRoute: typeof HuntsHuntIdCollectIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hunts/$huntId/users/$userId/': {
       id: '/hunts/$huntId/users/$userId/'
       path: '/hunts/$huntId/users/$userId'
-      fullPath: '/hunts/$huntId/users/$userId'
+      fullPath: '/hunts/$huntId/users/$userId/'
       preLoaderRoute: typeof HuntsHuntIdUsersUserIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hunts/$huntId/items/$itemId/': {
       id: '/hunts/$huntId/items/$itemId/'
       path: '/hunts/$huntId/items/$itemId'
-      fullPath: '/hunts/$huntId/items/$itemId'
+      fullPath: '/hunts/$huntId/items/$itemId/'
       preLoaderRoute: typeof HuntsHuntIdItemsItemIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hunts/$huntId/collection-items/$collectionItemId/': {
       id: '/hunts/$huntId/collection-items/$collectionItemId/'
       path: '/hunts/$huntId/collection-items/$collectionItemId'
-      fullPath: '/hunts/$huntId/collection-items/$collectionItemId'
+      fullPath: '/hunts/$huntId/collection-items/$collectionItemId/'
       preLoaderRoute: typeof HuntsHuntIdCollectionItemsCollectionItemIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hunts/$huntId/items/$itemId/collect/': {
       id: '/hunts/$huntId/items/$itemId/collect/'
       path: '/hunts/$huntId/items/$itemId/collect'
-      fullPath: '/hunts/$huntId/items/$itemId/collect'
+      fullPath: '/hunts/$huntId/items/$itemId/collect/'
       preLoaderRoute: typeof HuntsHuntIdItemsItemIdCollectIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
