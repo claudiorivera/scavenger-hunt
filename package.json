@@ -78,7 +78,7 @@
     "tsx": "4.21.0",
     "typescript": "5.9.3",
     "vite": "7.3.1",
-    "vitest": "4.0.17",
+    "vitest": "4.0.18",
     "web-vitals": "5.1.0"
   }
 }
