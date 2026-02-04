@@ -1,5 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useTransition } from "react";
+import { toast } from "sonner";
 import { LoadingButton } from "@/components/loading-button";
 import { signIn } from "@/lib/auth-client";
 
@@ -23,6 +24,9 @@ function RouteComponent() {
 				callbackURL: "/",
 			});
 		} catch (error) {
+			toast.error(
+				"Failed to sign in. Please check your credentials and try again.",
+			);
 			console.error(`Failed to sign in:`, error);
 		}
 	};
