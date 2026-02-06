@@ -42,8 +42,8 @@ This document provides guidelines for agentic coding systems (AI assistants, LLM
 
 **Type annotations:**
 
-- Always explicitly type function parameters; return types are implicit (inferred by TypeScript)
-- Use `type` for simple object shapes, `interface` is discouraged
+- Always explicitly type function parameters; **omit return types** - let TypeScript infer them
+- Use `type` for simple object shapes; `interface` is discouraged
 - Prefer `Array<T>` generic syntax (enforced by Biome: `useConsistentArrayType`)
 - Export named types alongside exports: `type Props = { ... }; export function Component(props: Props) { ... }`
 
@@ -70,7 +70,7 @@ Use path alias `@/*` → `./src/*` (tsconfig.json)
 
 **Biome formatter** enforces:
 
-- 2-space indentation
+- Tab indentation (not spaces)
 - Trailing commas in multiline
 - Sorted class names in `cn()`, `clsx()`, `cva()` (Biome nursery rule)
 
@@ -115,6 +115,40 @@ export function Button({
 - Use `'use client'` directive sparingly; prefer Server Components in TanStack Start
 - Use Tailwind + `cn()` for styling (no inline CSS modules in most cases)
 - Prefer composition over prop drilling (children, slots)
+
+### Functional Programming & Code Style
+
+- **Prefer functional over object-oriented** - use functions, composition, and immutability
+- **Use function declaration syntax** for named exports and declarations; use arrow functions only for callbacks
+- **Omit return types** on functions and procedures - let TypeScript infer them
+- **Avoid classes** unless absolutely necessary (prefer factory functions or hooks)
+- **Favor pure functions** with explicit inputs and outputs over stateful methods
+- **Avoid mutating variables** - use immutable patterns (spread operator, map/filter, etc.)
+
+```tsx
+// ❌ Avoid mutation:
+const items = [1, 2, 3];
+items.push(4);
+
+const obj = { name: "John" };
+obj.age = 30;
+
+// ✅ Good - immutable:
+const items = [1, 2, 3, 4];
+const newItems = [...items, 4];
+
+const obj = { name: "John", age: 30 };
+const updated = { ...obj, age: 30 };
+
+// Function declarations for named exports:
+export function getUserById(id: string) {
+	// implementation
+}
+
+// Arrow functions for callbacks:
+const handleClick = () => { /* ... */ };
+items.map((item) => item.id);
+```
 
 ### Comments
 
@@ -183,7 +217,7 @@ export const myServerFn = createServerFn({ method: "POST" })
 
 ### Enums & Unions
 
-**No TypeScript enums** - Biome rule: `noEnum: error`. Use union types instead:
+**No TypeScript enums** - Biome rule: `noEnum: error`. Use `as const` enums with union types instead:
 
 ```tsx
 // ❌ Avoid:
@@ -193,8 +227,12 @@ enum Role {
 }
 
 // ✅ Good:
-type Role = "admin" | "user";
-const ROLES = ["admin", "user"] as const;
+const ROLES = {
+	admin: "admin",
+	user: "user",
+} as const;
+
+type Role = typeof ROLES[keyof typeof ROLES];
 ```
 
 ---
