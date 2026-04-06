@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@better-auth/drizzle-adapter": "1.6.0",
-    "@dotenvx/dotenvx": "1.60.0",
+    "@dotenvx/dotenvx": "1.60.1",
     "@faker-js/faker": "10.4.0",
     "@fontsource-variable/inter": "5.2.8",
     "@hookform/resolvers": "5.2.2",
