@@ -42,7 +42,7 @@
     "@tanstack/react-start": "1.167.39",
     "@tanstack/router-plugin": "1.167.22",
     "@tanstack/zod-adapter": "1.166.9",
-    "better-auth": "1.6.2",
+    "better-auth": "1.6.3",
     "class-variance-authority": "0.7.1",
     "cloudinary": "2.9.0",
     "clsx": "2.1.1",
