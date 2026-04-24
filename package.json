@@ -18,7 +18,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@better-auth/drizzle-adapter": "1.6.8",
+    "@better-auth/drizzle-adapter": "1.6.9",
     "@dotenvx/dotenvx": "1.62.0",
     "@faker-js/faker": "10.4.0",
     "@fontsource-variable/inter": "5.2.8",
