@@ -44,7 +44,7 @@
     "@tanstack/zod-adapter": "1.166.9",
     "better-auth": "1.6.9",
     "class-variance-authority": "0.7.1",
-    "cloudinary": "2.9.0",
+    "cloudinary": "2.10.0",
     "clsx": "2.1.1",
     "cmdk": "1.1.1",
     "date-fns": "4.1.0",
