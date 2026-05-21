@@ -7,15 +7,20 @@ import {
 	useEffect,
 } from "react";
 import { useForm } from "react-hook-form";
+import z from "zod";
 import { LoadingButton } from "@/components/loading-button";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import type { Item } from "@/db/types";
 import { useImageFileHandler } from "@/hooks/use-image-file-handler";
 import { useCreateCollectionItem } from "@/routes/hunts/$huntId/items/$itemId/collect/-hooks/use-create-collection-item";
-import { uploadCollectionItemSchema } from "@/server-funcs/cloudinary";
 
 const routeApi = getRouteApi("/hunts/$huntId/items/$itemId/collect/");
+
+const uploadCollectionItemSchema = z.object({
+	base64: z.string(),
+	itemId: z.string(),
+});
 
 export function CollectionItemForm({ item }: { item: Item }) {
 	const { huntId } = routeApi.useParams();
