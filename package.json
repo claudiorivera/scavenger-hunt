@@ -60,7 +60,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.4.16",
     "@tanstack/devtools-vite": "0.7.0",
-    "@types/node": "25.9.1",
+    "@types/node": "25.9.2",
     "@types/pg": "8.20.0",
     "@types/react": "19.2.15",
     "@types/react-dom": "19.2.3",
