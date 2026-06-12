@@ -18,7 +18,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@better-auth/drizzle-adapter": "1.6.16",
+    "@better-auth/drizzle-adapter": "1.6.17",
     "@dotenvx/dotenvx": "1.71.3",
     "@faker-js/faker": "10.4.0",
     "@fontsource-variable/inter": "5.2.8",
@@ -38,7 +38,7 @@
     "@tanstack/react-router-devtools": "1.167.0",
     "@tanstack/react-router-ssr-query": "1.167.1",
     "@tanstack/react-start": "1.168.25",
-    "better-auth": "1.6.16",
+    "better-auth": "1.6.17",
     "class-variance-authority": "0.7.1",
     "cloudinary": "2.10.0",
     "clsx": "2.1.1",
