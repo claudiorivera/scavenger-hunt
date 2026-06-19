@@ -31,7 +31,7 @@
     "@radix-ui/react-tooltip": "1.2.10",
     "@t3-oss/env-core": "0.13.11",
     "@tailwindcss/vite": "4.3.1",
-    "@tanstack/react-devtools": "0.10.5",
+    "@tanstack/react-devtools": "0.10.7",
     "@tanstack/react-query": "5.101.0",
     "@tanstack/react-query-devtools": "5.101.0",
     "@tanstack/react-router": "1.170.16",
