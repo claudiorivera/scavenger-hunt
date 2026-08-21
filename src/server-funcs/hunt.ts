@@ -8,7 +8,7 @@ import { authMiddleware } from "@/lib/auth-middleware";
 
 export const joinHuntServerFn = createServerFn({ method: "POST" })
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			huntId: z.string(),
 		}),
@@ -64,7 +64,7 @@ export const createHuntInputSchema = z.object({
 
 export const createHuntServerFn = createServerFn({ method: "POST" })
 	.middleware([authMiddleware])
-	.inputValidator(createHuntInputSchema)
+	.validator(createHuntInputSchema)
 	.handler(async ({ data, context }) => {
 		const huntId = createId();
 
@@ -102,7 +102,7 @@ export const createHuntServerFn = createServerFn({ method: "POST" })
 
 export const getHuntByIdServerFn = createServerFn()
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			id: z.string(),
 		}),
@@ -124,7 +124,7 @@ export const getHuntByIdServerFn = createServerFn()
 
 export const leaveHuntServerFn = createServerFn({ method: "POST" })
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			huntId: z.string(),
 		}),
@@ -156,7 +156,7 @@ export const leaveHuntServerFn = createServerFn({ method: "POST" })
 
 export const deleteHuntServerFn = createServerFn({ method: "POST" })
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			huntId: z.string(),
 		}),

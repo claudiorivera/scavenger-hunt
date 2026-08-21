@@ -10,20 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as SignInIndexRouteImport } from './routes/sign-in/index'
-import { Route as ProfileIndexRouteImport } from './routes/profile/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as ProfileEditIndexRouteImport } from './routes/profile/edit/index'
-import { Route as HuntsCreateIndexRouteImport } from './routes/hunts/create/index'
-import { Route as HuntsHuntIdIndexRouteImport } from './routes/hunts/$huntId/index'
-import { Route as ApiCronHandlerIndexRouteImport } from './routes/api/cron-handler/index'
+import { Route as ProfileIndexRouteImport } from './routes/profile/index'
+import { Route as SignInIndexRouteImport } from './routes/sign-in/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
-import { Route as HuntsHuntIdLeaderboardIndexRouteImport } from './routes/hunts/$huntId/leaderboard/index'
-import { Route as HuntsHuntIdItemsIndexRouteImport } from './routes/hunts/$huntId/items/index'
+import { Route as ApiCronHandlerIndexRouteImport } from './routes/api/cron-handler/index'
+import { Route as HuntsHuntIdIndexRouteImport } from './routes/hunts/$huntId/index'
+import { Route as HuntsCreateIndexRouteImport } from './routes/hunts/create/index'
+import { Route as ProfileEditIndexRouteImport } from './routes/profile/edit/index'
 import { Route as HuntsHuntIdCollectIndexRouteImport } from './routes/hunts/$huntId/collect/index'
-import { Route as HuntsHuntIdUsersUserIdIndexRouteImport } from './routes/hunts/$huntId/users/$userId/index'
-import { Route as HuntsHuntIdItemsItemIdIndexRouteImport } from './routes/hunts/$huntId/items/$itemId/index'
+import { Route as HuntsHuntIdItemsIndexRouteImport } from './routes/hunts/$huntId/items/index'
+import { Route as HuntsHuntIdLeaderboardIndexRouteImport } from './routes/hunts/$huntId/leaderboard/index'
 import { Route as HuntsHuntIdCollectionItemsCollectionItemIdIndexRouteImport } from './routes/hunts/$huntId/collection-items/$collectionItemId/index'
+import { Route as HuntsHuntIdItemsItemIdIndexRouteImport } from './routes/hunts/$huntId/items/$itemId/index'
+import { Route as HuntsHuntIdUsersUserIdIndexRouteImport } from './routes/hunts/$huntId/users/$userId/index'
 import { Route as HuntsHuntIdItemsItemIdCollectIndexRouteImport } from './routes/hunts/$huntId/items/$itemId/collect/index'
 
 const IndexRoute = IndexRouteImport.update({
@@ -31,9 +31,9 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SignInIndexRoute = SignInIndexRouteImport.update({
-  id: '/sign-in/',
-  path: '/sign-in/',
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileIndexRoute = ProfileIndexRouteImport.update({
@@ -41,24 +41,14 @@ const ProfileIndexRoute = ProfileIndexRouteImport.update({
   path: '/profile/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
-  id: '/admin/',
-  path: '/admin/',
+const SignInIndexRoute = SignInIndexRouteImport.update({
+  id: '/sign-in/',
+  path: '/sign-in/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProfileEditIndexRoute = ProfileEditIndexRouteImport.update({
-  id: '/profile/edit/',
-  path: '/profile/edit/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HuntsCreateIndexRoute = HuntsCreateIndexRouteImport.update({
-  id: '/hunts/create/',
-  path: '/hunts/create/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HuntsHuntIdIndexRoute = HuntsHuntIdIndexRouteImport.update({
-  id: '/hunts/$huntId/',
-  path: '/hunts/$huntId/',
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiCronHandlerIndexRoute = ApiCronHandlerIndexRouteImport.update({
@@ -66,9 +56,29 @@ const ApiCronHandlerIndexRoute = ApiCronHandlerIndexRouteImport.update({
   path: '/api/cron-handler/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
-  id: '/api/auth/$',
-  path: '/api/auth/$',
+const HuntsHuntIdIndexRoute = HuntsHuntIdIndexRouteImport.update({
+  id: '/hunts/$huntId/',
+  path: '/hunts/$huntId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HuntsCreateIndexRoute = HuntsCreateIndexRouteImport.update({
+  id: '/hunts/create/',
+  path: '/hunts/create/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileEditIndexRoute = ProfileEditIndexRouteImport.update({
+  id: '/profile/edit/',
+  path: '/profile/edit/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HuntsHuntIdCollectIndexRoute = HuntsHuntIdCollectIndexRouteImport.update({
+  id: '/hunts/$huntId/collect/',
+  path: '/hunts/$huntId/collect/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HuntsHuntIdItemsIndexRoute = HuntsHuntIdItemsIndexRouteImport.update({
+  id: '/hunts/$huntId/items/',
+  path: '/hunts/$huntId/items/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HuntsHuntIdLeaderboardIndexRoute =
@@ -77,20 +87,10 @@ const HuntsHuntIdLeaderboardIndexRoute =
     path: '/hunts/$huntId/leaderboard/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const HuntsHuntIdItemsIndexRoute = HuntsHuntIdItemsIndexRouteImport.update({
-  id: '/hunts/$huntId/items/',
-  path: '/hunts/$huntId/items/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HuntsHuntIdCollectIndexRoute = HuntsHuntIdCollectIndexRouteImport.update({
-  id: '/hunts/$huntId/collect/',
-  path: '/hunts/$huntId/collect/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HuntsHuntIdUsersUserIdIndexRoute =
-  HuntsHuntIdUsersUserIdIndexRouteImport.update({
-    id: '/hunts/$huntId/users/$userId/',
-    path: '/hunts/$huntId/users/$userId/',
+const HuntsHuntIdCollectionItemsCollectionItemIdIndexRoute =
+  HuntsHuntIdCollectionItemsCollectionItemIdIndexRouteImport.update({
+    id: '/hunts/$huntId/collection-items/$collectionItemId/',
+    path: '/hunts/$huntId/collection-items/$collectionItemId/',
     getParentRoute: () => rootRouteImport,
   } as any)
 const HuntsHuntIdItemsItemIdIndexRoute =
@@ -99,10 +99,10 @@ const HuntsHuntIdItemsItemIdIndexRoute =
     path: '/hunts/$huntId/items/$itemId/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const HuntsHuntIdCollectionItemsCollectionItemIdIndexRoute =
-  HuntsHuntIdCollectionItemsCollectionItemIdIndexRouteImport.update({
-    id: '/hunts/$huntId/collection-items/$collectionItemId/',
-    path: '/hunts/$huntId/collection-items/$collectionItemId/',
+const HuntsHuntIdUsersUserIdIndexRoute =
+  HuntsHuntIdUsersUserIdIndexRouteImport.update({
+    id: '/hunts/$huntId/users/$userId/',
+    path: '/hunts/$huntId/users/$userId/',
     getParentRoute: () => rootRouteImport,
   } as any)
 const HuntsHuntIdItemsItemIdCollectIndexRoute =
@@ -252,11 +252,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sign-in/': {
-      id: '/sign-in/'
-      path: '/sign-in'
-      fullPath: '/sign-in/'
-      preLoaderRoute: typeof SignInIndexRouteImport
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile/': {
@@ -266,39 +266,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/': {
-      id: '/admin/'
-      path: '/admin'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/profile/edit/': {
-      id: '/profile/edit/'
-      path: '/profile/edit'
-      fullPath: '/profile/edit/'
-      preLoaderRoute: typeof ProfileEditIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/hunts/create/': {
-      id: '/hunts/create/'
-      path: '/hunts/create'
-      fullPath: '/hunts/create/'
-      preLoaderRoute: typeof HuntsCreateIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/hunts/$huntId/': {
-      id: '/hunts/$huntId/'
-      path: '/hunts/$huntId'
-      fullPath: '/hunts/$huntId/'
-      preLoaderRoute: typeof HuntsHuntIdIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/cron-handler/': {
-      id: '/api/cron-handler/'
-      path: '/api/cron-handler'
-      fullPath: '/api/cron-handler/'
-      preLoaderRoute: typeof ApiCronHandlerIndexRouteImport
+    '/sign-in/': {
+      id: '/sign-in/'
+      path: '/sign-in'
+      fullPath: '/sign-in/'
+      preLoaderRoute: typeof SignInIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/auth/$': {
@@ -308,18 +280,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/hunts/$huntId/leaderboard/': {
-      id: '/hunts/$huntId/leaderboard/'
-      path: '/hunts/$huntId/leaderboard'
-      fullPath: '/hunts/$huntId/leaderboard/'
-      preLoaderRoute: typeof HuntsHuntIdLeaderboardIndexRouteImport
+    '/api/cron-handler/': {
+      id: '/api/cron-handler/'
+      path: '/api/cron-handler'
+      fullPath: '/api/cron-handler/'
+      preLoaderRoute: typeof ApiCronHandlerIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/hunts/$huntId/items/': {
-      id: '/hunts/$huntId/items/'
-      path: '/hunts/$huntId/items'
-      fullPath: '/hunts/$huntId/items/'
-      preLoaderRoute: typeof HuntsHuntIdItemsIndexRouteImport
+    '/hunts/$huntId/': {
+      id: '/hunts/$huntId/'
+      path: '/hunts/$huntId'
+      fullPath: '/hunts/$huntId/'
+      preLoaderRoute: typeof HuntsHuntIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hunts/create/': {
+      id: '/hunts/create/'
+      path: '/hunts/create'
+      fullPath: '/hunts/create/'
+      preLoaderRoute: typeof HuntsCreateIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/edit/': {
+      id: '/profile/edit/'
+      path: '/profile/edit'
+      fullPath: '/profile/edit/'
+      preLoaderRoute: typeof ProfileEditIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hunts/$huntId/collect/': {
@@ -329,11 +315,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HuntsHuntIdCollectIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/hunts/$huntId/users/$userId/': {
-      id: '/hunts/$huntId/users/$userId/'
-      path: '/hunts/$huntId/users/$userId'
-      fullPath: '/hunts/$huntId/users/$userId/'
-      preLoaderRoute: typeof HuntsHuntIdUsersUserIdIndexRouteImport
+    '/hunts/$huntId/items/': {
+      id: '/hunts/$huntId/items/'
+      path: '/hunts/$huntId/items'
+      fullPath: '/hunts/$huntId/items/'
+      preLoaderRoute: typeof HuntsHuntIdItemsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hunts/$huntId/leaderboard/': {
+      id: '/hunts/$huntId/leaderboard/'
+      path: '/hunts/$huntId/leaderboard'
+      fullPath: '/hunts/$huntId/leaderboard/'
+      preLoaderRoute: typeof HuntsHuntIdLeaderboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hunts/$huntId/collection-items/$collectionItemId/': {
+      id: '/hunts/$huntId/collection-items/$collectionItemId/'
+      path: '/hunts/$huntId/collection-items/$collectionItemId'
+      fullPath: '/hunts/$huntId/collection-items/$collectionItemId/'
+      preLoaderRoute: typeof HuntsHuntIdCollectionItemsCollectionItemIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hunts/$huntId/items/$itemId/': {
@@ -343,11 +343,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HuntsHuntIdItemsItemIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/hunts/$huntId/collection-items/$collectionItemId/': {
-      id: '/hunts/$huntId/collection-items/$collectionItemId/'
-      path: '/hunts/$huntId/collection-items/$collectionItemId'
-      fullPath: '/hunts/$huntId/collection-items/$collectionItemId/'
-      preLoaderRoute: typeof HuntsHuntIdCollectionItemsCollectionItemIdIndexRouteImport
+    '/hunts/$huntId/users/$userId/': {
+      id: '/hunts/$huntId/users/$userId/'
+      path: '/hunts/$huntId/users/$userId'
+      fullPath: '/hunts/$huntId/users/$userId/'
+      preLoaderRoute: typeof HuntsHuntIdUsersUserIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hunts/$huntId/items/$itemId/collect/': {

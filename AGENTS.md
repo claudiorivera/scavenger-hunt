@@ -142,11 +142,13 @@ const updated = { ...obj, age: 30 };
 
 // Function declarations for named exports:
 export function getUserById(id: string) {
-	// implementation
+  // implementation
 }
 
 // Arrow functions for callbacks:
-const handleClick = () => { /* ... */ };
+const handleClick = () => {
+  /* ... */
+};
 items.map((item) => item.id);
 ```
 
@@ -190,7 +192,7 @@ import { authMiddleware } from "@/lib/auth-middleware";
 
 export const myServerFn = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
-  .inputValidator(z.object({ id: z.string() }))
+  .validator(z.object({ id: z.string() }))
   .handler(async ({ data, context }) => {
     try {
       return result;
@@ -228,11 +230,11 @@ enum Role {
 
 // ✅ Good:
 const ROLES = {
-	admin: "admin",
-	user: "user",
+  admin: "admin",
+  user: "user",
 } as const;
 
-type Role = typeof ROLES[keyof typeof ROLES];
+type Role = (typeof ROLES)[keyof typeof ROLES];
 ```
 
 ---
