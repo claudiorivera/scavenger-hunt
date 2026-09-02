@@ -1,11 +1,21 @@
 import { relations } from "drizzle-orm";
-import { collectionItem, hunt, item, participation, user } from "@/db/schema";
+import {
+	account,
+	collectionItem,
+	hunt,
+	item,
+	participation,
+	session,
+	user,
+} from "@/db/schema";
 
 export const userRelations = relations(user, ({ many }) => ({
 	collectionItems: many(collectionItem),
 	huntsCreated: many(hunt),
 	itemsAdded: many(item),
 	participations: many(participation),
+	sessions: many(session),
+	accounts: many(account),
 }));
 
 export const collectionItemRelations = relations(collectionItem, ({ one }) => ({
@@ -51,6 +61,20 @@ export const participationRelations = relations(participation, ({ one }) => ({
 	}),
 	user: one(user, {
 		fields: [participation.userId],
+		references: [user.id],
+	}),
+}));
+
+export const sessionRelations = relations(session, ({ one }) => ({
+	user: one(user, {
+		fields: [session.userId],
+		references: [user.id],
+	}),
+}));
+
+export const accountRelations = relations(account, ({ one }) => ({
+	user: one(user, {
+		fields: [account.userId],
 		references: [user.id],
 	}),
 }));
