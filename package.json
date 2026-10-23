@@ -37,7 +37,7 @@
     "@tanstack/react-router": "1.170.40",
     "@tanstack/react-router-devtools": "1.167.2",
     "@tanstack/react-router-ssr-query": "1.167.3",
-    "@tanstack/react-start": "1.168.59",
+    "@tanstack/react-start": "1.169.4",
     "better-auth": "1.7.6",
     "class-variance-authority": "0.7.1",
     "cloudinary": "2.11.0",
