@@ -10,7 +10,7 @@ export const createCollectionItemServerFn = createServerFn({
 	method: "POST",
 })
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			huntId: z.string(),
 			itemId: z.string(),
@@ -45,7 +45,7 @@ export const createCollectionItemServerFn = createServerFn({
 
 export const getCollectionItemWithUserAndItemByIdServerFn = createServerFn()
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			id: z.string(),
 		}),
@@ -78,7 +78,7 @@ export const getCollectionItemWithUserAndItemByIdServerFn = createServerFn()
 
 export const deleteCollectionItemServerFn = createServerFn({ method: "POST" })
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			id: z.string(),
 		}),

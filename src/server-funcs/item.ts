@@ -7,7 +7,7 @@ import { authMiddleware } from "@/lib/auth-middleware";
 
 export const getItemsByHuntIdServerFn = createServerFn()
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			huntId: z.string(),
 		}),
@@ -32,7 +32,7 @@ export const getItemsByHuntIdServerFn = createServerFn()
 
 export const createItemServerFn = createServerFn({ method: "POST" })
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			description: z.string().min(1),
 			huntId: z.string(),
@@ -56,7 +56,7 @@ export const createItemServerFn = createServerFn({ method: "POST" })
 
 export const getItemByIdServerFn = createServerFn()
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			itemId: z.string(),
 		}),
@@ -75,7 +75,7 @@ export const getItemByIdServerFn = createServerFn()
 
 export const deleteItemServerFn = createServerFn({ method: "POST" })
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			itemId: z.string(),
 		}),
@@ -86,7 +86,7 @@ export const deleteItemServerFn = createServerFn({ method: "POST" })
 
 export const getNextUncollectedItemForHuntServerFn = createServerFn()
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			huntId: z.string(),
 		}),

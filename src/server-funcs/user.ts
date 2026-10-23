@@ -8,7 +8,7 @@ import { uploadToCloudinary } from "@/lib/cloudinary";
 
 export const getUsersWhoCollectedItemServerFn = createServerFn()
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			itemId: z.string(),
 		}),
@@ -46,7 +46,7 @@ export type UserWithCollectionItems = Awaited<
 
 export const getUserWithCollectionItemsForHuntServerFn = createServerFn()
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			userId: z.string(),
 			huntId: z.string(),
@@ -84,7 +84,7 @@ export const getUserWithCollectionItemsForHuntServerFn = createServerFn()
 
 export const getUsersByHuntIdServerFn = createServerFn()
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			huntId: z.string(),
 		}),
@@ -118,7 +118,7 @@ export const getUsersByHuntIdServerFn = createServerFn()
 
 export const deleteUserServerFn = createServerFn({ method: "POST" })
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			userId: z.string(),
 		}),
@@ -129,7 +129,7 @@ export const deleteUserServerFn = createServerFn({ method: "POST" })
 
 export const editProfileServerFn = createServerFn({ method: "POST" })
 	.middleware([authMiddleware])
-	.inputValidator(
+	.validator(
 		z.object({
 			name: z.string().optional(),
 			base64: z.string().optional(),
